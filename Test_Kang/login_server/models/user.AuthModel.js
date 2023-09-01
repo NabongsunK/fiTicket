@@ -14,10 +14,14 @@ const AuthModel = {
   },
   async getAuthNum(id){
     try{
-      // result = {pid,currentTime,expirationTime,counter,authNum}
+      // result = {pid, currentTime, expirationTime, counter, auth}
       const sql = `
       select
-        pid, currentTime, expirationTime,counter
+        pid, 
+        DATE_FORMAT(currentTime, '%Y-%m-%d %H:%i:%s') as currentTime, 
+        DATE_FORMAT(expirationTime,  '%Y-%m-%d %H:%i:%s') as expirationTime, 
+        counter, 
+        auth
       from auth
       where pid = ?
         `;
@@ -29,3 +33,5 @@ const AuthModel = {
     }
   }
 }
+
+module.exports = AuthModel
