@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`auth` (
   `phoneNumber` VARCHAR(45) NOT NULL COMMENT 'userPhoneNumber',
   `currentTime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT '입력시간',
   `expirationTime` DATETIME NULL COMMENT'인증만료시간',
-  `auth` VARCHAR(8) NOT NULL DEFAULT 1 COMMENT 'authentication key',
-  `counter` INT NULL,
+  `auth` VARCHAR(8) NOT NULL COMMENT 'authentication key',
+  `counter` INT DEFAULT 1 NULL,
   PRIMARY KEY (`pid`))
 ENGINE = InnoDB;
 
@@ -36,7 +36,7 @@ BEFORE INSERT ON auth
 FOR EACH ROW
 BEGIN
     SET NEW.expirationTime = DATE_ADD(NOW(), INTERVAL 3 MINUTE);
-    SET NEW.auth = substring(hex(aes_encrypt(CONCAT(NOW(),NEW.id,NEW.phoneNumber), CREATE_ASYMMETRIC_PRIV_KEY())),4,4);
+    SET NEW.auth = substring(hex(aes_encrypt(CONCAT(NOW(),NEW.id,NEW.phoneNumber), CONVERT(round(RAND(),6), CHAR))),4,4);
 END;
 //
 DELIMITER ;
@@ -51,3 +51,8 @@ select * from auth;
 
 insert into auth(id,phoneNumber) values("kkk","1234567890");
 insert into auth(id,phoneNumber) values("kka","1234567891");
+
+select pid from auth
+      where
+        id = "kkk" and
+        phoneNumber = "1234567890";
