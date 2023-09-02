@@ -63,12 +63,13 @@ const AuthService = {
       var endTime = new Date(data.expirationTime)
 
       if(data.auth === article.auth){
+        // 인증 완료
         if(curTime.getTime()>=beginTime.getTime() && curTime.getTime()<=endTime.getTime()){
           await AuthModel.deleteByPID(getPid.pid, conn);
           await conn.commit();
           return {ok:true};
         }
-        //인증번호는 맞으나 시간지남
+        // 인증번호는 맞으나 시간지남
         await AuthModel.deleteByPID(getPid.pid, conn);
         await conn.commit();
         return {ok:false, message:"인증시간만료"}
