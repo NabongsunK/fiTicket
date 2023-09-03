@@ -1,7 +1,8 @@
 ins
 .history
 **/node_modules
-workspace
+
+woox
 
 # 오피스 임시파일
 ~$*
