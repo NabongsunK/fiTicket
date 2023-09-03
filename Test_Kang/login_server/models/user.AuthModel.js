@@ -38,9 +38,8 @@ const AuthModel = {
   },
 
   // 인증정보 리턴
-  async getAuthNum(id, conn=pool){
+  async getAuthByPID(pid, conn=pool){
     try{
-      // result = {pid, currentTime, expirationTime, counter, auth}
       const sql = `
       select
         pid, 
@@ -51,8 +50,8 @@ const AuthModel = {
       from auth
       where pid = ?
         `;
-      const [ result ] = await conn.query(sql, [id]);
-      return result[0] 
+      const [ result ] = await conn.query(sql, [pid]);
+      return result[0] ;
 
     }catch(err){
       throw new Error('DB Error', { cause: err });
@@ -61,15 +60,40 @@ const AuthModel = {
 
 
   // 해당정보 삭제
-  async deleteByPID(id, conn=pool){
+  async deleteByPID(pid, conn=pool){
     try{
       const sql = `delete from auth where pid = ?`;
-      await conn.query(sql, [id]);
-      return true
+      await conn.query(sql, [pid]);
+      return true;
     }catch(err){
       throw new Error('DB Error', { cause: err });
     }
-  }
+  },
+
+  // 인증번호조회
+  async checkAuth(article, conn=pool){
+    // article = {id,phoneNumber,auth}
+    // res = {pid}
+    try{
+      const sql = `select pid from auth where id=? and phoneNumber=?`;
+      const [ result ] = await conn.query(sql, [article.id, article.phoneNumber]);
+      return result[0];
+    }catch(err){
+      throw new Error('DB Error', { cause: err });
+    }
+  },
+
+  // 카운트증가
+  async plusCounter(pid, conn=pool){
+    try{
+      const sql = `update auth set counter = counter+1 where pid = ?`;
+      await conn.query(sql, [pid]);
+      return true;
+    }catch(err){
+      throw new Error('DB Error', { cause: err });
+    }
+  },
+
 }
 
 module.exports = AuthModel
