@@ -51,8 +51,14 @@ select * from auth;
 
 insert into auth(id,phoneNumber) values("kkk","1234567890");
 insert into auth(id,phoneNumber) values("kka","1234567891");
+insert into auth(id,phoneNumber) values("kkk","1234567891");
+insert into auth(id,phoneNumber) values("kkk","12367891");
+insert into auth(id,phoneNumber) values("kka","1234567891");
 
 select pid from auth
       where
         id = "kkk" and
         phoneNumber = "1234567890";
+        
+
+update auth set counter = counter+1 where pid = 26;
