@@ -282,7 +282,7 @@ img {
         height: 40px;
         border-bottom: 1px solid #ebebeb; } }
   .header_area .header-meta {
-    height: 85px;
+    height: 72px;
     position: relative;
     z-index: 1; }
     @media only screen and (max-width: 767px) {

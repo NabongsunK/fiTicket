@@ -16,8 +16,8 @@ const Header= function(){
       
       <header className="header-area header-sticky header_area">
         <div className="container breakpoint-off d-flex align-items-center">
-          <div className="row">
-            <div className="col-12">
+          <div className="col-10">
+            <div className="">
               <nav className="main-nav">
                 <Link to="/" className="logo">
                   <img src="assets/images/logo.png" alt="" />
@@ -35,7 +35,7 @@ const Header= function(){
             </div>
           </div>
 
-          <div className="header-meta d-flex clearfix justify-content-end">
+          <div className="header-meta d-flex clearfix">
             <div className="user-login-info">
               <NavLink to="/books"><img src="/assets/images/core-img/user.svg" alt=""/></NavLink>
             </div>

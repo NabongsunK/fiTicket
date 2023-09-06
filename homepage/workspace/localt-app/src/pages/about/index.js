@@ -35,49 +35,49 @@ const About= function(){
                   <div className="owl-cites-town owl-carousel">
                     <div className="item">
                       <div className="thumb">
-                        <img src="assets/images/cities-01.jpg" alt="" />
+                        <img src="/assets/images/cities-01.jpg" alt="" />
                         <h4>Havana</h4>
                       </div>
                     </div>
                     <div className="item">
                       <div className="thumb">
-                        <img src="assets/images/cities-02.jpg" alt="" />
+                        <img src="/assets/images/cities-02.jpg" alt="" />
                         <h4>Kingston</h4>
                       </div>
                     </div>
                     <div className="item">
                       <div className="thumb">
-                        <img src="assets/images/cities-03.jpg" alt="" />
+                        <img src="/assets/images/cities-03.jpg" alt="" />
                         <h4>George Town</h4>
                       </div>
                     </div>
                     <div className="item">
                       <div className="thumb">
-                        <img src="assets/images/cities-04.jpg" alt="" />
+                        <img src="/assets/images/cities-04.jpg" alt="" />
                         <h4>Santo Domingo</h4>
                       </div>
                     </div>
                     <div className="item">
                       <div className="thumb">
-                        <img src="assets/images/cities-01.jpg" alt="" />
+                        <img src="/assets/images/cities-01.jpg" alt="" />
                         <h4>Havana</h4>
                       </div>
                     </div>
                     <div className="item">
                       <div className="thumb">
-                        <img src="assets/images/cities-02.jpg" alt="" />
+                        <img src="/assets/images/cities-02.jpg" alt="" />
                         <h4>Kingston</h4>
                       </div>
                     </div>
                     <div className="item">
                       <div className="thumb">
-                        <img src="assets/images/cities-03.jpg" alt="" />
+                        <img src="/assets/images/cities-03.jpg" alt="" />
                         <h4>George Town</h4>
                       </div>
                     </div>
                     <div className="item">
                       <div className="thumb">
-                        <img src="assets/images/cities-04.jpg" alt="" />
+                        <img src="/assets/images/cities-04.jpg" alt="" />
                         <h4>Santo Domingo</h4>
                       </div>
                     </div>
@@ -118,7 +118,7 @@ const About= function(){
                         <li><i className="fa fa-building"></i> Daily Places Visit</li>
                       </ul>
                       <div className="main-button">
-                        <a href="reservation.html">Make a Reservation</a>
+                        <Link to="reservation.html">Make a Reservation</Link>
                       </div>
                     </div>
                   </div>
@@ -137,7 +137,7 @@ const About= function(){
                         <li><i className="fa fa-building"></i> Daily Places Visit</li>
                       </ul>
                       <div className="main-button">
-                        <a href="reservation.html">Make a Reservation</a>
+                        <Link to="reservation.html">Make a Reservation</Link>
                       </div>
                     </div>
                   </div>
@@ -156,7 +156,7 @@ const About= function(){
                         <li><i className="fa fa-building"></i> Daily Places Visit</li>
                       </ul>
                       <div className="main-button">
-                        <a href="reservation.html">Make a Reservation</a>
+                        <Link to="reservation.html">Make a Reservation</Link>
                       </div>
                     </div>
                   </div>
@@ -175,7 +175,7 @@ const About= function(){
                         <li><i className="fa fa-building"></i> Daily Places Visit</li>
                       </ul>
                       <div className="main-button">
-                        <a href="reservation.html">Make a Reservation</a>
+                        <Link to="reservation.html">Make a Reservation</Link>
                       </div>
                     </div>
                   </div>
@@ -194,7 +194,7 @@ const About= function(){
                         <li><i className="fa fa-building"></i> Daily Places Visit</li>
                       </ul>
                       <div className="main-button">
-                        <a href="reservation.html">Make a Reservation</a>
+                        <Link to="reservation.html">Make a Reservation</Link>
                       </div>
                     </div>
                   </div>
@@ -213,7 +213,7 @@ const About= function(){
                         <li><i className="fa fa-building"></i> Daily Places Visit</li>
                       </ul>
                       <div className="main-button">
-                        <a href="reservation.html">Make a Reservation</a>
+                        <Link to="reservation.html">Make a Reservation</Link>
                       </div>
                     </div>
                   </div>
@@ -267,12 +267,13 @@ const About= function(){
               </div>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
               <div className="main-button">
-                <a href="reservation.html">Discover More</a>
+                <Link to="reservation.html">Discover More</Link>
               </div>
             </div>
           </div>
         </div>
       </div>
+
 
       <div className="call-to-action">
         <div className="container">
