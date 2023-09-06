@@ -1,9 +1,14 @@
 
 const AuthModel = require('../models/user.AuthModel');
+const LoginModel = require('../models/user.LoginModel')
 const pool = require('../models/pool');
 require('date-utils')
 
-const AuthService = {
+//로그인상태를 어떻게 구별하지?
+//authDB랑 연결을 어떻게? 왜 시키지?
+//로그인시도일때 비밀번호만 틀렸을떄 알려주기
+
+const BoardService = {
   async getAuth(article){
     //article = {id,phoneNumber}
     const conn = await pool.getConnection();
@@ -101,9 +106,75 @@ const AuthService = {
       pool.releaseConnection(conn);
     }
 
-  }
+  },
+  async signIn(article){
+    // article = {id,password}
+    const conn = await pool.getConnection();
+    try{
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      const getPid = await LoginModel.findSame(article, conn);
+      await LoginModel.chTrue(getPid.pid,conn);
+      //여기에 로그인실패(패스워드, 없는닉네임 추가할것)
+      await conn.commit();
+      return {ok:true, message:"로그인완료"}
 
+    }catch(err){
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error('Service Error', {cause: err});
+    }finally{
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
 
+  },
+  async signOut(article){
+    // article = {id,password}
+    const conn = await pool.getConnection();
+    try{
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      const getPid = await LoginModel.findSame(article, conn);
+      await LoginModel.chFalse(getPid.pid,conn);
+      await conn.commit();
+      return {ok:true, message:"로그아웃완료"}
+
+    }catch(err){
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error('Service Error', {cause: err});
+    }finally{
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+
+  },
+  async signUp(article){
+    // article = {id,phoneNumber,password,role,email,paymentInformation}
+    const conn = await pool.getConnection();
+    try{
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      const ch = await LoginModel.findId(article.id, conn);
+      if(ch){
+        await conn.commit();
+        return {ok:false, message:"아이디사용불가"}
+      }
+      await LoginModel.insertUser(article,conn);
+      await conn.commit();
+      return {ok:true, message:"회원가입완료"}
+
+    }catch(err){
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error('Service Error', {cause: err});
+    }finally{
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+
+  },
 };
 
-module.exports = AuthService;
+module.exports = BoardService;
