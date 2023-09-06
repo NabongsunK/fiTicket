@@ -4,6 +4,7 @@ import Layout from './components/layout';
 import Books from './pages/books';
 import Deal from './pages/deals';
 import About from './pages/about';
+import Login from './pages/login';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/deals" element={<Deal />} />
           <Route path="/books" element={<Books />} />
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </Router>

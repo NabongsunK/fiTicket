@@ -37,7 +37,7 @@ const Header= function(){
 
           <div className="header-meta d-flex clearfix">
             <div className="user-login-info">
-              <NavLink to="/books"><img src="/assets/images/core-img/user.svg" alt=""/></NavLink>
+              <NavLink to="/login"><img src="/assets/images/core-img/user.svg" alt=""/></NavLink>
             </div>
 
             <div className="cart-area">
