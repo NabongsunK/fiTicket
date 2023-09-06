@@ -5,11 +5,7 @@ const Loading= function(){
       <div className="preloader-inner">
         <span className="dot"></span>
         <div className="dots">
-          <span><br /><br />
-            <h1>
-            Loca!T
-            </h1>
-            </span>
+          <span><br/><br/><h2>Loca!&nbsp;T</h2></span>
           <span></span>
           <span></span>
         </div>

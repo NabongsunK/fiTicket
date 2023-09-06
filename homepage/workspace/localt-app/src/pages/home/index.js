@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import Loading from "../../components/common/Loading";
 
 function Home() {
   return (
     <>
-    
+      
       <section id="section-1">
         <div className="content-slider">
           <input type="radio" id="banner1" className="sec-1-input" name="banner" defaultChecked />
@@ -17,7 +16,8 @@ function Home() {
                 <div className="main-caption">
                   <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
                   <h1>Caribbean</h1>
-                  <div className="border-button"><Link to="about.html">Go There</Link></div>
+                  {/* 회원가입 페이지로 이동 */}
+                  <div className="border-button"><Link to="/">지금 가입하기</Link></div>
                 </div>
                 <div className="container">
                   <div className="row">
@@ -38,7 +38,8 @@ function Home() {
                           </div>
                           <div className="col-lg-3 col-sm-6 col-6">
                             <div className="main-button">
-                              <Link to="about.html">Explore More</Link>
+                              {/* 추천 행사로 이동 */}
+                              <Link to="/deals">Explore More</Link>
                             </div>
                           </div>
                         </div>
@@ -287,7 +288,7 @@ function Home() {
                 <div className="row">
                   <div className="col-lg-12">
                     <div id="map">
-                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="100%" height="550px" frameBorder="0" style={{border:0}, {borderRadius: 0}} allowFullScreen=""></iframe>
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="100%" height="550px" frameBorder="0" style={{border:0, borderRadius: 0}} allowFullScreen=""></iframe>
                     </div>
                   </div>
                 </div>
@@ -306,7 +307,7 @@ function Home() {
             </div>
             <div className="col-lg-4">
               <div className="border-button">
-                <Link to="reservation.html">Book Yours Now</Link>
+                <Link to="/books">Book Yours Now</Link>
               </div>
             </div>
           </div>

@@ -19,10 +19,13 @@
     <link rel="stylesheet" href="/assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
+    <!-- cart -->
+    <link rel="stylesheet" href="/cart/css/core-style.css">
+
     
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- <noscript>You need to enable JavaScript to run this app.</noscript> -->
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -37,7 +40,8 @@
 
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
+    <!-- <script src="/vendor/jquery/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>  
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <script src="/assets/js/isotope.min.js"></script>
@@ -61,5 +65,29 @@
         bannerTimer = setInterval(bannerSwitcher, 5000)
       });
     </script>
+
+    <!-- about, deals -->
+    <script>
+      $(".option").click(function(){
+        $(".option").removeClass("active");
+        $(this).addClass("active"); 
+      });
+    </script>
+
+
+    <!-- cart -->
+    <script src="/cart/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="/cart/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/cart/js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="/cart/js/plugins.js"></script>
+    <!-- Classy Nav js -->
+    <script src="/cart/js/classy-nav.min.js"></script>
+    <!-- Active js -->
+    <script src="/cart/js/active.js"></script>
+
+    
   </body>
 </html>

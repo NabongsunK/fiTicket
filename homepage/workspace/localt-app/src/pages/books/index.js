@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Loading from "../../components/common/Loading";
 
 const Books= function(){
   return (
@@ -17,34 +16,23 @@ const Books= function(){
         </div>
       </div>
 
-      <div className="more-info reservation-info">
+
+      {/* 지도 위 소제목 */}
+      <div className="amazing-deals">
         <div className="container">
           <div className="row">
-            <div className="col-lg-4 col-sm-6">
-              <div className="info-item">
-                <i className="fa fa-phone"></i>
-                <h4>Make a Phone Call</h4>
-                <Link to="#">+123 456 789 (0)</Link>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-6">
-              <div className="info-item">
-                <i className="fa fa-envelope"></i>
-                <h4>Contact Us via Email</h4>
-                <Link to="#">company@email.com</Link>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-6">
-              <div className="info-item">
-                <i className="fa fa-map-marker"></i>
-                <h4>Visit Our Offices</h4>
-                <Link to="#">24th Street North Avenue London, UK</Link>
+            <div className="col-lg-6 offset-lg-3">
+              <div className="section-heading text-center">
+                <h2>지금 바로 축제를 즐기세요!</h2>
+                <p>여러분 주위에 여러 행사들이 열려있습니다.<br/>Loca!T와 함께 다양한 축제를 지금 바로 만끽하시길 바랍니다.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
+
+      {/* 지도 */}
       <div className="reservation-form">
         <div className="container">
           <div className="row">
@@ -55,16 +43,10 @@ const Books= function(){
               </div>
             </div>
             <div className="col-lg-12">
-            <div class="amazing-deals">
-              <div class="container">
+            <div className="amazing-deals">
+              <div className="container">
 
                 <div className="row">
-                  <div className="col-lg-6 offset-lg-3">
-                    <div className="section-heading text-center">
-                      <h2>Best Weekly Offers In Each City</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                    </div>
-                  </div>
                   <div className="col-lg-12 col-sm-3">
                     <div className="item">
                       <div className="row">
@@ -73,53 +55,76 @@ const Books= function(){
                             <img src="assets/images/deals-01.jpg" alt="" />
                           </div>
                         </div>
-                        <div className="col-lg-5 align-self-center">
+                        <div className="col-lg-6 align-self-center">
                           <div className="content">
-                            <span className="info">*Limited Offer Today</span>
-                            <h4>Glasgow City Lorem</h4>
-                            <p>Lorem ipsum dolor sit amet dire consectetur adipiscing elit.</p>
-
-                          </div>
-                        </div>
-                        <div className="col-lg-3 align-self-center">
-                          <div className="main-button">
-                            <Link to="reservation.html">Make a Reservation</Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-12 col-sm-3">
-                    <div className="item">
-                      <div className="row">
-                        <div className="col-lg-2">
-                          <div className="image">
-                            <img src="assets/images/deals-01.jpg" alt="" />
-                          </div>
-                        </div>
-                        <div className="col-lg-5 align-self-center">
-                          <div className="content">
-                            <span className="info">*Limited Offer Today</span>
-                            <h4>Glasgow City Lorem</h4>
+                            <span className="info">*궁중 다도 체험</span>
+                            <h4>2023년 경복궁 생과방(하반기)</h4>
                             <div className="row">
                               <div className="col-6">
                                 <i className="fa fa-clock"></i>
-                                <span className="list">5 Days</span>
+                                <span className="list">2023-09-07 ~ 2023-10-21</span>
                               </div>
                               <div className="col-6">
                                 <i className="fa fa-map"></i>
-                                <span className="list">Daily Places</span>
+                                <span className="list">다과세트 할인</span>
                               </div>
                             </div>
-                            <p>Lorem ipsum dolor sit amet dire consectetur adipiscing elit.</p>
+                            <p>경복궁 생과방에서 진행시 필요한 다과 세트 할인</p>
 
                           </div>
                         </div>
-                        <div className="col-lg-3 align-self-center">
+                        <div className="col-lg-2 align-self-center">
                           <div className="main-button">
-                            <Link to="reservation.html">Make a Reservation</Link>
+                            <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">행사 홈페이지</Link>
                           </div>
                         </div>
+                        <div className="col-lg-2 align-self-center">
+                          <div className="main-button">
+                            <Link to="reservation.html">티켓 구매</Link>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12 col-sm-3">
+                    <div className="item">
+                      <div className="row">
+                        <div className="col-lg-2">
+                          <div className="image">
+                            <img src="assets/images/deals-01.jpg" alt="" />
+                          </div>
+                        </div>
+                        <div className="col-lg-6 align-self-center">
+                          <div className="content">
+                            <span className="info">*궁중 다도 체험</span>
+                            <h4>2023년 경복궁 생과방(하반기)</h4>
+                            <div className="row">
+                              <div className="col-6">
+                                <i className="fa fa-clock"></i>
+                                <span className="list">2023-09-07 ~ 2023-10-21</span>
+                              </div>
+                              <div className="col-6">
+                                <i className="fa fa-map"></i>
+                                <span className="list">다과세트 할인</span>
+                              </div>
+                            </div>
+                            <p>경복궁 생과방에서 진행시 필요한 다과 세트 할인</p>
+
+                          </div>
+                        </div>
+                        <div className="col-lg-2 align-self-center">
+                          <div className="main-button">
+                            <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">행사 홈페이지</Link>
+                          </div>
+                        </div>
+                        <div className="col-lg-2 align-self-center">
+                          <div className="main-button">
+                            <Link to="reservation.html">티켓 구매</Link>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -131,32 +136,40 @@ const Books= function(){
                             <img src="assets/images/deals-01.jpg" alt="" />
                           </div>
                         </div>
-                        <div className="col-lg-5 align-self-center">
+                        <div className="col-lg-6 align-self-center">
                           <div className="content">
-                            <span className="info">*Limited Offer Today</span>
-                            <h4>Glasgow City Lorem</h4>
+                            <span className="info">*궁중 다도 체험</span>
+                            <h4>2023년 경복궁 생과방(하반기)</h4>
                             <div className="row">
                               <div className="col-6">
                                 <i className="fa fa-clock"></i>
-                                <span className="list">5 Days</span>
+                                <span className="list">2023-09-07 ~ 2023-10-21</span>
                               </div>
                               <div className="col-6">
                                 <i className="fa fa-map"></i>
-                                <span className="list">Daily Places</span>
+                                <span className="list">다과세트 할인</span>
                               </div>
                             </div>
-                            <p>Lorem ipsum dolor sit amet dire consectetur adipiscing elit.</p>
+                            <p>경복궁 생과방에서 진행시 필요한 다과 세트 할인</p>
 
                           </div>
                         </div>
-                        <div className="col-lg-3 align-self-center">
+                        <div className="col-lg-2 align-self-center">
                           <div className="main-button">
-                            <Link to="reservation.html">Make a Reservation</Link>
+                            <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">행사 홈페이지</Link>
                           </div>
                         </div>
+                        <div className="col-lg-2 align-self-center">
+                          <div className="main-button">
+                            <Link to="reservation.html">티켓 구매</Link>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
+
+
 
 
                   <div className="col-lg-12">
