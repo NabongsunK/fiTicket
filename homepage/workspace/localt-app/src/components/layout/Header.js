@@ -48,6 +48,7 @@ const Header= function(){
         </div>
       </header>
 
+      {/* cart 오버레이 되는 부분 */}
       <div className={isActive ? "cart-bg-overlay" : "cart-bg-overlay cart-bg-overlay-on"}></div>
 
       <div className={isActive ? "right-side-cart-area" : "right-side-cart-area cart-on"}>

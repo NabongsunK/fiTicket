@@ -1,6 +1,45 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
-const Deal= function(){
+import DealsListItem from "./DealsListItem";
+
+const Deal= function(props){
+
+  // const list= props.festivals.map(festival => {
+  //   return (
+  //     <DealsListItem key={festival.id} festival={festival} />
+  //   );
+  // });
+
+    // 페이징 처리
+    const [searchParams, setSearchParams]= useSearchParams();
+    const page= Number(searchParams.get('page') || 1);
+  
+    const listPerPage= 4;
+    const lastPage= Math.floor((listPerPage+props.festivals.length-1)/listPerPage);
+    const skip= (page-1) * listPerPage;
+  
+    const pageResult= props.festivals.slice(skip, skip+listPerPage);
+  
+    
+    const goPrev= function(){
+      if(page === 2){
+        searchParams.delete('page');
+      }else if(page > 2){
+        searchParams.set('page', page-1);
+      }
+      setSearchParams(searchParams);
+    };
+  
+    const goNext= function(){
+      if(page < lastPage){
+        searchParams.set('page',page+1);
+        setSearchParams(searchParams);
+      }
+    };
+  
+    const list= pageResult.map(festival => <DealsListItem key={festival.id} festival={festival} />);
+  
   return (
     <>
       <div className="page-heading">
@@ -73,137 +112,21 @@ const Deal= function(){
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
               </div>
             </div>
-            <div className="col-lg-6 col-sm-6">
-              <div className="item">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className="image">
-                      <img src="assets/images/deals-01.jpg" alt="" />
-                    </div>
-                  </div>
-                  <div className="col-lg-6 align-self-center">
-                    <div className="content">
-                      <span className="info">*Limited Offer Today</span>
-                      <h4>Glasgow City Lorem</h4>
-                      <div className="row">
-                        <div className="col-6">
-                          <i className="fa fa-clock"></i>
-                          <span className="list">5 Days</span>
-                        </div>
-                        <div className="col-6">
-                          <i className="fa fa-map"></i>
-                          <span className="list">Daily Places</span>
-                        </div>
-                      </div>
-                      <p>Lorem ipsum dolor sit amet dire consectetur adipiscing elit.</p>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6 col-sm-6">
-              <div className="item">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className="image">
-                      <img src="assets/images/deals-02.jpg" alt="" />
-                    </div>
-                  </div>
-                  <div className="col-lg-6 align-self-center">
-                    <div className="content">
-                      <span className="info">*Today & Tomorrow Only</span>
-                      <h4>Venezia Italy Ipsum</h4>
-                      <div className="row">
-                        <div className="col-6">
-                          <i className="fa fa-clock"></i>
-                          <span className="list">5 Days</span>
-                        </div>
-                        <div className="col-6">
-                          <i className="fa fa-map"></i>
-                          <span className="list">Daily Places</span>
-                        </div>
-                      </div>
-                      <p>Lorem ipsum dolor sit amet dire consectetur adipiscing elit.</p>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6 col-sm-6">
-              <div className="item">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className="image">
-                      <img src="assets/images/deals-03.jpg" alt="" />
-                    </div>
-                  </div>
-                  <div className="col-lg-6 align-self-center">
-                    <div className="content">
-                      <span className="info">**Undefined</span>
-                      <h4>Glasgow City Lorem</h4>
-                      <div className="row">
-                        <div className="col-6">
-                          <i className="fa fa-clock"></i>
-                          <span className="list">5 Days</span>
-                        </div>
-                        <div className="col-6">
-                          <i className="fa fa-map"></i>
-                          <span className="list">Daily Places</span>
-                        </div>
-                      </div>
-                      <p>Lorem ipsum dolor sit amet dire consectetur adipiscing elit.</p>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6 col-sm-6">
-              <div className="item">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className="image">
-                      <img src="assets/images/deals-04.jpg" alt="" />
-                    </div>
-                  </div>
-                  <div className="col-lg-6 align-self-center">
-                    <div className="content">
-                      <span className="info">*Offer Until 24th March</span>
-                      <h4>Glasgow City Lorem</h4>
-                      <div className="row">
-                        <div className="col-6">
-                          <i className="fa fa-clock"></i>
-                          <span className="list">5 Days</span>
-                        </div>
-                        <div className="col-6">
-                          <i className="fa fa-map"></i>
-                          <span className="list">Daily Places</span>
-                        </div>
-                      </div>
-                      <p>This free CSS template is provided by Template Mo website.</p>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+            {/* 추천 행사 리스트 */}
+            {list}
+
+
+
+
+
             <div className="col-lg-12">
               <ul className="page-numbers">
-                <li><Link to="#"><i className="fa fa-arrow-left"></i></Link></li>
+                <li><Link to="" onClick={goPrev}><i className="fa fa-arrow-left"></i></Link></li>
                 <li><Link to="#">1</Link></li>
                 <li className="active"><Link to="#">2</Link></li>
                 <li><Link to="#">3</Link></li>
-                <li><Link to="#"><i className="fa fa-arrow-right"></i></Link></li>
+                <li><Link to="" onClick={goNext}><i className="fa fa-arrow-right"></i></Link></li>
               </ul>
             </div>
           </div>
