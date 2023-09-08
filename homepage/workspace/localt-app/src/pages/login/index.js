@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 function Home() {
+  const signIn = function(){
+    console.log("뷁")
+  }
   return (
     // 이쪽 수정부탁
     <div style={{"width": "18rem", "margin":"10rem","backgroundColor":"green"}}>
@@ -34,7 +37,11 @@ function Home() {
         </div>
 
         {/* <!-- Submit button --> */}
-        <button type="button" className="btn btn-primary btn-block mb-4">Sign in</button>
+        <button type="button" 
+                className="btn btn-primary btn-block mb-4"
+                onClick={()=>{signIn()}}>
+          Sign in
+        </button>
 
         {/* <!-- Register buttons --> */}
         <div className="text-center">
