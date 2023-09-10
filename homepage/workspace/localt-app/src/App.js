@@ -7,20 +7,25 @@ import About from './pages/about';
 import Login from './pages/login';
 
 import festivals from './data/festivals.json';
+import { Provider } from 'react-redux';
+import store from './store/store'
+
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/deals" element={<Deal festivals={festivals} />} />
-          <Route path="/books" element={<Books />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-        </Route>
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/deals" element={<Deal festivals={festivals} />} />
+            <Route path="/books" element={<Books />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 

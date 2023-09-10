@@ -1,8 +1,22 @@
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
-function Home() {
-  const signIn = function(){
-    console.log("뷁")
+
+// axios 기본 url 정의
+axios.defaults.baseURL = 'http://localhost:33000/todolist';
+
+
+
+function Login() {
+  const dispatch = useDispatch();
+  // const itemList = useSelector(state=>state.todoStore.itemList);
+
+
+  const signIn = async function(){
+    const res = await axios.get('/');
+    // dispatch(listTodo({list:res.data}));
   }
   return (
     // 이쪽 수정부탁
@@ -68,4 +82,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Login;
