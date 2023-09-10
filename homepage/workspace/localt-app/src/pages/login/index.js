@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 // axios 기본 url 정의
-axios.defaults.baseURL = 'http://localhost:4400/api/login';
+axios.defaults.baseURL = 'http://localhost:4400/api';
 
 
 function Login() {
@@ -14,7 +14,7 @@ function Login() {
   const [LoginPw,setLoginPw] = useState('')
 
   const signIn = async function(){
-    const res = await axios.post('/signin',{
+    const res = await axios.post('/login/signin',{
       id : LoginId,
       password : LoginPw
     });

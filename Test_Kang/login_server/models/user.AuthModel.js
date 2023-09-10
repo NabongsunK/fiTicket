@@ -16,7 +16,7 @@ const AuthModel = {
         id = ? and
         phoneNumber = ?
       `;
-      const [ result ] = await conn.query(sql, [article.id, article.phoneNumber]);
+      const [ result ] = await conn.query(sql, [article.id, article.phonenumber]);
       return result; 
 
     }catch(err){
@@ -76,7 +76,7 @@ const AuthModel = {
     // res = {pid}
     try{
       const sql = `select pid from auth where id=? and phoneNumber=?`;
-      const [ result ] = await conn.query(sql, [article.id, article.phoneNumber]);
+      const [ result ] = await conn.query(sql, [article.id, article.phonenumber]);
       return result[0];
     }catch(err){
       throw new Error('DB Error', { cause: err });
