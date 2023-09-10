@@ -1,22 +1,24 @@
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
-
 // axios 기본 url 정의
-axios.defaults.baseURL = 'http://localhost:33000/todolist';
-
+axios.defaults.baseURL = 'http://localhost:4400/api/login';
 
 
 function Login() {
   const dispatch = useDispatch();
-  // const itemList = useSelector(state=>state.todoStore.itemList);
-
+  // redux 이용하기
+  const [LoginId,setLoginId] = useState('')
+  const [LoginPw,setLoginPw] = useState('')
 
   const signIn = async function(){
-    const res = await axios.get('/');
-    // dispatch(listTodo({list:res.data}));
+    const res = await axios.post('/signin',{
+      id : LoginId,
+      password : LoginPw
+    });
+    console.log(res);
   }
   return (
     // 이쪽 수정부탁
@@ -24,13 +26,13 @@ function Login() {
       <form>
         {/* <!-- ID input --> */}
         <div className="form-outline mb-4">
-          <input type="email" id="form2Example1" className="form-control" />
+          <input type="email" id="form2Example1" className="form-control" onChange={e=>setLoginId(e.target.value)}/>
           <label className="form-label" htmlFor="form2Example1">ID</label>
         </div>
 
         {/* <!-- Password input --> */}
         <div className="form-outline mb-4">
-          <input type="password" id="form2Example2" className="form-control" />
+          <input type="password" id="form2Example2" className="form-control" onChange={e=>setLoginPw(e.target.value)}/>
           <label className="form-label" htmlFor="form2Example2">Password</label>
         </div>
 
@@ -46,7 +48,7 @@ function Login() {
 
           <div className="col">
             {/* <!-- Simple link --> */}
-            <a href="#!">Forgot password?</a>
+            <Link to="/signup">Forgot password?</Link>
           </div>
         </div>
 
@@ -59,7 +61,7 @@ function Login() {
 
         {/* <!-- Register buttons --> */}
         <div className="text-center">
-          <p>Not a member? <a href="#!">Register</a></p>
+          <p>Not a member? <Link to="/signup">Register</Link></p>
           <p>or sign up with:</p>
           <button type="button" className="btn btn-link btn-floating mx-1">
             <i className="fab fa-facebook-f"></i>

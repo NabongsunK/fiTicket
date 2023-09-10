@@ -9,6 +9,7 @@ import Login from './pages/login';
 import festivals from './data/festivals.json';
 import { Provider } from 'react-redux';
 import store from './store/store'
+import Signup from './pages/signup';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/books" element={<Books />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
           </Route>
         </Routes>
       </Router>
