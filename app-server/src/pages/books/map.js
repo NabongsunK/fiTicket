@@ -3,19 +3,17 @@ import { useEffect, useState } from "react";
 
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const {kakao} = window;
-const test = async function(){
-  const result = await getAdress(127.1086228, 37.4012191);
-  console.log('주소 정보:', result);
-}
+
+// x:경도 y:위도 로 지역찾기
 const getAdress = async function (x, y) {
   try {
     const res = await axios.get("https://dapi.kakao.com/v2/local/geo/coord2regioncode.json", {
-      Params: {
-        'x': x,
-        'y': y
+      params: {
+        x: x,
+        y: y
       },
-      Headers: {
-        'Authorization': "KakaoAK 8e8301f6d873da44dfc2345e960bae20"
+      headers: {
+        Authorization: "KakaoAK 8e8301f6d873da44dfc2345e960bae20"
       }
     });
 
@@ -26,21 +24,44 @@ const getAdress = async function (x, y) {
     throw error; // 오류를 상위로 전파하거나 다른 방식으로 처리할 수 있습니다.
   }
 }
+// 쿼리로 경위도 찾기
+const getItude = async function (query="서울") {
+  try {
+    const res = await axios.get("https://dapi.kakao.com/v2/local/search/address.json", {
+      params: {
+        query:  query
+      },
+      headers: {
+        Authorization: "KakaoAK 8e8301f6d873da44dfc2345e960bae20"
+      }
+    });
+    if(res.data.documents[0]){
+      return ([res.data.documents[0].x,res.data.documents[0].y]);
+    }
+    else return ([126.978652258309,37.566826004661])
+    
+  } catch (error) {
+    // 오류 처리
+    console.error('오류:', error);
+    throw error; // 오류를 상위로 전파하거나 다른 방식으로 처리할 수 있습니다.
+  }
+}
 
-
-test()
 
 
 const Map= function(){
-  const [x,setLoginX] = useState('')
-  const [y,setLoginY] = useState('')
+  const [mapItude,setMapItude] = useState([126.978652258309,37.566826004661])
+  const onChangeQuery = async function (e){
+    if(e.target.value){
+      return setMapItude(await getItude(e.target.value))
+    }
+  }
 
-  
-  useEffect(()=>{
+  useEffect(function(){
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(parseInt(x), parseInt(y)), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(mapItude[1],mapItude[0]), // 지도의 중심좌표
+        level: 8 // 지도의 확대 레벨
     };
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
@@ -55,17 +76,15 @@ const Map= function(){
         
         var resultDiv = document.getElementById('result'); 
         resultDiv.innerHTML = message;
-        
     });
     
-  },[x,y])
+  },[mapItude])
   return(
     <>
     {/* x,y */}
       <div className="form-outline mb-4">
-        <input type="number" id="form2Example1" className="form-control" onChange={e=>setLoginX(e.target.value)}/>
-        <input type="number" id="form2Example1" className="form-control" onChange={e=>setLoginY(e.target.value)}/>
-        <label className="form-label" htmlFor="form2Example1">X/Y</label>
+        <input type="text" id="form2Example1" className="form-control" onChange={onChangeQuery}/>
+        <label className="form-label" htmlFor="form2Example1">지역</label>
       </div>
 
       <div id="map" style ={{
