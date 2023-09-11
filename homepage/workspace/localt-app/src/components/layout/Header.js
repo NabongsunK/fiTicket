@@ -14,7 +14,7 @@ const Header= function(){
   return (
     <>
       
-      <header className="header-area header-sticky header_area">
+      <header className="header-area header-sticky">
         <div className="container breakpoint-off d-flex align-items-center">
           <div className="col-10">
             <div className="">

@@ -260,7 +260,7 @@ img {
       margin-right: 15px; } } */
       /* 장바구니 */
   .header_area .classy-navbar,
-  .header_area .header-meta {
+  .header-area .header-meta {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50%;
     /* flex: 0 0 50%; */
@@ -268,7 +268,7 @@ img {
     width: 50%; }
     @media only screen and (max-width: 767px) {
       .header_area .classy-navbar,
-      .header_area .header-meta {
+      .header-area .header-meta {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 100%;
         flex: 0 0 100%;
@@ -281,12 +281,12 @@ img {
       .header_area .classy-navbar {
         height: 40px;
         border-bottom: 1px solid #ebebeb; } }
-  .header_area .header-meta {
+  .header-area .header-meta {
     height: 72px;
     position: relative;
     z-index: 1; }
     @media only screen and (max-width: 767px) {
-      .header_area .header-meta {
+      .header-area .header-meta {
         height: 40px; } }
   .header_area .classynav ul li a {
     font-size: 16px;
@@ -356,8 +356,8 @@ img {
           left: 10px;
           height: 40px; } }
   .header_area .favourite-area a,
-  .header_area .user-login-info a,
-  .header_area .cart-area a {
+  .header-area .user-login-info a,
+  .header-area .cart-area a {
     position: relative;
     z-index: 1;
     -webkit-box-flex: 0;
@@ -371,20 +371,20 @@ img {
     line-height: 80px; }
     @media only screen and (max-width: 767px) {
       .header_area .favourite-area a,
-      .header_area .user-login-info a,
-      .header_area .cart-area a {
+      .header-area .user-login-info a,
+      .header-area .cart-area a {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 50px;
         flex: 0 0 50px;
         width: 50px;
         line-height: 40px; } }
     .header_area .favourite-area a img,
-    .header_area .user-login-info a img,
-    .header_area .cart-area a img {
+    .header-area .user-login-info a img,
+    .header-area .cart-area a img {
       max-width: 20px; }
     .header_area .favourite-area a span,
-    .header_area .user-login-info a span,
-    .header_area .cart-area a span {
+    .header-area .user-login-info a span,
+    .header-area .cart-area a span {
       font-family: "Ubuntu", sans-serif;
       font-size: 18px;
       color: #0315ff;
@@ -393,10 +393,10 @@ img {
       top: -10px; }
       @media only screen and (max-width: 767px) {
         .header_area .favourite-area a span,
-        .header_area .user-login-info a span,
-        .header_area .cart-area a span {
+        .header-area .user-login-info a span,
+        .header-area .cart-area a span {
           font-size: 14px; } }
-  .header_area.sticky {
+  .header-area.sticky {
     position: fixed;
     z-index: 900;
     top: 0;
@@ -1753,3 +1753,4 @@ img {
 /* ##### The End ##### */
 
 /*# sourceMappingURL=core-style.css.map */
+
