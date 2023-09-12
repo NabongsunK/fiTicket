@@ -8,7 +8,7 @@ require('date-utils')
 //authDB랑 연결을 어떻게? 왜 시키지?
 //로그인시도일때 비밀번호만 틀렸을떄 알려주기
 
-const BoardService = {
+const UserService = {
   async getAuth(article){
     //article = {id,phoneNumber}
     const conn = await pool.getConnection();
@@ -177,4 +177,4 @@ const BoardService = {
   },
 };
 
-module.exports = BoardService;
+module.exports = UserService;

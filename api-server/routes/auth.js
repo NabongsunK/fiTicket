@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 
-const BoardService = require('../services/board.service');
+const UserService = require('../services/User.service');
 
 // 사용자 정보 입력
 router.post('/getauthnum', async (req, res, next) => {
   // req.body = {id,phoneNumber}
   // res = {pid,currentTime,expirationTime,counter,auth}
   try{
-    const result= await BoardService.getAuth(req.body);
+    const result= await UserService.getAuth(req.body);
     res.json(result);
   }catch(err){
     next(err);
@@ -21,7 +21,7 @@ router.post('/doauth', async (req, res, next) => {
   // req.body = {id,phoneNumber,auth}
   // res = {check}
   try{
-    const result= await BoardService.doAuth(req.body);
+    const result= await UserService.doAuth(req.body);
     res.json(result);
   }catch(err){
     next(err);
