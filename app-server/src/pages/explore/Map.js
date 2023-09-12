@@ -90,8 +90,8 @@ const Map= function(){
       </div>
 
       <div id="map" style ={{
-        width:'1000px',
-        height:'500px'
+        width:'100%',
+        height:'550px'
       }}>
 
       </div>
