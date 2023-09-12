@@ -16,8 +16,7 @@ const getAdress = async function (x, y) {
         Authorization: "KakaoAK 8e8301f6d873da44dfc2345e960bae20"
       }
     });
-
-    return res.data;
+    return res.data.documents[0].address_name;
   } catch (error) {
     // 오류 처리
     console.error('오류:', error);
@@ -67,12 +66,13 @@ const Map= function(){
 
     // 지도에 클릭 이벤트를 등록합니다
     // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-    kakao.maps.event.addListener(map, 'click', function(mouseEvent) { 
+    kakao.maps.event.addListener(map, 'click', async function(mouseEvent) { 
         // 클릭한 위도, 경도 정보를 가져옵니다 
         var latlng = mouseEvent.latLng;
         
         var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-        message += '경도는 ' + latlng.getLng() + ' 입니다';
+        message += '경도는 ' + latlng.getLng() + ' 입니다. \n';
+        message += '지역은 ' + await getAdress(latlng.getLng(),latlng.getLat()) + ' 입니다.';
         
         var resultDiv = document.getElementById('result'); 
         resultDiv.innerHTML = message;
