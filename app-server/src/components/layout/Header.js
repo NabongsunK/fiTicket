@@ -55,8 +55,21 @@ const Header= function(){
 
         {/* Cart Button  */}
         <div className="cart-button">
-            <Link to="#" id="rightSideCart" onClick={handleToggle}><img src="/assets/images/core-img/bag2.svg" alt=""/> <span>3</span></Link>
+            <Link to="#" id="rightSideCart"><img src="/assets/images/core-img/bag2.svg" alt=""/> <span>3</span></Link>
         </div>
+        
+        {/* user button */}
+        <div className="user-button">
+            <Link to="#" id="rightSideCart"><img src="/assets/images/core-img/user2.svg" alt=""/></Link>
+        </div>
+
+        
+        {/* close */}
+        <div className="close-button">
+            <Link to="#" id="rightSideCart" onClick={handleToggle}><i className="fa fa-close fa-close-cart" aria-hidden="true"></i></Link>
+        </div>
+
+
 
         <div className="cart-content d-flex">
 
