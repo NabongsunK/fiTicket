@@ -2,6 +2,25 @@ const pool = require('./pool');
 
 const LoginModel = {
 
+  // 닉네임중복검사
+  async findSameIdNum(article, conn=pool){
+    try{
+      // article = {id,password}
+      const sql = `
+      select
+        pid
+      from userDB
+      where
+        id = ?
+      `;
+      const [ result ] = await conn.query(sql, [article.id]);
+      return result.length; 
+
+    }catch(err){
+      throw new Error('DB Error', { cause: err });
+    }
+  },
+
   // 닉네임/비밀번호비교
   async findSame(article, conn=pool){
     try{
@@ -37,24 +56,6 @@ const LoginModel = {
       const sql = `update userDB set isSigned = false where pid = ?`;
       await conn.query(sql, [pid]);
       return true;
-    }catch(err){
-      throw new Error('DB Error', { cause: err });
-    }
-  },
-  // 닉네임중복검사
-  async findId(article, conn=pool){
-    try{
-      // article = {id}
-      const sql = `
-      select
-        pid
-      from userDB
-      where
-        id = ?
-      `;
-      const [ result ] = await conn.query(sql, [article.id]);
-      return result[0]; 
-
     }catch(err){
       throw new Error('DB Error', { cause: err });
     }

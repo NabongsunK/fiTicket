@@ -16,7 +16,13 @@ const UserService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
 
-      // 중복 제거작업
+      // userDB에 중복아이디가 1개라도 있으면
+      const sameIdsAtUserDB = await LoginModel.findSameIdNum(article,conn);
+      if(sameIdsAtUserDB>0){
+        return {ok:false, message:"중복아이디"}
+      }
+
+      // auth에서 중복 제거작업
       const same = await AuthModel.findSame(article,conn);
       let ch = true;
       let id = 0
@@ -40,10 +46,10 @@ const UserService = {
         id = await AuthModel.insertUser(article, conn);
       }
       // result = {pid,currentTime,expirationTime,counter,auth} 
-      const result = await AuthModel.getAuthByPID(id, conn);
+      const data = await AuthModel.getAuthByPID(id, conn);
       // DB에 작업 반영
       await conn.commit();
-      return result;
+      return {ok:true, data};
     }catch(err){
       // DB 작업 취소
       await conn.rollback();
@@ -156,11 +162,6 @@ const UserService = {
     try{
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
-      const ch = await LoginModel.findId(article.id, conn);
-      if(ch){
-        await conn.commit();
-        return {ok:false, message:"아이디사용불가"}
-      }
       await LoginModel.insertUser(article,conn);
       await conn.commit();
       return {ok:true, message:"회원가입완료"}

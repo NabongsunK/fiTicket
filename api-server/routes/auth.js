@@ -4,7 +4,7 @@ var router = express.Router();
 
 const UserService = require('../services/User.service');
 
-// 사용자 정보 입력
+// 인증번호받기
 router.post('/getauthnum', async (req, res, next) => {
   // req.body = {id,phoneNumber}
   // res = {pid,currentTime,expirationTime,counter,auth}
