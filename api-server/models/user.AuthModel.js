@@ -1,7 +1,6 @@
 const pool = require('./pool');
 
 const AuthModel = {
-
   // 중복검사
   async findSame(article, conn=pool){
     try{

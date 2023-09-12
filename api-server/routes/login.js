@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-const BoardService = require('../services/board.service');
+const UserService = require('../services/User.service');
 
 // 로그인 시도
 router.post('/signin', async (req, res, next) => {
   try{
-    const result= await BoardService.signIn(req.body)
+    const result= await UserService.signIn(req.body)
     res.json(result);
   }catch(err){
     next(err);
@@ -16,7 +16,7 @@ router.post('/signin', async (req, res, next) => {
 // 로그아웃
 router.post('/signout', async (req, res, next) => {
   try{
-    const result= await BoardService.signOut(req.body);
+    const result= await UserService.signOut(req.body);
     res.json(result);
   }catch(err){
     next(err);
@@ -26,7 +26,7 @@ router.post('/signout', async (req, res, next) => {
 // 회원가입
 router.post('/signup', async (req, res, next) => {
   try{
-    const result= await BoardService.signUp(req.body);
+    const result= await UserService.signUp(req.body);
     res.json(result);
   }catch(err){
     next(err);
