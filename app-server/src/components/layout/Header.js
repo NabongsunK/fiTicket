@@ -25,8 +25,8 @@ const Header= function(){
                 <ul className="nav">
                   <li><NavLink to="/ ">Home</NavLink></li>
                   <li><NavLink to="/deals">추천 행사</NavLink></li>
-                  <li><NavLink to="/books">행사 찾기</NavLink></li>
-                  <li><NavLink to="/about">Loca!T</NavLink></li>
+                  <li><NavLink to="/explore">행사 찾기</NavLink></li>
+                  <li><NavLink to="/teams">Loca!T</NavLink></li>
                 </ul>
                 <Link className='menu-trigger'>
                     <span>Menu</span>

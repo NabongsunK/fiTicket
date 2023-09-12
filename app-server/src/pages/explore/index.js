@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import Map from "./map";
-import TicketList from "./ticketList";
+import Map from "./Map";
+import TicketList from "./TicketList";
 
-const Books= function(){
+const Explore= function(){
   return (
     <>
       <div className="second-page-heading">
@@ -12,7 +12,7 @@ const Books= function(){
               <h4>Book Prefered Deal Here</h4>
               <h2>Make Your Reservation</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt uttersi labore et dolore magna aliqua is ipsum suspendisse ultrices gravida</p>
-              <div className="main-button"><Link to="/books">Discover More</Link></div>
+              <div className="main-button"><Link to="/explore">Discover More</Link></div>
             </div>
           </div>
         </div>
@@ -56,4 +56,4 @@ const Books= function(){
   );
 };
 
-export default Books;
+export default Explore;

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const About= function(){
+const Teams= function(){
   return (
     <>
       <div className="about-main-content">
@@ -297,4 +297,4 @@ const About= function(){
   );
 };
 
-export default About;
+export default Teams;
