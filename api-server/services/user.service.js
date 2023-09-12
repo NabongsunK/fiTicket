@@ -41,15 +41,26 @@ const UserService = {
           id = element.pid;
         }
       });
-      // 없으면 생성후 해당 id 저장
+      // 없으면 인증번호 생성후 해당 id 저장
       if(ch){
-        id = await AuthModel.insertUser(article, conn);
+        const auth = Math.floor(Math.random() * 65535).toString(16).toUpperCase();
+        const now = new Date();
+        var end = new Date()
+        end.setMinutes(end.getMinutes()+3);
+        article={
+          ...article,
+          auth:auth,
+          currentTime:now,
+          expirationTime:end
+        }
+
+        id = await AuthModel.insertAuth(article, conn);
       }
       // result = {pid,currentTime,expirationTime,counter,auth} 
       const data = await AuthModel.getAuthByPID(id, conn);
       // DB에 작업 반영
       await conn.commit();
-      return {ok:true, data};
+      return {...data, ok:true};
     }catch(err){
       // DB 작업 취소
       await conn.rollback();

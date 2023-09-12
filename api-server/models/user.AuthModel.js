@@ -24,7 +24,7 @@ const AuthModel = {
   },
 
   // id정보 등록
-  async insertUser(article, conn=pool){
+  async insertAuth(article, conn=pool){
     try{
       // article = {id,phoneNumber}
       const sql = `insert into auth set ?`;
