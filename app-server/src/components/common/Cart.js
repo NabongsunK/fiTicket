@@ -20,6 +20,7 @@ const Cart= function(){
             <Link to="#" id="rightSideCart" onClick={handleToggle}><img src="/assets/images/core-img/bag2.svg" alt=""/> <span>3</span></Link>
         </div>
 
+
         <div className="cart-content d-flex">
 
             {/* Cart List Area */}
