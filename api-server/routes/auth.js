@@ -6,8 +6,8 @@ const UserService = require('../services/User.service');
 
 // 인증번호받기
 router.post('/getauthnum', async (req, res, next) => {
-  // req.body = {id,phoneNumber}
-  // res = {pid,currentTime,expirationTime,counter,auth}
+  // req.body = {login_id,phone_number}
+  // res = {id,current_time,expiration_time,count,authentication_number}
   try{
     const result= await UserService.getAuth(req.body);
     res.json(result);
@@ -18,7 +18,7 @@ router.post('/getauthnum', async (req, res, next) => {
 
 // 인증확인
 router.post('/doauth', async (req, res, next) => {
-  // req.body = {id,phoneNumber,auth}
+  // req.body = {login_id,phone_number,authentication_number}
   // res = {check}
   try{
     const result= await UserService.doAuth(req.body);

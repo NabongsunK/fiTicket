@@ -8,10 +8,10 @@ const LoginModel = {
       // article = {id,password}
       const sql = `
       select
-        pid
-      from userDB
+        id
+      from users
       where
-        id = ?
+        login_id = ?
       `;
       const [ result ] = await conn.query(sql, [article.id]);
       return result.length; 
@@ -27,10 +27,10 @@ const LoginModel = {
       // article = {id,password}
       const sql = `
       select
-        pid
-      from userDB
+        id
+      from users
       where
-        id = ? and
+        login_id = ? and
         password = ?
       `;
       const [ result ] = await conn.query(sql, [article.id, article.password]);
@@ -43,7 +43,7 @@ const LoginModel = {
   // signin
   async chTrue(pid, conn=pool){
     try{
-      const sql = `update userDB set isSigned = true where pid = ?`;
+      const sql = `update users set is_signed = true where id = ?`;
       await conn.query(sql, [pid]);
       return true;
     }catch(err){
@@ -53,7 +53,7 @@ const LoginModel = {
   // signout
   async chFalse(pid, conn=pool){
     try{
-      const sql = `update userDB set isSigned = false where pid = ?`;
+      const sql = `update users set is_signed = false where id = ?`;
       await conn.query(sql, [pid]);
       return true;
     }catch(err){
@@ -64,7 +64,7 @@ const LoginModel = {
   async insertUser(article, conn=pool){
     try{
       // article = {id,phoneNumber,password,role,email,paymentInformation}
-      const sql = `insert into userDB set ?`;
+      const sql = `insert into users set ?`;
       const [ result ] = await conn.query(sql, [article]);
       return result.insertId; 
 

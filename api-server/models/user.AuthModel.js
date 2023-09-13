@@ -4,18 +4,18 @@ const AuthModel = {
   // 중복검사
   async findSame(article, conn=pool){
     try{
-      // article = {id,phoneNumber}
+      // article = {login_id,phone_number}
       const sql = `
       select
-        pid,
-        DATE_FORMAT(currentTime, '%Y-%m-%d %H:%i:%s') as currentTime, 
-        DATE_FORMAT(expirationTime,  '%Y-%m-%d %H:%i:%s') as expirationTime
+        id,
+        DATE_FORMAT(curr_time, '%Y-%m-%d %H:%i:%s') as curr_time, 
+        DATE_FORMAT(expiration_time,  '%Y-%m-%d %H:%i:%s') as expiration_time
       from auth
       where
-        id = ? and
-        phoneNumber = ?
+        login_id = ? and
+        phone_number = ?
       `;
-      const [ result ] = await conn.query(sql, [article.id, article.phonenumber]);
+      const [ result ] = await conn.query(sql, [article.login_id, article.phone_number]);
       return result; 
 
     }catch(err){
@@ -26,7 +26,7 @@ const AuthModel = {
   // id정보 등록
   async insertAuth(article, conn=pool){
     try{
-      // article = {id,phoneNumber}
+      // article = {login_id,phone_number,authentication_number,curr_time,expiration_time}
       const sql = `insert into auth set ?`;
       const [ result ] = await conn.query(sql, [article]);
       return result.insertId; 
@@ -37,19 +37,19 @@ const AuthModel = {
   },
 
   // 인증정보 리턴
-  async getAuthByPID(pid, conn=pool){
+  async getAuthByPID(id, conn=pool){
     try{
       const sql = `
       select
-        pid, 
-        DATE_FORMAT(currentTime, '%Y-%m-%d %H:%i:%s') as currentTime, 
-        DATE_FORMAT(expirationTime,  '%Y-%m-%d %H:%i:%s') as expirationTime, 
-        counter, 
-        auth
+        id, 
+        DATE_FORMAT(curr_time, '%Y-%m-%d %H:%i:%s') as curr_time, 
+        DATE_FORMAT(expiration_time,  '%Y-%m-%d %H:%i:%s') as expiration_time, 
+        count, 
+        authentication_number
       from auth
-      where pid = ?
+      where id = ?
         `;
-      const [ result ] = await conn.query(sql, [pid]);
+      const [ result ] = await conn.query(sql, [id]);
       return result[0] ;
 
     }catch(err){
@@ -59,10 +59,10 @@ const AuthModel = {
 
 
   // 해당정보 삭제
-  async deleteByPID(pid, conn=pool){
+  async deleteByPID(id, conn=pool){
     try{
-      const sql = `delete from auth where pid = ?`;
-      await conn.query(sql, [pid]);
+      const sql = `delete from auth where id = ?`;
+      await conn.query(sql, [id]);
       return true;
     }catch(err){
       throw new Error('DB Error', { cause: err });
@@ -72,10 +72,10 @@ const AuthModel = {
   // 인증번호조회
   async checkAuth(article, conn=pool){
     // article = {id,phoneNumber,auth}
-    // res = {pid}
+    // res = {id}
     try{
-      const sql = `select pid from auth where id=? and phoneNumber=?`;
-      const [ result ] = await conn.query(sql, [article.id, article.phonenumber]);
+      const sql = `select id from auth where login_id=? and phone_number=?`;
+      const [ result ] = await conn.query(sql, [article.login_id, article.phone_number]);
       return result[0];
     }catch(err){
       throw new Error('DB Error', { cause: err });
@@ -83,10 +83,10 @@ const AuthModel = {
   },
 
   // 카운트증가
-  async plusCounter(pid, conn=pool){
+  async plusCounter(id, conn=pool){
     try{
-      const sql = `update auth set counter = counter+1 where pid = ?`;
-      await conn.query(sql, [pid]);
+      const sql = `update auth set count = count+1 where id = ?`;
+      await conn.query(sql, [id]);
       return true;
     }catch(err){
       throw new Error('DB Error', { cause: err });
