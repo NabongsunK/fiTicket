@@ -17,7 +17,7 @@ const UserService = {
       await conn.beginTransaction();
 
       // userDB에 중복아이디가 1개라도 있으면
-      const sameIdsAtUserDB = await LoginModel.findSameIdNum(article,conn);
+      const sameIdsAtUserDB = await LoginModel.findSameLoginIdNum(article,conn);
       if(sameIdsAtUserDB>0){
         return {ok:false, message:"중복아이디"}
       }
@@ -56,7 +56,7 @@ const UserService = {
 
         id = await AuthModel.insertAuth(article, conn);
       }
-      // result = {id,current_time,expiration_time,count,authentication_number} 
+      // result = {id,curr_time,expiration_time,count,authentication_number} 
       const data = await AuthModel.getAuthByPID(id, conn);
       // DB에 작업 반영
       await conn.commit();
@@ -81,10 +81,10 @@ const UserService = {
       const data = await AuthModel.getAuthByPID(getPid.id,conn);
 
       var curTime = new Date();
-      var beginTime = new Date(data.currentTime)
-      var endTime = new Date(data.expirationTime)
+      var beginTime = new Date(data.curr_time)
+      var endTime = new Date(data.expiration_time)
 
-      if(data.auth === article.auth){
+      if(data.authentication_number === article.authentication_number){
         // 인증 완료
         if(curTime.getTime()>=beginTime.getTime() && curTime.getTime()<=endTime.getTime()){
           await AuthModel.deleteByPID(getPid.id, conn);
@@ -125,7 +125,7 @@ const UserService = {
 
   },
   async signIn(article){
-    // article = {id,password}
+    // article = {login_id,password}
     const conn = await pool.getConnection();
     try{
       // 트랜젝션 작업 시작
@@ -147,7 +147,7 @@ const UserService = {
 
   },
   async signOut(article){
-    // article = {id,password}
+    // article = {login_id,password}
     const conn = await pool.getConnection();
     try{
       // 트랜젝션 작업 시작
@@ -168,7 +168,7 @@ const UserService = {
 
   },
   async signUp(article){
-    // article = {id,phoneNumber,password,role,email,paymentInformation}
+    // article = {login_id,phone_number,password,role,email,name}
     const conn = await pool.getConnection();
     try{
       // 트랜젝션 작업 시작

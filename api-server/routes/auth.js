@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-const UserService = require('../services/User.service');
+const UserService = require('../services/user.service');
 
 // 인증번호받기
 router.post('/getauthnum', async (req, res, next) => {

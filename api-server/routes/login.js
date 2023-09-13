@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const UserService = require('../services/User.service');
+const UserService = require('../services/user.service');
 
 // 로그인 시도
 router.post('/signin', async (req, res, next) => {
