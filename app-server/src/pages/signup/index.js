@@ -16,22 +16,23 @@ function Signup() {
   const [SignupRole,setSignupRole] = useState('')
   const [SignupEm,setSignupEm] = useState('')
   const [SignupAuth,setSignupAuth] = useState('')
+  const [SignupName,setSignupName] = useState('')
 
   const signUp = async function(){
     const res = await axios.post('/login/signup',{
-      "id" : SignupId,
-      "phonenumber" : SignupPn,
+      "login_id" : SignupId,
+      "phone_number" : SignupPn,
       "password" : SignupPw,
       "role" : SignupRole,
       "email" : SignupEm,
-      "issigned" : false
+      "name" : SignupName
     });
     console.log(res);
   }
   const getAuth = async function(){
     const res = await axios.post('/auth/getauthnum',{
-      "id" : SignupId,
-      "phonenumber" : SignupPn
+      "login_id" : SignupId,
+      "phone_number" : SignupPn
     });
     console.log(res);
   }
@@ -39,9 +40,9 @@ function Signup() {
   // 아마 회원가입한사람만(userdb에 아이디가 저장된 사람만) 인증번호 받기로 했던거 같은데 이거 수정해야됨
   const doAuth = async function(){
     const res = await axios.post('/auth/doauth',{
-      "id" : SignupId,
-      "phonenumber" : SignupPn,
-      "auth": SignupAuth
+      "login_id" : SignupId,
+      "phone_number" : SignupPn,
+      "authentication_number": SignupAuth
     });
     console.log(res);
   }
@@ -78,6 +79,12 @@ function Signup() {
         <div className="form-outline mb-4">
           <input type="password" id="form2Example2" className="form-control" onChange={e=>setSignupPw(e.target.value)}/>
           <label className="form-label" htmlFor="form2Example2">비밀번호</label>
+        </div>
+
+        {/* <!-- 이름 --> */}
+        <div className="form-outline mb-4">
+          <input type="text" id="form2Example2" className="form-control" onChange={e=>setSignupName(e.target.value)}/>
+          <label className="form-label" htmlFor="form2Example2">이름</label>
         </div>
 
         {/* <!-- 역할 --> */}

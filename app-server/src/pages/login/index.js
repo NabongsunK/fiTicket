@@ -15,7 +15,7 @@ function Login() {
 
   const signIn = async function(){
     const res = await axios.post('/login/signin',{
-      id : LoginId,
+      login_id : LoginId,
       password : LoginPw
     });
     console.log(res);
