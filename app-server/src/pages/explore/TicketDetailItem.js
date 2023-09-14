@@ -7,7 +7,7 @@ const TicketListItem= function(props){
         <div className="row">
           <div className="col-lg-2">
             <div className="image">
-              {/* <img src={props.festival.firstimage} alt="" /> */}
+              <img src={props.festival.firstimage} alt="" />
             </div>
           </div>
           <div className="col-lg-6 align-self-center">
