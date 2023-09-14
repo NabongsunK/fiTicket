@@ -48,7 +48,7 @@ function Signup() {
   }
   return (
     // 이쪽 수정부탁
-    <div style={{"width": "18rem", "margin":"10rem","backgroundColor":"green"}}>
+    <div style={{"width": "18rem", "margin":"10rem","backgroundColor":"#22b3c1"}}>
       <form>
         {/* <!-- ID input --> */}
         <div className="form-outline mb-4">
