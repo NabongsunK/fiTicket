@@ -38,8 +38,8 @@ figure, header, nav, section, article, aside, footer, figcaption {
   padding: 0;
   border: 0;
   outline: 0;
-  background-color: #fff;
 }
+body{background-color: #fff;}
 
 .clearfix:after {
   content: ".";
