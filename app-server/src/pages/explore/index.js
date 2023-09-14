@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Map from "./Map";
 import TicketList from "./TicketList";
+import TicketDetailItem from "./TicketDetailItem";
 
 import festivals from '../../data/festivals.json';
 
@@ -48,6 +49,7 @@ const Explore= function(){
             {/* 축제 목록 리스트 */}
             <div className="col-lg-12">
               <TicketList festivals={festivals}/>
+              <TicketDetailItem festival={festivals[0]}/>
               
             </div>
           </div>
