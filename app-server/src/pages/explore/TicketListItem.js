@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const TicketListItem= function(props){
   return (
-    <div className="col-lg-12 col-sm-3">
+    <div className="col-lg-6 col-sm-3">
       <div className="item">
         <div className="row">
           <div className="col-lg-2">
@@ -29,14 +29,16 @@ const TicketListItem= function(props){
             </div>
           </div>
           <div className="col-lg-2 align-self-center">
-            <div className="main-button">
-              <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">행사 홈페이지</Link>
+            {/* 홈페이지 연결 */}
+            <div className="explore_list_button">
+              <Link to="https://www.chf.or.kr/short/8sQs" target="_blank"><i className="fa fa-home"></i></Link>
             </div>
-          </div>
-          <div className="col-lg-2 align-self-center">
-            <div className="main-button">
-              <Link to="reservation.html">티켓 구매</Link>
+
+            {/* 장바구니 담기 */}
+            <div className="explore_list_button">
+              <Link to="/"><i className="fa fa-cart-plus"></i></Link>
             </div>
+
           </div>
 
         </div>
