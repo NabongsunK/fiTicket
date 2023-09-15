@@ -1,5 +1,15 @@
 [
   {
+    "id": 0,
+    "defaultChecked": true,
+    "localTitle": "내위치",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
     "id": 1,
     "defaultChecked": true,
     "localTitle": "전국",
