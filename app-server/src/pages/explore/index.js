@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import Map from "./Map";
 import TicketList from "./TicketList";
 import TicketDetailItem from "./TicketDetailItem";
 
 import festivals from "../../data/festivals.json";
+import MapDiv from "./MapDiv";
 
 const Explore = function () {
   return (
@@ -51,7 +51,7 @@ const Explore = function () {
           <div className="row">
             {/* 지도 */}
             <div className="col-lg-12">
-              <Map />
+              <MapDiv />
             </div>
 
             {/* 축제 목록 리스트 */}
