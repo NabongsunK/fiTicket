@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import chicken from "../../data/chicken.json";
+import localInfos from "../../data/localInfos.json";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const { kakao } = window;
 
@@ -50,7 +51,6 @@ const getItude = async function (query = "서울") {
     throw error; // 오류를 상위로 전파하거나 다른 방식으로 처리할 수 있습니다.
   }
 };
-
 const Map = function () {
   //경도,위도,사이즈
   const [mapItude, setMapItude] = useState([
@@ -62,11 +62,7 @@ const Map = function () {
       return setMapItude([...(await getItude(e.target.value)), 3]);
     }
   };
-
   //첫마운트 될때
-  useEffect(function () {}, []);
-  //MapItude 바뀔때
-  // 여기서 지도를 계속 생성안해도 되는 방법은 없을까?
   useEffect(function () {
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
     if (navigator.geolocation) {
@@ -78,172 +74,52 @@ const Map = function () {
       });
     }
 
-    var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-      mapOption = {
-        center: new kakao.maps.LatLng(mapItude[1], mapItude[0]), // 지도의 중심좌표
-        level: mapItude[2], // 지도의 확대 레벨
-      };
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-    // 지도에 클릭 이벤트를 등록합니다
-    // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-    kakao.maps.event.addListener(map, "click", async function (mouseEvent) {
-      // 클릭한 위도, 경도 정보를 가져옵니다
-      var latlng = mouseEvent.latLng;
-
-      var message = "클릭한 위치의 위도는 " + latlng.getLat() + " 이고, ";
-      message += "경도는 " + latlng.getLng() + " 입니다. \n";
-      message +=
-        "지역은 " +
-        (await getAdress(latlng.getLng(), latlng.getLat())) +
-        " 입니다.";
-
-      var resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = message;
+    var map = new kakao.maps.Map(document.getElementById("map"), {
+      // 지도를 표시할 div
+      center: new kakao.maps.LatLng(mapItude[1], mapItude[0]), // 지도의 중심좌표
+      level: mapItude[2], // 지도의 확대 레벨
     });
+
+    // 마커 클러스터러를 생성합니다
+    var clusterer = new kakao.maps.MarkerClusterer({
+      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 10, // 클러스터 할 최소 지도 레벨
+    });
+
+    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+    var data = chicken["positions"];
+    var markers = data.map(function (position) {
+      return new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(position.lat, position.lng),
+      });
+    });
+
+    // 클러스터러에 마커들을 추가합니다
+    clusterer.addMarkers(markers);
   }, []);
-  const localInfos = [
-    {
-      id: 1,
-      defaultChecked: true,
-      localTitle: "전국",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 2,
-      defaultChecked: false,
-      localTitle: "서울",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 3,
-      defaultChecked: false,
-      localTitle: "부산",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 4,
-      defaultChecked: false,
-      localTitle: "대전",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 5,
-      defaultChecked: false,
-      localTitle: "인천",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 6,
-      defaultChecked: false,
-      localTitle: "대구",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 7,
-      defaultChecked: false,
-      localTitle: "울산",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 8,
-      defaultChecked: false,
-      localTitle: "경기",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 9,
-      defaultChecked: false,
-      localTitle: "충청",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 10,
-      defaultChecked: false,
-      localTitle: "강원",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 11,
-      defaultChecked: false,
-      localTitle: "경상",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 12,
-      defaultChecked: false,
-      localTitle: "전라",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 13,
-      defaultChecked: false,
-      localTitle: "제주",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-    {
-      id: 14,
-      defaultChecked: false,
-      localTitle: "세종",
-      localxMax: 1,
-      localxMin: 1,
-      localyMax: 1,
-      localyMin: 1,
-      localMapLevel: 3,
-    },
-  ];
+
+  // MapItude 바뀔때
+  // 여기서 지도를 계속 생성안해도 되는 방법은 없을까?
+  // useEffect(function () {
+  //   // 지도에 클릭 이벤트를 등록합니다
+  //   // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+  //   kakao.maps.event.addListener(map, "click", async function (mouseEvent) {
+  //     // 클릭한 위도, 경도 정보를 가져옵니다
+  //     var latlng = mouseEvent.latLng;
+
+  //     var message = "클릭한 위치의 위도는 " + latlng.getLat() + " 이고, ";
+  //     message += "경도는 " + latlng.getLng() + " 입니다. \n";
+  //     message +=
+  //       "지역은 " +
+  //       (await getAdress(latlng.getLng(), latlng.getLat())) +
+  //       " 입니다.";
+
+  //     var resultDiv = document.getElementById("result");
+  //     resultDiv.innerHTML = message;
+  //   });
+  // }, []);
+
   const LocalSelectItem = function ({ localInfo }) {
     return (
       <>
