@@ -120,7 +120,7 @@
           a,
           { widgetEventPrefix: n ? a.widgetEventPrefix || e : e },
           r,
-          { constructor: o, namespace: l, widgetName: e, widgetFullName: h },
+          { constructor: o, namespace: l, widgetName: e, widgetFullName: h }
         )),
         n
           ? (t.each(n._childConstructors, function (e, i) {
@@ -171,7 +171,7 @@
                             o +
                             "' for " +
                             e +
-                            " widget instance",
+                            " widget instance"
                         )
                     : t.error(
                         "cannot call methods on " +
@@ -179,7 +179,7 @@
                           " prior to initialization; " +
                           "attempted to call method '" +
                           o +
-                          "'",
+                          "'"
                       );
                 })
               : (l = void 0)
@@ -219,13 +219,13 @@
             }),
             (this.document = t(s.style ? s.ownerDocument : s.document || s)),
             (this.window = t(
-              this.document[0].defaultView || this.document[0].parentWindow,
+              this.document[0].defaultView || this.document[0].parentWindow
             ))),
           (this.options = t.widget.extend(
             {},
             this.options,
             this._getCreateOptions(),
-            i,
+            i
           )),
           this._create(),
           this.options.disabled &&
@@ -300,7 +300,7 @@
               ((s = t(n.get())),
               this._removeClass(n, i),
               s.addClass(
-                this._classes({ element: s, keys: i, classes: e, add: !0 }),
+                this._classes({ element: s, keys: i, classes: e, add: !0 })
               ));
       },
       _setOptionDisabled: function (t) {
@@ -308,7 +308,7 @@
           this.widget(),
           this.widgetFullName + "-disabled",
           null,
-          !!t,
+          !!t
         ),
           t &&
             (this._removeClass(this.hoverable, null, "ui-state-hover"),
@@ -337,7 +337,7 @@
         return (
           (e = t.extend(
             { element: this.element, classes: this.options.classes || {} },
-            e,
+            e
           )),
           this._on(e.element, { remove: "_untrackClassesElement" }),
           e.keys && i(e.keys.match(/\S+/g) || [], !0),
@@ -521,7 +521,7 @@
           var e,
             i,
             s = t(
-              "<div style='display:block;position:absolute;width:50px;height:50px;overflow:hidden;'><div style='height:100px;width:auto;'></div></div>",
+              "<div style='display:block;position:absolute;width:50px;height:50px;overflow:hidden;'><div style='height:100px;width:auto;'></div></div>"
             ),
             o = s.children()[0];
           return (
@@ -956,7 +956,7 @@
                   (this._removeClass(
                     s.siblings().children(".ui-state-active"),
                     null,
-                    "ui-state-active",
+                    "ui-state-active"
                   ),
                   this.focus(e, s));
               }
@@ -972,7 +972,7 @@
               this._delay(function () {
                 var i = !t.contains(
                   this.element[0],
-                  t.ui.safeActiveElement(this.document[0]),
+                  t.ui.safeActiveElement(this.document[0])
                 );
                 i && this.collapseAll(e);
               });
@@ -1000,7 +1000,7 @@
           .find(".ui-menu")
           .addBack()
           .removeAttr(
-            "role aria-labelledby aria-expanded aria-hidden aria-disabled tabIndex",
+            "role aria-labelledby aria-expanded aria-hidden aria-disabled tabIndex"
           )
           .removeUniqueId()
           .show(),
@@ -1096,7 +1096,7 @@
         this._toggleClass(
           "ui-menu-icons",
           null,
-          !!this.element.find(".ui-icon").length,
+          !!this.element.find(".ui-icon").length
         ),
           (s = l
             .filter(":not(.ui-menu)")
@@ -1130,7 +1130,7 @@
             .attr({ tabIndex: -1, role: this._itemRole() })),
           this._addClass(n, "ui-menu-item")._addClass(
             o,
-            "ui-menu-item-wrapper",
+            "ui-menu-item-wrapper"
           ),
           i.filter(".ui-state-disabled").attr("aria-disabled", "true"),
           this.active &&
@@ -1146,7 +1146,7 @@
           this._removeClass(i, null, this.options.icons.submenu)._addClass(
             i,
             null,
-            e.submenu,
+            e.submenu
           );
         }
         this._super(t, e);
@@ -1199,7 +1199,7 @@
             (this._removeClass(
               this.active.children(".ui-menu-item-wrapper"),
               null,
-              "ui-state-active",
+              "ui-state-active"
             ),
             this._trigger("blur", t, { item: this.active }),
             (this.active = null));
@@ -1237,7 +1237,7 @@
               this._removeClass(
                 s.find(".ui-state-active"),
                 null,
-                "ui-state-active",
+                "ui-state-active"
               ),
               (this.activeMenu = s);
           }, this.delay));
@@ -1291,7 +1291,7 @@
           (s =
             "first" === t || "last" === t
               ? this.active["first" === t ? "prevAll" : "nextAll"](
-                  ".ui-menu-item",
+                  ".ui-menu-item"
                 ).eq(-1)
               : this.active[t + "All"](".ui-menu-item").eq(0)),
           (s && s.length && this.active) ||
@@ -1313,7 +1313,7 @@
                     e,
                     this.activeMenu
                       .find(this.options.items)
-                      [this.active ? "last" : "first"](),
+                      [this.active ? "last" : "first"]()
                   )),
             void 0)
           : (this.next(e), void 0);
@@ -1331,7 +1331,7 @@
                   this.focus(e, i))
                 : this.focus(
                     e,
-                    this.activeMenu.find(this.options.items).first(),
+                    this.activeMenu.find(this.options.items).first()
                   )),
             void 0)
           : (this.next(e), void 0);
@@ -1353,7 +1353,7 @@
           .filter(".ui-menu-item")
           .filter(function () {
             return s.test(
-              t.trim(t(this).children(".ui-menu-item-wrapper").text()),
+              t.trim(t(this).children(".ui-menu-item-wrapper").text())
             );
           });
       },
@@ -1418,7 +1418,7 @@
                     t.data(e.target, this.widgetName + ".preventClickEvent") &&
                     t.removeData(
                       e.target,
-                      this.widgetName + ".preventClickEvent",
+                      this.widgetName + ".preventClickEvent"
                     ),
                   (this._mouseMoveDelegate = function (t) {
                     return i._mouseMove(t);
@@ -1484,7 +1484,7 @@
         return (
           Math.max(
             Math.abs(this._mouseDownEvent.pageX - t.pageX),
-            Math.abs(this._mouseDownEvent.pageY - t.pageY),
+            Math.abs(this._mouseDownEvent.pageY - t.pageY)
           ) >= this.options.distance
         );
       },
@@ -1532,7 +1532,7 @@
           this._calculateNewMax(),
           this._addClass(
             "ui-slider ui-slider-" + this.orientation,
-            "ui-widget ui-widget-content",
+            "ui-widget ui-widget-content"
           ),
           this._refresh(),
           (this._animateOff = !1);
@@ -1577,7 +1577,7 @@
             this.range && this.range.length
               ? (this._removeClass(
                   this.range,
-                  "ui-slider-range-min ui-slider-range-max",
+                  "ui-slider-range-min ui-slider-range-max"
                 ),
                 this.range.css({ left: "", bottom: "" }))
               : ((this.range = t("<div>").appendTo(this.element)),
@@ -1781,7 +1781,7 @@
                 (this.options.values = null))
               : "max" === i &&
                 ((this.options.value = this._values(
-                  this.options.values.length - 1,
+                  this.options.values.length - 1
                 )),
                 (this.options.values = null))),
           t.isArray(this.options.values) && (n = this.options.values.length),
@@ -1791,7 +1791,7 @@
           case "orientation":
             this._detectOrientation(),
               this._removeClass(
-                "ui-slider-horizontal ui-slider-vertical",
+                "ui-slider-horizontal ui-slider-vertical"
               )._addClass("ui-slider-" + this.orientation),
               this._refreshValue(),
               this.options.range && this._refreshRange(i),
@@ -1914,19 +1914,19 @@
                       1 === s &&
                         l.range[h ? "animate" : "css"](
                           { width: i - e + "%" },
-                          { queue: !1, duration: r.animate },
+                          { queue: !1, duration: r.animate }
                         ))
                     : (0 === s &&
                         l.range
                           .stop(1, 1)
                           [h ? "animate" : "css"](
                             { bottom: i + "%" },
-                            r.animate,
+                            r.animate
                           ),
                       1 === s &&
                         l.range[h ? "animate" : "css"](
                           { height: i - e + "%" },
-                          { queue: !1, duration: r.animate },
+                          { queue: !1, duration: r.animate }
                         ))),
                 (e = i);
             })
@@ -1997,12 +1997,12 @@
               break;
             case t.ui.keyCode.PAGE_UP:
               n = this._trimAlignValue(
-                s + (this._valueMax() - this._valueMin()) / this.numPages,
+                s + (this._valueMax() - this._valueMin()) / this.numPages
               );
               break;
             case t.ui.keyCode.PAGE_DOWN:
               n = this._trimAlignValue(
-                s - (this._valueMax() - this._valueMin()) / this.numPages,
+                s - (this._valueMax() - this._valueMin()) / this.numPages
               );
               break;
             case t.ui.keyCode.UP:
@@ -2055,13 +2055,13 @@
         e.Plugins,
         a.proxy(function (a, b) {
           this._plugins[a[0].toLowerCase() + a.slice(1)] = new b(this);
-        }, this),
+        }, this)
       ),
       a.each(
         e.Pipe,
         a.proxy(function (b, c) {
           this._pipe.push({ filter: c.filter, run: a.proxy(c.run, this) });
-        }, this),
+        }, this)
       ),
       this.setup(),
       this.initialize();
@@ -2221,11 +2221,11 @@
                 c.pop())
               : (c.push(c.length / 2),
                 this.$stage.append(
-                  d[c[c.length - 1]].clone().addClass("cloned"),
+                  d[c[c.length - 1]].clone().addClass("cloned")
                 ),
                 c.push(d.length - 1 - (c.length - 1) / 2),
                 this.$stage.prepend(
-                  d[c[c.length - 1]].clone().addClass("cloned"),
+                  d[c[c.length - 1]].clone().addClass("cloned")
                 ));
         },
       },
@@ -2362,7 +2362,7 @@
       }
       this.$element.addClass("owl-loading"),
         (this.$stage = a(
-          "<" + this.settings.stageElement + ' class="owl-stage"/>',
+          "<" + this.settings.stageElement + ' class="owl-stage"/>'
         ).wrap('<div class="owl-stage-outer">')),
         this.$element.append(this.$stage.parent()),
         this.replace(this.$element.children().not(this.$stage.parent())),
@@ -2484,7 +2484,7 @@
       b.clearTimeout(this.resizeTimer),
         (this.resizeTimer = b.setTimeout(
           this.e._onResize,
-          this.settings.responsiveRefreshRate,
+          this.settings.responsiveRefreshRate
         ));
     }),
     (e.prototype.onResize = function () {
@@ -2516,7 +2516,7 @@
             "mousedown",
             a.proxy(function (a) {
               this.eventsRouter(a);
-            }, this),
+            }, this)
           ),
           this.$stage.on("dragstart", function () {
             return !1;
@@ -2531,14 +2531,14 @@
             "touchstart touchcancel",
             a.proxy(function (a) {
               this.eventsRouter(a);
-            }, this),
+            }, this)
           ),
         this.transitionEndVendor &&
           this.on(
             this.$stage.get(0),
             this.transitionEndVendor,
             this.e._transitionEnd,
-            !1,
+            !1
           ),
         this.settings.responsive !== !1 &&
           this.on(b, "resize", a.proxy(this.onThrottledResize, this));
@@ -2589,7 +2589,7 @@
           "mousemove.owl.dragEvents mouseup.owl.dragEvents touchmove.owl.dragEvents touchend.owl.dragEvents",
           a.proxy(function (a) {
             this.eventsRouter(a);
-          }, this),
+          }, this)
         );
     }),
     (e.prototype.onDragMove = function (a) {
@@ -2610,7 +2610,7 @@
             ? this.op(
                 this.drag.currentX,
                 ">",
-                this.coordinates(this.minimum()),
+                this.coordinates(this.minimum())
               ) && "right" === this.state.direction
               ? (this.drag.currentX -=
                   (this.settings.center && this.coordinates(0)) -
@@ -2618,22 +2618,22 @@
               : this.op(
                   this.drag.currentX,
                   "<",
-                  this.coordinates(this.maximum()),
+                  this.coordinates(this.maximum())
                 ) &&
                 "left" === this.state.direction &&
                 (this.drag.currentX +=
                   (this.settings.center && this.coordinates(0)) -
                   this.coordinates(this._items.length))
             : ((h = this.coordinates(
-                this.settings.rtl ? this.maximum() : this.minimum(),
+                this.settings.rtl ? this.maximum() : this.minimum()
               )),
               (i = this.coordinates(
-                this.settings.rtl ? this.minimum() : this.maximum(),
+                this.settings.rtl ? this.minimum() : this.maximum()
               )),
               (j = this.settings.pullDrag ? this.drag.distance / 5 : 0),
               (this.drag.currentX = Math.max(
                 Math.min(this.drag.currentX, h + j),
-                i + j,
+                i + j
               ))),
           (this.drag.distance > 8 || this.drag.distance < -8) &&
             (c.preventDefault !== d ? c.preventDefault() : (c.returnValue = !1),
@@ -2715,7 +2715,7 @@
                     (c = "left" === this.state.direction ? a + 1 : a),
                 -1 === c
               );
-            }, this),
+            }, this)
           ),
         this.settings.loop ||
           (this.op(b, ">", f[this.minimum()])
@@ -2740,7 +2740,7 @@
               this.settings.fallbackEasing,
               a.proxy(function () {
                 this.state.inMotion && this.transitionEnd();
-              }, this),
+              }, this)
             );
     }),
     (e.prototype.current = function (a) {
@@ -2847,7 +2847,7 @@
             this._coordinates,
             a.proxy(function (a, b) {
               return this.coordinates(b);
-            }, this),
+            }, this)
           )
         : (this.settings.center
             ? ((c = this._coordinates[b]),
@@ -2883,7 +2883,7 @@
                 this.current(f + e),
                 this.update();
             }, this),
-            30,
+            30
           ));
       } else
         this.speed(this.duration(this.current(), c, d)),
@@ -2935,14 +2935,14 @@
                     b
                       .find("[data-merge]")
                       .andSelf("[data-merge]")
-                      .attr("data-merge") || 1,
+                      .attr("data-merge") || 1
                 );
-            }, this),
+            }, this)
           ),
         this.reset(
           a.isNumeric(this.settings.startPosition)
             ? this.settings.startPosition
-            : 0,
+            : 0
         ),
         this.invalidate("items");
     }),
@@ -2957,7 +2957,7 @@
                 a
                   .find("[data-merge]")
                   .andSelf("[data-merge]")
-                  .attr("data-merge") || 1,
+                  .attr("data-merge") || 1
             ))
           : (this._items[b].before(a),
             this._items.splice(b, 0, a),
@@ -2968,7 +2968,7 @@
                 a
                   .find("[data-merge]")
                   .andSelf("[data-merge]")
-                  .attr("data-merge") || 1,
+                  .attr("data-merge") || 1
             )),
         this.invalidate("items"),
         this.trigger("added", { content: a, position: b });
@@ -3005,7 +3005,7 @@
         },
         a.proxy(function (a, c) {
           this.$element.on(a + ".owl.carousel", b(c, a + ".owl.carousel"));
-        }, this),
+        }, this)
       );
     }),
     (e.prototype.watchVisibility = function () {
@@ -3048,7 +3048,7 @@
           this.off(
             this.$stage.get(0),
             this.transitionEndVendor,
-            this.e._transitionEnd,
+            this.e._transitionEnd
           );
       for (var d in this._plugins) this._plugins[d].destroy();
       (this.settings.mouseDrag || this.settings.touchDrag) &&
@@ -3097,11 +3097,11 @@
               return a;
             })
             .join("-")
-            .toLowerCase(),
+            .toLowerCase()
         ),
         g = a.Event(
           [b, "owl", d || "carousel"].join(".").toLowerCase(),
-          a.extend({ relatedTarget: this }, e, c),
+          a.extend({ relatedTarget: this }, e, c)
         );
       return (
         this._supress[b] ||
@@ -3120,7 +3120,7 @@
         b,
         a.proxy(function (a, b) {
           this._supress[b] = !0;
-        }, this),
+        }, this)
       );
     }),
     (e.prototype.release = function (b) {
@@ -3128,7 +3128,7 @@
         b,
         a.proxy(function (a, b) {
           delete this._supress[b];
-        }, this),
+        }, this)
       );
     }),
     (e.prototype.browserSupport = function () {
@@ -3214,9 +3214,9 @@
                             this._core.trigger(
                               "loaded",
                               { element: f, url: g },
-                              "lazy",
+                              "lazy"
                             );
-                        }, this),
+                        }, this)
                       )
                       .attr("src", g)
                   : ((e = new Image()),
@@ -3228,11 +3228,11 @@
                         this._core.trigger(
                           "loaded",
                           { element: f, url: g },
-                          "lazy",
+                          "lazy"
                         );
                     }, this)),
                     (e.src = g));
-            }, this),
+            }, this)
           ),
           this._loaded.push(d.get(0)));
       }),
@@ -3271,7 +3271,7 @@
         this._core.$stage
           .parent()
           .height(
-            this._core.$stage.children().eq(this._core.current()).height(),
+            this._core.$stage.children().eq(this._core.current()).height()
           )
           .addClass(this._core.settings.autoHeightClass);
       }),
@@ -3310,7 +3310,7 @@
           ".owl-video-play-icon",
           a.proxy(function (a) {
             this.play(a);
-          }, this),
+          }, this)
         );
     };
     (d.Defaults = { video: !1, videoHeight: !1, videoWidth: !1 }),
@@ -3323,7 +3323,7 @@
         if (!g) throw new Error("Missing video URL.");
         if (
           ((d = g.match(
-            /(http:|https:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/,
+            /(http:|https:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/
           )),
           d[3].indexOf("youtu") > -1)
         )
@@ -3430,7 +3430,7 @@
               h +
               'px" class="owl-video-frame">' +
               c +
-              "</div>",
+              "</div>"
           )),
           e.after(d);
       }),
@@ -3507,7 +3507,7 @@
                 .addClass(g)
                 .one(
                   "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",
-                  c,
+                  c
                 )),
             f &&
               e
@@ -3515,7 +3515,7 @@
                 .addClass(f)
                 .one(
                   "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",
-                  c,
+                  c
                 ));
         }
       }),
@@ -3544,7 +3544,7 @@
             function () {
               this.autoplay();
             },
-            this,
+            this
           ),
           "play.owl.autoplay": a.proxy(function (a, b, c) {
             this.play(b, c);
@@ -3574,7 +3574,7 @@
               a.proxy(function () {
                 this.play();
               }, this),
-              this.core.settings.autoplayTimeout,
+              this.core.settings.autoplayTimeout
             )))
           : b.clearInterval(this.interval);
       }),
@@ -3625,7 +3625,7 @@
                 a(b.content)
                   .find("[data-dot]")
                   .andSelf("[data-dot]")
-                  .attr("data-dot"),
+                  .attr("data-dot")
               );
           }, this),
           "add.owl.carousel": a.proxy(function (b) {
@@ -3636,7 +3636,7 @@
                 a(b.content)
                   .find("[data-dot]")
                   .andSelf("[data-dot]")
-                  .attr("data-dot"),
+                  .attr("data-dot")
               );
           }, this),
           "remove.owl.carousel prepared.owl.carousel": a.proxy(function (a) {
@@ -3725,7 +3725,7 @@
                 ? a(b.target).index()
                 : a(b.target).parent().index();
               b.preventDefault(), this.to(c, d.dotsSpeed);
-            }, this),
+            }, this)
           ),
           (b = d.navContainer
             ? a(d.navContainer)
@@ -3743,7 +3743,7 @@
               "click",
               a.proxy(function () {
                 this.prev(d.navSpeed);
-              }, this),
+              }, this)
             ),
           this._controls.$next
             .addClass(d.navClass[1])
@@ -3754,7 +3754,7 @@
               "click",
               a.proxy(function () {
                 this.next(d.navSpeed);
-              }, this),
+              }, this)
             );
         for (c in this._overrides) this._core[c] = a.proxy(this[c], this);
       }),
@@ -3800,7 +3800,7 @@
             (this._controls.$previous.toggleClass("disabled", 0 >= f),
             this._controls.$next.toggleClass(
               "disabled",
-              f >= this._core.maximum(),
+              f >= this._core.maximum()
             )),
           this._controls.$previous.toggle(e.nav),
           this._controls.$next.toggle(e.nav),
@@ -3876,7 +3876,7 @@
           : ((e = this._pages.length),
             a.proxy(this._overrides.to, this._core)(
               this._pages[((b % e) + e) % e].start,
-              c,
+              c
             ));
       }),
       (a.fn.owlCarousel.Constructor.Plugins.Navigation = b);
@@ -3909,7 +3909,7 @@
               c = this._core.$stage.children(),
               d = (this._hashes[a] && c.index(this._hashes[a])) || 0;
             return a ? void this._core.to(d, !1, !0) : !1;
-          }, this),
+          }, this)
         );
     };
     (c.Defaults = { URLhashListener: !1 }),
@@ -4116,7 +4116,7 @@
     : a(
         "object" == typeof exports
           ? require("jquery")
-          : window.jQuery || window.Zepto,
+          : window.jQuery || window.Zepto
       );
 })(function (a) {
   var b,
@@ -4163,7 +4163,7 @@
       return (
         (c === g && b.currTemplate.closeBtn) ||
           ((b.currTemplate.closeBtn = a(
-            b.st.closeMarkup.replace("%title%", b.st.tClose),
+            b.st.closeMarkup.replace("%title%", b.st.tClose)
           )),
           (g = c)),
         b.currTemplate.closeBtn
@@ -4192,7 +4192,7 @@
           b.isAndroid ||
           b.isIOS ||
           /(Opera Mini)|Kindle|webOS|BlackBerry|(Opera Mobi)|(Windows Phone)|IEMobile/i.test(
-            navigator.userAgent,
+            navigator.userAgent
           )),
         (d = a(document)),
         (b.popupsCache = {});
@@ -4373,7 +4373,7 @@
       e && e !== c.type && b.container.removeClass("mfp-" + e + "-holder");
       var g = b["get" + d.charAt(0).toUpperCase() + d.slice(1)](
         c,
-        b.currTemplate[d],
+        b.currTemplate[d]
       );
       b.appendContent(g, d),
         (c.preloaded = !0),
@@ -4522,7 +4522,7 @@
                 ? f.is("img")
                   ? f.attr("src", d)
                   : f.replaceWith(
-                      a("<img>").attr("src", d).attr("class", f.attr("class")),
+                      a("<img>").attr("src", d).attr("class", f.attr("class"))
                     )
                 : f.attr(e[1], d);
             }
@@ -4690,11 +4690,11 @@
                 (c.finished = c.loadError = !0),
                 b.updateStatus(
                   "error",
-                  b.st.ajax.tError.replace("%url%", c.src),
+                  b.st.ajax.tError.replace("%url%", c.src)
                 );
             },
           },
-          b.st.ajax.settings,
+          b.st.ajax.settings
         );
         return (b.req = a.ajax(d)), "";
       },
@@ -5002,7 +5002,7 @@
                   "string" == typeof this.id
                     ? e.substr(
                         e.lastIndexOf(this.id) + this.id.length,
-                        e.length,
+                        e.length
                       )
                     : this.id.call(this, e)),
               (e = this.src.replace("%id%", e)),
@@ -5067,14 +5067,12 @@
                 if (b.items.length > 1 && c.arrows && !b.arrowLeft) {
                   var d = c.arrowMarkup,
                     e = (b.arrowLeft = a(
-                      d
-                        .replace(/%title%/gi, c.tPrev)
-                        .replace(/%dir%/gi, "left"),
+                      d.replace(/%title%/gi, c.tPrev).replace(/%dir%/gi, "left")
                     ).addClass(s)),
                     f = (b.arrowRight = a(
                       d
                         .replace(/%title%/gi, c.tNext)
-                        .replace(/%dir%/gi, "right"),
+                        .replace(/%dir%/gi, "right")
                     ).addClass(s));
                   e.click(function () {
                     b.prev();
@@ -5195,7 +5193,7 @@
     var o = ($.fn.scrollUp.settings = $.extend(
         {},
         $.fn.scrollUp.defaults,
-        options,
+        options
       )),
       triggerVisible = false,
       animIn,
@@ -5311,7 +5309,7 @@
           scrollTop: scrollTarget,
         },
         o.scrollSpeed,
-        o.easingType,
+        o.easingType
       );
     });
   };
@@ -5331,7 +5329,7 @@
     scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
     scrollImg: false, // Set true to use image
     activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-    zIndex: 2147483647, // Z-Index for the overlay
+    zIndex: 21474836, // Z-Index for the overlay
   };
 
   // Destroy scrollUp plugin and clean all modifications to the DOM
@@ -5448,7 +5446,7 @@
           void setTimeout(
             function () {
               this.check();
-            }.bind(this),
+            }.bind(this)
           ))
         : new o(e, t, r);
     }
@@ -5639,7 +5637,7 @@
           var h = a.data(u, i);
           if (!h)
             return void r(
-              i + " not initialized. Cannot call methods, i.e. " + s,
+              i + " not initialized. Cannot call methods, i.e. " + s
             );
           var d = h[e];
           if (!d || "_" == e.charAt(0))
@@ -5779,7 +5777,7 @@
           a(
             "Style returned " +
               e +
-              ". Are you running this code in a hidden iframe on Firefox? See http://bit.ly/getsizebug1",
+              ". Are you running this code in a hidden iframe on Firefox? See http://bit.ly/getsizebug1"
           ),
         e
       );
@@ -5894,7 +5892,7 @@
           ["desandro-matches-selector/matches-selector"],
           function (i) {
             return e(t, i);
-          },
+          }
         )
       : "object" == typeof module && module.exports
       ? (module.exports = e(t, require("desandro-matches-selector")))
@@ -6007,7 +6005,7 @@
       ? define(
           "outlayer/item",
           ["ev-emitter/ev-emitter", "get-size/get-size"],
-          e,
+          e
         )
       : "object" == typeof module && module.exports
       ? (module.exports = e(require("ev-emitter"), require("get-size")))
@@ -6310,7 +6308,7 @@
           ],
           function (i, n, o, s) {
             return e(t, i, n, o, s);
-          },
+          }
         )
       : "object" == typeof module && module.exports
       ? (module.exports = e(
@@ -6318,14 +6316,14 @@
           require("ev-emitter"),
           require("get-size"),
           require("fizzy-ui-utils"),
-          require("./item"),
+          require("./item")
         ))
       : (t.Outlayer = e(
           t,
           t.EvEmitter,
           t.getSize,
           t.fizzyUIUtils,
-          t.Outlayer.Item,
+          t.Outlayer.Item
         ));
   })(window, function (t, e, i, n, o) {
     "use strict";
@@ -6335,7 +6333,7 @@
         return void (
           u &&
           u.error(
-            "Bad element for " + this.constructor.namespace + ": " + (i || t),
+            "Bad element for " + this.constructor.namespace + ": " + (i || t)
           )
         );
       (this.element = i),
@@ -6777,7 +6775,7 @@
       ? define(
           "isotope/js/layout-mode",
           ["get-size/get-size", "outlayer/outlayer"],
-          e,
+          e
         )
       : "object" == typeof module && module.exports
       ? (module.exports = e(require("get-size"), require("outlayer")))
@@ -6968,12 +6966,12 @@
       ? define(
           "isotope/js/layout-modes/masonry",
           ["../layout-mode", "masonry/masonry"],
-          e,
+          e
         )
       : "object" == typeof module && module.exports
       ? (module.exports = e(
           require("../layout-mode"),
-          require("masonry-layout"),
+          require("masonry-layout")
         ))
       : e(t.Isotope.LayoutMode, t.Masonry);
   })(window, function (t, e) {
@@ -7077,7 +7075,7 @@
           ],
           function (i, n, o, s, r, a) {
             return e(t, i, n, o, s, r, a);
-          },
+          }
         )
       : "object" == typeof module && module.exports
       ? (module.exports = e(
@@ -7090,7 +7088,7 @@
           require("isotope/js/layout-mode"),
           require("isotope/js/layout-modes/masonry"),
           require("isotope/js/layout-modes/fit-rows"),
-          require("isotope/js/layout-modes/vertical"),
+          require("isotope/js/layout-modes/vertical")
         ))
       : (t.Isotope = e(
           t,
@@ -7099,7 +7097,7 @@
           t.matchesSelector,
           t.fizzyUIUtils,
           t.Isotope.Item,
-          t.Isotope.LayoutMode,
+          t.Isotope.LayoutMode
         ));
   })(window, function (t, e, i, n, o, s, r) {
     function a(t, e) {
@@ -7435,7 +7433,7 @@
       }),
       (a.prototype.isMobile = function (a) {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          a,
+          a
         );
       }),
       (a.prototype.createEvent = function (a, b, c, d) {
@@ -7518,7 +7516,7 @@
             "undefined" != typeof console &&
               null !== console &&
               console.warn(
-                "WOW.js cannot detect dom mutations, please call .sync() after loading new content.",
+                "WOW.js cannot detect dom mutations, please call .sync() after loading new content."
               );
         }
         return (a.notSupported = !0), (a.prototype.observe = function () {}), a;
@@ -7627,11 +7625,11 @@
                               )
                                 (e = c[a]), d.push(this.doSync(e));
                               return d;
-                            }.call(a),
+                            }.call(a)
                           );
                       return g;
                     };
-                  })(this),
+                  })(this)
                 ).observe(document.body, { childList: !0, subtree: !0 })
               : void 0
           );
@@ -7695,7 +7693,7 @@
                 return function () {
                   return f.customStyle(a, b, d, c, e);
                 };
-              })(this),
+              })(this)
             )
           );
         }),
@@ -7754,10 +7752,10 @@
                     (f = g[b]),
                       h.push(
                         (a["" + f + c.charAt(0).toUpperCase() + c.substr(1)] =
-                          e),
+                          e)
                       );
                   return h;
-                }.call(this),
+                }.call(this)
               );
           return d;
         }),
@@ -8158,7 +8156,7 @@
               t.call(e, i)
             );
           },
-          r,
+          r
         );
       }
       function z(e, o, t, r) {
@@ -8256,7 +8254,7 @@
         (this.doc = M.doc),
         (this.iddoc = this.doc && this.doc[0] ? this.doc[0].id || "" : ""),
         (this.ispage = /^BODY|HTML/.test(
-          M.win ? M.win[0].nodeName : this.doc[0].nodeName,
+          M.win ? M.win[0].nodeName : this.doc[0].nodeName
         )),
         (this.haswrapper = !1 !== M.win),
         (this.win = M.win || (this.ispage ? c : this.doc)),
@@ -8478,7 +8476,7 @@
                     T.doc.translate.tx +
                     "," +
                     T.doc.translate.ty +
-                    ",0)",
+                    ",0)"
                 ),
                 o || T.notifyScrollEvent(T.win[0]);
             }),
@@ -8491,7 +8489,7 @@
                     T.doc.translate.tx +
                     "," +
                     T.doc.translate.ty +
-                    ",0)",
+                    ",0)"
                 ),
                 o || T.notifyScrollEvent(T.win[0]);
             }))
@@ -8504,7 +8502,7 @@
                     T.doc.translate.tx +
                     "," +
                     T.doc.translate.ty +
-                    ")",
+                    ")"
                 ),
                 o || T.notifyScrollEvent(T.win[0]);
             }),
@@ -8517,7 +8515,7 @@
                     T.doc.translate.tx +
                     "," +
                     T.doc.translate.ty +
-                    ")",
+                    ")"
                 ),
                 o || T.notifyScrollEvent(T.win[0]);
             }));
@@ -8678,7 +8676,7 @@
             T.ishwscroll &&
               (this.doc.css(
                 P.transitionstyle,
-                P.prefixstyle + "transform 0ms ease-out",
+                P.prefixstyle + "transform 0ms ease-out"
               ),
               P.transitionend &&
                 T.bind(T.doc, P.transitionend, T.onScrollTransitionEnd, !1)),
@@ -8795,7 +8793,7 @@
                 w.addClass("nicescroll-rails nicescroll-rails-hr"),
                 (w.height = Math.max(
                   parseFloat(M.cursorwidth),
-                  d.outerHeight(),
+                  d.outerHeight()
                 )),
                 w.css({
                   height: w.height + "px",
@@ -9168,11 +9166,11 @@
                           T.rail.drag.hr
                             ? T.doScrollLeft(
                                 Math.round(T.scroll.x * T.scrollratio.x),
-                                M.cursordragspeed,
+                                M.cursordragspeed
                               )
                             : T.doScrollTop(
                                 Math.round(T.scroll.y * T.scrollratio.y),
-                                M.cursordragspeed,
+                                M.cursordragspeed
                               ));
                       }),
                       T.cancelEvent(e)
@@ -9246,10 +9244,10 @@
                         (T.showCursor(),
                         T.rail.drag.hr
                           ? T.scrollLeft(
-                              Math.round(T.scroll.x * T.scrollratio.x),
+                              Math.round(T.scroll.x * T.scrollratio.x)
                             )
                           : T.scrollTop(
-                              Math.round(T.scroll.y * T.scrollratio.y),
+                              Math.round(T.scroll.y * T.scrollratio.y)
                             ));
                     }),
                     T.cancelEvent(e)
@@ -9298,7 +9296,7 @@
                         function () {
                           L();
                         },
-                        50,
+                        50
                       );
                   }
                 }
@@ -9329,7 +9327,7 @@
                       function () {
                         L(e);
                       },
-                      250,
+                      250
                     );
                 });
             }
@@ -9428,7 +9426,7 @@
                 ? (T.bind(
                     P.hasmousecapture ? T.win : l,
                     "mouseup",
-                    T.ontouchend,
+                    T.ontouchend
                   ),
                   T.onclick && T.bind(l, "click", T.onclick),
                   M.cursordragontouch
@@ -9449,7 +9447,7 @@
                 : (T.bind(
                     P.hasmousecapture ? T.win : l,
                     "mouseup",
-                    T.onmouseup,
+                    T.onmouseup
                   ),
                   T.bind(l, "mousemove", T.onmousemove),
                   T.onclick && T.bind(l, "click", T.onclick),
@@ -9582,7 +9580,7 @@
                 T.bind(
                   l,
                   P.isopera && !P.isopera12 ? "keypress" : "keydown",
-                  T.onkeypress,
+                  T.onkeypress
                 ),
               T.bind(l, "keydown", function (e) {
                 (e.ctrlKey || !1) && (T.wheelprevented = !0);
@@ -9663,7 +9661,7 @@
                 : (T.bind(
                     R,
                     P.isie && !P.isie9 ? "propertychange" : "DOMAttrModified",
-                    T.onAttributeChange,
+                    T.onAttributeChange
                   ),
                   P.isie9 &&
                     R.attachEvent("onpropertychange", T.onAttributeChange),
@@ -9707,11 +9705,11 @@
                     return {
                       w: Math.max(
                         T.iframe.html.scrollWidth,
-                        T.iframe.body.scrollWidth,
+                        T.iframe.body.scrollWidth
                       ),
                       h: Math.max(
                         T.iframe.html.scrollHeight,
-                        T.iframe.body.scrollHeight,
+                        T.iframe.body.scrollHeight
                       ),
                     };
                   }),
@@ -9721,7 +9719,7 @@
                 T.win.scrollTop(0), T.doc.height("");
                 var t = Math.max(
                   o.getElementsByTagName("html")[0].scrollHeight,
-                  o.body.scrollHeight,
+                  o.body.scrollHeight
                 );
                 T.doc.height(t);
               }
@@ -9817,7 +9815,7 @@
                 w: Math.max(l.body.scrollWidth, l.documentElement.scrollWidth),
                 h: Math.max(
                   l.body.scrollHeight,
-                  l.documentElement.scrollHeight,
+                  l.documentElement.scrollHeight
                 ),
               };
             }
@@ -9892,14 +9890,14 @@
                   (T.view.h -= 20),
                 (T.cursorheight = Math.min(
                   T.view.h,
-                  Math.round(T.view.h * (T.view.h / T.page.h)),
+                  Math.round(T.view.h * (T.view.h / T.page.h))
                 )),
                 (T.cursorheight = M.cursorfixedheight
                   ? M.cursorfixedheight
                   : Math.max(M.cursorminheight, T.cursorheight)),
                 (T.cursorwidth = Math.min(
                   T.view.w,
-                  Math.round(T.view.w * (T.view.w / T.page.w)),
+                  Math.round(T.view.w * (T.view.w / T.page.w))
                 )),
                 (T.cursorwidth = M.cursorfixedheight
                   ? M.cursorfixedheight
@@ -10365,7 +10363,7 @@
                   (T.scrollendtrapped && clearTimeout(T.scrollendtrapped),
                   (T.scrollendtrapped = setTimeout(
                     T.onScrollTransitionEnd,
-                    c,
+                    c
                   ))),
                 T.setScrollTop(T.newscrolly),
                 T.setScrollLeft(T.newscrollx);
@@ -10523,7 +10521,7 @@
               (T.scroll.y = Math.round(T.getScrollTop() / T.scrollratio.y)),
                 T.railh &&
                   (T.scroll.x = Math.round(
-                    T.getScrollLeft() / T.scrollratio.x,
+                    T.getScrollLeft() / T.scrollratio.x
                   )),
                 T.noticeCursor();
             });
@@ -10706,7 +10704,7 @@
                   (p < 0 || p > l) && (e = 0.1)),
                   o.speedy &&
                     ((m = Math.floor(
-                      o.lastscrolly - o.speedy * (1 - o.demulxy),
+                      o.lastscrolly - o.speedy * (1 - o.demulxy)
                     )),
                     (o.lastscrolly = m),
                     (m < 0 || m > n) && (e = 0.1)),
@@ -10819,7 +10817,7 @@
           this[o].apply(this, e);
         });
       };
-    },
+    }
   ),
     (e.fn.getNiceScroll = function (e) {
       return void 0 === e
@@ -10874,7 +10872,7 @@
           .addClass(t.attr("class") || "")
           .addClass(t.attr("disabled") ? "disabled" : "")
           .attr("tabindex", t.attr("disabled") ? null : "0")
-          .html('<span class="current"></span><ul class="list"></ul>'),
+          .html('<span class="current"></span><ul class="list"></ul>')
       );
       var s = t.next(),
         n = t.find("option"),
@@ -10890,9 +10888,9 @@
               .addClass(
                 "option" +
                   (n.is(":selected") ? " selected" : "") +
-                  (n.is(":disabled") ? " disabled" : ""),
+                  (n.is(":disabled") ? " disabled" : "")
               )
-              .html(n.text()),
+              .html(n.text())
           );
         });
     }
@@ -10945,7 +10943,7 @@
           var i = s.data("display") || s.text();
           n.find(".current").text(i),
             n.prev("select").val(s.data("value")).trigger("change");
-        },
+        }
       ),
       e(document).on("keydown.nice_select", ".nice-select", function (t) {
         var s = e(this),

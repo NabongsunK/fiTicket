@@ -68,6 +68,7 @@ const Header = function () {
         className={
           isActive ? "right-side-cart-area" : "right-side-cart-area cart-on"
         }
+        style={{ zIndex: "21474899" }}
       >
         {/* Cart Button  */}
         <div className="cart-button">

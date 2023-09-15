@@ -98,11 +98,8 @@ const Teams = function () {
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="section-heading text-center">
-                <h2>Best Weekly Offers In Each City</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore.
-                </p>
+                <h2>Loca!T와 함께 다양한 축제를 즐기세요</h2>
+                <p>축제를 더욱 더 알차게 즐길 수 있도록 힘쓰겠습니다</p>
               </div>
             </div>
           </div>
@@ -359,7 +356,7 @@ const Teams = function () {
                     <div className="col-lg-2">
                       <img
                         src="assets/images/fold.png"
-                        style={{ width: "70%" }}
+                        style={{ width: "70%", cursor: "pointer" }}
                       />
                     </div>
                   </div>
@@ -373,7 +370,7 @@ const Teams = function () {
                     <div className="col-lg-2">
                       <img
                         src="assets/images/fold.png"
-                        style={{ width: "70%" }}
+                        style={{ width: "70%", cursor: "pointer" }}
                       />
                     </div>
                   </div>
@@ -386,35 +383,96 @@ const Teams = function () {
                     <div className="col-lg-2">
                       <img
                         src="assets/images/fold.png"
-                        style={{ width: "70%" }}
+                        style={{ width: "70%", cursor: "pointer" }}
                       />
                     </div>
                   </div>
                 </div>
 
                 <div className="col-lg-12">
-                  <div className="info-item">
-                    <div className="row">
-                      <div className="col-lg-10">
-                        <h4>Loca!T는 뭐하는 사이트인가요?</h4>
-                        <br />
-                        <span>
-                          우리 주변에 있지만 미처 알지 못했던 다양한 행사들을
-                          소개하고 참여시 더욱 합리넉으로 할 수 있게 도와주는
-                          Loca!T입니다.
-                        </span>
-                      </div>
-                      <div className="col-lg-2">
-                        <img
-                          src="assets/images/fold.png"
-                          style={{ width: "70%", rotate: "180deg" }}
-                        />
-                      </div>
+                  <div className="info-item row">
+                    <div className="col-lg-10">
+                      <h4>Loca!T는 뭐하는 사이트인가요?</h4>
+                      <br />
+                      <span>
+                        우리 주변에 있지만 미처 알지 못했던 다양한 행사들을
+                        소개하고 참여시 더욱 합리넉으로 할 수 있게 도와주는
+                        Loca!T입니다.
+                      </span>
+                    </div>
+                    <div className="col-lg-2">
+                      <img
+                        src="assets/images/fold.png"
+                        style={{
+                          width: "70%",
+                          rotate: "180deg",
+                          cursor: "pointer",
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="container"
+        style={{ padding: "0 200px", marginTop: "50px" }}
+      >
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="row">
+              <h4
+                className="mb-4 col-9"
+                style={{ color: "#22b3c1", paddingLeft: "50px" }}
+              >
+                문의하기
+              </h4>
+              <div className="col-3">
+                <h4>
+                  <div className="border-button">
+                    <Link to="/">보내기</Link>
+                  </div>
+                </h4>
+              </div>
+            </div>
+
+            <form>
+              <div className="row g-3">
+                <div className="col-12 col-sm-6">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="이름"
+                  />
+                </div>
+                <div className="col-12 col-sm-6">
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="이메일"
+                  />
+                </div>
+                <div className="col-12 col-sm-6">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="연락처"
+                  />
+                </div>
+                <div className="col-12 col-sm-6"></div>
+                <div className="col-12">
+                  <textarea
+                    className="form-control"
+                    rows="5"
+                    placeholder="문의 내용"
+                  ></textarea>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
