@@ -1,16 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
-import Layout from './components/layout';
-import Deal from './pages/deals';
-import Login from './pages/login';
+import Layout from "./components/layout";
+import Deal from "./pages/deals";
+import Login from "./pages/login";
 
-import festivals from './data/festivals.json';
-import { Provider } from 'react-redux';
-import store from './store/store'
-import Signup from './pages/signup';
-import Explore from './pages/explore';
-import Teams from './pages/teams';
-
+import festivals from "./data/festivals.json";
+import { Provider } from "react-redux";
+import store from "./store/store";
+import Signup from "./pages/signup";
+import Explore from "./pages/explore";
+import Teams from "./pages/teams";
 
 function App() {
   return (

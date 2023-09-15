@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-const DealsListItem= function(props){
-  
+const DealsListItem = function (props) {
   return (
     <>
       <div className="col-lg-6 col-sm-6">
@@ -20,11 +19,15 @@ const DealsListItem= function(props){
                 <div className="row">
                   <div className="col-6">
                     <i className="fa fa-clock"></i>
-                    <span className="list">{props.festival.eventstartdate} -{props.festival.eventenddate}</span>
+                    <span className="list">
+                      {props.festival.eventstartdate} -
+                      {props.festival.eventenddate}
+                    </span>
                   </div>
-                  
                 </div>
-                <p>Lorem ipsum dolor sit amet dire consectetur adipiscing elit.</p>
+                <p>
+                  Lorem ipsum dolor sit amet dire consectetur adipiscing elit.
+                </p>
                 <div className="main-button">
                   <Link to="reservation.html">Make a Reservation</Link>
                 </div>

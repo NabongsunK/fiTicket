@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const TicketListItem= function(props){
+const TicketListItem = function (props) {
   return (
     <div className="col-lg-12 col-sm-3">
       <div className="item">
@@ -17,7 +17,10 @@ const TicketListItem= function(props){
               <div className="row">
                 <div className="col-6">
                   <i className="fa fa-clock"></i>
-                  <span className="list">{props.festival.eventstartdate} ~ {props.festival.eventenddate}</span>
+                  <span className="list">
+                    {props.festival.eventstartdate} ~{" "}
+                    {props.festival.eventenddate}
+                  </span>
                 </div>
                 <div className="col-6">
                   <i className="fa fa-map"></i>
@@ -25,12 +28,13 @@ const TicketListItem= function(props){
                 </div>
               </div>
               <p>경복궁 생과방에서 진행시 필요한 다과 세트 할인</p>
-
             </div>
           </div>
           <div className="col-lg-2 align-self-center">
             <div className="main-button">
-              <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">행사 홈페이지</Link>
+              <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">
+                행사 홈페이지
+              </Link>
             </div>
           </div>
           <div className="col-lg-2 align-self-center">
@@ -38,11 +42,9 @@ const TicketListItem= function(props){
               <Link to="reservation.html">티켓 구매</Link>
             </div>
           </div>
-
         </div>
       </div>
     </div>
-
   );
 };
 

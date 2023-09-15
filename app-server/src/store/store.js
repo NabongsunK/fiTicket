@@ -3,8 +3,8 @@ import loginSlice from "./loginSlice";
 
 const store = configureStore({
   reducer: {
-    myLoginSlice : loginSlice .reducer
-  }
+    myLoginSlice: loginSlice.reducer,
+  },
 });
 
 export default store;

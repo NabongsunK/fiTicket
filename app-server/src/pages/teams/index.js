@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-
-const Teams= function(){
+const Teams = function () {
   return (
     <>
       <div className="about-main-content">
@@ -13,7 +12,11 @@ const Teams= function(){
                 <h4>EXPLORE OUR COUNTRY</h4>
                 <div className="line-dec"></div>
                 <h2>Welcome To Caribbean</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt uttersi labore et dolore magna aliqua is ipsum suspendisse ultrices gravida</p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt uttersi labore et dolore magna
+                  aliqua is ipsum suspendisse ultrices gravida
+                </p>
                 <div className="main-button">
                   <Link to="reservation.html">Discover More</Link>
                 </div>
@@ -29,7 +32,9 @@ const Teams= function(){
             <div className="slider-content">
               <div className="row">
                 <div className="col-lg-12">
-                  <h2>Caribbean’s <em>Cities &amp; Towns</em></h2>
+                  <h2>
+                    Caribbean’s <em>Cities &amp; Towns</em>
+                  </h2>
                 </div>
                 <div className="col-lg-12">
                   <div className="owl-cites-town owl-carousel">
@@ -88,14 +93,17 @@ const Teams= function(){
           </div>
         </div>
       </div>
-      
+
       <div className="weekly-offers">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="section-heading text-center">
                 <h2>Best Weekly Offers In Each City</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore.
+                </p>
               </div>
             </div>
           </div>
@@ -108,14 +116,31 @@ const Teams= function(){
                   <div className="thumb">
                     <img src="assets/images/offers-01.jpg" alt="" />
                     <div className="text">
-                      <h4>Havana<br/><span><i className="fa fa-users"></i> 234 Check Ins</span></h4>
-                      <h6>$420<br/><span>/person</span></h6>
+                      <h4>
+                        Havana
+                        <br />
+                        <span>
+                          <i className="fa fa-users"></i> 234 Check Ins
+                        </span>
+                      </h4>
+                      <h6>
+                        $420
+                        <br />
+                        <span>/person</span>
+                      </h6>
                       <div className="line-dec"></div>
                       <ul>
                         <li>Deal Includes:</li>
-                        <li><i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel Included</li>
-                        <li><i className="fa fa-plane"></i> Airplane Bill Included</li>
-                        <li><i className="fa fa-building"></i> Daily Places Visit</li>
+                        <li>
+                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
+                          Included
+                        </li>
+                        <li>
+                          <i className="fa fa-plane"></i> Airplane Bill Included
+                        </li>
+                        <li>
+                          <i className="fa fa-building"></i> Daily Places Visit
+                        </li>
                       </ul>
                       <div className="main-button">
                         <Link to="reservation.html">Make a Reservation</Link>
@@ -127,14 +152,31 @@ const Teams= function(){
                   <div className="thumb">
                     <img src="assets/images/offers-02.jpg" alt="" />
                     <div className="text">
-                      <h4>Kingston<br/><span><i className="fa fa-users"></i> 234 Check Ins</span></h4>
-                      <h6>$420<br/><span>/person</span></h6>
+                      <h4>
+                        Kingston
+                        <br />
+                        <span>
+                          <i className="fa fa-users"></i> 234 Check Ins
+                        </span>
+                      </h4>
+                      <h6>
+                        $420
+                        <br />
+                        <span>/person</span>
+                      </h6>
                       <div className="line-dec"></div>
                       <ul>
                         <li>Deal Includes:</li>
-                        <li><i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel Included</li>
-                        <li><i className="fa fa-plane"></i> Airplane Bill Included</li>
-                        <li><i className="fa fa-building"></i> Daily Places Visit</li>
+                        <li>
+                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
+                          Included
+                        </li>
+                        <li>
+                          <i className="fa fa-plane"></i> Airplane Bill Included
+                        </li>
+                        <li>
+                          <i className="fa fa-building"></i> Daily Places Visit
+                        </li>
                       </ul>
                       <div className="main-button">
                         <Link to="reservation.html">Make a Reservation</Link>
@@ -146,14 +188,31 @@ const Teams= function(){
                   <div className="thumb">
                     <img src="assets/images/offers-03.jpg" alt="" />
                     <div className="text">
-                      <h4>George Town<br/><span><i className="fa fa-users"></i> 234 Check Ins</span></h4>
-                      <h6>$420<br/><span>/person</span></h6>
+                      <h4>
+                        George Town
+                        <br />
+                        <span>
+                          <i className="fa fa-users"></i> 234 Check Ins
+                        </span>
+                      </h4>
+                      <h6>
+                        $420
+                        <br />
+                        <span>/person</span>
+                      </h6>
                       <div className="line-dec"></div>
                       <ul>
                         <li>Deal Includes:</li>
-                        <li><i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel Included</li>
-                        <li><i className="fa fa-plane"></i> Airplane Bill Included</li>
-                        <li><i className="fa fa-building"></i> Daily Places Visit</li>
+                        <li>
+                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
+                          Included
+                        </li>
+                        <li>
+                          <i className="fa fa-plane"></i> Airplane Bill Included
+                        </li>
+                        <li>
+                          <i className="fa fa-building"></i> Daily Places Visit
+                        </li>
                       </ul>
                       <div className="main-button">
                         <Link to="reservation.html">Make a Reservation</Link>
@@ -165,14 +224,31 @@ const Teams= function(){
                   <div className="thumb">
                     <img src="assets/images/offers-01.jpg" alt="" />
                     <div className="text">
-                      <h4>Havana<br/><span><i className="fa fa-users"></i> 234 Check Ins</span></h4>
-                      <h6>$420<br/><span>/person</span></h6>
+                      <h4>
+                        Havana
+                        <br />
+                        <span>
+                          <i className="fa fa-users"></i> 234 Check Ins
+                        </span>
+                      </h4>
+                      <h6>
+                        $420
+                        <br />
+                        <span>/person</span>
+                      </h6>
                       <div className="line-dec"></div>
                       <ul>
                         <li>Deal Includes:</li>
-                        <li><i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel Included</li>
-                        <li><i className="fa fa-plane"></i> Airplane Bill Included</li>
-                        <li><i className="fa fa-building"></i> Daily Places Visit</li>
+                        <li>
+                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
+                          Included
+                        </li>
+                        <li>
+                          <i className="fa fa-plane"></i> Airplane Bill Included
+                        </li>
+                        <li>
+                          <i className="fa fa-building"></i> Daily Places Visit
+                        </li>
                       </ul>
                       <div className="main-button">
                         <Link to="reservation.html">Make a Reservation</Link>
@@ -184,14 +260,31 @@ const Teams= function(){
                   <div className="thumb">
                     <img src="assets/images/offers-02.jpg" alt="" />
                     <div className="text">
-                      <h4>Kingston<br/><span><i className="fa fa-users"></i> 234 Check Ins</span></h4>
-                      <h6>$420<br/><span>/person</span></h6>
+                      <h4>
+                        Kingston
+                        <br />
+                        <span>
+                          <i className="fa fa-users"></i> 234 Check Ins
+                        </span>
+                      </h4>
+                      <h6>
+                        $420
+                        <br />
+                        <span>/person</span>
+                      </h6>
                       <div className="line-dec"></div>
                       <ul>
                         <li>Deal Includes:</li>
-                        <li><i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel Included</li>
-                        <li><i className="fa fa-plane"></i> Airplane Bill Included</li>
-                        <li><i className="fa fa-building"></i> Daily Places Visit</li>
+                        <li>
+                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
+                          Included
+                        </li>
+                        <li>
+                          <i className="fa fa-plane"></i> Airplane Bill Included
+                        </li>
+                        <li>
+                          <i className="fa fa-building"></i> Daily Places Visit
+                        </li>
                       </ul>
                       <div className="main-button">
                         <Link to="reservation.html">Make a Reservation</Link>
@@ -203,14 +296,31 @@ const Teams= function(){
                   <div className="thumb">
                     <img src="assets/images/offers-03.jpg" alt="" />
                     <div className="text">
-                      <h4>George Town<br/><span><i className="fa fa-users"></i> 234 Check Ins</span></h4>
-                      <h6>$420<br/><span>/person</span></h6>
+                      <h4>
+                        George Town
+                        <br />
+                        <span>
+                          <i className="fa fa-users"></i> 234 Check Ins
+                        </span>
+                      </h4>
+                      <h6>
+                        $420
+                        <br />
+                        <span>/person</span>
+                      </h6>
                       <div className="line-dec"></div>
                       <ul>
                         <li>Deal Includes:</li>
-                        <li><i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel Included</li>
-                        <li><i className="fa fa-plane"></i> Airplane Bill Included</li>
-                        <li><i className="fa fa-building"></i> Daily Places Visit</li>
+                        <li>
+                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
+                          Included
+                        </li>
+                        <li>
+                          <i className="fa fa-plane"></i> Airplane Bill Included
+                        </li>
+                        <li>
+                          <i className="fa fa-building"></i> Daily Places Visit
+                        </li>
                       </ul>
                       <div className="main-button">
                         <Link to="reservation.html">Make a Reservation</Link>
@@ -235,7 +345,10 @@ const Teams= function(){
             <div className="col-lg-6">
               <div className="section-heading">
                 <h2>Discover More About Our Country</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore.
+                </p>
               </div>
               <div className="row">
                 <div className="col-lg-6">
@@ -265,7 +378,12 @@ const Teams= function(){
                   </div>
                 </div>
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore.
+              </p>
               <div className="main-button">
                 <Link to="reservation.html">Discover More</Link>
               </div>
@@ -273,7 +391,6 @@ const Teams= function(){
           </div>
         </div>
       </div>
-
 
       <div className="call-to-action">
         <div className="container">
@@ -290,9 +407,6 @@ const Teams= function(){
           </div>
         </div>
       </div>
-
-
-
     </>
   );
 };

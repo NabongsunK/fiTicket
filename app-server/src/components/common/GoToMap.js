@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const GoToMap= function(){
+const GoToMap = function () {
   return (
     <div className="call-to-action">
       <div className="container">
