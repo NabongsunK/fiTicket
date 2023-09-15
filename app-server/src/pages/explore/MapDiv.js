@@ -82,7 +82,7 @@ const MapDiv = function () {
   //쿼리입력되면, 값변경
   const onChangeQuery = async function (e) {
     if (e.target.value) {
-      return setMapItude([...(await getItude(e.target.value)), 13]);
+      return setMapItude([...(await getItude(e.target.value)), 8]);
     }
   };
   //토글 변경되면, 값변경
@@ -90,7 +90,11 @@ const MapDiv = function () {
     if (val === 0) {
       getCurrentPos();
     } else {
-      setMapItude([...(await getItude(localInfos[val].localTitle)), 5]);
+      setMapItude([
+        localInfos[val].centerLon,
+        localInfos[val].centerLat,
+        localInfos[val].localMapLevel,
+      ]);
     }
   };
 
@@ -109,13 +113,9 @@ const MapDiv = function () {
 
   return (
     <>
-      <div className="form-outline mb-4">
-        <input
-          type="text"
-          id="form2Example1"
-          className="form-control"
-          onChange={onChangeQuery}
-        />
+      <div className="form-outline mb-4" onChange={onChangeQuery}>
+        <input type="text" id="form2Example1" className="form-control" />
+        <button />
         {/* 여기에 검색도중 추천리스트가 나오게 설정 */}
 
         <label className="form-label" htmlFor="form2Example1">

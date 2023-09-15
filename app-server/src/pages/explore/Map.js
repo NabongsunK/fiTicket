@@ -4,7 +4,7 @@ import chicken from "../../data/chicken.json";
 const { kakao } = window;
 
 const Map = function (props) {
-  //첫마운트 될때
+  //첫마운트 될때, props변경될때
   console.log(props);
   useEffect(
     function () {
@@ -31,6 +31,11 @@ const Map = function (props) {
 
       // 클러스터러에 마커들을 추가합니다
       clusterer.addMarkers(markers);
+
+      // 언마운트시;
+      return function () {
+        kakao.maps.event.removeListene;
+      };
     },
     [props]
   );
