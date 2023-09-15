@@ -3,7 +3,7 @@
 **/TEST
 essence-master
 woox
-# .vscode
+.vscode
 # 오피스 임시파일
 ~$*
 
