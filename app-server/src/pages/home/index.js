@@ -35,7 +35,7 @@ function Home() {
               <div className="banner-inner-wrapper header-text">
                 <div className="main-caption">
                   <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
-                  <h1>Caribbean</h1>
+                  <h1>포항 이가리닻</h1>
                   {/* 회원가입 페이지로 이동 */}
                   <div className="border-button">
                     <Link to="/">지금 가입하기</Link>
@@ -87,7 +87,7 @@ function Home() {
               <div className="banner-inner-wrapper header-text">
                 <div className="main-caption">
                   <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
-                  <h1>Switzerland</h1>
+                  <h1>속초 영랑호수윗길</h1>
                   <div className="border-button">
                     <Link to="about.html">Go There</Link>
                   </div>
@@ -137,7 +137,7 @@ function Home() {
               <div className="banner-inner-wrapper header-text">
                 <div className="main-caption">
                   <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
-                  <h1>France</h1>
+                  <h1>연천 댑싸리공원</h1>
                   <div className="border-button">
                     <Link to="about.html">Go There</Link>
                   </div>
@@ -187,7 +187,7 @@ function Home() {
               <div className="banner-inner-wrapper header-text">
                 <div className="main-caption">
                   <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
-                  <h1>Thailand</h1>
+                  <h1>태백 당골광장</h1>
                   <div className="border-button">
                     <Link to="about.html">Go There</Link>
                   </div>
