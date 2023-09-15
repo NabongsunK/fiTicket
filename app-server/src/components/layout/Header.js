@@ -178,7 +178,7 @@ const Header = function () {
               </li>
             </ul>
             <div className="checkout-btn mt-100">
-              <Link to="checkout.html" className="btn essence-btn">
+              <Link to="/" className="btn essence-btn">
                 check out
               </Link>
             </div>
