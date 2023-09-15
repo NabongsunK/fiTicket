@@ -12,9 +12,7 @@ const Filter = function () {
               action="#"
             >
               <div className="row">
-                <div className="col-lg-2">
-                  <h4>Sort Deals By:</h4>
-                </div>
+                <div className="col-lg-2">{/* <h4>Sort Deals By:</h4> */}</div>
                 <div className="col-lg-4">
                   <fieldset>
                     <select
@@ -57,7 +55,7 @@ const Filter = function () {
                 </div>
                 <div className="col-lg-2">
                   <fieldset>
-                    <button className="border-button">Search Results</button>
+                    <button className="border-button">찾기</button>
                   </fieldset>
                 </div>
               </div>

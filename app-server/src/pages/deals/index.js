@@ -18,7 +18,7 @@ const Deal = function (props) {
 
   const listPerPage = 4;
   const lastPage = Math.floor(
-    (listPerPage + props.festivals.length - 1) / listPerPage,
+    (listPerPage + props.festivals.length - 1) / listPerPage
   );
   const skip = (page - 1) * listPerPage;
 
@@ -50,10 +50,11 @@ const Deal = function (props) {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h4>Discover Our Weekly Offers</h4>
-              <h2>Amazing Prices &amp; More</h2>
+              <h4>Loca!T가 추천하는 행사</h4>
+              <h2>다양한 축제들이 여러분을 기다립니다</h2>
+              <h2>지금 바로 즐겨보세요!</h2>
               <div className="border-button">
-                <Link to="about.html">Discover More</Link>
+                <Link to="/login">로그인하기</Link>
               </div>
             </div>
           </div>
@@ -69,10 +70,10 @@ const Deal = function (props) {
             {/* 추천 행사 타이틀 */}
             <div className="col-lg-6 offset-lg-3">
               <div className="section-heading text-center">
-                <h2>Best Weekly Offers In Each City</h2>
+                <h2>이번주 Loca!T가 추천하는 축제</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore.
+                  여러 도시들에서 축제가 진행중입니다. 그 중 인기있는 축제들을
+                  소개합니다.
                 </p>
               </div>
             </div>

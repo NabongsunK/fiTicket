@@ -17,7 +17,7 @@ const DealsListItem = function (props) {
                 <span className="info">*Limited Offer Today</span>
                 <h4>{props.festival.title}</h4>
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-11">
                     <i className="fa fa-clock"></i>
                     <span className="list">
                       {props.festival.eventstartdate} -
@@ -28,8 +28,26 @@ const DealsListItem = function (props) {
                 <p>
                   Lorem ipsum dolor sit amet dire consectetur adipiscing elit.
                 </p>
-                <div className="main-button">
-                  <Link to="reservation.html">Make a Reservation</Link>
+                <div className="row">
+                  <div className="col-lg-3">
+                    {/* 홈페이지 연결 */}
+                    <div className="explore_list_button">
+                      <Link
+                        to="https://www.chf.or.kr/short/8sQs"
+                        target="_blank"
+                      >
+                        <i className="fa fa-home"></i>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="col-lg-3">
+                    {/* 장바구니 담기 */}
+                    <div className="explore_list_button">
+                      <Link to="/">
+                        <i className="fa fa-cart-plus"></i>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
