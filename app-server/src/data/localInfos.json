@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "defaultChecked": true,
+    "localTitle": "전국",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 2,
+    "defaultChecked": false,
+    "localTitle": "서울",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 3,
+    "defaultChecked": false,
+    "localTitle": "부산",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 4,
+    "defaultChecked": false,
+    "localTitle": "대전",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 5,
+    "defaultChecked": false,
+    "localTitle": "인천",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 6,
+    "defaultChecked": false,
+    "localTitle": "대구",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 7,
+    "defaultChecked": false,
+    "localTitle": "울산",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 8,
+    "defaultChecked": false,
+    "localTitle": "경기",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 9,
+    "defaultChecked": false,
+    "localTitle": "충청",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 10,
+    "defaultChecked": false,
+    "localTitle": "강원",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 11,
+    "defaultChecked": false,
+    "localTitle": "경상",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 12,
+    "defaultChecked": false,
+    "localTitle": "전라",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 13,
+    "defaultChecked": false,
+    "localTitle": "제주",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  },
+  {
+    "id": 14,
+    "defaultChecked": false,
+    "localTitle": "세종",
+    "localxMax": 1,
+    "localxMin": 1,
+    "localyMax": 1,
+    "localyMin": 1,
+    "localMapLevel": 3
+  }
+]
