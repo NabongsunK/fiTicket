@@ -1,38 +1,46 @@
 import { Link, useSearchParams } from "react-router-dom";
 import TicketListItem from "./TicketListItem";
+import { useSelector, useDispatch, Provider } from "react-redux";
+import store from "../../store/store";
+import { next, prev } from "../../store/pageSlice";
+import festivals from "../../data/festivals.json";
 
-const TicketList = function (props) {
+const TicketList = function () {
   //페이징 처리
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = Number(searchParams.get("page") || 1);
+
+  const page = useSelector((state) => {
+    return state.viewPageSlice.page;
+  });
 
   const listPerPage = 4;
   const lastPage = Math.floor(
-    (listPerPage + props.festivals.length - 1) / listPerPage,
+    (listPerPage + festivals.length - 1) / listPerPage
   );
   const skip = (page - 1) * listPerPage;
 
-  const pageResult = props.festivals.slice(skip, skip + listPerPage);
+  const pageResult = festivals.slice(skip, skip + listPerPage);
 
-  const goPrev = function () {
-    if (page === 2) {
-      searchParams.delete("page");
-    } else if (page > 2) {
-      searchParams.set("page", page - 1);
-    }
-    setSearchParams(searchParams);
-  };
+  // const goPrev = function () {
+  //   if (page === 2) {
+  //     searchParams.delete("page");
+  //   } else if (page > 2) {
+  //     searchParams.set("page", page - 1);
+  //   }
+  //   setSearchParams(searchParams);
+  // };
 
-  const goNext = function () {
-    if (page < lastPage) {
-      searchParams.set("page", page + 1);
-      setSearchParams(searchParams);
-    }
-  };
+  // const goNext = function () {
+  //   if (page < lastPage) {
+  //     searchParams.set("page", page + 1);
+  //     setSearchParams(searchParams);
+  //   }
+  // };
 
   const list = pageResult.map((festival) => (
     <TicketListItem key={festival.id} festival={festival} />
   ));
+
+  const dispatch = useDispatch();
 
   return (
     <div className="amazing-deals">
@@ -44,7 +52,7 @@ const TicketList = function (props) {
           <div className="col-lg-12">
             <ul className="page-numbers">
               <li>
-                <Link to="" onClick={goPrev}>
+                <Link to="" onClick={() => dispatch(prev({ step: 1 }))}>
                   <i className="fa fa-arrow-left"></i>
                 </Link>
               </li>
@@ -58,7 +66,7 @@ const TicketList = function (props) {
                 <Link to="#">3</Link>
               </li>
               <li>
-                <Link to="" onClick={goNext}>
+                <Link to="" onClick={() => dispatch(next({ step: 1 }))}>
                   <i className="fa fa-arrow-right"></i>
                 </Link>
               </li>
