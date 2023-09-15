@@ -56,8 +56,9 @@ const getItude = async function (query = "서울") {
 const MapDiv = function () {
   //경도,위도,사이즈
   const [mapItude, setMapItude] = useState([]);
-  //처음마운트 될때 위치정보 얻기
-  useEffect(function () {
+
+  //mapItude를 현재위치로 변경
+  const getCurrentPos = function () {
     if (navigator.geolocation) {
       // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -76,7 +77,7 @@ const MapDiv = function () {
       // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
       setMapItude([128.25, 35.95, 13]);
     }
-  }, []);
+  };
 
   //쿼리입력되면, 값변경
   const onChangeQuery = async function (e) {
@@ -84,6 +85,17 @@ const MapDiv = function () {
       return setMapItude([...(await getItude(e.target.value)), 13]);
     }
   };
+  //토글 변경되면, 값변경
+  const onChangeToggle = async function (val) {
+    if (val === 0) {
+      getCurrentPos();
+    } else {
+      setMapItude([...(await getItude(localInfos[val].localTitle)), 5]);
+    }
+  };
+
+  //처음마운트 될때 위치정보 얻기
+  useEffect(getCurrentPos, []);
 
   const LocalSelectList = localInfos.map((localInfo) => (
     <ToggleButton
@@ -116,11 +128,8 @@ const MapDiv = function () {
       <ToggleButtonGroup
         type="radio"
         name="options"
-        defaultValue={1}
-        onChange={async (val) => {
-          // 여기 숫자변경해서 자연스럽게
-          setMapItude([...(await getItude(localInfos[val].localTitle)), 5]);
-        }}
+        defaultValue={0}
+        onChange={onChangeToggle}
       >
         {LocalSelectList}
       </ToggleButtonGroup>
