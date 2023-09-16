@@ -115,7 +115,6 @@ const MapDiv = function () {
     <>
       <div className="form-outline mb-4" onChange={onChangeQuery}>
         <input type="text" id="form2Example1" className="form-control" />
-        <button />
         {/* 여기에 검색도중 추천리스트가 나오게 설정 */}
 
         <label className="form-label" htmlFor="form2Example1">
