@@ -35,7 +35,7 @@ function Home() {
             <div id="top-banner-1" className="banner">
               <div className="banner-inner-wrapper header-text">
                 <div className="main-caption">
-                  <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
+                  <h2>시원하게 펼쳐진 포항의 바다를 한눈에 담아보자 !</h2>
                   <h1>포항 이가리닻</h1>
                   {/* 회원가입 페이지로 이동 */}
                   <div className="border-button">
@@ -87,7 +87,7 @@ function Home() {
             <div id="top-banner-2" className="banner">
               <div className="banner-inner-wrapper header-text">
                 <div className="main-caption">
-                  <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
+                  <h2>물 위를 걷는 느낌</h2>
                   <h1>속초 영랑호수윗길</h1>
                   <div className="border-button">
                     <Link to="about.html">Go There</Link>
@@ -137,7 +137,9 @@ function Home() {
             <div id="top-banner-3" className="banner">
               <div className="banner-inner-wrapper header-text">
                 <div className="main-caption">
-                  <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
+                  <h2>
+                    계절에 따라 색을 입는 댑싸리의 향연에 여러분을 초대합니다
+                  </h2>
                   <h1>연천 댑싸리공원</h1>
                   <div className="border-button">
                     <Link to="about.html">Go There</Link>
@@ -187,7 +189,7 @@ function Home() {
             <div id="top-banner-4" className="banner">
               <div className="banner-inner-wrapper header-text">
                 <div className="main-caption">
-                  <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
+                  <h2>자연을 느끼고 싶다면 태백으로 놀어오세요</h2>
                   <h1>태백 당골광장</h1>
                   <div className="border-button">
                     <Link to="about.html">Go There</Link>
@@ -266,42 +268,54 @@ function Home() {
         </div>
       </section>
 
-      <div className="container" style={{marginTop:"150px"}}>
+      <div className="container" style={{ marginTop: "150px" }}>
         <div className="row">
           <div className="col-12">
-            <img src="assets/images/recommand_temp.png" style={{width:"100%"}} />
+            <img
+              src="assets/images/recommand_temp.png"
+              style={{ width: "100%" }}
+            />
           </div>
         </div>
       </div>
 
-      <div className="container" style={{marginTop:"150px"}}>
-
+      <div className="container" style={{ marginTop: "150px" }}>
         <div className="row">
-
-        <div className="cities-town">
-          <div className="container">
-            <div className="slider-content" style={{padding:"10px", width:"50%", left:"25%", backgroundColor:"#22b3c1"}}>
-              <div className="row justify-content-center align-items-center">
-                <div className="col-5 align-middle">
-                  <h2 style={{margin:"0", color:"#fff"}}>
-                    <em style={{color:"#fff"}}>베스트 리뷰</em>
-                  </h2>
+          <div className="cities-town">
+            <div className="container">
+              <div
+                className="slider-content"
+                style={{
+                  padding: "10px",
+                  width: "50%",
+                  left: "25%",
+                  backgroundColor: "#22b3c1",
+                }}
+              >
+                <div className="row justify-content-center align-items-center">
+                  <div className="col-5 align-middle">
+                    <h2 style={{ margin: "0", color: "#fff" }}>
+                      <em style={{ color: "#fff" }}>베스트 리뷰</em>
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-          
-    
           <div className="row align-items-center">
             <div className="col-1">
               <div className="border-button">
-                <Link to="/"><i className="fa fa-angle-left fs-2"></i></Link>
+                <Link to="/">
+                  <i className="fa fa-angle-left fs-2"></i>
+                </Link>
               </div>
             </div>
             <div className="col-10">
-              <img src="assets/images/review_temp.png" style={{width:"120%"}} />
+              <img
+                src="assets/images/review_temp.png"
+                style={{ width: "120%" }}
+              />
             </div>
             <div className="col-1">
               <div className="border-button">
@@ -311,11 +325,7 @@ function Home() {
           </div>
         </div>
       </div>
-
-
-
       <GoToMap />
-
     </>
   );
 }
