@@ -17,6 +17,7 @@ const TicketList = function (props) {
 
   const pageResult = props.festivals.slice(skip, skip + listPerPage);
 
+
   // const goPrev = function () {
   //   if (page === 2) {
   //     searchParams.delete("page");
@@ -39,6 +40,13 @@ const TicketList = function (props) {
     <TicketListItem key={festival.id} festival={festival} />
   ));
 
+  const totalPage= [];
+  for(let i=1; i<=lastPage; i++){
+    totalPage.push(i);
+  }
+   const currPage= (skip/listPerPage)+1;
+
+
   return (
     <div className="amazing-deals">
       <div className="container">
@@ -60,16 +68,16 @@ const TicketList = function (props) {
                   <i className="fa fa-arrow-left"></i>
                 </Link>
               </li>
-{/*               <li className="active">
-                <Link to="#">1</Link>
-              </li>
+
+
+              {totalPage.map((page) => (
+                <li key={page}
+                    className={ page === currPage ? "active" : ""}>
+                  <Link to="#" onClick={() => {}}>{page}</Link>
+                </li>
+               ))}
+
               <li>
-                <Link to="#">2</Link>
-              </li>
-              <li>
-                <Link to="#">3</Link>
-              </li>
- */}              <li>
                 <Link
                   to=""
                   onClick={() => {
