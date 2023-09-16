@@ -17,7 +17,7 @@ const ExploreGetModel = {
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
-  }, async getAllList(conn = pool) {
+  }, async getAllSelect(conn = pool) {
     try {
       const sql = `
       select

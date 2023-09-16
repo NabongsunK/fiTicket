@@ -31,7 +31,7 @@ const ExploreService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
 
-      const data = await ExploreGetModel.getAllList();
+      const data = await ExploreGetModel.getAllSelect();
       // DB에 작업 반영
       await conn.commit();
       return { data, ok: true };
