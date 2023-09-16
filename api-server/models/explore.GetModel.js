@@ -20,19 +20,26 @@ const ExploreGetModel = {
   }, async getAllSelect(conn = pool) {
     try {
       const sql = `
-      select
-        addr1,
-        addr2,
-        first_image,
-        first_image2,
-        tel,
-        title,
-        event_start_date,
-        event_end_date,
-        home_page,
-        over_view
-      from festival_api
-      ORDER BY title ASC, event_start_date ASC
+      SELECT
+      addr1,
+      addr2,
+      first_image,
+      first_image2,
+      tel,
+      title,
+      event_start_date,
+      event_end_date,
+      home_page,
+      over_view
+      FROM festival_api
+
+      WHERE
+      first_image IS NOT NULL
+      AND title IS NOT NULL
+      AND event_start_date IS NOT NULL
+      AND event_end_date IS NOT NULL
+      AND over_view IS NOT NULL
+      ORDER BY event_start_date ASC
       `;
       const [result] = await conn.query(sql);
       return result;
