@@ -58,12 +58,12 @@ const TicketListItem = function (props) {
                 <div className="col-12">
                   <i className="fa fa-clock"></i>
                   <span className="list">
-                    {props.festival.eventstartdate} ~{" "}
-                    {props.festival.eventenddate}
+                    {props.festival.event_start_date} ~{" "}
+                    {props.festival.event_end_date}
                   </span>
                 </div>
               </div>
-              <p>경복궁 생과방에서 진행시 필요한 다과 세트 할인</p>
+              <p>티켓 팝니다</p>
             </div>
           </div>
           <div className="col-lg-2 align-self-center">

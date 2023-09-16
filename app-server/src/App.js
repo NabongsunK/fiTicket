@@ -4,7 +4,7 @@ import Layout from "./components/layout";
 import Deal from "./pages/deals";
 import Login from "./pages/login";
 
-import festivals from "./data/festivals.json";
+import festivals from "./data/_festivals.json";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import Signup from "./pages/signup";
