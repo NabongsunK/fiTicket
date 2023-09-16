@@ -1,15 +1,15 @@
 import { Link, useSearchParams } from "react-router-dom";
 import TicketListItem from "./TicketListItem";
 //import TicketDetailItem from "./TicketDetailItem";
-import { useDispatch } from "react-redux";
-import {next, prev} from "../../store/pageSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { next, prev } from "../../store/pageSlice";
 import festivals from "../../data/festivals.json"
 
 
 const TicketList = function () {
   //페이징 처리
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = Number(searchParams.get("page") || 1);
+
+  const page = useSelector(state => state.viewPageSlice.page);
 
   const listPerPage = 4;
   const lastPage = Math.floor(
