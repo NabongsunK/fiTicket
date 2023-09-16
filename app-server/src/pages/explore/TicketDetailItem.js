@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
 
@@ -29,7 +29,7 @@ const TicketDetailItem = function (props) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(!modalIsOpen);
   }
 
   function afterOpenModal() {
@@ -37,11 +37,15 @@ const TicketDetailItem = function (props) {
     subtitle.style.color = "#f00";
   }
 
-  function closeModal() {
+  function closeModal(e) {
+    setIsOpen(!modalIsOpen);
     console.log("모달 닫기");
-    setIsOpen(false);
-    event.stopPropagation(); // 이벤트 버블링 방지
+    (e) => e.stopPropagation();
   }
+
+  useEffect(() => {
+    console.log(modalIsOpen);
+  }, [modalIsOpen]);
 
   return (
     <div className="col-lg-12 col-sm-3">
@@ -66,29 +70,22 @@ const TicketDetailItem = function (props) {
               </h2>
               <form>
                 <div className="content">
-                  <div className="col-6">
-                    <i className="fa fa-clock"></i>
-                    <h3 className="list">
-                      {props.festival.eventstartdate} ~{" "}
-                      {props.festival.eventenddate}
-                    </h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nulla vestibulum euismod dolor vel bibendum. Integer a
-                      tristique augue. Vivamus bibendum odio at quam convallis,
-                      eu fringilla tellus viverra. Sed id malesuada sapien. Sed
-                      vitae odio a ante venenatis fermentum vel quis justo.
-                      Fusce non lacinia lectus. Nullam tincidunt quam eget justo
-                      convallis, eget gravida turpis auctor. Donec sed urna non
-                      dui vulputate tempor nec ut ligula. Aenean et elit vel
-                    </p>
-                  </div>
+                  <i className="fa fa-clock"></i>
+                  <h3 className="list">
+                    {props.festival.eventstartdate} ~{" "}
+                    {props.festival.eventenddate}
+                  </h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nulla vestibulum euismod dolor vel bibendum. Integer a
+                    tristique augue. Vivamus bibendum odio at quam convallis, eu
+                    fringilla tellus viverra. Sed id malesuada sapien. Sed vitae
+                    odio a ante venenatis fermentum vel quis justo. Fusce non
+                    lacinia lectus. Nullam tincidunt quam eget justo convallis,
+                    eget gravida turpis auctor. Donec sed urna non dui vulputate
+                    tempor nec ut ligula. Aenean et elit vel
+                  </p>
                 </div>
-
-                <button>tab navigation</button>
-                <button>stays</button>
-                <button>inside</button>
-                <button>the modal</button>
                 <br />
                 <br />
               </form>
