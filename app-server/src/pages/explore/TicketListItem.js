@@ -58,7 +58,7 @@ const TicketListItem = function (props) {
                 <div className="col-12">
                   <i className="fa fa-clock"></i>
                   <span className="list">
-                    {props.festival.event_start_date} ~{" "}
+                    {"  "}{props.festival.event_start_date} ~{" "}
                     {props.festival.event_end_date}
                   </span>
                 </div>
