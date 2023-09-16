@@ -8,17 +8,9 @@ const TicketDetailItem = function (props) {
         <div className="content">
           <i className="fa fa-clock"></i>
           <h3 className="list">
-            {props.festival.eventstartdate} ~ {props.festival.eventenddate}
+            {props.festival.event_start_date} ~ {props.festival.event_end_date}
           </h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            vestibulum euismod dolor vel bibendum. Integer a tristique augue.
-            Vivamus bibendum odio at quam convallis, eu fringilla tellus
-            viverra. Sed id malesuada sapien. Sed vitae odio a ante venenatis
-            fermentum vel quis justo. Fusce non lacinia lectus. Nullam tincidunt
-            quam eget justo convallis, eget gravida turpis auctor. Donec sed
-            urna non dui vulputate tempor nec ut ligula. Aenean et elit vel
-          </p>
+          <p>{props.festival.over_view}</p>
         </div>
         <br />
         <br />
