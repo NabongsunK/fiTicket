@@ -35,7 +35,7 @@ const TicketListItem = function (props) {
         <div className="row">
           <div className="col-lg-2">
             <div className="image">
-              <img src={props.festival.firstimage} alt="" />
+              <img src={props.festival.first_image} alt="" />
             </div>
           </div>
           <div className="col-lg-6 align-self-center" onClick={openModal}>
@@ -55,19 +55,15 @@ const TicketListItem = function (props) {
               <span className="info">*궁중 다도 체험</span>
               <h4>{props.festival.title}</h4>
               <div className="row">
-                <div className="col-6">
+                <div className="col-12">
                   <i className="fa fa-clock"></i>
                   <span className="list">
-                    {props.festival.eventstartdate} ~{" "}
-                    {props.festival.eventenddate}
+                    {props.festival.event_start_date} ~{" "}
+                    {props.festival.event_end_date}
                   </span>
                 </div>
-                <div className="col-6">
-                  <i className="fa fa-map"></i>
-                  <span className="list">다과세트 할인</span>
-                </div>
               </div>
-              <p>경복궁 생과방에서 진행시 필요한 다과 세트 할인</p>
+              <p>티켓 팝니다</p>
             </div>
           </div>
           <div className="col-lg-2 align-self-center">
