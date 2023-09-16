@@ -33,12 +33,12 @@ const TicketListItem = function (props) {
     <div className="col-lg-6 col-sm-3">
       <div className="item">
         <div className="row">
-          <div className="col-lg-2">
+          <div className="col-lg-3">
             <div className="image">
-              <img src={props.festival.first_image} alt="" />
+              <img className="poster" src={props.festival.first_image} alt="" />
             </div>
           </div>
-          <div className="col-lg-6 align-self-center" onClick={openModal}>
+          <div className="col-lg-7 align-self-center" onClick={openModal}>
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={openModal}
@@ -52,7 +52,7 @@ const TicketListItem = function (props) {
             </Modal>
 
             <div className="content">
-              <span className="info">*궁중 다도 체험</span>
+              <span className="info">*d-4 / 4일 후 축제가 끝나요</span>
               <h4>{props.festival.title}</h4>
               <div className="row">
                 <div className="col-12">

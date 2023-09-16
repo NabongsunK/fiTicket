@@ -179,7 +179,7 @@ img {
   width: 60%;
   overflow: hidden;
 }
-
+.poster{width: auto; height: 100%;}
 /* 
 ---------------------------------------------
 Global Styles
@@ -258,7 +258,7 @@ body {
   color: #fff;
   background-color: #22b3c1;
   border: 1px solid #22b3c1;
-  padding: 12px 14px;
+  padding: 8px 12px;
   display: inline-block;
   border-radius: 25px;
   font-weight: 500;
@@ -2126,7 +2126,7 @@ Deals Page Style
 
 .amazing-deals .item i {
   color: #777;
-  margin-right: 5px;
+  margin: 0 2px;
 }
 
 .amazing-deals .item .explore_image {
