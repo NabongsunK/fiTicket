@@ -16,7 +16,7 @@ const ExploreService = {
       const data = await ExploreGetModel.getListMap();
       // DB에 작업 반영
       await conn.commit();
-      return { ...data, ok: true };
+      return { data, ok: true };
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();

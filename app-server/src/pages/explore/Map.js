@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import chicken from "../../data/chicken.json";
+// import chicken from "../../data/chicken.json";
+
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const { kakao } = window;
 
@@ -27,18 +28,14 @@ const Map = function (props) {
       });
 
       // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-      var data = chicken["positions"];
-      var markers = data.map(function (position) {
+      var markers = props.data.map(function (position) {
         var marker = new kakao.maps.Marker({
-          position: new kakao.maps.LatLng(position.lat, position.lng),
+          position: new kakao.maps.LatLng(position.map_y, position.map_x),
           clickable: true,
         });
 
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-        var iwContent = `<div style="padding:5px;">${[
-            position.lat,
-            position.lng,
-          ]}</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        var iwContent = `<div style="padding:5px;">${[position.title]}</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
           iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
         // 인포윈도우를 생성합니다

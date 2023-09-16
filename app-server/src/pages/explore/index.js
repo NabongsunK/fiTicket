@@ -7,6 +7,17 @@ import festivals from "../../data/festivals.json";
 import MapDiv from "./MapDiv";
 import { useState } from "react";
 
+import axios from "axios";
+
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const signUp = async function () {
+  const res = await axios.get("/explore/getallmap");
+  return res.data.data;
+};
+var data = await signUp();
+
 const Explore = function () {
   const [isActive, setActive] = useState("false");
 
@@ -42,7 +53,7 @@ const Explore = function () {
           <div className="row">
             {/* 지도 */}
             <div className="col-lg-12">
-              <MapDiv />
+              <MapDiv data={data} />
             </div>
 
             <div className="detail-area">

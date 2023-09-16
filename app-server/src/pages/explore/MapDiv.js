@@ -53,7 +53,7 @@ const getItude = async function (query = "서울") {
   }
 };
 
-const MapDiv = function () {
+const MapDiv = function (props) {
   //경도,위도,사이즈
   const [mapItude, setMapItude] = useState([]);
 
@@ -122,7 +122,7 @@ const MapDiv = function () {
         </label>
       </div>
 
-      <Map mapItude={mapItude} />
+      <Map mapItude={mapItude} data={props.data} />
 
       <ToggleButtonGroup
         type="radio"
