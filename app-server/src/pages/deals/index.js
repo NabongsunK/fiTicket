@@ -4,6 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import DealsListItem from "./DealsListItem";
 import GoToMap from "../../components/common/GoToMap";
 import Filter from "./Filter";
+import DealsPageHeading from "./DealsPageHeading";
 
 const Deal = function (props) {
   // const list= props.festivals.map(festival => {
@@ -46,20 +47,7 @@ const Deal = function (props) {
 
   return (
     <>
-      <div className="page-heading">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <h4>Loca!T가 추천하는 행사</h4>
-              <h2>다양한 축제들이 여러분을 기다립니다</h2>
-              <h2>지금 바로 즐겨보세요!</h2>
-              <div className="border-button">
-                <Link to="/login">로그인하기</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DealsPageHeading />
 
       {/* 필터 */}
       <Filter />
