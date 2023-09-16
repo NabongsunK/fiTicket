@@ -32,6 +32,7 @@ const ExploreGetModel = {
         home_page,
         over_view
       from festival_api
+      ORDER BY title ASC, event_start_date ASC
       `;
       const [result] = await conn.query(sql);
       return result;
