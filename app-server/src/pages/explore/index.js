@@ -3,7 +3,6 @@ import TicketList from "./TicketList";
 import TicketDetailItem from "./TicketDetailItem";
 import ExplorePageHeading from "./ExplorePageHeading";
 
-import festivals from "../../data/festivals.json";
 import MapDiv from "./MapDiv";
 import { useState } from "react";
 
