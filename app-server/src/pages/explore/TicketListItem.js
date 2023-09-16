@@ -1,6 +1,34 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import Modal from "react-modal";
+import TicketDetailItem from "./TicketDetailItem";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    height: "70vh",
+    width: "50vw",
+    //marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const TicketListItem = function (props) {
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const appElement = document.getElementById("root");
+
+  if (appElement) {
+    Modal.setAppElement(appElement);
+  } else {
+    console.error("App element not found!");
+  }
+  function openModal() {
+    setIsOpen(!modalIsOpen);
+  }
+
   return (
     <div className="col-lg-6 col-sm-3">
       <div className="item">
@@ -10,7 +38,19 @@ const TicketListItem = function (props) {
               <img src={props.festival.firstimage} alt="" />
             </div>
           </div>
-          <div className="col-lg-6 align-self-center">
+          <div className="col-lg-6 align-self-center" onClick={openModal}>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={openModal}
+              style={customStyles}
+              contentLabel="Example Modal"
+            >
+              <TicketDetailItem
+                festival={props.festival}
+                openModal={openModal}
+              />
+            </Modal>
+
             <div className="content">
               <span className="info">*궁중 다도 체험</span>
               <h4>{props.festival.title}</h4>

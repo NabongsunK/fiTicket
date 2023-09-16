@@ -3,21 +3,19 @@ import TicketListItem from "./TicketListItem";
 //import TicketDetailItem from "./TicketDetailItem";
 import { useDispatch, useSelector } from "react-redux";
 import { next, prev } from "../../store/pageSlice";
-import festivals from "../../data/festivals.json"
 
-
-const TicketList = function () {
+const TicketList = function (props) {
   //페이징 처리
 
-  const page = useSelector(state => state.viewPageSlice.page);
+  const page = useSelector((state) => state.viewPageSlice.page);
 
   const listPerPage = 4;
   const lastPage = Math.floor(
-    (listPerPage + festivals.length - 1) / listPerPage
+    (listPerPage + props.festivals.length - 1) / listPerPage
   );
   const skip = (page - 1) * listPerPage;
 
-  const pageResult = festivals.slice(skip, skip + listPerPage);
+  const pageResult = props.festivals.slice(skip, skip + listPerPage);
 
   // const goPrev = function () {
   //   if (page === 2) {
@@ -35,7 +33,7 @@ const TicketList = function () {
   //   }
   // };
 
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
 
   const list = pageResult.map((festival) => (
     <TicketListItem key={festival.id} festival={festival} />
