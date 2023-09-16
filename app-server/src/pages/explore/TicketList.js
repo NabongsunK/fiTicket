@@ -45,7 +45,14 @@ const TicketList = function (props) {
           <div className="col-lg-12">
             <ul className="page-numbers">
               <li>
-                <Link to="" onClick={goPrev}>
+                <Link
+                  to=""
+                  onClick={() => {
+                    if (page > 1) {
+                      dispatch(prev({ step: 1 }));
+                    }
+                  }}
+                >
                   <i className="fa fa-arrow-left"></i>
                 </Link>
               </li>
@@ -59,7 +66,14 @@ const TicketList = function (props) {
                 <Link to="#">3</Link>
               </li>
               <li>
-                <Link to="" onClick={goNext}>
+                <Link
+                  to=""
+                  onClick={() => {
+                    if (page < lastPage) {
+                      dispatch(next({ step: 1 }));
+                    }
+                  }}
+                >
                   <i className="fa fa-arrow-right"></i>
                 </Link>
               </li>
