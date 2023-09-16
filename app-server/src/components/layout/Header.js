@@ -50,7 +50,7 @@ const Header = function () {
             <div className="cart-area">
               <Link to="#" id="essenceCartBtn" onClick={handleToggle}>
                 <img src="/assets/images/core-img/bag.svg" alt="" />{" "}
-                <span>3</span>
+                <span>5</span>
               </Link>
             </div>
           </div>
@@ -73,7 +73,7 @@ const Header = function () {
         {/* Cart Button  */}
         <div className="cart-button">
           <Link to="#" id="rightSideCart">
-            <img src="/assets/images/core-img/bag2.svg" alt="" /> <span>3</span>
+            <img src="/assets/images/core-img/bag2.svg" alt="" /> <span>5</span>
           </Link>
         </div>
 
