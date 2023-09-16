@@ -25,11 +25,12 @@ const ExploreGetModel = {
         addr2,
         first_image,
         first_image2,
-        map_x,
-        map_y,
         tel,
         title,
-        home_page
+        event_start_date,
+        event_end_date,
+        home_page,
+        over_view
       from festival_api
       `;
       const [result] = await conn.query(sql);
