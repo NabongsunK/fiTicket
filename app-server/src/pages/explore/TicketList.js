@@ -60,7 +60,7 @@ const TicketList = function (props) {
                   <i className="fa fa-arrow-left"></i>
                 </Link>
               </li>
-              <li className="active">
+{/*               <li className="active">
                 <Link to="#">1</Link>
               </li>
               <li>
@@ -69,7 +69,7 @@ const TicketList = function (props) {
               <li>
                 <Link to="#">3</Link>
               </li>
-              <li>
+ */}              <li>
                 <Link
                   to=""
                   onClick={() => {
