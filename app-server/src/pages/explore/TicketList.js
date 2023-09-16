@@ -1,35 +1,41 @@
 import { Link, useSearchParams } from "react-router-dom";
 import TicketListItem from "./TicketListItem";
 //import TicketDetailItem from "./TicketDetailItem";
+import { useDispatch } from "react-redux";
+import {next, prev} from "../../store/pageSlice";
+import festivals from "../../data/festivals.json"
 
-const TicketList = function (props) {
+
+const TicketList = function () {
   //페이징 처리
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page") || 1);
 
   const listPerPage = 4;
   const lastPage = Math.floor(
-    (listPerPage + props.festivals.length - 1) / listPerPage
+    (listPerPage + festivals.length - 1) / listPerPage
   );
   const skip = (page - 1) * listPerPage;
 
-  const pageResult = props.festivals.slice(skip, skip + listPerPage);
+  const pageResult = festivals.slice(skip, skip + listPerPage);
 
-  const goPrev = function () {
-    if (page === 2) {
-      searchParams.delete("page");
-    } else if (page > 2) {
-      searchParams.set("page", page - 1);
-    }
-    setSearchParams(searchParams);
-  };
+  // const goPrev = function () {
+  //   if (page === 2) {
+  //     searchParams.delete("page");
+  //   } else if (page > 2) {
+  //     searchParams.set("page", page - 1);
+  //   }
+  //   setSearchParams(searchParams);
+  // };
 
-  const goNext = function () {
-    if (page < lastPage) {
-      searchParams.set("page", page + 1);
-      setSearchParams(searchParams);
-    }
-  };
+  // const goNext = function () {
+  //   if (page < lastPage) {
+  //     searchParams.set("page", page + 1);
+  //     setSearchParams(searchParams);
+  //   }
+  // };
+
+  const dispatch= useDispatch();
 
   const list = pageResult.map((festival) => (
     <TicketListItem key={festival.id} festival={festival} />
