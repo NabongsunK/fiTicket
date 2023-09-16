@@ -22,6 +22,8 @@ const Footer = function () {
               <Link to="https://themewagon.com" target="_blank">
                 ThemeWagon
               </Link>
+              <br />
+              Loca!T 대표번호: 070-9376-0983 KG이니시스 구매안전 서비스[test]  LocalTicketkorea@localt.kr
             </p>
           </div>
         </div>

@@ -17,7 +17,27 @@ const ExploreGetModel = {
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
-  },
+  }, async getAllSelect(conn = pool) {
+    try {
+      const sql = `
+      select
+        addr1,
+        addr2,
+        first_image,
+        first_image2,
+        map_x,
+        map_y,
+        tel,
+        title,
+        home_page
+      from festival_api
+      `;
+      const [result] = await conn.query(sql);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  }
 };
 
 module.exports = ExploreGetModel;

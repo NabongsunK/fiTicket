@@ -319,9 +319,7 @@ function Home() {
             </div>
             <div className="col-1">
               <div className="border-button">
-                <Link to="/">
-                  <i className="fa fa-angle-right fa-2"></i>
-                </Link>
+                <Link to="/"><i className="fa fa-angle-right fs-2"></i></Link>
               </div>
             </div>
           </div>
