@@ -25,7 +25,25 @@ const ExploreService = {
       // 커넥션 반납
       pool.releaseConnection(conn);
     }
-  },
+  },async getAllList() {
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+
+      const data = await ExploreGetModel.getAllList();
+      // DB에 작업 반영
+      await conn.commit();
+      return { data, ok: true };
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  }
 };
 
 module.exports = ExploreService;
