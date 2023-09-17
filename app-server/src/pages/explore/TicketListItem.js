@@ -9,6 +9,7 @@ const customStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
+    // 여기 수정하면 모달창 크기조절
     height: "70vh",
     width: "50vw",
     //marginRight: "-50%",
@@ -58,7 +59,8 @@ const TicketListItem = function (props) {
                 <div className="col-12">
                   <i className="fa fa-clock"></i>
                   <span className="list">
-                    {"  "}{props.festival.event_start_date} ~{" "}
+                    {"  "}
+                    {props.festival.event_start_date} ~{" "}
                     {props.festival.event_end_date}
                   </span>
                 </div>
