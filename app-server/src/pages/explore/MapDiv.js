@@ -98,7 +98,6 @@ const MapDiv = function (props) {
     }
     // TODO:
     props.actions.setMapQuery(localInfos[val].localTitle);
-    console.log(localInfos[val].localTitle);
   };
 
   //처음마운트 될때 위치정보 얻기

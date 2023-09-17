@@ -25,26 +25,26 @@ router.get("/getallmap", async (req, res, next) => {
     next(err);
   }
 });
-// // 지역에 따른 query를받아 검색
-// router.get("/getregionlist", async (req, res, next) => {
-//   // req.body = query
-//   // res =
-//   try {
-//     const result = await ExploreService.getRegionList(req.query.query);
-//     res.json(result);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-// 지역에 따른 area_code를받아 검색
+// 지역에 따른 query를받아 검색
 router.get("/getregionlist", async (req, res, next) => {
-  // req.body = area_code
+  // req.body = query
   // res =
   try {
-    const result = await ExploreService.getRegionListByAreaCode(req.query.code);
+    const result = await ExploreService.getRegionList(req.query.query);
     res.json(result);
   } catch (err) {
     next(err);
   }
 });
+// 지역에 따른 area_code를받아 검색
+// router.get("/getregionlist", async (req, res, next) => {
+//   // req.body = area_code
+//   // res =
+//   try {
+//     const result = await ExploreService.getRegionListByAreaCode(req.query.code);
+//     res.json(result);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 module.exports = router;

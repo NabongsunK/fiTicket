@@ -22,6 +22,7 @@ const ExploreGetModel = {
     try {
       const sql = `
       SELECT
+      id,
       addr1,
       addr2,
       first_image,
@@ -52,6 +53,7 @@ const ExploreGetModel = {
     try {
       const sql = `
       SELECT
+      id,
       addr1,
       addr2,
       first_image,
@@ -83,6 +85,7 @@ const ExploreGetModel = {
     try {
       const sql = `
       SELECT
+      id,
       addr1,
       addr2,
       first_image,
