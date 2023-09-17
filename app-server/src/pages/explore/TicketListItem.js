@@ -9,6 +9,7 @@ const customStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
+    // 여기 수정하면 모달창 크기조절
     height: "70vh",
     width: "50vw",
     //marginRight: "-50%",
