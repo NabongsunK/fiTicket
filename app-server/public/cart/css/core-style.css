@@ -685,7 +685,7 @@ img {
   .single-cart-item
   .product-image
   img {
-    width: auto;
+  width: auto;
   height: 100%;
 }
 .right-side-cart-area
@@ -2485,4 +2485,8 @@ img {
   overflow-x: hidden;
   overflow-y: hidden;
   height: 100%;
+}
+
+.ReactModal__Overlay {
+  z-index: 999;
 }
