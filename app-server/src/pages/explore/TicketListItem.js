@@ -13,6 +13,16 @@ const customStyles = {
     width: "50vw",
     //marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+
+    //모달 창 뒤로 배경 너무 뿌옇게 나오는 거 해결 필요!
+    /* 모달 창을 위한 스타일 설정 */
+    backgroundColor: "rgba(255, 255, 255, 0.9)", // 배경을 투명하지 않게 설정
+    padding: "20px",
+    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)", // 모달에 그림자 효과 추가
+    //Index: 1000, // 모달을 다른 요소 위에 표시
+
+    // 뒷 배경을 조절하기 위한 스타일 설정
+    backdropFilter: "blur(0px)", // 배경 블러 효과 비활성화
   },
 };
 
@@ -58,7 +68,8 @@ const TicketListItem = function (props) {
                 <div className="col-12">
                   <i className="fa fa-clock"></i>
                   <span className="list">
-                    {"  "}{props.festival.event_start_date} ~{" "}
+                    {"  "}
+                    {props.festival.event_start_date} ~{" "}
                     {props.festival.event_end_date}
                   </span>
                 </div>
