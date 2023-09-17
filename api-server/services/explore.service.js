@@ -65,6 +65,24 @@ const ExploreService = {
       pool.releaseConnection(conn);
     }
   },
+  async getRegionListByAreaCode(area_code) {
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      const data = await ExploreGetModel.getRegionSelectByAreaCode(area_code);
+      // DB에 작업 반영
+      await conn.commit();
+      return { data, ok: true };
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
 };
 
 module.exports = ExploreService;

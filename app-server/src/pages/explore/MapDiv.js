@@ -54,9 +54,6 @@ const getItude = async function (query = "서울") {
 };
 
 const MapDiv = function (props) {
-  //경도,위도,사이즈
-  const [mapItude, setMapItude] = useState([]);
-
   //mapItude를 현재위치로 변경
   const getCurrentPos = function () {
     if (navigator.geolocation) {
@@ -66,23 +63,26 @@ const MapDiv = function (props) {
         function (position) {
           var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
-          setMapItude([lon, lat, 8]);
+          props.actions.setMapItude([lon, lat, 8]);
         },
         function (error) {
           // 실패했을때 실행
-          setMapItude([128.25, 35.95, 13]);
+          props.actions.setMapItude([128.25, 35.95, 13]);
         }
       );
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      setMapItude([128.25, 35.95, 13]);
+      props.actions.setMapItude([128.25, 35.95, 13]);
     }
   };
 
   //쿼리입력되면, 값변경
   const onChangeQuery = async function (e) {
     if (e.target.value) {
-      return setMapItude([...(await getItude(e.target.value)), 8]);
+      return props.actions.setMapItude([
+        ...(await getItude(e.target.value)),
+        8,
+      ]);
     }
   };
   //토글 변경되면, 값변경
@@ -90,12 +90,15 @@ const MapDiv = function (props) {
     if (val === 0) {
       getCurrentPos();
     } else {
-      setMapItude([
+      props.actions.setMapItude([
         localInfos[val].centerLon,
         localInfos[val].centerLat,
         localInfos[val].localMapLevel,
       ]);
     }
+    // TODO:
+    props.actions.setMapQuery(localInfos[val].localTitle);
+    console.log(localInfos[val].localTitle);
   };
 
   //처음마운트 될때 위치정보 얻기
@@ -122,7 +125,7 @@ const MapDiv = function (props) {
         </label>
       </div>
 
-      <Map mapItude={mapItude} data={props.data} />
+      <Map mapItude={props.states.mapItude} data={props.data} />
 
       <ToggleButtonGroup
         type="radio"
