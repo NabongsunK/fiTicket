@@ -102,7 +102,6 @@ const MapDiv = function (props) {
         localInfos[val].localMapLevel,
       ]);
     }
-    // TODO:
     props.actions.setMapCode(localInfos[val].area_code);
     props.states.regionId.current = localInfos[val].id;
   };

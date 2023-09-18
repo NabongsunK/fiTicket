@@ -64,6 +64,7 @@ const Cart = function (props) {
           {/* Cart List Area */}
           <div className="cart-list">
             {/* Single Cart Item */}
+            {/* 여기 나누세요 cartItems로 */}
             <div className="single-cart-item">
               <Link to="#" className="product-image">
                 <img
