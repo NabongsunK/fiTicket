@@ -97,7 +97,7 @@ const MapDiv = function (props) {
       ]);
     }
     // TODO:
-    props.actions.setMapQuery(localInfos[val].localTitle);
+    props.actions.setMapCode(localInfos[val].area_code);
   };
 
   //처음마운트 될때 위치정보 얻기

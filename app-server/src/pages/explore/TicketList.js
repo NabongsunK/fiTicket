@@ -2,7 +2,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import TicketListItem from "./TicketListItem";
 //import TicketDetailItem from "./TicketDetailItem";
 import { useDispatch, useSelector } from "react-redux";
-import { next, prev } from "../../store/pageSlice";
+import { next, prev, curr } from "../../store/pageSlice";
+import { useState } from "react";
 
 const TicketList = function (props) {
   //페이징 처리
@@ -51,6 +52,40 @@ const TicketList = function (props) {
         <div className="row">
           {list}
 
+          <div className="search-form">
+            <div className="container">
+              <div className="row justify-content-center">
+                <div className="col-lg-8">
+                  <form
+                    id="explore-search-form"
+                    name="gs"
+                    method="submit"
+                    role="search"
+                    action="#"
+                  >
+                    <div className="row justify-content-center">
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="축제 찾기"
+                        />
+                      </div>
+
+                      <div className="col-lg-2">
+                        <fieldset>
+                          <button className="border-button">
+                            <i className="fa fa-search"></i>
+                          </button>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* pagination */}
           <div className="col-lg-12">
             <ul className="page-numbers">
@@ -94,4 +129,5 @@ const TicketList = function (props) {
     </div>
   );
 };
+
 export default TicketList;

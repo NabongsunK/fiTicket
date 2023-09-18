@@ -8,6 +8,7 @@
     "id": 1,
     "defaultChecked": false,
     "localTitle": "전국",
+    "area_code": 0,
     "centerLat": 35.95,
     "centerLon": 128.25,
     "localMapLevel": 13
@@ -16,6 +17,7 @@
     "id": 2,
     "defaultChecked": false,
     "localTitle": "서울",
+    "area_code": 1,
     "centerLat": 37.5519029387878,
     "centerLon": 126.991805206633,
     "localMapLevel": 9
@@ -24,6 +26,7 @@
     "id": 3,
     "defaultChecked": false,
     "localTitle": "부산",
+    "area_code": 6,
     "centerLat": 35.201635134019,
     "centerLon": 129.060389530808,
     "localMapLevel": 8
@@ -32,6 +35,7 @@
     "id": 4,
     "defaultChecked": false,
     "localTitle": "대구",
+    "area_code": 4,
     "centerLat": 35.829760251193,
     "centerLon": 128.565148651849,
     "localMapLevel": 9
@@ -40,6 +44,7 @@
     "id": 5,
     "defaultChecked": false,
     "localTitle": "인천",
+    "area_code": 2,
     "centerLat": 37.5839436704584,
     "centerLon": 126.37855001725,
     "localMapLevel": 10
@@ -48,6 +53,7 @@
     "id": 6,
     "defaultChecked": false,
     "localTitle": "광주",
+    "area_code": 5,
     "centerLat": 35.1557372332499,
     "centerLon": 126.835434830147,
     "localMapLevel": 8
@@ -56,6 +62,7 @@
     "id": 7,
     "defaultChecked": false,
     "localTitle": "대전",
+    "area_code": 3,
     "centerLat": 36.33972243,
     "centerLon": 127.394019938345,
     "localMapLevel": 8
@@ -64,6 +71,7 @@
     "id": 8,
     "defaultChecked": false,
     "localTitle": "울산",
+    "area_code": 7,
     "centerLat": 35.55418464,
     "centerLon": 129.2376309,
     "localMapLevel": 9
@@ -72,6 +80,7 @@
     "id": 9,
     "defaultChecked": false,
     "localTitle": "세종",
+    "area_code": 8,
     "centerLat": 36.56065771,
     "centerLon": 127.2587801,
     "localMapLevel": 9
@@ -80,6 +89,7 @@
     "id": 10,
     "defaultChecked": false,
     "localTitle": "경기",
+    "area_code": 31,
     "centerLat": 37.53305251,
     "centerLon": 127.1808873,
     "localMapLevel": 11
@@ -88,6 +98,7 @@
     "id": 11,
     "defaultChecked": false,
     "localTitle": "강원",
+    "area_code": 32,
     "centerLat": 37.71828113,
     "centerLon": 128.3034288,
     "localMapLevel": 12
@@ -96,6 +107,7 @@
     "id": 12,
     "defaultChecked": false,
     "localTitle": "충북",
+    "area_code": 33,
     "centerLat": 36.73788704,
     "centerLon": 127.8304451,
     "localMapLevel": 11
@@ -104,6 +116,7 @@
     "id": 13,
     "defaultChecked": false,
     "localTitle": "충남",
+    "area_code": 34,
     "centerLat": 36.52858275,
     "centerLon": 126.8503052,
     "localMapLevel": 11
@@ -112,6 +125,7 @@
     "id": 14,
     "defaultChecked": false,
     "localTitle": "전북",
+    "area_code": 37,
     "centerLat": 35.71574153,
     "centerLon": 127.1424445,
     "localMapLevel": 11
@@ -120,6 +134,7 @@
     "id": 15,
     "defaultChecked": false,
     "localTitle": "전남",
+    "area_code": 38,
     "centerLat": 34.87579946,
     "centerLon": 126.9002998,
     "localMapLevel": 11
@@ -128,6 +143,7 @@
     "id": 16,
     "defaultChecked": false,
     "localTitle": "경북",
+    "area_code": 35,
     "centerLat": 36.34755714,
     "centerLon": 128.748464,
     "localMapLevel": 11
@@ -136,6 +152,7 @@
     "id": 17,
     "defaultChecked": false,
     "localTitle": "경남",
+    "area_code": 36,
     "centerLat": 35.32420001,
     "centerLon": 128.2615745,
     "localMapLevel": 11
@@ -144,6 +161,7 @@
     "id": 18,
     "defaultChecked": false,
     "localTitle": "제주",
+    "area_code": 39,
     "centerLat": 33.38705744,
     "centerLon": 126.5536658,
     "localMapLevel": 9
