@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom";
-import TicketList from "./TicketList";
-import TicketDetailItem from "./TicketDetailItem";
-import ExplorePageHeading from "./ExplorePageHeading";
 import MapDiv from "./MapDiv";
 import { useEffect, useRef, useState } from "react";
 
 import axios from "axios";
 import SecondHead from "./SecondHead";
 import BodyTop from "./BodyTop";
+import TicketBody from "./TicketBody";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -64,7 +61,7 @@ const Explore = function () {
 
             {/* 축제 목록 리스트 */}
             <div className="col-lg-12">
-              <TicketList festivals={listData} />
+              <TicketBody festivals={listData} />
             </div>
           </div>
         </div>
