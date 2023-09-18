@@ -93,7 +93,9 @@ figcaption {
   border: 0;
   outline: 0;
 }
-body{background-color: #fff;}
+body {
+  background-color: #fff;
+}
 
 .clearfix:after {
   content: ".";
@@ -179,7 +181,10 @@ img {
   width: 60%;
   overflow: hidden;
 }
-.poster{width: auto; height: 100%;}
+.poster {
+  width: auto;
+  height: 100%;
+}
 /* 
 ---------------------------------------------
 Global Styles
@@ -1634,8 +1639,7 @@ body #user-button {
 }
 body #user-button .u-card {
   border-radius: 100%;
-  box-shadow:
-    0 0 1rem -0.25rem var(--user-button-shadow),
+  box-shadow: 0 0 1rem -0.25rem var(--user-button-shadow),
     inset 0 0 1rem -0.75rem var(--user-button-shadow);
 }
 body #user-button .u-main {
@@ -1906,8 +1910,7 @@ body .options .option.active {
   }*/
 }
 body .options .option.active .shadow {
-  box-shadow:
-    inset 0 -120px 120px -120px black,
+  box-shadow: inset 0 -120px 120px -120px black,
     inset 0 -120px 120px -100px black;
 }
 body .options .option.active .label {
@@ -1924,9 +1927,7 @@ body .options .option:not(.active) {
 }
 body .options .option:not(.active) .shadow {
   bottom: -40px;
-  box-shadow:
-    inset 0 -120px 0px -120px black,
-    inset 0 -120px 0px -100px black;
+  box-shadow: inset 0 -120px 0px -120px black, inset 0 -120px 0px -100px black;
 }
 body .options .option:not(.active) .label {
   bottom: 10px;
@@ -1973,9 +1974,7 @@ body .options .option .label .info {
 }
 body .options .option .label .info > div {
   position: relative;
-  transition:
-    0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95),
-    opacity 0.5s ease-out;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95), opacity 0.5s ease-out;
 }
 body .options .option .label .info .main {
   font-size: 20px;
@@ -2491,4 +2490,29 @@ body {
   .weekly-offers .container-fluid {
     padding: 0px;
   }
+}
+
+/* 추가 */
+
+.search-form #explore-search-form {
+  background-color: #22b3c1;
+  border-radius: 23px;
+  padding: 20px 60px;
+}
+.search-form #explore-search-form button {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 8px 30px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
 }

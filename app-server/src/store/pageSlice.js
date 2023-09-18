@@ -8,12 +8,13 @@ const pagingSlice = createSlice({
       state.page -= action.payload.step;
     },
     next(state, action) {
-      if (state) {
-        state.page += action.payload.step;
-      }
+      state.page += action.payload.step;
+    },
+    curr(state, action) {
+      state.page = action.payload.page;
     },
   },
 });
 
 export default pagingSlice;
-export const { next, prev } = pagingSlice.actions;
+export const { next, prev, curr } = pagingSlice.actions;
