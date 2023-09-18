@@ -3,15 +3,31 @@ import TicketListItem from "./TicketListItem";
 //import TicketDetailItem from "./TicketDetailItem";
 import { useDispatch, useSelector } from "react-redux";
 import { next, prev, curr } from "../../store/pageSlice";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const TicketList = function (props) {
-  console.log(props.data);
-
-  //페이징 처리
-
+  // 검색
   const keyword = useRef("");
   const [searchResult, setSearchResult] = useState(props.festivals);
+
+  useEffect(() => {
+    setSearchResult(props.festivals);
+  }, [props]);
+
+  const search = function () {
+    const regExp = new RegExp(keyword.current, "i");
+    setSearchResult(
+      props.festivals.filter((festival) => regExp.test(festival.title))
+    );
+  };
+
+  const keyHandler = function (event) {
+    if (event.key === "Enter") {
+      search();
+    }
+  };
+
+  //페이징 처리
 
   const page = useSelector((state) => state.viewPageSlice.page);
 
@@ -50,21 +66,6 @@ const TicketList = function (props) {
     totalPage.push(i);
   }
   const currPage = skip / listPerPage + 1;
-
-  // 검색
-
-  const search = function (event) {
-    const regExp = new RegExp(keyword.current, "i");
-    setSearchResult(
-      props.festivals.filter((festival) => regExp.test(festival.title))
-    );
-  };
-
-  const keyHandler = function (event) {
-    if (event.key === "Enter") {
-      search();
-    }
-  };
 
   return (
     <div className="amazing-deals">
