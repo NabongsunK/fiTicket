@@ -34,8 +34,8 @@ const Explore = function () {
   //경도,위도,사이즈
   const [mapItude, setMapItude] = useState([]);
   const [mapCode, setMapCode] = useState(0);
-  let regionId = useRef(0);
   const [listData, setListData] = useState(allListData);
+  let regionId = useRef(0);
 
   useEffect(() => {
     getRegionList(mapCode).then((response) => setListData(response));
