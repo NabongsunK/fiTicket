@@ -67,6 +67,7 @@ const MapDiv = function (props) {
           Object.values(localInfos).forEach(async (localInfo) => {
             if ((await getAdress(lon, lat)) === localInfo.region_1depth_name) {
               props.actions.setMapCode(localInfo.area_code);
+              props.states.regionId.current = localInfo.id;
             }
           });
         },
@@ -103,6 +104,7 @@ const MapDiv = function (props) {
     }
     // TODO:
     props.actions.setMapCode(localInfos[val].area_code);
+    props.states.regionId.current = localInfos[val].id;
   };
 
   //처음마운트 될때 위치정보 얻기
@@ -117,6 +119,9 @@ const MapDiv = function (props) {
       {localInfo.localTitle}
     </ToggleButton>
   ));
+  useEffect(() => {
+    console.log(props.states.regionId.current);
+  }, [props]);
 
   return (
     <>
@@ -129,7 +134,11 @@ const MapDiv = function (props) {
         </label>
       </div>
 
-      <Map mapItude={props.states.mapItude} data={props.data} />
+      <Map
+        mapItude={props.states.mapItude}
+        data={props.data}
+        boundary={localInfos[props.states.regionId.current].boundary}
+      />
 
       <ToggleButtonGroup
         type="radio"

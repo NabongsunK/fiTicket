@@ -10,6 +10,7 @@ import store from "./store/store";
 import Signup from "./pages/signup";
 import Explore from "./pages/explore";
 import Teams from "./pages/teams";
+import Test from "./pages/test";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/teams" element={<Teams />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/test" element={<Test />} />
           </Route>
         </Routes>
       </Router>
