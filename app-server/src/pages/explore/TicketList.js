@@ -3,10 +3,13 @@ import TicketListItem from "./TicketListItem";
 //import TicketDetailItem from "./TicketDetailItem";
 import { useDispatch, useSelector } from "react-redux";
 import { next, prev, curr } from "../../store/pageSlice";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const TicketList = function (props) {
   //페이징 처리
+
+  const keyword = useRef("");
+  const [searchResult, setSearchResult] = useState(props.festivals);
 
   const page = useSelector((state) => state.viewPageSlice.page);
 
@@ -16,7 +19,7 @@ const TicketList = function (props) {
   );
   const skip = (page - 1) * listPerPage;
 
-  const pageResult = props.festivals.slice(skip, skip + listPerPage);
+  const pageResult = searchResult.slice(skip, skip + listPerPage);
 
   // const goPrev = function () {
   //   if (page === 2) {
@@ -46,12 +49,29 @@ const TicketList = function (props) {
   }
   const currPage = skip / listPerPage + 1;
 
+  // 검색
+
+  const search = function (event) {
+    const regExp = new RegExp(keyword.current, "i");
+    setSearchResult(
+      props.festivals.filter((festival) => regExp.test(festival.title))
+    );
+  };
+
+  const keyHandler = function (event) {
+    if (event.key === "Enter") {
+      search();
+    }
+  };
+
   return (
     <div className="amazing-deals">
       <div className="container">
-        <div className="row">
-          {list}
+        {/* 리스트 */}
+        <div className="row">{list}</div>
 
+        {/* 찾기 페이지 */}
+        <div>
           <div className="search-form">
             <div className="container">
               <div className="row justify-content-center">
@@ -69,15 +89,15 @@ const TicketList = function (props) {
                           className="form-control"
                           type="text"
                           placeholder="축제 찾기"
+                          onChange={(e) => (keyword.current = e.target.value)}
+                          onKeyUp={keyHandler}
                         />
                       </div>
 
                       <div className="col-lg-2">
-                        <fieldset>
-                          <button className="border-button">
-                            <i className="fa fa-search"></i>
-                          </button>
-                        </fieldset>
+                        <button className="border-button" onClick={search}>
+                          <i className="fa fa-search"></i>
+                        </button>
                       </div>
                     </div>
                   </form>

@@ -48,7 +48,7 @@ const Map = function (props) {
       kakao.maps.event.addListener(marker, "click", function () {
         // 마커 위에 인포윈도우를 표시합니다
         closeInfoWindow();
-        infowindow.open(map, marker);
+        infowindow.open(map.current, marker);
       });
 
       return marker;
