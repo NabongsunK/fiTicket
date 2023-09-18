@@ -10,6 +10,10 @@ const TicketList = function (props) {
   const keyword = useRef("");
   const [searchResult, setSearchResult] = useState(props.festivals);
 
+  useEffect(() => {
+    setSearchResult(props.festivals);
+  }, [props]);
+
   const search = function () {
     const regExp = new RegExp(keyword.current, "i");
     setSearchResult(
@@ -29,7 +33,7 @@ const TicketList = function (props) {
 
   const listPerPage = 4;
   const lastPage = Math.floor(
-    (listPerPage + searchResult.length - 1) / listPerPage
+    (listPerPage + props.festivals.length - 1) / listPerPage
   );
   const skip = (page - 1) * listPerPage;
 
