@@ -119,9 +119,9 @@ const MapDiv = function (props) {
       {localInfo.localTitle}
     </ToggleButton>
   ));
-  useEffect(() => {
-    console.log(props.states.regionId.current);
-  }, [props]);
+  // useEffect(() => {
+  //   // console.log(props.states.regionId.current);
+  // }, [props]);
 
   return (
     <>

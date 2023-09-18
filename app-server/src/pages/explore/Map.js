@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 const { kakao } = window;
 
 const Map = function (props) {
-  console.log(props);
   let map = useRef(null);
   let polygon = useRef(null);
   var infoWindows = [];
