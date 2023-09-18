@@ -76,13 +76,7 @@ const TicketList = function (props) {
             <div className="container">
               <div className="row justify-content-center">
                 <div className="col-lg-8">
-                  <form
-                    id="explore-search-form"
-                    name="gs"
-                    method="submit"
-                    role="search"
-                    action="#"
-                  >
+                  <div id="explore-search-form">
                     <div className="row justify-content-center">
                       <div className="col-lg-6">
                         <input
@@ -100,7 +94,7 @@ const TicketList = function (props) {
                         </button>
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
