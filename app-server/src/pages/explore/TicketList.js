@@ -79,7 +79,7 @@ const TicketList = function (props) {
             <div className="container">
               <div className="row justify-content-center">
                 <div className="col-lg-8">
-                  <form
+                  <div
                     id="explore-search-form"
                     name="gs"
                     method="submit"
@@ -103,7 +103,7 @@ const TicketList = function (props) {
                         </button>
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
