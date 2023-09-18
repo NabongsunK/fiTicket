@@ -3,12 +3,16 @@ import TicketListItem from "./TicketListItem";
 //import TicketDetailItem from "./TicketDetailItem";
 import { useDispatch, useSelector } from "react-redux";
 import { next, prev, curr } from "../../store/pageSlice";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const TicketList = function (props) {
   // 검색
   const keyword = useRef("");
   const [searchResult, setSearchResult] = useState(props.festivals);
+
+  useEffect(() => {
+    setSearchResult(props.festivals);
+  }, [props]);
 
   const search = function () {
     const regExp = new RegExp(keyword.current, "i");
