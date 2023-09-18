@@ -33,7 +33,7 @@ const TicketList = function (props) {
 
   const listPerPage = 4;
   const lastPage = Math.floor(
-    (listPerPage + searchResult.length - 1) / listPerPage
+    (listPerPage + props.festivals.length - 1) / listPerPage
   );
   const skip = (page - 1) * listPerPage;
 
@@ -79,7 +79,13 @@ const TicketList = function (props) {
             <div className="container">
               <div className="row justify-content-center">
                 <div className="col-lg-8">
-                  <div id="explore-search-form">
+                  <form
+                    id="explore-search-form"
+                    name="gs"
+                    method="submit"
+                    role="search"
+                    action="#"
+                  >
                     <div className="row justify-content-center">
                       <div className="col-lg-6">
                         <input
@@ -97,7 +103,7 @@ const TicketList = function (props) {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>

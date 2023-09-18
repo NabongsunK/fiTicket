@@ -3,7 +3,7 @@ import TicketList from "./TicketList";
 import TicketDetailItem from "./TicketDetailItem";
 import ExplorePageHeading from "./ExplorePageHeading";
 import MapDiv from "./MapDiv";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import axios from "axios";
 import SecondHead from "./SecondHead";
@@ -34,6 +34,7 @@ const Explore = function () {
   //경도,위도,사이즈
   const [mapItude, setMapItude] = useState([]);
   const [mapCode, setMapCode] = useState(0);
+  let regionId = useRef(0);
   const [listData, setListData] = useState(allListData);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const Explore = function () {
               <MapDiv
                 data={mapData}
                 actions={{ setMapItude, setMapCode }}
-                states={{ mapItude, mapCode }}
+                states={{ mapItude, mapCode, regionId }}
               />
             </div>
 
