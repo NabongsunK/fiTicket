@@ -62,32 +62,29 @@ const Map = function (props) {
   // props변경될때
   useEffect(
     function () {
-      // console.log(props.boundary);
-      // if (props.boundary) {
-      //   var path = [
-      //     new kakao.maps.LatLng(33.45086654081833, 126.56906858718982),
-      //     new kakao.maps.LatLng(33.45010890948828, 126.56898629127468),
-      //     new kakao.maps.LatLng(33.44979857909499, 126.57049357211622),
-      //     new kakao.maps.LatLng(33.450137483918496, 126.57202991943016),
-      //     new kakao.maps.LatLng(33.450706188506054, 126.57223147947938),
-      //     new kakao.maps.LatLng(33.45164068091554, 126.5713126693152),
-      //   ];
+      if (props.boundary) {
+        props.boundary.forEach((ss) => {
+          var path = [];
+          ss.forEach((x) => {
+            path.push(new kakao.maps.LatLng(x[1], x[0]));
+          });
 
-      //   // 다각형을 생성하고 지도에 표시합니다
-      //   polygon.current = new kakao.maps.Polygon({
-      //     map: map.current,
-      //     path: [path], // 좌표 배열의 배열로 하나의 다각형을 표시할 수 있습니다
-      //     strokeWeight: 2,
-      //     strokeColor: "#b26bb2",
-      //     strokeOpacity: 0.8,
-      //     fillColor: "#f9f",
-      //     fillOpacity: 0.7,
-      //   });
-      //   // 다각형 객체를 구성할 좌표배열입니다
-      // }
+          // 다각형을 생성하고 지도에 표시합니다
+          polygon.current = new kakao.maps.Polygon({
+            map: map.current,
+            path: [path], // 좌표 배열의 배열로 하나의 다각형을 표시할 수 있습니다
+            strokeWeight: 2,
+            strokeColor: "#b26bb2",
+            strokeOpacity: 0.8,
+            fillColor: "#f9f",
+            fillOpacity: 0.7,
+          });
+          // 다각형 객체를 구성할 좌표배열입니다
+        });
 
-      // //지도에 다각형을 보이게합니다.
-      // polygon.current.setMap(map.current);
+        //지도에 다각형을 보이게합니다.
+        polygon.current.setMap(map.current);
+      }
 
       if (props.mapItude[1]) {
         map.current.setCenter(
@@ -95,11 +92,11 @@ const Map = function (props) {
         );
         map.current.setLevel(props.mapItude[2]);
       }
-      // return () => {
-      //   if (props.boundary) {
-      //     polygon.current.setMap(null);
-      //   }
-      // };
+      return () => {
+        if (props.boundary) {
+          polygon.current.setMap(null);
+        }
+      };
     },
     [props]
   );
