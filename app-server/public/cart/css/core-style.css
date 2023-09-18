@@ -2487,6 +2487,7 @@ img {
   height: 100%;
 }
 
+/* 모달창 zindex */
 .ReactModal__Overlay {
   z-index: 999;
 }

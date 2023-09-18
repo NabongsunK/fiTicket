@@ -36,17 +36,15 @@ const TicketList = function (props) {
 
   const dispatch = useDispatch();
 
-  const list = pageResult.map((festival) => (
-    <TicketListItem key={festival.id} festival={festival} />
-  ));
+  const list = pageResult.map((festival) => {
+    return <TicketListItem key={festival.id} festival={festival} />;
+  });
 
   const totalPage = [];
   for (let i = 1; i <= lastPage; i++) {
     totalPage.push(i);
   }
   const currPage = skip / listPerPage + 1;
-
-  const curr = function () {};
 
   return (
     <div className="amazing-deals">
@@ -105,12 +103,10 @@ const TicketList = function (props) {
               </li>
 
               {totalPage.map((page) => (
-                <li
-                  key={page}
-                  className={page === currPage ? "active" : ""}
-                  onClick={curr}
-                >
-                  <Link to="#">{page}</Link>
+                <li key={page} className={page === currPage ? "active" : ""}>
+                  <Link to="#" onClick={() => {}}>
+                    {page}
+                  </Link>
                 </li>
               ))}
 

@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import TicketList from "./TicketList";
 import TicketDetailItem from "./TicketDetailItem";
 import ExplorePageHeading from "./ExplorePageHeading";
-
 import MapDiv from "./MapDiv";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 import SecondHead from "./SecondHead";
@@ -23,15 +22,23 @@ const getAllList = async function () {
   const res = await axios.get("/explore/getalllist");
   return res.data.data;
 };
-var listData = await getAllList();
-console.log(listData);
+
+const getRegionList = async function (code) {
+  const res = await axios.get("/explore/getregionlist?code=" + code);
+  return res.data.data;
+};
+
+var allListData = await getAllList();
 
 const Explore = function () {
-  const [isActive, setActive] = useState("false");
+  //경도,위도,사이즈
+  const [mapItude, setMapItude] = useState([]);
+  const [mapCode, setMapCode] = useState(0);
+  const [listData, setListData] = useState(allListData);
 
-  const handleToggle = () => {
-    setActive(!isActive);
-  };
+  useEffect(() => {
+    getRegionList(mapCode).then((response) => setListData(response));
+  }, [mapCode]);
 
   return (
     <>
@@ -47,7 +54,11 @@ const Explore = function () {
           <div className="row">
             {/* 지도 */}
             <div className="col-lg-12">
-              <MapDiv data={mapData} />
+              <MapDiv
+                data={mapData}
+                actions={{ setMapItude, setMapCode }}
+                states={{ mapItude, mapCode }}
+              />
             </div>
 
             {/* 축제 목록 리스트 */}
