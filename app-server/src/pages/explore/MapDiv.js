@@ -21,7 +21,7 @@ const getAdress = async function (x, y) {
         },
       }
     );
-    return res.data.documents[0].address_name;
+    return res.data.documents[0].region_1depth_name;
   } catch (error) {
     // 오류 처리
     console.error("오류:", error);
@@ -64,15 +64,20 @@ const MapDiv = function (props) {
           var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
           props.actions.setMapItude([lon, lat, 8]);
+          Object.values(localInfos).forEach(async (localInfo) => {
+            if ((await getAdress(lon, lat)) === localInfo.region_1depth_name) {
+              props.actions.setMapCode(localInfo.area_code);
+            }
+          });
         },
         function (error) {
           // 실패했을때 실행
-          props.actions.setMapItude([128.25, 35.95, 13]);
+          props.actions.setMapItude([35.95, 128.25, 13]);
         }
       );
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      props.actions.setMapItude([128.25, 35.95, 13]);
+      props.actions.setMapItude([35.95, 128.25, 13]);
     }
   };
 
