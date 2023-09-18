@@ -6,30 +6,18 @@ import { next, prev, curr } from "../../store/pageSlice";
 import { useRef, useState } from "react";
 
 const TicketList = function (props) {
-  // 검색
-  const keyword = useRef("");
-  const [searchResult, setSearchResult] = useState(props.festivals);
-
-  const search = function () {
-    const regExp = new RegExp(keyword.current, "i");
-    setSearchResult(
-      props.festivals.filter((festival) => regExp.test(festival.title))
-    );
-  };
-
-  const keyHandler = function (event) {
-    if (event.key === "Enter") {
-      search();
-    }
-  };
+  console.log(props.data);
 
   //페이징 처리
+
+  const keyword = useRef("");
+  const [searchResult, setSearchResult] = useState(props.festivals);
 
   const page = useSelector((state) => state.viewPageSlice.page);
 
   const listPerPage = 4;
   const lastPage = Math.floor(
-    (listPerPage + searchResult.length - 1) / listPerPage
+    (listPerPage + props.festivals.length - 1) / listPerPage
   );
   const skip = (page - 1) * listPerPage;
 
@@ -63,6 +51,21 @@ const TicketList = function (props) {
   }
   const currPage = skip / listPerPage + 1;
 
+  // 검색
+
+  const search = function (event) {
+    const regExp = new RegExp(keyword.current, "i");
+    setSearchResult(
+      props.festivals.filter((festival) => regExp.test(festival.title))
+    );
+  };
+
+  const keyHandler = function (event) {
+    if (event.key === "Enter") {
+      search();
+    }
+  };
+
   return (
     <div className="amazing-deals">
       <div className="container">
@@ -75,7 +78,13 @@ const TicketList = function (props) {
             <div className="container">
               <div className="row justify-content-center">
                 <div className="col-lg-8">
-                  <div id="explore-search-form">
+                  <form
+                    id="explore-search-form"
+                    name="gs"
+                    method="submit"
+                    role="search"
+                    action="#"
+                  >
                     <div className="row justify-content-center">
                       <div className="col-lg-6">
                         <input
@@ -93,7 +102,7 @@ const TicketList = function (props) {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
