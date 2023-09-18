@@ -3,12 +3,12 @@ import TicketListItem from "./TicketListItem";
 //import TicketDetailItem from "./TicketDetailItem";
 import { useDispatch, useSelector } from "react-redux";
 import { next, prev, curr } from "../../store/pageSlice";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const TicketList = function (props) {
   //페이징 처리
 
-  const [keyword, setKeyword] = useState("");
+  const keyword = useRef("");
   const [searchResult, setSearchResult] = useState(props.festivals);
 
   const page = useSelector((state) => state.viewPageSlice.page);
@@ -52,12 +52,16 @@ const TicketList = function (props) {
   // 검색
 
   const search = function (event) {
-    const searchKeyword = event.target.value;
-    setKeyword(searchKeyword);
-    const regExp = new RegExp(searchKeyword, "i");
+    const regExp = new RegExp(keyword.current, "i");
     setSearchResult(
       props.festivals.filter((festival) => regExp.test(festival.title))
     );
+  };
+
+  const keyHandler = function (event) {
+    if (event.key === "Enter") {
+      search();
+    }
   };
 
   return (
@@ -85,17 +89,15 @@ const TicketList = function (props) {
                           className="form-control"
                           type="text"
                           placeholder="축제 찾기"
-                          value={keyword}
-                          onChange={search}
+                          onChange={(e) => (keyword.current = e.target.value)}
+                          onKeyUp={keyHandler}
                         />
                       </div>
 
                       <div className="col-lg-2">
-                        <fieldset>
-                          <button className="border-button">
-                            <i className="fa fa-search"></i>
-                          </button>
-                        </fieldset>
+                        <button className="border-button" onClick={search}>
+                          <i className="fa fa-search"></i>
+                        </button>
                       </div>
                     </div>
                   </form>
