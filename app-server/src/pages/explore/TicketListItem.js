@@ -23,7 +23,7 @@ const customStyles = {
     //Index: 1000, // 모달을 다른 요소 위에 표시
 
     // 뒷 배경을 조절하기 위한 스타일 설정
-    backdropFilter: "sepia(90%)",
+    backdropFilter: "sepia(90%)", //왜 적용이 안되는 것인가
   },
 };
 
