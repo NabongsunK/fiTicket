@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import TicketDetailItem from "./TicketDetailItem";
 
+import { push, pop } from "../../store/cartSlice";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
 const customStyles = {
   content: {
     top: "50%",
@@ -30,7 +36,7 @@ const customStyles = {
 const TicketListItem = function (props) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const appElement = document.getElementById("root");
-
+  const dispatch = useDispatch();
   if (appElement) {
     Modal.setAppElement(appElement);
   } else {
@@ -40,6 +46,31 @@ const TicketListItem = function (props) {
     setIsOpen(!modalIsOpen);
   }
 
+  // 이건 결제버튼 누르면 실행되야하는것
+  const toGeoljae = async function () {
+    const res = await axios.post("/cart/tickets", {
+      content_id: 2746930,
+      ticket_quantity: 3,
+      login_id: "test",
+    });
+    console.log(res);
+  };
+
+  const toCart = function () {
+    dispatch(
+      push({
+        ticket: {
+          // 여기 지역추가
+          badge: props.festival.addr1,
+          name: props.festival.title,
+          quantity: 1,
+          // 여기 가격추가
+          price: props.festival.event_end_date,
+          image: props.festival.first_image,
+        },
+      })
+    );
+  };
   return (
     <div className="col-lg-6 col-sm-3">
       <div className="item">
@@ -87,8 +118,8 @@ const TicketListItem = function (props) {
             </div>
 
             {/* 장바구니 담기 */}
-            <div className="explore_list_button">
-              <Link to="/">
+            <div className="explore_list_button" onClick={toCart}>
+              <Link>
                 <i className="fa fa-cart-plus"></i>
               </Link>
             </div>
