@@ -10,9 +10,14 @@ const TicketBody = function (props) {
 
   // 페이지 갯수
   const totalPage = [];
-  for (let i = 1; i <= props.pages.lastPage; i++) {
+  for (
+    let i = Math.max(1, page - 2);
+    i <= Math.min(props.pages.lastPage, Math.max(page + 2, 5));
+    i++
+  ) {
     totalPage.push(i);
   }
+  // TODO:
 
   // 페이지 버튼
   const pageButtons = totalPage.map((paging) => (
@@ -31,6 +36,7 @@ const TicketBody = function (props) {
   return (
     //  pagination
     <div className="col-lg-12">
+      <div>{`총 ${props.pages.lastPage} 페이지 있습니다.`}</div>
       <ul className="page-numbers">
         <li>
           <Link
