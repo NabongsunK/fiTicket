@@ -43,7 +43,7 @@ function Payment() {
   // 이건 결제버튼 누르면 실행되야하는것
   const toServer = function () {
     console.log(paymentsTickets);
-    paymentsTickets.foreach(async (ticket) => {
+    paymentsTickets.forEach(async (ticket) => {
       const res = await axios.post("/cart", {
         ticket_id: ticket.ticket_id,
         ticket_quantity: ticket.quantity,
@@ -57,10 +57,7 @@ function Payment() {
       <Link
         className="btn essence-btn"
         style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
-        onClick={() => {
-          onClickPayment();
-          toServer();
-        }}
+        onClick={toServer}
       >
         결제하기
       </Link>
