@@ -1,32 +1,42 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CartList from "./CartList";
+import CartSummary from "./CartSummary";
+import { useSelector } from "react-redux";
 
-const initialData = [
-  {
-    badge: "경기도 안성시",
-    name: "안성 남사당놀이 상설공연",
-    quantity: 2,
-    // discount: 0,  나중에 결정  (할인)
-    price: 10000,
-    image: "http://tong.visitkorea.or.kr/cms/resource/52/2607852_image2_1.jpg",
-  },
-  {
-    id: 2,
-    badge: "세종 특별시",
-    name: "국립세종수목원 야간개장 ＂특별한 夜행＂",
-    quantity: 3,
-    // discount: 10,   나중에 결정  (할인)
-    price: 2500,
-    image: "http://tong.visitkorea.or.kr/cms/resource/84/2993884_image2_1.jpg",
-  },
-];
-
+// const initialData = [
+//   {
+//     id: 1,
+//     badge: "경기도 안성시",
+//     name: "안성 남사당놀이 상설공연",
+//     quantity: 2,
+//     // discount: 0,  나중에 결정  (할인)
+//     price: 10000,
+//     image: "http://tong.visitkorea.or.kr/cms/resource/52/2607852_image2_1.jpg",
+//   },
+//   {
+//     id: 2,
+//     badge: "세종 특별시",
+//     name: "국립세종수목원 야간개장 ＂특별한 夜행＂",
+//     quantity: 3,
+//     // discount: 10,   나중에 결정  (할인)
+//     price: 2500,
+//     image: "http://tong.visitkorea.or.kr/cms/resource/84/2993884_image2_1.jpg",
+//   },
+// ];
 const Cart = function (props) {
+  // 카트 분리시키기
+  // 삭제하면 리덕스이용해서 리스트에서 지우기
+  const initialData = useSelector((state) => state.myCartSlice.myCarts);
   const [cartItems, setCartItems] = useState(initialData);
 
   useEffect(() => {
     props.setCartNo(cartItems.length);
   }, [cartItems]);
+
+  useEffect(() => {
+    setCartItems(initialData);
+  }, [initialData]);
 
   const calculateTotalAmount = () => {
     return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -48,7 +58,6 @@ const Cart = function (props) {
     setCartItems(updatedItems);
   };
 
-  // 티켓 수량 조정
   const handleIncreaseQuantity = (id) => {
     const updatedItems = cartItems.map((item) => {
       if (item.id === id) {
@@ -91,7 +100,7 @@ const Cart = function (props) {
         {/* Cart Button */}
         <div className="cart-button">
           <Link to="#" id="rightSideCart">
-            <img src="/assets/images/core-img/bag2.svg" alt="" />{" "}
+            <img src="/assets/images/core-img/bag2.svg" alt="" />
             <span>{props.cartNo}</span>
           </Link>
         </div>
@@ -112,77 +121,19 @@ const Cart = function (props) {
 
         <div className="cart-content">
           {/* Cart Summary */}
-          <div className="cart-amount-summary">
-            <h2>쇼핑 내역</h2>
-            <ul className="summary-table">
-              <li>
-                <span>티켓 가격:</span>{" "}
-                <span>{calculateTotalAmount().toLocaleString()}원</span>
-              </li>
-              <li>
-                <span>티켓 총수량:</span>{" "}
-                <span>{calculateTotalQuantity()}장</span>
-              </li>
-              <li>
-                {/* <span>총할인:</span>{" "}
-                <span>
-                  -
-                  {(
-                    (calculateTotalDiscount() / calculateTotalAmount()) *
-                    100
-                  ).toFixed(2)}
-                  %
-                </span> */}
-              </li>
-              <li>
-                <span>결제금액:</span>{" "}
-                <span>
-                  {(
-                    calculateTotalAmount() - calculateTotalDiscount()
-                  ).toLocaleString()}
-                  원
-                </span>
-              </li>
-            </ul>
-          </div>
+          <CartSummary
+            calculateTotalAmount={calculateTotalAmount}
+            calculateTotalQuantity={calculateTotalQuantity}
+            calculateTotalDiscount={calculateTotalDiscount}
+          />
 
           {/* Cart List Area */}
-          <div className="cart-list">
-            {cartItems.map((item) => (
-              <div className="single-cart-item" key={item.id}>
-                <Link to="#" className="product-image">
-                  <img
-                    src={item.image}
-                    className="cart-thumb"
-                    alt={item.name}
-                  />
-                  <div className="cart-item-desc">
-                    <span className="product-remove">
-                      <i
-                        className="fa fa-close"
-                        aria-hidden="true"
-                        onClick={() => handleRemoveItem(item.id)}
-                      ></i>
-                    </span>
-                    <span className="badge">{item.badge}</span>
-                    <h6>{item.name}</h6>
-                    <p className="size">
-                      수량:{" "}
-                      <button onClick={() => handleDecreaseQuantity(item.id)}>
-                        -
-                      </button>
-                      {item.quantity}
-                      <button onClick={() => handleIncreaseQuantity(item.id)}>
-                        +
-                      </button>
-                    </p>
-                    <p className="color">할인: {item.discount}%</p>
-                    <p className="price">{item.price.toLocaleString()}원</p>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+          <CartList
+            cartItems={cartItems}
+            handleRemoveItem={handleRemoveItem}
+            handleIncreaseQuantity={handleIncreaseQuantity}
+            handleDecreaseQuantity={handleDecreaseQuantity}
+          />
 
           <div className="checkout-btn mt-100">
             <Link
