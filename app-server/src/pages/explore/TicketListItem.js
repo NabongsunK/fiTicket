@@ -104,7 +104,7 @@ const TicketListItem = function (props) {
           <div className="col-lg-2 align-self-center">
             {/* 홈페이지 연결 */}
             <div className="explore_list_button">
-              <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">
+              <Link to={props.festival.home_page} target="_blank">
                 <i className="fa fa-home"></i>
               </Link>
             </div>
