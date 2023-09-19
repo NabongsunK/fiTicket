@@ -57,7 +57,12 @@ const Recommend = function () {
             <LocalSelect />
 
             {/* 여기리스트 들어갈 부분 */}
-            <div>리스트</div>
+            <div className="col-lg-3">
+            <div className="image">
+              <img className="poster" src={props.festival.first_image} alt="" />
+            </div>
+            <h5>{props.festival.title}</h5>
+          </div>
           </div>
         </div>
       </div>
