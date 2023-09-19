@@ -1,18 +1,18 @@
 import React from "react";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-import localInfos from "../../data/localInfos.json";
+import localList from "../../data/locallist.json";
 
 const onChangeToggle = function () {};
 
 const LocalSelect = ({ onChangeToggle }) => {
-  const LocalSelectList = localInfos.map((localInfo) => (
+  const LocalSelectList = localList.map((localList) => (
     <ToggleButton
-      id={"tbg-radio" + localInfo.id}
-      value={localInfo.id}
-      key={localInfo.id}
+      id={"tbg-radio" + localList.id}
+      value={localList.id}
+      key={localList.id}
     >
-      {localInfo.localTitle}
+      {localList.localTitle}
     </ToggleButton>
   ));
 
@@ -53,11 +53,11 @@ const Recommend = function () {
               </div>
             </div>
 
-            {/* 여기리스트 들어갈 부분 */}
-            <div>리스트</div>
-
             {/* 토글버튼 */}
             <LocalSelect />
+
+            {/* 여기리스트 들어갈 부분 */}
+            <div>리스트</div>
           </div>
         </div>
       </div>
