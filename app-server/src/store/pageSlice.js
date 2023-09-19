@@ -10,11 +10,11 @@ const pagingSlice = createSlice({
     next(state, action) {
       state.page += action.payload.step;
     },
-    curr(state, action) {
-      state.page = action.payload.page;
+    move(state, action) {
+      state.page = action.payload.point;
     },
   },
 });
 
 export default pagingSlice;
-export const { next, prev, curr } = pagingSlice.actions;
+export const { next, prev, move } = pagingSlice.actions;

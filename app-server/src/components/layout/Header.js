@@ -4,6 +4,8 @@ import { useState } from "react";
 
 const Header = function () {
   const [isActive, setActive] = useState("false");
+
+  const [cartNo, setCartNo] = useState(0);
   const handleToggle = () => {
     setActive(!isActive);
   };
@@ -48,13 +50,18 @@ const Header = function () {
             <div className="cart-area">
               <Link to="#" id="essenceCartBtn" onClick={handleToggle}>
                 <img src="/assets/images/core-img/bag.svg" alt="" />{" "}
-                <span>5</span>
+                <span>{cartNo}</span>
               </Link>
             </div>
           </div>
         </div>
       </header>
-      <Cart isActive={isActive} handleToggle={handleToggle} />
+      <Cart
+        isActive={isActive}
+        handleToggle={handleToggle}
+        cartNo={cartNo}
+        setCartNo={setCartNo}
+      />
     </>
   );
 };

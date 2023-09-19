@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-// import chicken from "../../data/chicken.json";
 
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const { kakao } = window;
