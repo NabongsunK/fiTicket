@@ -67,7 +67,7 @@ const Cart = function (props) {
             <div className="single-cart-item">
               <Link to="#" className="product-image">
                 <img
-                  src="http://tong.visitkorea.or.kr/cms/resource/17/3008017_image2_1.jpg"
+                  src="http://tong.visitkorea.or.kr/cms/resource/52/2607852_image2_1.jpg"
                   className="cart-thumb"
                   alt=""
                 />
@@ -76,11 +76,11 @@ const Cart = function (props) {
                   <span className="product-remove">
                     <i className="fa fa-close" aria-hidden="true"></i>
                   </span>
-                  <span className="badge">전북 고창</span>
-                  <h6>고창 청농원 핑크뮬리 축제</h6>
+                  <span className="badge">경기도 안성</span>
+                  <h6>안성 남사당놀이 상설공연</h6>
                   <p className="size">수량: 3</p>
                   <p className="color">할인: 15%</p>
-                  <p className="price">25,500원</p>
+                  <p className="price">10,000</p>
                 </div>
               </Link>
             </div>
