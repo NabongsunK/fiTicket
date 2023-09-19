@@ -4,6 +4,8 @@ import localInfos from "../../data/localInfos.json";
 import Map from "./Map";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import { useDispatch } from "react-redux";
+import { move } from "../../store/pageSlice";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 
 // x:경도 y:위도 로 지역찾기
@@ -54,6 +56,7 @@ const getItude = async function (query = "서울") {
 };
 
 const MapDiv = function (props) {
+  const dispatch = useDispatch();
   //mapItude를 현재위치로 변경
   const getCurrentPos = function () {
     if (navigator.geolocation) {
@@ -93,6 +96,7 @@ const MapDiv = function (props) {
   };
   //토글 변경되면, 값변경
   const onChangeToggle = async function (val) {
+    dispatch(move({ point: 1 }));
     if (val === 0) {
       getCurrentPos();
     } else {

@@ -1,69 +1,54 @@
-import { Link, useSearchParams } from "react-router-dom";
-import TicketListItem from "./TicketListItem";
-import TicketList from "./TicketList";
-//import TicketDetailItem from "./TicketDetailItem";
-//import TicketDetailItem from "./TicketDetailItem";
 import { useDispatch, useSelector } from "react-redux";
-import { next, prev, curr } from "../../store/pageSlice";
 import { useEffect, useRef, useState } from "react";
+import TicketList from "./TicketList";
+import TicketFind from "./TicketFind";
+import TicketPage from "./TicketPage";
+import { move } from "../../store/pageSlice";
 
 const TicketBody = function (props) {
-  // 검색
-  const keyword = useRef("");
-  const [searchResult, setSearchResult] = useState(props.festivals);
-
-  useEffect(() => {
-    setSearchResult(props.festivals);
-  }, [props]);
-
-  const search = function () {
-    const regExp = new RegExp(keyword.current, "i");
-    setSearchResult(
-      props.festivals.filter((festival) => regExp.test(festival.title))
-    );
-  };
-
-  const keyHandler = function (event) {
-    if (event.key === "Enter") {
-      search();
-    }
-  };
-
-  //페이징 처리
-
-  const page = useSelector((state) => state.viewPageSlice.page);
-
-  const listPerPage = 4;
-  const lastPage = Math.floor(
-    (listPerPage + props.festivals.length - 1) / listPerPage
-  );
-  const skip = (page - 1) * listPerPage;
-
-  const pageResult = searchResult.slice(skip, skip + listPerPage);
-
-  // const goPrev = function () {
-  //   if (page === 2) {
-  //     searchParams.delete("page");
-  //   } else if (page > 2) {
-  //     searchParams.set("page", page - 1);
-  //   }
-  //   setSearchParams(searchParams);
-  // };
-
-  // const goNext = function () {
-  //   if (page < lastPage) {
-  //     searchParams.set("page", page + 1);
-  //     setSearchParams(searchParams);
-  //   }
-  // };
-
+  // 검색어
+  const [keyword, setKeyword] = useState("");
+  // 지역별 리스트
+  const [regionResult, setRegionResult] = useState(props.festivals);
+  // 페이지별 리스트
+  const [pageResult, setPageResult] = useState([]);
   const dispatch = useDispatch();
 
-  const totalPage = [];
-  for (let i = 1; i <= lastPage; i++) {
-    totalPage.push(i);
-  }
-  const currPage = skip / listPerPage + 1;
+  // 새로 지역리스트 들어오면
+  useEffect(() => {
+    // 지역리스트 갱신
+    setRegionResult(props.festivals);
+  }, [props]);
+
+  // 키워드 바뀌면
+  useEffect(() => {
+    //페이징 초기화
+    dispatch(move({ point: 1 }));
+    //정규식으로 regionResult 분리
+    const regExp = new RegExp(keyword, "i");
+    setRegionResult(
+      props.festivals.filter((festival) => regExp.test(festival.title))
+    );
+  }, [keyword]);
+
+  //슬라이스에서 현재 페이지 가지고옴
+  var page = useSelector((state) => state.viewPageSlice.page);
+
+  // 한페이지당 출력되야되는 리스트
+  const listPerPage = 4;
+  // 해당페이지 첫 요소
+  var skip = (page - 1) * listPerPage;
+
+  //검색에의해서 바뀌거나 page가 바뀌면
+  useEffect(() => {
+    skip = (page - 1) * listPerPage;
+    setPageResult(regionResult.slice(skip, skip + listPerPage));
+  }, [regionResult, page]);
+
+  // 마지막페이지 계산
+  const lastPage = Math.floor(
+    (listPerPage + regionResult.length - 1) / listPerPage
+  );
 
   return (
     <div className="amazing-deals">
@@ -72,78 +57,10 @@ const TicketBody = function (props) {
         <TicketList pageResult={pageResult} />
 
         {/* 찾기 페이지 */}
-        <div className="search-form">
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-lg-8">
-                <div
-                  id="explore-search-form"
-                  name="gs"
-                  method="submit"
-                  role="search"
-                  action="#"
-                >
-                  <div className="row justify-content-center">
-                    <div className="col-lg-6">
-                      <input
-                        className="form-control"
-                        type="text"
-                        placeholder="축제 찾기"
-                        onChange={(e) => (keyword.current = e.target.value)}
-                        onKeyUp={keyHandler}
-                      />
-                    </div>
-
-                    <div className="col-lg-2">
-                      <button className="border-button" onClick={search}>
-                        <i className="fa fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <TicketFind keyword={keyword} setKeyword={setKeyword} />
 
         {/* pagination */}
-        <div className="col-lg-12">
-          <ul className="page-numbers">
-            <li>
-              <Link
-                to=""
-                onClick={() => {
-                  if (page > 1) {
-                    dispatch(prev({ step: 1 }));
-                  }
-                }}
-              >
-                <i className="fa fa-arrow-left"></i>
-              </Link>
-            </li>
-
-            {totalPage.map((page) => (
-              <li key={page} className={page === currPage ? "active" : ""}>
-                <Link to="#" onClick={() => {}}>
-                  {page}
-                </Link>
-              </li>
-            ))}
-
-            <li>
-              <Link
-                to=""
-                onClick={() => {
-                  if (page < lastPage) {
-                    dispatch(next({ step: 1 }));
-                  }
-                }}
-              >
-                <i className="fa fa-arrow-right"></i>
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <TicketPage pages={{ lastPage }} />
       </div>
     </div>
   );
