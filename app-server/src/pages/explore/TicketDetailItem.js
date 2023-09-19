@@ -1,5 +1,3 @@
-import React from "react";
-
 const TicketDetailItem = function (props) {
   return (
     <div onClick={(e) => e.stopPropagation()}>
