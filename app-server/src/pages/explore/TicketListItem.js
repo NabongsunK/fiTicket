@@ -46,27 +46,19 @@ const TicketListItem = function (props) {
     setIsOpen(!modalIsOpen);
   }
 
-  // 이건 결제버튼 누르면 실행되야하는것
-  const toGeoljae = async function () {
-    const res = await axios.post("/cart/tickets", {
-      content_id: 2746930,
-      ticket_quantity: 3,
-      login_id: "test",
-    });
-    console.log(res);
-  };
-
   const toCart = function () {
+    console.log(props.festival);
     dispatch(
       push({
         ticket: {
           // 여기 지역추가
-          badge: props.festival.addr1,
+          badge: props.festival.addr1 + " " + props.festival.addr2,
           name: props.festival.title,
           quantity: 1,
           // 여기 가격추가
           price: props.festival.event_end_date,
           image: props.festival.first_image,
+          ticket_id: props.festival.id,
         },
       })
     );

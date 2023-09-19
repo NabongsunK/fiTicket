@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CartList from "./CartList";
 import CartSummary from "./CartSummary";
 import { useSelector } from "react-redux";
+import Payment from "./Payment";
 
 // const initialData = [
 //   {
@@ -135,15 +136,7 @@ const Cart = function (props) {
             handleDecreaseQuantity={handleDecreaseQuantity}
           />
 
-          <div className="checkout-btn mt-100">
-            <Link
-              to="/"
-              className="btn essence-btn"
-              style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
-            >
-              결제하기
-            </Link>
-          </div>
+          <Payment />
         </div>
       </div>
     </>
