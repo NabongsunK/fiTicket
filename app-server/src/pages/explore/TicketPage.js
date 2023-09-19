@@ -13,6 +13,7 @@ const TicketBody = function (props) {
   for (let i = 1; i <= props.pages.lastPage; i++) {
     totalPage.push(i);
   }
+  // TODO:
 
   // 페이지 버튼
   const pageButtons = totalPage.map((paging) => (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const initialData = [
@@ -23,6 +23,10 @@ const initialData = [
 
 const Cart = function (props) {
   const [cartItems, setCartItems] = useState(initialData);
+
+  useEffect(() => {
+    props.setCartNo(cartItems.length);
+  }, [cartItems]);
 
   const calculateTotalAmount = () => {
     return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -88,7 +92,7 @@ const Cart = function (props) {
         <div className="cart-button">
           <Link to="#" id="rightSideCart">
             <img src="/assets/images/core-img/bag2.svg" alt="" />{" "}
-            <span>{cartItems.length}</span>
+            <span>{props.cartNo}</span>
           </Link>
         </div>
 
