@@ -1,14 +1,31 @@
 import { Link, NavLink } from "react-router-dom";
 import Cart from "../common/Cart";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const getUser = async function () {
+  const res = await axios.post("/explore/getallmap");
+  return res.data.data;
+};
 
 const Header = function () {
   const [isActive, setActive] = useState("false");
-
   const [cartNo, setCartNo] = useState(0);
   const handleToggle = function () {
     setActive(!isActive);
   };
+
+  // isLogined is_signed로 교체
+  const [isLogined, user_id] = useSelector((state) => [
+    state.myLoginSlice.isLogined,
+    state.myLoginSlice.user_id,
+  ]);
+
+  console.log(isLogined, user_id);
   return (
     <>
       <header className="header-area header-sticky">
@@ -41,6 +58,7 @@ const Header = function () {
           </div>
 
           <div className="header-meta d-flex clearfix">
+            {isLogined ? <div>{user_id}</div> : <div>로그인하세요</div>}
             <div className="user-login-info">
               <NavLink to="/login">
                 <img src="/assets/images/core-img/user.svg" alt="" />

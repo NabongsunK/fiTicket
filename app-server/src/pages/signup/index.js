@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { signin, signout } from "../../store/loginSlice";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
 function Signup() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // redux 이용하기
   const [SignupId, setSignupId] = useState("");
@@ -26,6 +27,11 @@ function Signup() {
       email: SignupEm,
       name: SignupName,
     });
+    // 회원가입성공시 성공시
+    if (res.data.ok) {
+      dispatch(signin({ user_id: res.data.user_id }));
+      navigate("/");
+    }
     console.log(res);
   };
   const getAuth = async function () {
@@ -53,11 +59,11 @@ function Signup() {
         <div className="form-outline mb-4">
           <input
             type="text"
-            id="form2Example1"
+            id="login_id"
             className="form-control"
             onChange={(e) => setSignupId(e.target.value)}
           />
-          <label className="form-label" htmlFor="form2Example1">
+          <label className="form-label" htmlFor="login_id">
             ID
           </label>
         </div>
@@ -66,11 +72,11 @@ function Signup() {
         <div className="form-outline mb-4">
           <input
             type="text"
-            id="form2Example2"
+            id="phone_number"
             className="form-control"
             onChange={(e) => setSignupPn(e.target.value)}
           />
-          <label className="form-label" htmlFor="form2Example2">
+          <label className="form-label" htmlFor="phone_number">
             핸드폰 번호
           </label>
           {/* <!--인증 --> */}
@@ -85,11 +91,11 @@ function Signup() {
           </button>
           <input
             type="text"
-            id="form2Example2"
+            id="authentication_number"
             className="form-control"
             onChange={(e) => setSignupAuth(e.target.value)}
           />
-          <label className="form-label" htmlFor="form2Example2">
+          <label className="form-label" htmlFor="authentication_number">
             인증번호
           </label>
           <button
@@ -107,11 +113,11 @@ function Signup() {
         <div className="form-outline mb-4">
           <input
             type="password"
-            id="form2Example2"
+            id="password"
             className="form-control"
             onChange={(e) => setSignupPw(e.target.value)}
           />
-          <label className="form-label" htmlFor="form2Example2">
+          <label className="form-label" htmlFor="password">
             비밀번호
           </label>
         </div>
@@ -120,11 +126,11 @@ function Signup() {
         <div className="form-outline mb-4">
           <input
             type="text"
-            id="form2Example2"
+            id="name"
             className="form-control"
             onChange={(e) => setSignupName(e.target.value)}
           />
-          <label className="form-label" htmlFor="form2Example2">
+          <label className="form-label" htmlFor="name">
             이름
           </label>
         </div>
@@ -133,11 +139,11 @@ function Signup() {
         <div className="form-outline mb-4">
           <input
             type="text"
-            id="form2Example2"
+            id="role"
             className="form-control"
             onChange={(e) => setSignupRole(e.target.value)}
           />
-          <label className="form-label" htmlFor="form2Example2">
+          <label className="form-label" htmlFor="role">
             유저/관리자
           </label>
         </div>
@@ -146,11 +152,11 @@ function Signup() {
         <div className="form-outline mb-4">
           <input
             type="text"
-            id="form2Example2"
+            id="email"
             className="form-control"
             onChange={(e) => setSignupEm(e.target.value)}
           />
-          <label className="form-label" htmlFor="form2Example2">
+          <label className="form-label" htmlFor="email">
             이메일주소
           </label>
         </div>

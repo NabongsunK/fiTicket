@@ -4,8 +4,7 @@ import { pop, change } from "../../store/cartSlice";
 
 const CartListItem = function (props) {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.myCartSlice.myCarts);
-  console.log(cartItems);
+  const cartItems = useSelector((state) => state.myCartSlice.isLogined);
 
   const removeItem = function (id) {
     cartItems.forEach((item, i) => {
