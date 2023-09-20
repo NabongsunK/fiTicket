@@ -1,5 +1,13 @@
 [
   {
+    "id": 0,
+    "defaultChecked": false,
+    "localTitle": "화성",
+    "region_1depth_name": "화성특별시",
+    "area_code": 40
+  },
+  
+  {
     "id": 1,
     "defaultChecked": false,
     "localTitle": "서울",

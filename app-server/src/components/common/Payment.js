@@ -23,6 +23,7 @@ function Payment() {
       buyer_addr: "신사동 661-16", // 구매자 주소
       buyer_postcode: "06018", // 구매자 우편번호
     };
+
     /* 4. 결제 창 호출하기 */
     IMP.request_pay(data, callback);
   };
@@ -39,8 +40,11 @@ function Payment() {
 
       // 결제 성공 - 서버로 데이터 전송
       try {
-        const serverResponse = await toServer(response);
-        console.log(serverResponse);
+        async (response) =>
+          await axios.post("/cart/tickets", {
+            paid_amount: response.paid_amount,
+            login_id: 4,
+          });
       } catch (err) {
         console.error("서버로 데이터 전송 중 에러 발생", err);
       }
@@ -60,6 +64,7 @@ function Payment() {
       console.log(res);
     });
   };
+
   return (
     <div className="checkout-btn mt-100">
       <Link
