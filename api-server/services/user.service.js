@@ -192,12 +192,12 @@ const UserService = {
       pool.releaseConnection(conn);
     }
   },
-  async getUserById(user_id) {
+  async getUserById(article) {
     const conn = await pool.getConnection();
     try {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
-      const data = await LoginModel.getUserById(user_id, conn);
+      const data = await LoginModel.getUserById(article.user_id, conn);
       await conn.commit();
       return { data };
     } catch (err) {

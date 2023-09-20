@@ -2,14 +2,19 @@ var express = require("express");
 var router = express.Router();
 
 const cartModel = require("../models/cart.model");
-// const CartService = require("../services/cart.service");
+const CartService = require("../services/cart.service");
 
 // 장바구니 정보 shopping_cart에 등록
 router.post("/", async (req, res, next) => {
   try {
-    // ticket={content_id, ticket_quantity, login_id}
-    const ticket = req.body;
-    const cart = await cartModel.insertTicket(ticket);
+    // req.body = {[tickets], login_id, paid_amount}
+    // tickets={content_id, ticket_quantity}
+    const cart = await CartService.doPay(req.body);
+    // const cart = await cartModel.insertTicket({
+    //   ticket_id: 205,
+    //   ticket_quantity: 3,
+    //   login_id: 6,
+    // });
     res.json({ cart });
   } catch (err) {
     next(err);

@@ -7,8 +7,10 @@ import axios from "axios";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
-const getUser = async function () {
-  const res = await axios.post("/explore/getallmap");
+const getUser = async function (user_id) {
+  const res = await axios.post("/getuser", {
+    user_id: user_id,
+  });
   return res.data.data;
 };
 
@@ -25,7 +27,8 @@ const Header = function () {
     state.myLoginSlice.user_id,
   ]);
 
-  console.log(isLogined, user_id);
+  getUser(user_id).then((response) => console.log(response));
+
   return (
     <>
       <header className="header-area header-sticky">

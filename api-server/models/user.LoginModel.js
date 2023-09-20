@@ -72,7 +72,7 @@ const LoginModel = {
     }
   },
   // id정보 등록
-  async getUserById(user_id, conn = pool) {
+  async getUserById(id, conn = pool) {
     try {
       // article = {login_id,phone_number,password,role,email,name}
       const sql = `
@@ -84,7 +84,7 @@ const LoginModel = {
       where
         id = ?
       `;
-      const [result] = await conn.query(sql, [user_id]);
+      const [result] = await conn.query(sql, [id]);
       return result[0];
     } catch (err) {
       throw new Error("DB Error", { cause: err });
