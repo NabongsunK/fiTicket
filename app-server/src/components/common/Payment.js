@@ -57,7 +57,10 @@ function Payment() {
       <Link
         className="btn essence-btn"
         style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
-        onClick={toServer}
+        onClick={() => {
+          toServer();
+          onClickPayment();
+        }}
       >
         결제하기
       </Link>
