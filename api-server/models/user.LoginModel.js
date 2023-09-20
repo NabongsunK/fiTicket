@@ -71,6 +71,25 @@ const LoginModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+  // id정보 등록
+  async getUserById(user_id, conn = pool) {
+    try {
+      // article = {login_id,phone_number,password,role,email,name}
+      const sql = `
+      select
+        name,
+        email,
+        phone_number
+      from users
+      where
+        id = ?
+      `;
+      const [result] = await conn.query(sql, [user_id]);
+      return result[0];
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = LoginModel;

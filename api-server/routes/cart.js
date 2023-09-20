@@ -16,6 +16,17 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+// 결제 완료
+router.post("/tickets", async (req, res, next) => {
+  try {
+    const cart = req.body;
+    const tickets = await cartModel.payDone(cart);
+    res.json({ tickets });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // 장바구니 삭제
 router.delete("/", async (req, res, next) => {
   try {

@@ -8,10 +8,13 @@ const cartSlice = createSlice({
       state.myCarts.push(action.payload.ticket);
     },
     pop(state, action) {
-      state.myCarts.splice(action.payload.id, 1);
+      state.myCarts.splice(action.payload.index, 1);
+    },
+    change(state, action) {
+      state.myCarts[action.payload.index] = action.payload.updateItem;
     },
   },
 });
 
 export default cartSlice;
-export const { push, pop } = cartSlice.actions;
+export const { push, pop, change } = cartSlice.actions;
