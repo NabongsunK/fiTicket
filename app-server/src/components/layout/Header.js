@@ -6,7 +6,7 @@ const Header = function () {
   const [isActive, setActive] = useState("false");
 
   const [cartNo, setCartNo] = useState(0);
-  const handleToggle = () => {
+  const handleToggle = function () {
     setActive(!isActive);
   };
   return (
