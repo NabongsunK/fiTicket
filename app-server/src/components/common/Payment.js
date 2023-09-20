@@ -47,7 +47,7 @@ function Payment() {
       const res = await axios.post("/cart", {
         ticket_id: ticket.ticket_id,
         ticket_quantity: ticket.quantity,
-        login_id: "test",
+        login_id: 7,
       });
       console.log(res);
     });
