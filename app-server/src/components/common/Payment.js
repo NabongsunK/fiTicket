@@ -6,6 +6,7 @@ axios.defaults.baseURL = "http://localhost:4400/api";
 
 function Payment() {
   const paymentsTickets = useSelector((state) => state.myCartSlice.myCarts);
+  var paid_id;
   const onClickPayment = function () {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
@@ -31,20 +32,19 @@ function Payment() {
   const callback = async function (response) {
     const { success, merchant_uid, error_msg } = response;
     console.log(success);
-    console.log(merchant_uid);
-    console.log(error_msg);
-    console.log(response);
-
     if (success) {
       alert("결제 성공");
 
       // 결제 성공 - 서버로 데이터 전송
       try {
-        async (response) =>
-          await axios.post("/cart/tickets", {
+        async (response) => {
+          const tmp = {
             paid_amount: response.paid_amount,
             login_id: 4,
-          });
+            id: paid_id,
+          };
+          await axios.post("/cart/check", tmp);
+        };
       } catch (err) {
         console.error("서버로 데이터 전송 중 에러 발생", err);
       }
@@ -53,16 +53,14 @@ function Payment() {
     }
   };
   // 이건 결제버튼 누르면 실행되야하는것
-  const toServer = function () {
-    console.log(paymentsTickets);
-    paymentsTickets.forEach(async (ticket) => {
-      const res = await axios.post("/cart", {
-        ticket_id: ticket.ticket_id,
-        ticket_quantity: ticket.quantity,
-        login_id: 4,
-      });
-      console.log(res);
+  const toServer = async function () {
+    const tickets = paymentsTickets.map((ticket) => {
+      return { ticket_id: ticket.ticket_id, ticket_quantity: ticket.quantity };
     });
+    const tmp = { tickets: tickets, login_id: 6, paid_amount: 100000 };
+    paid_id = await axios.post("/cart", tmp);
+
+    return paid_id;
   };
 
   return (

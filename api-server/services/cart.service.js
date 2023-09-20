@@ -64,8 +64,28 @@ const CartService = {
 
       // DB에 작업 반영
       await conn.commit();
-      // 이건 나중에 생각
-      return true;
+      return paid_id;
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
+  async donePay(article) {
+    // article = { paid_amount, login_id, id };
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+
+      const paid_id = await cartModel.findCartByArticle(article, conn);
+
+      // DB에 작업 반영
+      await conn.commit();
+      return paid_id;
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();

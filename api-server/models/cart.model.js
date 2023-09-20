@@ -46,6 +46,33 @@ const cartModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+
+  // paidtickets에서 정보찾기
+  async findCartByArticle(article, conn = pool) {
+    // article = { paid_amount, login_id, id };
+    try {
+      const sql = `
+      select 
+        id 
+      from paid_tickets 
+      where 
+        id = ? and
+        login_id = ? and
+        paid_amount = ?
+      `;
+      console.log(article);
+      const [result] = await conn.query(sql, [
+        article.paid_id,
+        article.login_id,
+        article.paid_amount,
+      ]);
+
+      console.log(result);
+      return result[0];
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = cartModel;

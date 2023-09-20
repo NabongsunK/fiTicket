@@ -9,24 +9,20 @@ router.post("/", async (req, res, next) => {
   try {
     // req.body = {[tickets], login_id, paid_amount}
     // tickets={content_id, ticket_quantity}
-    const cart = await CartService.doPay(req.body);
-    // const cart = await cartModel.insertTicket({
-    //   ticket_id: 205,
-    //   ticket_quantity: 3,
-    //   login_id: 6,
-    // });
-    res.json({ cart });
+    const paid_id = await CartService.doPay(req.body);
+    res.json({ ok: true, paid_id });
   } catch (err) {
     next(err);
   }
 });
 
 // 결제 완료
-router.post("/tickets", async (req, res, next) => {
+router.post("/check", async (req, res, next) => {
+  // req.body = { paid_amount, login_id, paid.id };
   try {
     const cart = req.body;
-    const tickets = await cartModel.payDone(cart);
-    res.json({ tickets });
+    await CartService.donePay(cart);
+    res.json({ ok: true });
   } catch (err) {
     next(err);
   }
