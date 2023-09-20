@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { signin, signout } from "../../store/loginSlice";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
 function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // redux 이용하기
   const [LoginId, setLoginId] = useState("");
@@ -17,6 +19,10 @@ function Login() {
       login_id: LoginId,
       password: LoginPw,
     });
+    if (res.data.ok) {
+      dispatch(signin({ user_id: res.data.user_id }));
+      navigate("/");
+    }
     console.log(res);
   };
   return (

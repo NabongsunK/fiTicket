@@ -2,16 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const loginSlice = createSlice({
   name: "myLogin",
-  initialState: { count: 1 },
+  initialState: { isLogined: false, user_id: -1 },
   reducers: {
-    up: function (state, action) {
-      state.count += action.payload.step;
+    signin: function (state, action) {
+      state.isLogined = true;
+      state.user_id = action.payload.user_id;
+      console.log("로그인완료", state.isLogined, state.user_id);
     },
-    down(state, action) {
-      state.count -= action.payload.step;
+    signout: function (state, action) {
+      state.isLogined = false;
+      state.user_id = -1;
+      console.log("로그아웃완료", state.isLogined, state.user_id);
     },
   },
 });
 
 export default loginSlice;
-// export const { up, down } = counterSlice.actions;
+export const { signin, signout } = loginSlice.actions;
