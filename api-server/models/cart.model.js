@@ -36,6 +36,17 @@ const cartModel = {
     }
   },
 
+  //결제 완료
+  async payDone(item, conn = pool) {
+    try {
+      const sql = `insert into paid_tickets set ?`;
+      const [result] = await conn.query(sql, [item]);
+      return result.insertId;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
   // 결제 미완
   async checkOutCancel(login_id, conn = pool) {
     try {
