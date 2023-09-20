@@ -4,6 +4,8 @@ var router = express.Router();
 const cartModel = require("../models/cart.model");
 const CartService = require("../services/cart.service");
 
+// TODO: login_id -> user_id로 변경
+
 // 장바구니 정보 shopping_cart에 등록
 router.post("/", async (req, res, next) => {
   try {
@@ -21,8 +23,8 @@ router.post("/check", async (req, res, next) => {
   // req.body = { paid_amount, login_id, paid.id };
   try {
     const cart = req.body;
-    await CartService.donePay(cart);
-    res.json({ ok: true });
+    const ret = await CartService.donePay(cart);
+    res.json(ret);
   } catch (err) {
     next(err);
   }

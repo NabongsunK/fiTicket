@@ -81,11 +81,22 @@ const CartService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
 
-      const paid_id = await cartModel.findCartByArticle(article, conn);
-
-      // DB에 작업 반영
-      await conn.commit();
-      return paid_id;
+      if (
+        (await cartModel.findPaidByArticle(article, conn)) &&
+        (await cartModel.findCartByArticle(article, conn))
+      ) {
+        await cartModel.setDonePaidByArticle(article, conn);
+        await cartModel.setDoneCartByArticle(article, conn);
+        // DB에 작업 반영
+        await conn.commit();
+        return { ok: true };
+      } else {
+        await cartModel.deletePaidByArticle(article, conn);
+        await cartModel.deleteCartByArticle(article, conn);
+        // DB에 작업 반영
+        await conn.commit();
+        return { ok: false };
+      }
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();

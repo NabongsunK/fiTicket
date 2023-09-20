@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import Cart from "../common/Cart";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -8,7 +8,7 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:4400/api";
 
 const getUser = async function (user_id) {
-  const res = await axios.post("/getuser", {
+  const res = await axios.post("/login/getuser", {
     user_id: user_id,
   });
   return res.data.data;
@@ -20,14 +20,18 @@ const Header = function () {
   const handleToggle = function () {
     setActive(!isActive);
   };
+  const [login_id, setLogin_id] = useState("");
 
-  // isLogined is_signed로 교체
-  const [isLogined, user_id] = useSelector((state) => [
-    state.myLoginSlice.isLogined,
+  const [is_signed, user_id] = useSelector((state) => [
+    state.myLoginSlice.is_signed,
     state.myLoginSlice.user_id,
   ]);
 
-  getUser(user_id).then((response) => console.log(response));
+  useEffect(() => {
+    getUser(user_id).then((response) => {
+      setLogin_id(response ? response.name : "");
+    });
+  }, [is_signed]);
 
   return (
     <>
@@ -61,7 +65,7 @@ const Header = function () {
           </div>
 
           <div className="header-meta d-flex clearfix">
-            {isLogined ? <div>{user_id}</div> : <div>로그인하세요</div>}
+            {is_signed ? <div>{login_id}</div> : <div>로그인하세요</div>}
             <div className="user-login-info">
               <NavLink to="/login">
                 <img src="/assets/images/core-img/user.svg" alt="" />

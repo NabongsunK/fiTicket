@@ -1,10 +1,32 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 axios.defaults.baseURL = "http://localhost:4400/api";
 
-function Payment() {
+const getUser = async function (user_id) {
+  const res = await axios.post("/login/getuser", {
+    user_id: user_id,
+  });
+  console.log(res);
+  return res.data.data;
+};
+
+function Payment(props) {
+  const navigate = useNavigate();
+  const [user, setUser] = useState([]);
+  const [is_signed, user_id] = useSelector((state) => [
+    state.myLoginSlice.is_signed,
+    state.myLoginSlice.user_id,
+  ]);
+
+  useEffect(() => {
+    getUser(user_id).then((response) => {
+      setUser(response);
+    });
+    console.log(user);
+  }, [is_signed]);
+
   const paymentsTickets = useSelector((state) => state.myCartSlice.myCarts);
   var paid_id;
   const onClickPayment = function () {
@@ -16,11 +38,11 @@ function Payment() {
       pg: "kakaopay", // PG사
       pay_method: "kakaopay", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: 1200, // 결제금액
+      amount: props.amount - 101100000, // 결제금액
       name: "아임포트 결제 데이터 분석", // 주문명
-      buyer_name: "홍길동", // 구매자 이름
-      buyer_tel: "01012341234", // 구매자 전화번호
-      buyer_email: "example@example", // 구매자 이메일
+      buyer_name: user.name, // 구매자 이름
+      buyer_tel: user.phone_number, // 구매자 전화번호
+      buyer_email: user.email, // 구매자 이메일
       buyer_addr: "신사동 661-16", // 구매자 주소
       buyer_postcode: "06018", // 구매자 우편번호
     };
@@ -31,24 +53,24 @@ function Payment() {
   /* 3. 콜백 함수 정의하기 */
   const callback = async function (response) {
     const { success, merchant_uid, error_msg } = response;
-    console.log(success);
     if (success) {
       alert("결제 성공");
 
       // 결제 성공 - 서버로 데이터 전송
       try {
-        async (response) => {
-          const tmp = {
-            paid_amount: response.paid_amount,
-            login_id: 4,
-            id: paid_id,
-          };
-          await axios.post("/cart/check", tmp);
+        const tmp = {
+          // TODO:login_id->user_id로 변경
+          paid_amount: response.paid_amount,
+          login_id: user.id,
+          paid_id: paid_id,
         };
+        console.log(tmp);
+        await axios.post("/cart/check", tmp);
       } catch (err) {
         console.error("서버로 데이터 전송 중 에러 발생", err);
       }
     } else {
+      // TODO: 결제실패시 서버생성후 적용
       alert(`결제 실패: ${error_msg}`);
     }
   };
@@ -57,8 +79,13 @@ function Payment() {
     const tickets = paymentsTickets.map((ticket) => {
       return { ticket_id: ticket.ticket_id, ticket_quantity: ticket.quantity };
     });
-    const tmp = { tickets: tickets, login_id: 6, paid_amount: 100000 };
-    paid_id = await axios.post("/cart", tmp);
+    const tmp = {
+      tickets: tickets,
+      login_id: user.id,
+      paid_amount: props.amount - 101100000,
+    };
+    // TODO:이건 서버를 수정해야할듯? , 결제완료되면 장바구니 끄기, 네비게이터 정리, 결제성공되면 서버에서 결과받고 뽑아오기
+    paid_id = (await axios.post("/cart", tmp)).data.paid_id;
 
     return paid_id;
   };
@@ -69,8 +96,14 @@ function Payment() {
         className="btn essence-btn"
         style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
         onClick={() => {
-          toServer();
-          onClickPayment();
+          if (is_signed) {
+            toServer();
+            onClickPayment();
+          } else {
+            // TODO: 안먹음
+            console.log("로그인하세요");
+            navigate("/");
+          }
         }}
       >
         결제하기
