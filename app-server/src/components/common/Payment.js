@@ -15,7 +15,7 @@ function Payment() {
       pg: "kakaopay", // PG사
       pay_method: "kakaopay", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: 1, // 결제금액
+      amount: 1200, // 결제금액
       name: "아임포트 결제 데이터 분석", // 주문명
       buyer_name: "홍길동", // 구매자 이름
       buyer_tel: "01012341234", // 구매자 전화번호
@@ -27,7 +27,7 @@ function Payment() {
     IMP.request_pay(data, callback);
   };
   /* 3. 콜백 함수 정의하기 */
-  const callback = function (response) {
+  const callback = async function (response) {
     const { success, merchant_uid, error_msg } = response;
     console.log(success);
     console.log(merchant_uid);
@@ -36,6 +36,14 @@ function Payment() {
 
     if (success) {
       alert("결제 성공");
+
+      // 결제 성공 - 서버로 데이터 전송
+      try {
+        const serverResponse = await toServer(response);
+        console.log(serverResponse);
+      } catch (err) {
+        console.error("서버로 데이터 전송 중 에러 발생", err);
+      }
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
@@ -47,7 +55,7 @@ function Payment() {
       const res = await axios.post("/cart", {
         ticket_id: ticket.ticket_id,
         ticket_quantity: ticket.quantity,
-        login_id: "test",
+        login_id: 4,
       });
       console.log(res);
     });
