@@ -1,11 +1,11 @@
-.history
+# .history
 **/node_modules
 **/TEST
-essence-master
-woox
-.vscode
-# 오피스 임시파일
-~$*
+# essence-master
+# # woox
+# .vscode
+# # 오피스 임시파일
+# ~$*
 
 
 
