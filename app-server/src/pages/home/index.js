@@ -4,12 +4,14 @@ import GoToMap from "../../components/common/GoToMap";
 import Top from "./Top";
 import Review from "./Review";
 import Recommend from "./Recommend";
+import festivalsData from "../../data/_festivals.json"
 
 function Home() {
+
   return (
     <>
       <Top />
-      <Recommend />
+      <Recommend festivals={festivalsData}/>
       <Review />
       <GoToMap />
     </>
