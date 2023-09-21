@@ -13,7 +13,7 @@ const ExploreService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
 
-      const data = await ExploreGetModel.getListMap();
+      const data = await ExploreGetModel.getListMap(conn);
       // DB에 작업 반영
       await conn.commit();
       return { data, ok: true, length: data.length };
@@ -32,7 +32,7 @@ const ExploreService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
 
-      const data = await ExploreGetModel.getAllSelect();
+      const data = await ExploreGetModel.getAllSelect(conn);
       // DB에 작업 반영
       await conn.commit();
       return { data, ok: true, length: data.length };
@@ -51,7 +51,8 @@ const ExploreService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
       const data = await ExploreGetModel.getRegionSelect(
-        "%" + decodeURI(query) + "%"
+        "%" + decodeURI(query) + "%",
+        conn
       );
       // DB에 작업 반영
       await conn.commit();
@@ -72,9 +73,9 @@ const ExploreService = {
       await conn.beginTransaction();
       var data;
       if (area_code == 0) {
-        data = await ExploreGetModel.getAllSelect();
+        data = await ExploreGetModel.getAllSelect(conn);
       } else {
-        data = await ExploreGetModel.getRegionSelectByAreaCode(area_code);
+        data = await ExploreGetModel.getRegionSelectByAreaCode(area_code, conn);
       }
       // DB에 작업 반영
       await conn.commit();
