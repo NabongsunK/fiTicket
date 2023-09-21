@@ -101,6 +101,24 @@ const Recommend = function (props) {
     </ToggleButton>
   ));
 
+    if (success) {
+      alert("결제 성공");
+    } else {
+      alert(`결제 실패: ${error_msg}`);
+    }
+  };
+  // 이건 결제버튼 누르면 실행되야하는것
+  const toServer = function () {
+    console.log(paymentsTickets);
+    paymentsTickets.forEach(async (ticket) => {
+      const res = await axios.post("/cart", {
+        ticket_id: ticket.ticket_id,
+        ticket_quantity: ticket.quantity,
+        login_id: "test",
+      });
+      console.log(res);
+    });
+  };
   return (
     <div className="container" style={{ marginTop: "150px" }}>
       <div className="row">
@@ -150,6 +168,6 @@ const Recommend = function (props) {
       </div>
     </div>
   );
-};
+}
 
-export default Recommend;
+export default Payment;
