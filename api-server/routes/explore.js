@@ -47,4 +47,13 @@ router.get("/getregionlist", async (req, res, next) => {
     next(err);
   }
 });
+router.post("/gettickets", async (req, res, next) => {
+  try {
+    // req.body = [{ticket_id, ticket_quantity}]
+    const result = await ExploreService.getTicketByIds(req.body);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
 module.exports = router;

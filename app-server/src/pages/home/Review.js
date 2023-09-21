@@ -1,112 +1,158 @@
-import React, { useEffect } from "react";
-import { Carousel } from "bootstrap";
+import React, { useEffect, useState } from "react";
+import ReviewList from "./ReviewList";
+import ReviewListItem from "./ReviewListItem";
 
-const sliderItems = [
-  { id: 1, imgSrc: "path/to/image1.jpg", description: "1" },
-  { id: 2, imgSrc: "path/to/image2.jpg", description: "22는는두두번번" },
-  { id: 3, imgSrc: "path/to/image3.jpg", description: "333333333333" },
-  { id: 4, imgSrc: "path/to/image4.jpg", description: "44444444" },
-  { id: 5, imgSrc: "path/to/image5.jpg", description: "5555555" },
-  { id: 6, imgSrc: "path/to/image6.jpg", description: "666666666666" },
+import Carousel from "react-bootstrap/Carousel";
+
+const items = [
+  {
+    id: 1,
+    ticket_id: 1,
+    title: "감악산 꽃&별 여행",
+    event_start_date: "20231004",
+    event_end_date: "20240121",
+    rating: 9,
+    name: "김철수",
+    content: "아주좋습니다.",
+    first_imgae: "path/to/image1.jpg",
+  },
+  {
+    id: 2,
+    ticket_id: 1,
+    title: "감악산 꽃&별 여행",
+    event_start_date: "20231004",
+    event_end_date: "20240121",
+    rating: 9,
+    name: "김철수",
+    content: "아주좋습니다.",
+    first_imgae: "path/to/image1.jpg",
+  },
+  {
+    id: 3,
+    ticket_id: 1,
+    title: "감악산 꽃&별 여행",
+    event_start_date: "20231004",
+    event_end_date: "20240121",
+    rating: 9,
+    name: "김철수",
+    content: "아주좋습니다.",
+    first_imgae: "path/to/image1.jpg",
+  },
+  {
+    id: 4,
+    ticket_id: 1,
+    title: "감악산 꽃&별 여행",
+    event_start_date: "20231004",
+    event_end_date: "20240121",
+    rating: 9,
+    name: "김철수",
+    content: "아주좋습니다.",
+    first_imgae: "path/to/image1.jpg",
+  },
+  {
+    id: 5,
+    ticket_id: 1,
+    title: "감악산 꽃&별 여행",
+    event_start_date: "20231004",
+    event_end_date: "20240121",
+    rating: 9,
+    name: "김철수",
+    content: "아주좋습니다.",
+    first_imgae: "path/to/image1.jpg",
+  },
+  {
+    id: 6,
+    ticket_id: 1,
+    title: "감악산 꽃&별 여행",
+    event_start_date: "20231004",
+    event_end_date: "20240121",
+    rating: 9,
+    name: "김철수",
+    content: "아주좋습니다.",
+    first_imgae: "path/to/image1.jpg",
+  },
 ];
 
 function Review() {
-  useEffect(() => {
-    const carouselElement = document.getElementById("carouselExampleControls");
-    new Carousel(carouselElement, {
-      interval: 3000,
-      wrap: true,
-    });
-  }, []);
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
 
   return (
-    <div className="container" style={{ marginTop: "150px" }}>
-      <div className="row">
-        <div className="cities-town">
-          <div className="container">
-            <div
-              className="slider-content"
-              style={{
-                padding: "10px",
-                width: "50%",
-                left: "25%",
-                backgroundColor: "#22b3c1",
-              }}
-            >
-              <div className="row justify-content-center align-items-center">
-                <div className="col-5 align-middle">
-                  <h2 style={{ margin: "0", color: "#fff" }}>
-                    <em style={{ color: "#fff" }}>베스트 리뷰</em>
-                  </h2>
-                </div>
-              </div>
-            </div>
+    <>
+      <Carousel activeIndex={index} onSelect={handleSelect}>
+        <Carousel.Item>
+          <div className="card-body" style={{ height: "1000px" }}>
+            <h6 className="card-subtitle mb-2 text-muted">{items[0].rating}</h6>
+            <h5 className="card-title">{items[0].title}</h5>
+            <h6 className="card-subtitle mb-2 text-muted">
+              {items[0].event_start_date} ~ {items[0].event_end_date}
+            </h6>
+            <h6 className="card-subtitle mb-2 text-muted">{items[0].name}</h6>
+            <h6 className="card-subtitle mb-2 text-muted">
+              {items[0].content}
+            </h6>
+            <p className="card-text">{items[0].path}</p>
           </div>
-        </div>
-
-        {/* 슬라이더 시작 */}
-        <div className="row mt-5">
-          <div
-            id="carouselExampleControls"
-            className="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div className="carousel-inner">
-              {/* 첫번째 슬라이더 */}
-              <div className="carousel-item active">
-                <div className="d-flex justify-content-center">
-                  {sliderItems.slice(0, 3).map((item) => (
-                    <div
-                      key={item.id}
-                      className="m-3 p-5 hover-item"
-                      style={{
-                        border: "1px solid black",
-                        borderRadius: "20px",
-                        width: "200px",
-                        textAlign: "center",
-                      }}
-                    >
-                      <img
-                        src={item.imgSrc}
-                        alt=""
-                        style={{ width: "80%", height: "auto" }}
-                      />
-                      <p>{item.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 두번째 슬라이더 */}
-              <div className="carousel-item">
-                <div className="d-flex justify-content-center">
-                  {sliderItems.slice(3, 6).map((item) => (
-                    <div
-                      key={item.id}
-                      className="m-3 p-5 hover-item"
-                      style={{
-                        border: "1px solid black",
-                        borderRadius: "20px",
-                        width: "200px",
-                        textAlign: "center",
-                      }}
-                    >
-                      <img
-                        src={item.imgSrc}
-                        alt=""
-                        style={{ width: "80%", height: "auto" }}
-                      />
-                      <p>{item.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <Carousel.Caption>
+            <div className="card-body" style={{ backgroundColor: "black" }}>
+              <h6 className="card-subtitle mb-2 text-muted">
+                {items[0].rating}
+              </h6>
+              <h5 className="card-title">{items[0].title}</h5>
+              <h6 className="card-subtitle mb-2 text-muted">
+                {items[0].event_start_date} ~ {items[0].event_end_date}
+              </h6>
+              <h6 className="card-subtitle mb-2 text-muted">{items[0].name}</h6>
+              <h6 className="card-subtitle mb-2 text-muted">
+                {items[0].content}
+              </h6>
+              <p className="card-text">{items[0].path}</p>
             </div>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div className="card-body" style={{ backgroundColor: "yellow" }}>
+            <h6 className="card-subtitle mb-2 text-muted">{items[1].rating}</h6>
+            <h5 className="card-title">{items[0].title}</h5>
+            <h6 className="card-subtitle mb-2 text-muted">
+              {items[1].event_start_date} ~ {items[1].event_end_date}
+            </h6>
+            <h6 className="card-subtitle mb-2 text-muted">{items[1].name}</h6>
+            <h6 className="card-subtitle mb-2 text-muted">
+              {items[1].content}
+            </h6>
+            <p className="card-text">{items[1].path}</p>
           </div>
-        </div>
-        {/* 슬라이더 끝 */}
-      </div>
-    </div>
+          <Carousel.Caption>
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div className="card-body" style={{ backgroundColor: "blue" }}>
+            <h6 className="card-subtitle mb-2 text-muted">{items[2].rating}</h6>
+            <h5 className="card-title">{items[0].title}</h5>
+            <h6 className="card-subtitle mb-2 text-muted">
+              {items[2].event_start_date} ~ {items[2].event_end_date}
+            </h6>
+            <h6 className="card-subtitle mb-2 text-muted">{items[2].name}</h6>
+            <h6 className="card-subtitle mb-2 text-muted">
+              {items[2].content}
+            </h6>
+            <p className="card-text">{items[2].path}</p>
+          </div>
+          <Carousel.Caption>
+            <h3>Third slide label</h3>
+            <p>
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+    </>
   );
 }
 
