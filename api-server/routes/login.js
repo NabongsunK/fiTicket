@@ -35,7 +35,7 @@ router.post("/signup", async (req, res, next) => {
 
 // 유저정보
 router.post("/getuser", async (req, res, next) => {
-  // req.body = {users.id}
+  // req.body = {user_id}
   try {
     const result = await UserService.getUserById(req.body);
     res.json(result);

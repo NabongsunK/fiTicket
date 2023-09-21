@@ -1,30 +1,27 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 axios.defaults.baseURL = "http://localhost:4400/api";
-
+import { deletes } from "../../store/cartSlice";
 const getUser = async function (user_id) {
   const res = await axios.post("/login/getuser", {
     user_id: user_id,
   });
-  console.log(res);
   return res.data.data;
 };
 
 function Payment(props) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState([]);
-  const [is_signed, user_id] = useSelector((state) => [
-    state.myLoginSlice.is_signed,
-    state.myLoginSlice.user_id,
-  ]);
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
 
   useEffect(() => {
     getUser(user_id).then((response) => {
       setUser(response);
     });
-    console.log(user);
   }, [is_signed]);
 
   const paymentsTickets = useSelector((state) => state.myCartSlice.myCarts);
@@ -54,23 +51,33 @@ function Payment(props) {
   const callback = async function (response) {
     const { success, merchant_uid, error_msg } = response;
     if (success) {
-      alert("결제 성공");
-
       // 결제 성공 - 서버로 데이터 전송
       try {
         const tmp = {
-          // TODO:login_id->user_id로 변경
           paid_amount: response.paid_amount,
-          login_id: user.id,
+          user_id: user.id,
           paid_id: paid_id,
         };
-        console.log(tmp);
-        await axios.post("/cart/check", tmp);
+        const db = await axios.post("/cart/check", tmp);
+        if (db.data.ok) {
+          alert("결제 성공");
+          dispatch(deletes());
+        }
       } catch (err) {
         console.error("서버로 데이터 전송 중 에러 발생", err);
       }
     } else {
-      // TODO: 결제실패시 서버생성후 적용
+      try {
+        const tmp = {
+          // TODO: 결제취소시에 페이지에 저장된 금액으로 검색함, 결제성공시에도 데이터에 에러핸들러가 필요할듯
+          paid_amount: props.amount,
+          user_id: user.id,
+          paid_id: paid_id,
+        };
+        await axios.post("/cart/checkfail", tmp);
+      } catch (err) {
+        console.error("서버로 데이터 전송 중 에러 발생", err);
+      }
       alert(`결제 실패: ${error_msg}`);
     }
   };
@@ -81,10 +88,9 @@ function Payment(props) {
     });
     const tmp = {
       tickets: tickets,
-      login_id: user.id,
+      user_id: user.id,
       paid_amount: props.amount,
     };
-    // TODO:이건 서버를 수정해야할듯? , 결제완료되면 장바구니 끄기, 네비게이터 정리, 결제성공되면 서버에서 결과받고 뽑아오기
     paid_id = (await axios.post("/cart", tmp)).data.paid_id;
 
     return paid_id;
@@ -97,6 +103,7 @@ function Payment(props) {
         style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
         onClick={() => {
           if (is_signed) {
+            props.handleToggle();
             toServer();
             onClickPayment();
           } else {

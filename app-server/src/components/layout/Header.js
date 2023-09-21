@@ -22,10 +22,8 @@ const Header = function () {
   };
   const [login_id, setLogin_id] = useState("");
 
-  const [is_signed, user_id] = useSelector((state) => [
-    state.myLoginSlice.is_signed,
-    state.myLoginSlice.user_id,
-  ]);
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
 
   useEffect(() => {
     getUser(user_id).then((response) => {
