@@ -18,7 +18,7 @@ const UserService = {
       // userDB에 중복아이디가 1개라도 있으면
       const sameIdsAtUserDB = await LoginModel.findSameLoginIdNum(
         article,
-        conn,
+        conn
       );
       if (sameIdsAtUserDB > 0) {
         return { ok: false, message: "중복아이디" };
@@ -145,7 +145,7 @@ const UserService = {
       await LoginModel.chTrue(getPid.id, conn);
       //여기에 로그인실패(패스워드, 없는닉네임 추가할것)
       await conn.commit();
-      return { ok: true, message: "로그인완료" };
+      return { ok: true, message: "로그인완료", user_id: getPid.id };
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();
@@ -164,7 +164,7 @@ const UserService = {
       const getPid = await LoginModel.findSame(article, conn);
       await LoginModel.chFalse(getPid.id, conn);
       await conn.commit();
-      return { ok: true, message: "로그아웃완료" };
+      return { ok: true, message: "로그아웃완료", user_id: getPid.id };
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();
@@ -180,9 +180,26 @@ const UserService = {
     try {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
-      await LoginModel.insertUser(article, conn);
+      const user_id = await LoginModel.insertUser(article, conn);
       await conn.commit();
-      return { ok: true, message: "회원가입완료" };
+      return { ok: true, message: "회원가입완료", user_id: user_id };
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
+  async getUserById(article) {
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      const data = await LoginModel.getUserById(article.user_id, conn);
+      await conn.commit();
+      return { data };
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();

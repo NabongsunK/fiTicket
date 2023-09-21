@@ -96,6 +96,7 @@ const MapDiv = function (props) {
   };
   //토글 변경되면, 값변경
   const onChangeToggle = async function (val) {
+    console.log(val);
     dispatch(move({ point: 1 }));
     if (val === 0) {
       getCurrentPos();

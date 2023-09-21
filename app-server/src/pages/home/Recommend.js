@@ -1,38 +1,105 @@
-import axios from "axios";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import localList from "../../data/locallist.json";
+import festivalsData from "../../data/_festivals.json";
+import { useDispatch, useSelector } from "react-redux";
+import { move } from "../../store/pageSlice";
 import { Link } from "react-router-dom";
-axios.defaults.baseURL = "http://localhost:4400/api";
 
-function Payment() {
-  const paymentsTickets = useSelector((state) => state.myCartSlice.myCarts);
-  const onClickPayment = function () {
-    /* 1. 가맹점 식별하기 */
-    const { IMP } = window;
-    IMP.init("imp37467640");
-    /* 2. 결제 데이터 정의하기 */
-    const data = {
-      pg: "kakaopay", // PG사
-      pay_method: "kakaopay", // 결제수단
-      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: 1, // 결제금액
-      name: "아임포트 결제 데이터 분석", // 주문명
-      buyer_name: "홍길동", // 구매자 이름
-      buyer_tel: "01012341234", // 구매자 전화번호
-      buyer_email: "example@example", // 구매자 이메일
-      buyer_addr: "신사동 661-16", // 구매자 주소
-      buyer_postcode: "06018", // 구매자 우편번호
-    };
-    /* 4. 결제 창 호출하기 */
-    IMP.request_pay(data, callback);
+const Recommend = function (props) {
+  
+  const [selectedAreaCode, setSelectedAreaCode] = useState(-1);
+  const [festivalData, setFestivalData] = useState(null); // 선택된 지역의 축제 데이터
+
+  const fetchFestivalDataByAreaCode = (areaCode) => {
+    // festivalsData에서 areaCode에 맞는 데이터를 찾습니다.
+    const selectedData = festivalsData.filter((festival) => {
+      console.log(festival.areacode, areaCode)
+      return(festival.areacode === areaCode)}
+      );
+    // console.log(selectedData);
+    if (selectedData) {
+      // 선택된 데이터에서 필요한 정보를 추출합니다.
+      const { area_code, firstimage, title } = selectedData;
+  
+      // 추출한 정보를 상태에 저장합니다.
+      setSelectedAreaCode(area_code);
+      setFestivalData({ firstimage, title });
+    } else {
+      // 해당 areaCode에 맞는 데이터가 없을 경우 처리할 내용을 여기에 추가할 수 있습니다.
+      //console.log(areaCode);
+    }
   };
-  /* 3. 콜백 함수 정의하기 */
-  const callback = function (response) {
-    const { success, merchant_uid, error_msg } = response;
-    console.log(success);
-    console.log(merchant_uid);
-    console.log(error_msg);
-    console.log(response);
+
+  const onChangeToggle = (val) => {
+  // console.log(val); // 클릭한 토글의 area_code를 콘솔에 출력
+    localList.forEach((area)=>{
+      console.log(area.id, val, area.id===val)
+      if (area.id == val){
+        
+        setSelectedAreaCode(area.area_code); // 선택된 지역의 area_code를 상태에 저장
+        console.log(selectedAreaCode)
+        return false
+      }
+    })
+    console.log(selectedAreaCode);
+    // fetchFestivalDataByAreaCode(selectedAreaCode); // 선택된 지역에 해당하는 데이터를 가져와서 상태에 저장
+  };
+
+  // 검색어
+  const [keyword, setKeyword] = useState("");
+  // 지역별 리스트
+  const [regionResult, setRegionResult] = useState(props.festivals);
+  // 페이지별 리스트
+  const [pageResult, setPageResult] = useState([]);
+  const dispatch = useDispatch();
+
+  // 새로 지역리스트 들어오면
+  useEffect(() => {
+    // 지역리스트 갱신
+    setRegionResult(props.festivals);
+  }, [props]);
+
+  // 키워드 바뀌면
+  useEffect(() => {
+    //페이징 초기화
+    dispatch(move({ point: 1 }));
+    //정규식으로 regionResult 분리
+    const regExp = new RegExp(keyword, "i");
+    setRegionResult(
+      props.festivals.filter((festivals) => regExp.test(festivals.title))
+    );
+  }, [keyword]);
+
+  //슬라이스에서 현재 페이지 가지고옴
+  var page = useSelector((state) => state.viewPageSlice.page);
+
+  // 한페이지당 출력되야되는 리스트
+  const listPerPage = 4;
+  // 해당페이지 첫 요소
+  var skip = (page - 1) * listPerPage;
+
+  //검색에의해서 바뀌거나 page가 바뀌면
+  useEffect(() => {
+    skip = (page - 1) * listPerPage;
+    setPageResult(regionResult.slice(skip, skip + listPerPage));
+  }, [regionResult, page]);
+
+  // 마지막페이지 계산
+  const lastPage = Math.floor(
+    (listPerPage + regionResult.length - 1) / listPerPage
+  );
+
+  const LocalSelectList = localList.map((localList) => (
+    <ToggleButton
+      id={"tbg-radio" + localList.id}
+      value={localList.id}
+      key={localList.id}
+    >
+      {localList.localTitle}
+    </ToggleButton>
+  ));
 
     if (success) {
       alert("결제 성공");
@@ -53,14 +120,52 @@ function Payment() {
     });
   };
   return (
-    <div className="checkout-btn mt-100">
-      <Link
-        className="btn essence-btn"
-        style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
-        onClick={toServer}
-      >
-        결제하기
-      </Link>
+    <div className="container" style={{ marginTop: "150px" }}>
+      <div className="row">
+        <div className="col-12">
+          <div className="container">
+            <div
+              className="slider-content"
+              style={{
+                padding: "10px",
+                width: "100%",
+                textAlign: "center",
+                borderRadius: "7px",
+                backgroundColor: "#22b3c1",
+              }}
+            >
+              <div className="row justify-content-center align-items-center">
+                <div className="col-5 align-middle">
+                  <h2 style={{ margin: "0", color: "#fff" }}>
+                    <em style={{ color: "#fff" }}>지역별 행사 추천</em>
+                  </h2>
+                </div>
+              </div>
+            </div>
+
+            {/* 토글버튼 */}
+            <ToggleButtonGroup
+              type="radio"
+              name="options"
+              defaultValue={0}
+              onChange={onChangeToggle}
+            >
+              {LocalSelectList}
+            </ToggleButtonGroup>
+
+            {/* 여기리스트 들어갈 부분 */}
+            
+            {festivalData && (
+            <div className="col-lg-6">
+              <div className="image">
+                <img src={festivalData.firstimage} alt="" />
+              </div>
+              <h5>{festivalData.title}</h5>
+            </div>
+          )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

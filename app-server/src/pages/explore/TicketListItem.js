@@ -5,7 +5,7 @@ import TicketDetailItem from "./TicketDetailItem";
 
 import { push, pop } from "../../store/cartSlice";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -37,6 +37,7 @@ const TicketListItem = function (props) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const appElement = document.getElementById("root");
   const dispatch = useDispatch();
+  const myCart = useSelector((state) => state.myCartSlice.myCarts);
   if (appElement) {
     Modal.setAppElement(appElement);
   } else {
@@ -47,7 +48,8 @@ const TicketListItem = function (props) {
   }
 
   const toCart = function () {
-    console.log(props.festival);
+    // console.log(props.festival);
+
     dispatch(
       push({
         ticket: {
@@ -59,6 +61,7 @@ const TicketListItem = function (props) {
           price: props.festival.event_end_date,
           image: props.festival.first_image,
           ticket_id: props.festival.id,
+          index: myCart.length,
         },
       })
     );
@@ -104,7 +107,7 @@ const TicketListItem = function (props) {
           <div className="col-lg-2 align-self-center">
             {/* 홈페이지 연결 */}
             <div className="explore_list_button">
-              <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">
+              <Link to={props.festival.home_page} target="_blank">
                 <i className="fa fa-home"></i>
               </Link>
             </div>
