@@ -58,7 +58,7 @@ const TicketListItem = function (props) {
           name: props.festival.title,
           quantity: 1,
           // 여기 가격추가
-          price: props.festival.event_end_date,
+          price: props.festival.id,
           image: props.festival.first_image,
           ticket_id: props.festival.id,
           index: myCart.length,

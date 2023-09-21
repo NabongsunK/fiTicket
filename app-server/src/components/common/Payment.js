@@ -38,7 +38,7 @@ function Payment(props) {
       pg: "kakaopay", // PG사
       pay_method: "kakaopay", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: props.amount - 101100000, // 결제금액
+      amount: props.amount, // 결제금액
       name: "아임포트 결제 데이터 분석", // 주문명
       buyer_name: user.name, // 구매자 이름
       buyer_tel: user.phone_number, // 구매자 전화번호
@@ -82,7 +82,7 @@ function Payment(props) {
     const tmp = {
       tickets: tickets,
       login_id: user.id,
-      paid_amount: props.amount - 101100000,
+      paid_amount: props.amount,
     };
     // TODO:이건 서버를 수정해야할듯? , 결제완료되면 장바구니 끄기, 네비게이터 정리, 결제성공되면 서버에서 결과받고 뽑아오기
     paid_id = (await axios.post("/cart", tmp)).data.paid_id;
@@ -102,7 +102,8 @@ function Payment(props) {
           } else {
             // TODO: 안먹음
             console.log("로그인하세요");
-            navigate("/");
+            props.handleToggle();
+            navigate("/signIn");
           }
         }}
       >
