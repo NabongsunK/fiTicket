@@ -4,7 +4,7 @@
     "defaultChecked": false,
     "localTitle": "서울",
     "region_1depth_name": "서울특별시",
-    "area_code": 1
+    "area_code": "1"
   },
 
   {
@@ -12,7 +12,7 @@
     "defaultChecked": false,
     "localTitle": "경기",
     "region_1depth_name": "경기도",
-    "area_code": 31
+    "area_code": "31"
   },
 
   {
@@ -20,7 +20,7 @@
     "defaultChecked": false,
     "localTitle": "인천",
     "region_1depth_name": "인천광역시",
-    "area_code": 2
+    "area_code": "2"
   },
 
   {
@@ -28,7 +28,7 @@
     "defaultChecked": false,
     "localTitle": "강원",
     "region_1depth_name": "강원특별자치도",
-    "area_code": 32
+    "area_code": "32"
   },
 
   {
@@ -36,14 +36,14 @@
     "defaultChecked": false,
     "localTitle": "세종",
     "region_1depth_name": "세종특별자치시",
-    "area_code": 8
+    "area_code": "8"
   },
   {
     "id": 5,
     "defaultChecked": false,
     "localTitle": "대전",
     "region_1depth_name": "대전광역시",
-    "area_code": 3
+    "area_code": "3"
   },
 
   {
@@ -51,7 +51,7 @@
     "defaultChecked": false,
     "localTitle": "충남",
     "region_1depth_name": "충청남도",
-    "area_code": 34
+    "area_code": "34"
   },
 
   {
@@ -59,7 +59,7 @@
     "defaultChecked": false,
     "localTitle": "충북",
     "region_1depth_name": "충청북도",
-    "area_code": 33
+    "area_code": "33"
   },
 
   {
@@ -67,7 +67,7 @@
     "defaultChecked": false,
     "localTitle": "광주",
     "region_1depth_name": "광주광역시",
-    "area_code": 5
+    "area_code": "5"
   },
 
   {
@@ -75,7 +75,7 @@
     "defaultChecked": false,
     "localTitle": "전남",
     "region_1depth_name": "전라남도",
-    "area_code": 38
+    "area_code": "38"
   },
 
   {
@@ -83,7 +83,7 @@
     "defaultChecked": false,
     "localTitle": "전북",
     "region_1depth_name": "전라북도",
-    "area_code": 37
+    "area_code": "37"
   },
 
   {
@@ -91,7 +91,7 @@
     "defaultChecked": false,
     "localTitle": "부산",
     "region_1depth_name": "부산광역시",
-    "area_code": 6
+    "area_code": "6"
   },
 
   {
@@ -99,7 +99,7 @@
     "defaultChecked": false,
     "localTitle": "대구",
     "region_1depth_name": "대구광역시",
-    "area_code": 4
+    "area_code": "4"
   },
 
   {
@@ -107,7 +107,7 @@
     "defaultChecked": false,
     "localTitle": "울산",
     "region_1depth_name": "울산광역시",
-    "area_code": 7
+    "area_code": "7"
   },
 
   {
@@ -115,7 +115,7 @@
     "defaultChecked": false,
     "localTitle": "경북",
     "region_1depth_name": "경상북도",
-    "area_code": 35
+    "area_code": "35"
   },
 
   {
@@ -123,7 +123,7 @@
     "defaultChecked": false,
     "localTitle": "경남",
     "region_1depth_name": "경상남도",
-    "area_code": 36
+    "area_code": "36"
   },
 
   {
@@ -131,7 +131,7 @@
     "defaultChecked": false,
     "localTitle": "제주",
     "region_1depth_name": "세종특별자치시",
-    "area_code": 39
+    "area_code": "39"
   }
 
 ]

@@ -12,16 +12,14 @@ const Recommend = function () {
   const [festivals, setFestivals] = useState(festivalsData); // 선택한 지역의 행사 정보를 저장하는 상태
 
   useEffect(() => {
-    console.log(festivalsData);
     // 선택한 지역의 ID가 변경될 때마다 해당 지역의 행사 정보
     const selectedLocalFestivals = festivalsData.filter(
-      (festival) => festival.area_code === selectedLocal
+      (festival) => festival.areacode === selectedLocal
     );
     setFestivals(selectedLocalFestivals);
   }, [selectedLocal]);
 
   const onChangeToggle = (selectedValue) => {
-    console.log(selectedValue)
     setSelectedLocal(selectedValue);
   };
   
