@@ -84,6 +84,23 @@ const cartModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+  // cart_done == 1 & cart_deleted ==0인 리스트 user_id로 찾기
+  async history(id, conn = pool) {
+    try {
+      const sql = `
+      select
+          ticket_id,
+          ticket_quantity
+          from cart
+      where (cart_done is true and cart_deleted is false and user_id= ? )
+      order by cart.created_time;
+      `;
+      const [result] = await conn.query(sql, [id]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = cartModel;
