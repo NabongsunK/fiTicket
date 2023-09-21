@@ -89,6 +89,33 @@ const ExploreService = {
       pool.releaseConnection(conn);
     }
   },
+  async getTicketByIds(article) {
+    // article = [{ticket_id, ticket_quantity}]
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+
+      const data = article.map(async (item) => {
+        console.log(item);
+        return {
+          ...(await ExploreGetModel.getTicketById(item.ticket_id, conn)),
+          ticket_quantity: item.ticket_quantity,
+        };
+      });
+
+      // DB에 작업 반영
+      await conn.commit();
+      return { data, ok: true, length: data.length };
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
 };
 
 module.exports = ExploreService;

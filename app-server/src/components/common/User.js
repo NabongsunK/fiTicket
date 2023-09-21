@@ -1,18 +1,40 @@
+import { useSelector } from "react-redux";
 import Left from "./Left";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import CartList from "./CartList";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
-const getList = async function () {
-  const res = await axios.get("/cart/tickethistory/" + "6");
-  return res.data.data;
+const getList = async function (user_id) {
+  const url = "/cart/tickethistory/" + user_id;
+  const res = await axios.get(url);
+  return res.data;
 };
 
+const cartItems = [
+  {
+    // 여기 지역추가
+    badge: "주소",
+    name: "이름",
+    quantity: "수량",
+    price: "가격",
+    image: "이미지",
+    ticket_id: "필요한가?",
+    index: "필요한가?",
+  },
+];
+
 const User = function (props) {
-  getList().then((response) => {
-    console.log(response);
-  });
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const [cartItems, setCartItems] = useState([]);
+  useEffect(() => {
+    getList(user_id).then((response) => {
+      console.log(response);
+    });
+  }, [user_id]);
+
   return (
     <div
       className={
@@ -25,7 +47,7 @@ const User = function (props) {
       <Left cartNo={props.cartNo} actions={props.actions} />
 
       <div className="cart-content">
-        <div>유저창입니다.</div>
+        <CartList cartItems={cartItems} />
       </div>
     </div>
   );

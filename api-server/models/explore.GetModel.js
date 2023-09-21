@@ -22,25 +22,25 @@ const ExploreGetModel = {
     try {
       const sql = `
       SELECT
-      id,
-      addr1,
-      addr2,
-      first_image,
-      first_image2,
-      tel,
-      title,
-      event_start_date,
-      event_end_date,
-      home_page,
-      over_view
+        id,
+        addr1,
+        addr2,
+        first_image,
+        first_image2,
+        tel,
+        title,
+        event_start_date,
+        event_end_date,
+        home_page,
+        over_view
       FROM festival_api
 
       WHERE
-      first_image IS NOT NULL
-      AND title IS NOT NULL
-      AND event_start_date IS NOT NULL
-      AND event_end_date IS NOT NULL
-      AND over_view IS NOT NULL
+        first_image IS NOT NULL
+        AND title IS NOT NULL
+        AND event_start_date IS NOT NULL
+        AND event_end_date IS NOT NULL
+        AND over_view IS NOT NULL
       ORDER BY event_start_date ASC
       `;
       const [result] = await conn.query(sql);
@@ -53,26 +53,26 @@ const ExploreGetModel = {
     try {
       const sql = `
       SELECT
-      id,
-      addr1,
-      addr2,
-      first_image,
-      first_image2,
-      tel,
-      title,
-      event_start_date,
-      event_end_date,
-      home_page,
-      over_view
+        id,
+        addr1,
+        addr2,
+        first_image,
+        first_image2,
+        tel,
+        title,
+        event_start_date,
+        event_end_date,
+        home_page,
+        over_view
       FROM festival_api
 
       WHERE
-      first_image IS NOT NULL
-      AND title IS NOT NULL
-      AND event_start_date IS NOT NULL
-      AND event_end_date IS NOT NULL
-      AND over_view IS NOT NULL
-      AND addr1 Like ?
+        first_image IS NOT NULL
+        AND title IS NOT NULL
+        AND event_start_date IS NOT NULL
+        AND event_end_date IS NOT NULL
+        AND over_view IS NOT NULL
+        AND addr1 Like ?
       ORDER BY event_start_date ASC
       `;
       const [result] = await conn.query(sql, [query]);
@@ -108,6 +108,24 @@ const ExploreGetModel = {
       ORDER BY event_start_date ASC
       `;
       const [result] = await conn.query(sql, [area_code]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  async getTicketById(id, conn = pool) {
+    try {
+      const sql = `
+      SELECT
+        id,
+        addr1,
+        first_image,
+        title
+      FROM festival_api
+      WHERE
+        id = ?
+      `;
+      const [result] = await conn.query(sql, [id]);
       return result;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
