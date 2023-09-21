@@ -126,7 +126,7 @@ const ExploreGetModel = {
         id = ?
       `;
       const [result] = await conn.query(sql, [id]);
-      return result;
+      return result[0];
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
