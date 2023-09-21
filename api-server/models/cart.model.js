@@ -46,6 +46,152 @@ const cartModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+
+  // paidtickets에서 정보찾기
+  async findPaidByArticle(article, conn = pool) {
+    // article = { paid_amount, login_id, id };
+    try {
+      const sql = `
+      select 
+        id 
+      from paid_tickets 
+      where 
+        id = ? and
+        login_id = ? and
+        paid_amount = ? and
+        pay_finished = false and
+        tickets_deleted = false
+      `;
+      const [result] = await conn.query(sql, [
+        article.paid_id,
+        article.login_id,
+        article.paid_amount,
+      ]);
+      return result.length === 1;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // shopping cart에서 정보찾기
+  async findCartByArticle(article, conn = pool) {
+    // article = { paid_amount, login_id, id };
+    try {
+      const sql = `
+      select 
+        id 
+      from shopping_cart_1
+      where 
+        paid_id = ? and
+        login_id = ? and
+        cart_deleted = false and 
+        pay_done = false
+      `;
+      const [result] = await conn.query(sql, [
+        article.paid_id,
+        article.login_id,
+        article.paid_amount,
+      ]);
+      return result.length > 0;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // shopping cart 구매처리
+  async setDoneCartByArticle(article, conn = pool) {
+    // article = { paid_amount, login_id, id };
+    try {
+      const sql = `
+      update
+        shopping_cart_1
+      set pay_done = true
+      where 
+        paid_id = ? and
+        login_id = ? and
+        cart_deleted = false
+      `;
+      const [result] = await conn.query(sql, [
+        article.paid_id,
+        article.login_id,
+      ]);
+
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // paidtickets에서 구매처리
+  async setDonePaidByArticle(article, conn = pool) {
+    // article = { paid_amount, login_id, id };
+    try {
+      const sql = `
+      update
+        paid_tickets 
+      set pay_finished = true
+      where 
+        id = ? and
+        login_id = ? and
+        paid_amount = ? and
+        tickets_deleted = false
+      `;
+      const [result] = await conn.query(sql, [
+        article.paid_id,
+        article.login_id,
+        article.paid_amount,
+      ]);
+
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // shopping cart 삭제처리
+  async deleteCartByArticle(article, conn = pool) {
+    // article = { paid_amount, login_id, id };
+    try {
+      const sql = `
+      update
+        shopping_cart_1
+      set cart_deleted = true
+      where 
+        paid_id = ? and
+        login_id = ? and
+        pay_done = false
+      `;
+      const [result] = await conn.query(sql, [
+        article.paid_id,
+        article.login_id,
+      ]);
+
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // paidtickets에서 구매처리
+  async deletePaidByArticle(article, conn = pool) {
+    // article = { paid_amount, login_id, id };
+    try {
+      const sql = `
+      update
+        paid_tickets 
+      set tickets_deleted = true
+      where 
+        id = ? and
+        login_id = ? and
+        paid_amount = ? and
+        pay_finished = false
+      `;
+      const [result] = await conn.query(sql, [
+        article.paid_id,
+        article.login_id,
+        article.paid_amount,
+      ]);
+
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = cartModel;

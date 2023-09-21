@@ -8,9 +8,11 @@ import CartLeft from "./CartLeft";
 
 const Cart = function (props) {
   const cartItems = useSelector((state) => state.myCartSlice.myCarts);
+  const [amount, setAmount] = useState(0);
 
   useEffect(() => {
     props.setCartNo(cartItems.length);
+    setAmount(calculateTotalAmount());
   }, [cartItems]);
 
   const calculateTotalAmount = () => {
@@ -60,7 +62,7 @@ const Cart = function (props) {
           {/* Cart List Area */}
           <CartList cartItems={cartItems} />
 
-          <Payment />
+          <Payment amount={amount} />
         </div>
       </div>
     </>

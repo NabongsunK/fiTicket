@@ -2516,3 +2516,12 @@ body {
   position: relative;
   overflow: hidden;
 }
+
+.hover-item {
+  transition: all 0.3s;
+}
+
+.hover-item:hover {
+  background-color: #f5f5f5;
+  transform: scale(1.1);
+}

@@ -79,7 +79,8 @@ const LoginModel = {
       select
         name,
         email,
-        phone_number
+        phone_number,
+        id
       from users
       where
         id = ?

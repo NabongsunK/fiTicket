@@ -4,7 +4,7 @@ import { pop, change } from "../../store/cartSlice";
 
 const CartListItem = function (props) {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.myCartSlice.isLogined);
+  const cartItems = useSelector((state) => state.myCartSlice.myCarts);
 
   const removeItem = function (id) {
     cartItems.forEach((item, i) => {
@@ -16,6 +16,7 @@ const CartListItem = function (props) {
   };
 
   const increaseQuantity = function (id) {
+    console.log(cartItems);
     cartItems.forEach((item, i) => {
       if (item.index === id) {
         const updateItem = { ...item, quantity: item.quantity + 1 };
