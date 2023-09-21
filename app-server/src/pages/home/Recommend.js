@@ -8,95 +8,37 @@ import { move } from "../../store/pageSlice";
 import { Link } from "react-router-dom";
 
 const Recommend = function (props) {
-  const [selectedAreaCode, setSelectedAreaCode] = useState(-1);
-  const [festivalData, setFestivalData] = useState(null); // 선택된 지역의 축제 데이터
+  const [selectedLocal, setSelectedLocal] = useState(0); // 선택한 지역의 ID를 저장하는 상태
+  const [festivals, setFestivals] = useState([]); // 선택한 지역의 행사 정보를 저장하는 상태
 
-  const fetchFestivalDataByAreaCode = (areaCode) => {
-    // festivalsData에서 areaCode에 맞는 데이터를 찾습니다.
-    const selectedData = festivalsData.filter((festival) => {
-      console.log(festival.areacode, areaCode);
-      return festival.areacode === areaCode;
-    });
-    // console.log(selectedData);
-    if (selectedData) {
-      // 선택된 데이터에서 필요한 정보를 추출합니다.
-      const { area_code, firstimage, title } = selectedData;
-
-      // 추출한 정보를 상태에 저장합니다.
-      setSelectedAreaCode(area_code);
-      setFestivalData({ firstimage, title });
-    } else {
-      // 해당 areaCode에 맞는 데이터가 없을 경우 처리할 내용을 여기에 추가할 수 있습니다.
-      //console.log(areaCode);
-    }
-  };
-
-  const onChangeToggle = (val) => {
-    // console.log(val); // 클릭한 토글의 area_code를 콘솔에 출력
-    localList.forEach((area) => {
-      console.log(area.id, val, area.id === val);
-      if (area.id == val) {
-        setSelectedAreaCode(area.area_code); // 선택된 지역의 area_code를 상태에 저장
-        console.log(selectedAreaCode);
-        return false;
-      }
-    });
-    console.log(selectedAreaCode);
-    // fetchFestivalDataByAreaCode(selectedAreaCode); // 선택된 지역에 해당하는 데이터를 가져와서 상태에 저장
-  };
-
-  // 검색어
-  const [keyword, setKeyword] = useState("");
-  // 지역별 리스트
-  const [regionResult, setRegionResult] = useState(props.festivals);
-  // 페이지별 리스트
-  const [pageResult, setPageResult] = useState([]);
-  const dispatch = useDispatch();
-
-  // 새로 지역리스트 들어오면
   useEffect(() => {
-    // 지역리스트 갱신
-    setRegionResult(props.festivals);
-  }, [props]);
-
-  // 키워드 바뀌면
-  useEffect(() => {
-    //페이징 초기화
-    dispatch(move({ point: 1 }));
-    //정규식으로 regionResult 분리
-    const regExp = new RegExp(keyword, "i");
-    setRegionResult(
-      props.festivals.filter((festivals) => regExp.test(festivals.title))
+    // 선택한 지역의 ID가 변경될 때마다 해당 지역의 행사 정보
+    const selectedLocalFestivals = festivalsData.filter(
+      (festival) => festival.local_id === selectedLocal
     );
-  }, [keyword]);
+    setFestivals(selectedLocalFestivals);
+  }, [selectedLocal]);
 
-  //슬라이스에서 현재 페이지 가지고옴
-  var page = useSelector((state) => state.viewPageSlice.page);
+  const onChangeToggle = (selectedValue) => {
+    setSelectedLocal(selectedValue);
+  };
 
-  // 한페이지당 출력되야되는 리스트
-  const listPerPage = 4;
-  // 해당페이지 첫 요소
-  var skip = (page - 1) * listPerPage;
-
-  //검색에의해서 바뀌거나 page가 바뀌면
-  useEffect(() => {
-    skip = (page - 1) * listPerPage;
-    setPageResult(regionResult.slice(skip, skip + listPerPage));
-  }, [regionResult, page]);
-
-  // 마지막페이지 계산
-  const lastPage = Math.floor(
-    (listPerPage + regionResult.length - 1) / listPerPage
-  );
-
-  const LocalSelectList = localList.map((localList) => (
+  const LocalSelectList = localList.map((localItem) => (
     <ToggleButton
-      id={"tbg-radio" + localList.id}
-      value={localList.id}
-      key={localList.id}
+      id={"tbg-radio" + localItem.id}
+      value={localItem.id}
+      key={localItem.id}
     >
-      {localList.localTitle}
+      {localItem.localTitle}
     </ToggleButton>
+  ));
+  
+  const festivalList = festivals.map((festival) => (
+    <div key={festival.id}>
+      <img src={festival.firstimage}/>
+      <h3>{festival.title}</h3>
+      {/* 이 밑에 원하는 행사 정보 표시 내용 추가 */}
+    </div>
   ));
 
   return (
@@ -133,16 +75,8 @@ const Recommend = function (props) {
               {LocalSelectList}
             </ToggleButtonGroup>
 
-            {/* 여기리스트 들어갈 부분 */}
-
-            {festivalData && (
-              <div className="col-lg-6">
-                <div className="image">
-                  <img src={festivalData.firstimage} alt="" />
-                </div>
-                <h5>{festivalData.title}</h5>
-              </div>
-            )}
+            {/* 행사 리스트 */}
+            <div className="festival-list">{festivalList}</div>
           </div>
         </div>
       </div>
