@@ -91,6 +91,21 @@ const LoginModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+  // slt 가져오기
+  async getSlt(conn = pool) {
+    try {
+      // article = {login_id,phone_number,password,role,email,name}
+      const sql = `
+      select
+        a
+      from slt
+      `;
+      const [result] = await conn.query(sql);
+      return result[0].a;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = LoginModel;

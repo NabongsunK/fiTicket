@@ -16,21 +16,18 @@ const getUser = async function (user_id) {
   return res.data.data;
 };
 
-const Header = function () {
+const Header = function (props) {
   const [isActive, setActive] = useState(false);
   const [isCart, setCart] = useState(true);
   const [cartNo, setCartNo] = useState(0);
   const handleToggle = function () {
     setActive(!isActive);
-    console.log("isActive: ", isActive);
   };
   const goCart = function () {
     setCart(true);
-    console.log("isCart: ", isCart);
   };
   const goUser = function () {
     setCart(false);
-    console.log("isCart: ", isActive);
   };
   const [login_id, setLogin_id] = useState("");
 

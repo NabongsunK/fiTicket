@@ -44,4 +44,14 @@ router.post("/getuser", async (req, res, next) => {
   }
 });
 
+// 유저정보
+router.get("/getslt", async (req, res, next) => {
+  try {
+    const result = await UserService.getSlt();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

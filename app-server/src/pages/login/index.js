@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { signin, signout } from "../../store/loginSlice";
+import hasing from "../../store/hasing";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -17,7 +18,7 @@ function Login() {
   const signIn = async function () {
     const res = await axios.post("/login/signin", {
       login_id: LoginId,
-      password: LoginPw,
+      password: await hasing(LoginPw),
     });
     if (res.data.ok) {
       dispatch(signin({ user_id: res.data.user_id }));

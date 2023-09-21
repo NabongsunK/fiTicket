@@ -209,6 +209,23 @@ const UserService = {
       pool.releaseConnection(conn);
     }
   },
+  async getSlt() {
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      const data = await LoginModel.getSlt();
+      await conn.commit();
+      return data;
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
 };
 
 module.exports = UserService;

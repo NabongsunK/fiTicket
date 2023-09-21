@@ -68,7 +68,7 @@ const CartListItem = function (props) {
             </button>
           </p>
           <p className="color">할인: {props.item.discount}%</p>
-          <p className="price">{props.item.price.toLocaleString()}원</p>
+          {/* <p className="price">{props.item.price.toLocaleString()}원</p> */}
         </div>
       </Link>
     </div>
