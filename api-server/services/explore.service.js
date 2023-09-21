@@ -96,12 +96,13 @@ const ExploreService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
 
-      const data = article.map(async (item) => {
-        console.log(item);
-        return {
+      const data = [];
+      article.forEach(async (item) => {
+        const tmp = {
           ...(await ExploreGetModel.getTicketById(item.ticket_id, conn)),
           ticket_quantity: item.ticket_quantity,
         };
+        data.push(tmp);
       });
 
       // DB에 작업 반영

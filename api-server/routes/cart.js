@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 
 const CartService = require("../services/cart.service");
-const cartModel = require("../models/cart.model");
 
 // TODO: login_id -> user_id로 변경
 
@@ -46,7 +45,7 @@ router.post("/checkfail", async (req, res, next) => {
 router.get("/tickethistory/:id", async (req, res, next) => {
   try {
     const id = Number(req.params.id);
-    const article = await cartModel.history(id);
+    const article = await CartService.getPayDetails(id);
     res.json(article);
   } catch (err) {
     next(err);

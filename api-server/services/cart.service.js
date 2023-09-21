@@ -1,5 +1,6 @@
 const cartModel = require("../models/cart.model");
 const paidModel = require("../models/paid.model");
+const ExploreGetModel = require("../models/explore.GetModel");
 const pool = require("../models/pool");
 
 const CartService = {
@@ -87,6 +88,35 @@ const CartService = {
         await conn.commit();
         return { ok: true };
       }
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
+  async getPayDetails(id) {
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+
+      const ticket_ids = await cartModel.getTicketIdsByUserId(id);
+
+      var data = [];
+      ticket_ids.forEach(async (item) => {
+        const tmp = {
+          ...(await ExploreGetModel.getTicketById(item.ticket_id, conn)),
+          ticket_quantity: item.ticket_quantity,
+        };
+        data.push(tmp);
+      });
+
+      // DB에 작업 반영
+      await conn.commit();
+      return { ok: true, data };
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();
