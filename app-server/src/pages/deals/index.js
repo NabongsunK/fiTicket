@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { next, prev } from "../../store/pageSlice";
@@ -8,18 +8,29 @@ import GoToMap from "../../components/common/GoToMap";
 import Filter from "./Filter";
 import DealsPageHeading from "./DealsPageHeading";
 
-const Deal = function (props) {
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const allRecommends = async function () {
+  const res = await axios.get("/explore/recommends");
+  return res.data;
+};
+
+var recommendsList = await allRecommends();
+
+const Deal = function () {
   //페이징 처리
 
   const page = useSelector((state) => state.viewPageSlice.page);
 
   const listPerPage = 4;
   const lastPage = Math.floor(
-    (listPerPage + props.festivals.length - 1) / listPerPage
+    (listPerPage + recommendsList.length - 1) / listPerPage
   );
   const skip = (page - 1) * listPerPage;
 
-  const pageResult = props.festivals.slice(skip, skip + listPerPage);
+  const pageResult = recommendsList.slice(skip, skip + listPerPage);
 
   const totalPage = [];
   for (let i = 1; i <= lastPage; i++) {
@@ -74,11 +85,7 @@ const Deal = function (props) {
                 </li>
 
                 {totalPage.map((page) => (
-                  <li
-                    key={page}
-                    className={page === currPage ? "active" : ""}
-                    onClick={"active"}
-                  >
+                  <li key={page} className={page === currPage ? "active" : ""}>
                     <Link to="#">{page}</Link>
                   </li>
                 ))}

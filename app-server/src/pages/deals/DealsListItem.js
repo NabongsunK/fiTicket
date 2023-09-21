@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
 const DealsListItem = function (props) {
   return (
     <>
@@ -8,25 +12,26 @@ const DealsListItem = function (props) {
           <div className="row">
             <div className="col-lg-6">
               <div className="image">
-                <img src={props.festival.firstimage} alt="" />
+                <img src={props.festival.first_image} alt="" />
                 {/* <img src="http://tong.visitkorea.or.kr/cms/resource/75/2769775_image2_1.JPG" alt="" /> */}
               </div>
             </div>
             <div className="col-lg-6 align-self-center">
               <div className="content">
-                <span className="info">*Limited Offer Today</span>
+                <span className="info">*D-{props.festival.d_day}</span>
                 <h4>{props.festival.title}</h4>
                 <div className="row">
                   <div className="col-11">
                     <i className="fa fa-clock"></i>
                     <span className="list">
-                      {props.festival.eventstartdate} -
-                      {props.festival.eventenddate}
+                      {props.festival.event_start_date} -
+                      {props.festival.event_end_date}
                     </span>
                   </div>
                 </div>
                 <p>
-                  Lorem ipsum dolor sit amet dire consectetur adipiscing elit.
+                  {props.festival.over_view.substring(0, 64)}{" "}
+                  {props.festival.over_view.length > 64 ? "......" : ""}
                 </p>
                 <div className="row">
                   <div className="col-lg-3">
