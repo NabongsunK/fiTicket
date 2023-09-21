@@ -62,7 +62,7 @@ const Cart = function (props) {
           {/* Cart List Area */}
           <CartList cartItems={cartItems} />
 
-          <Payment amount={amount} />
+          <Payment amount={amount} handleToggle={props.handleToggle} />
         </div>
       </div>
     </>
