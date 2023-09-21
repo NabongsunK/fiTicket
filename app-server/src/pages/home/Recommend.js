@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { move } from "../../store/pageSlice";
 import { Link } from "react-router-dom";
 
-const Recommend = function (props) {
+const Recommend = function () {
   const [selectedLocal, setSelectedLocal] = useState(0); // 선택한 지역의 ID를 저장하는 상태
-  const [festivals, setFestivals] = useState([]); // 선택한 지역의 행사 정보를 저장하는 상태
+  const [festivals, setFestivals] = useState(festivalsData); // 선택한 지역의 행사 정보를 저장하는 상태
 
   useEffect(() => {
     // 선택한 지역의 ID가 변경될 때마다 해당 지역의 행사 정보
     const selectedLocalFestivals = festivalsData.filter(
-      (festival) => festival.local_id === selectedLocal
+      (festival) => festival.areacode === selectedLocal
     );
     setFestivals(selectedLocalFestivals);
   }, [selectedLocal]);
@@ -22,11 +22,12 @@ const Recommend = function (props) {
   const onChangeToggle = (selectedValue) => {
     setSelectedLocal(selectedValue);
   };
+  
 
   const LocalSelectList = localList.map((localItem) => (
     <ToggleButton
       id={"tbg-radio" + localItem.id}
-      value={localItem.id}
+      value={localItem.area_code}
       key={localItem.id}
     >
       {localItem.localTitle}

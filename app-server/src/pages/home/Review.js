@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import ReviewList from "./ReviewList";
-import ReviewListItem from "./ReviewListItem";
-
+import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 
 const items = [
@@ -14,62 +11,68 @@ const items = [
     rating: 9,
     name: "김철수",
     content: "아주좋습니다.",
-    first_imgae: "path/to/image1.jpg",
+    first_imgae:
+      "http://tong.visitkorea.or.kr/cms/resource/01/2859201_image2_1.jpg",
   },
   {
     id: 2,
     ticket_id: 1,
-    title: "감악산 꽃&별 여행",
+    title: "비봉산 꽃&별 여행",
     event_start_date: "20231004",
     event_end_date: "20240121",
     rating: 9,
-    name: "김철수",
+    name: "김길수",
     content: "아주좋습니다.",
-    first_imgae: "path/to/image1.jpg",
+    first_imgae:
+      "http://tong.visitkorea.or.kr/cms/resource/01/2859201_image2_1.jpg",
   },
   {
     id: 3,
     ticket_id: 1,
-    title: "감악산 꽃&별 여행",
+    title: "별 여행",
     event_start_date: "20231004",
     event_end_date: "20240121",
     rating: 9,
-    name: "김철수",
+    name: "외계인",
     content: "아주좋습니다.",
-    first_imgae: "path/to/image1.jpg",
+    first_imgae:
+      "http://tong.visitkorea.or.kr/cms/resource/01/2859201_image2_1.jpg",
   },
   {
     id: 4,
     ticket_id: 1,
-    title: "감악산 꽃&별 여행",
+    title: "땡벌",
     event_start_date: "20231004",
     event_end_date: "20240121",
     rating: 9,
-    name: "김철수",
+    name: "지쳤어요",
     content: "아주좋습니다.",
-    first_imgae: "path/to/image1.jpg",
+    first_imgae:
+      "http://tong.visitkorea.or.kr/cms/resource/01/2859201_image2_1.jpg",
   },
   {
     id: 5,
     ticket_id: 1,
-    title: "감악산 꽃&별 여행",
+    title: "볓,별,눈물",
     event_start_date: "20231004",
     event_end_date: "20240121",
     rating: 9,
-    name: "김철수",
+    name: "마지막춤을",
     content: "아주좋습니다.",
-    first_imgae: "path/to/image1.jpg",
+    first_imgae:
+      "http://tong.visitkorea.or.kr/cms/resource/01/2859201_image2_1.jpg",
   },
   {
     id: 6,
     ticket_id: 1,
-    title: "감악산 꽃&별 여행",
+    title: "전부땅아아아아",
     event_start_date: "20231004",
     event_end_date: "20240121",
     rating: 9,
-    name: "김철수",
+    name: "아아아아아아",
     content: "아주좋습니다.",
-    first_imgae: "path/to/image1.jpg",
+    first_imgae:
+      "http://tong.visitkorea.or.kr/cms/resource/24/2804924_image2_1.jpg",
   },
 ];
 
@@ -80,79 +83,97 @@ function Review() {
     setIndex(selectedIndex);
   };
 
+  const groupedItems = [];
+  for (let i = 0; i < items.length; i += 3) {
+    groupedItems.push(items.slice(i, i + 3));
+  }
+
   return (
-    <>
-      <Carousel activeIndex={index} onSelect={handleSelect}>
-        <Carousel.Item>
-          <div className="card-body" style={{ height: "1000px" }}>
-            <h6 className="card-subtitle mb-2 text-muted">{items[0].rating}</h6>
-            <h5 className="card-title">{items[0].title}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">
-              {items[0].event_start_date} ~ {items[0].event_end_date}
-            </h6>
-            <h6 className="card-subtitle mb-2 text-muted">{items[0].name}</h6>
-            <h6 className="card-subtitle mb-2 text-muted">
-              {items[0].content}
-            </h6>
-            <p className="card-text">{items[0].path}</p>
-          </div>
-          <Carousel.Caption>
-            <div className="card-body" style={{ backgroundColor: "black" }}>
-              <h6 className="card-subtitle mb-2 text-muted">
-                {items[0].rating}
-              </h6>
-              <h5 className="card-title">{items[0].title}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">
-                {items[0].event_start_date} ~ {items[0].event_end_date}
-              </h6>
-              <h6 className="card-subtitle mb-2 text-muted">{items[0].name}</h6>
-              <h6 className="card-subtitle mb-2 text-muted">
-                {items[0].content}
-              </h6>
-              <p className="card-text">{items[0].path}</p>
+    <div className="container" style={{ marginTop: "150px" }}>
+      <div className="row">
+        <div className="cities-town">
+          <div className="container">
+            <div
+              className="slider-content"
+              style={{
+                padding: "10px",
+                width: "50%",
+                left: "25%",
+                backgroundColor: "#22b3c1",
+              }}
+            >
+              <div className="row justify-content-center align-items-center">
+                <div className="col-5 align-middle">
+                  <h2 style={{ margin: "0", color: "#fff" }}>
+                    <em style={{ color: "#fff" }}>베스트 리뷰</em>
+                  </h2>
+                </div>
+              </div>
             </div>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <div className="card-body" style={{ backgroundColor: "yellow" }}>
-            <h6 className="card-subtitle mb-2 text-muted">{items[1].rating}</h6>
-            <h5 className="card-title">{items[0].title}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">
-              {items[1].event_start_date} ~ {items[1].event_end_date}
-            </h6>
-            <h6 className="card-subtitle mb-2 text-muted">{items[1].name}</h6>
-            <h6 className="card-subtitle mb-2 text-muted">
-              {items[1].content}
-            </h6>
-            <p className="card-text">{items[1].path}</p>
           </div>
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <div className="card-body" style={{ backgroundColor: "blue" }}>
-            <h6 className="card-subtitle mb-2 text-muted">{items[2].rating}</h6>
-            <h5 className="card-title">{items[0].title}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">
-              {items[2].event_start_date} ~ {items[2].event_end_date}
-            </h6>
-            <h6 className="card-subtitle mb-2 text-muted">{items[2].name}</h6>
-            <h6 className="card-subtitle mb-2 text-muted">
-              {items[2].content}
-            </h6>
-            <p className="card-text">{items[2].path}</p>
-          </div>
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-    </>
+        </div>
+
+        <Carousel
+          activeIndex={index}
+          onSelect={handleSelect}
+          nextIcon={null}
+          prevIcon={null}
+        >
+          {groupedItems.map((group, idx) => (
+            <Carousel.Item key={idx}>
+              <div className="row justify-content-center">
+                {group.map((item) => (
+                  <div
+                    className="col-md-3 card-body"
+                    key={item.id}
+                    style={{
+                      margin: "10px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        backgroundImage: `url(${item.first_imgae})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        position: "relative",
+                        width: "100%",
+                        height: "300px",
+                        margin: "10px auto",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          bottom: "10px",
+                          left: "10px",
+                          backgroundColor: "rgba(255, 255, 255, 0.7)",
+                          padding: "10px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        <h6 className="card-subtitle mb-2 text-muted">
+                          {item.rating}
+                        </h6>
+                        <h5 className="card-title">{item.title}</h5>
+                        <h6 className="card-subtitle mb-2 text-muted">
+                          {item.event_start_date} ~ {item.event_end_date}
+                        </h6>
+                        <h6 className="card-subtitle mb-2 text-muted">
+                          {item.name}
+                        </h6>
+                        <h6 className="card-subtitle mb-2 text-muted">
+                          {item.content}
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </div>
+    </div>
   );
 }
 
