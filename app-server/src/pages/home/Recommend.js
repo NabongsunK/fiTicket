@@ -8,20 +8,21 @@ import { move } from "../../store/pageSlice";
 import { Link } from "react-router-dom";
 
 const Recommend = function (props) {
+  
   const [selectedAreaCode, setSelectedAreaCode] = useState(-1);
   const [festivalData, setFestivalData] = useState(null); // 선택된 지역의 축제 데이터
 
   const fetchFestivalDataByAreaCode = (areaCode) => {
     // festivalsData에서 areaCode에 맞는 데이터를 찾습니다.
     const selectedData = festivalsData.filter((festival) => {
-      console.log(festival.areacode, areaCode);
-      return festival.areacode === areaCode;
-    });
+      console.log(festival.areacode, areaCode)
+      return(festival.areacode === areaCode)}
+      );
     // console.log(selectedData);
     if (selectedData) {
       // 선택된 데이터에서 필요한 정보를 추출합니다.
       const { area_code, firstimage, title } = selectedData;
-
+  
       // 추출한 정보를 상태에 저장합니다.
       setSelectedAreaCode(area_code);
       setFestivalData({ firstimage, title });
@@ -32,15 +33,16 @@ const Recommend = function (props) {
   };
 
   const onChangeToggle = (val) => {
-    // console.log(val); // 클릭한 토글의 area_code를 콘솔에 출력
-    localList.forEach((area) => {
-      console.log(area.id, val, area.id === val);
-      if (area.id == val) {
+  // console.log(val); // 클릭한 토글의 area_code를 콘솔에 출력
+    localList.forEach((area)=>{
+      console.log(area.id, val, area.id===val)
+      if (area.id == val){
+        
         setSelectedAreaCode(area.area_code); // 선택된 지역의 area_code를 상태에 저장
-        console.log(selectedAreaCode);
-        return false;
+        console.log(selectedAreaCode)
+        return false
       }
-    });
+    })
     console.log(selectedAreaCode);
     // fetchFestivalDataByAreaCode(selectedAreaCode); // 선택된 지역에 해당하는 데이터를 가져와서 상태에 저장
   };
@@ -134,15 +136,15 @@ const Recommend = function (props) {
             </ToggleButtonGroup>
 
             {/* 여기리스트 들어갈 부분 */}
-
+            
             {festivalData && (
-              <div className="col-lg-6">
-                <div className="image">
-                  <img src={festivalData.firstimage} alt="" />
-                </div>
-                <h5>{festivalData.title}</h5>
+            <div className="col-lg-6">
+              <div className="image">
+                <img src={festivalData.firstimage} alt="" />
               </div>
-            )}
+              <h5>{festivalData.title}</h5>
+            </div>
+          )}
           </div>
         </div>
       </div>
