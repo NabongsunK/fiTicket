@@ -3,6 +3,8 @@ import Cart from "../common/Cart";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import User from "../common/User";
+import Left from "../common/Left";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -15,17 +17,25 @@ const getUser = async function (user_id) {
 };
 
 const Header = function () {
-  const [isActive, setActive] = useState("false");
+  const [isActive, setActive] = useState(false);
+  const [isCart, setCart] = useState(true);
   const [cartNo, setCartNo] = useState(0);
   const handleToggle = function () {
     setActive(!isActive);
+    console.log("isActive: ", isActive);
+  };
+  const goCart = function () {
+    setCart(true);
+    console.log("isCart: ", isCart);
+  };
+  const goUser = function () {
+    setCart(false);
+    console.log("isCart: ", isActive);
   };
   const [login_id, setLogin_id] = useState("");
 
-  const [is_signed, user_id] = useSelector((state) => [
-    state.myLoginSlice.is_signed,
-    state.myLoginSlice.user_id,
-  ]);
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
 
   useEffect(() => {
     getUser(user_id).then((response) => {
@@ -67,13 +77,30 @@ const Header = function () {
           <div className="header-meta d-flex clearfix">
             {is_signed ? <div>{login_id}</div> : <div>로그인하세요</div>}
             <div className="user-login-info">
-              <NavLink to="/login">
-                <img src="/assets/images/core-img/user.svg" alt="" />
-              </NavLink>
+              {is_signed ? (
+                <NavLink
+                  onClick={() => {
+                    handleToggle();
+                    goUser();
+                  }}
+                >
+                  <img src="/assets/images/core-img/user.svg" alt="" />
+                </NavLink>
+              ) : (
+                <NavLink to="/login">
+                  <img src="/assets/images/core-img/user.svg" alt="" />
+                </NavLink>
+              )}
             </div>
 
             <div className="cart-area">
-              <Link to="#" id="essenceCartBtn" onClick={handleToggle}>
+              <Link
+                id="essenceCartBtn"
+                onClick={() => {
+                  handleToggle();
+                  goCart();
+                }}
+              >
                 <img src="/assets/images/core-img/bag.svg" alt="" />{" "}
                 <span>{cartNo}</span>
               </Link>
@@ -81,11 +108,21 @@ const Header = function () {
           </div>
         </div>
       </header>
+
+      {/*뒷배경 */}
+      <div
+        className={
+          isActive ? "cart-bg-overlay cart-bg-overlay-on" : "cart-bg-overlay "
+        }
+      ></div>
+
       <Cart
-        isActive={isActive}
-        handleToggle={handleToggle}
-        cartNo={cartNo}
-        setCartNo={setCartNo}
+        states={{ isActive, isCart, cartNo }}
+        actions={{ handleToggle, goCart, goUser, setCartNo }}
+      />
+      <User
+        states={{ isActive, isCart }}
+        actions={{ handleToggle, goCart, goUser, setCartNo }}
       />
     </>
   );

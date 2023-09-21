@@ -11,21 +11,21 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema localticket
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema boarddb
+-- Schema localticket
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema boarddb
+-- Schema localticket
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `boarddb` DEFAULT CHARACTER SET utf8mb3 ;
-USE `boarddb` ;
+CREATE SCHEMA IF NOT EXISTS `localticket` DEFAULT CHARACTER SET utf8mb3 ;
+USE `localticket` ;
 
 -- -----------------------------------------------------
--- Table `boarddb`.`review`
+-- Table `localticket`.`review`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `boarddb`.`review` ;
+DROP TABLE IF EXISTS `localticket`.`review` ;
 
-CREATE TABLE IF NOT EXISTS `boarddb`.`review` (
+CREATE TABLE IF NOT EXISTS `localticket`.`review` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `rating` INT NOT NULL COMMENT '1 ~ 10',
   `ticket_id` BIGINT NOT NULL,
@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS `boarddb`.`review` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `FK_users_TO_review_idx` ON `boarddb`.`review` (`user_id` ASC) VISIBLE;
+CREATE INDEX `FK_users_TO_review_idx` ON `localticket`.`review` (`user_id` ASC) VISIBLE;
 
-CREATE INDEX `FK_festival_api_TO_review_idx` ON `boarddb`.`review` (`ticket_id` ASC) VISIBLE;
+CREATE INDEX `FK_festival_api_TO_review_idx` ON `localticket`.`review` (`ticket_id` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
