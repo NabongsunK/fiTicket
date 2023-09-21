@@ -131,6 +131,51 @@ const ExploreGetModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+  // 추천 축제 area_code로 찾기
+  async areaRecommends(code, conn = pool) {
+    try {
+      const sql = `
+      select
+        id,
+        event_start_date,
+        event_end_date,
+        title,
+        first_image,
+        over_view,
+        home_page,
+        datediff(event_end_date, now()) as d_day
+      from festival_api
+      where (rec is true and area_code= ?)
+      `;
+      const [result] = await conn.query(sql, [code]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // 추천 축제 리스트
+  async recommends(code, conn = pool) {
+    try {
+      const sql = `
+      select
+        id,
+        event_start_date,
+        event_end_date,
+        title,
+        first_image,
+        over_view,
+        home_page,
+        datediff(event_end_date, now()) as d_day
+      from festival_api
+      where rec is true
+      order by festival_api.event_end_date
+      `;
+      const [result] = await conn.query(sql, [code]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = ExploreGetModel;
