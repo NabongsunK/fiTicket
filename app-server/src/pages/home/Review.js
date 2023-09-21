@@ -1,13 +1,24 @@
+import React, { useEffect } from "react";
+import { Carousel } from "bootstrap";
+
 const sliderItems = [
-  { id: 1, imgSrc: "path/to/image1.jpg", description: "1번" },
-  { id: 2, imgSrc: "path/to/image2.jpg", description: " 2번임" },
-  { id: 3, imgSrc: "path/to/image3.jpg", description: "3333333ㅋㅋ 3" },
-  { id: 4, imgSrc: "path/to/image4.jpg", description: "4ㅋ4ㅋ4ㅋ4ㅋ123 4" },
-  { id: 5, imgSrc: "path/to/image5.jpg", description: "이55이이이5" },
-  { id: 6, imgSrc: "path/to/image6.jpg", description: "이육육ㅁ닝 6" },
+  { id: 1, imgSrc: "path/to/image1.jpg", description: "1" },
+  { id: 2, imgSrc: "path/to/image2.jpg", description: "22는는두두번번" },
+  { id: 3, imgSrc: "path/to/image3.jpg", description: "333333333333" },
+  { id: 4, imgSrc: "path/to/image4.jpg", description: "44444444" },
+  { id: 5, imgSrc: "path/to/image5.jpg", description: "5555555" },
+  { id: 6, imgSrc: "path/to/image6.jpg", description: "666666666666" },
 ];
 
 function Review() {
+  useEffect(() => {
+    const carouselElement = document.getElementById("carouselExampleControls");
+    new Carousel(carouselElement, {
+      interval: 3000,
+      wrap: true,
+    });
+  }, []);
+
   return (
     <div className="container" style={{ marginTop: "150px" }}>
       <div className="row">
@@ -33,7 +44,7 @@ function Review() {
           </div>
         </div>
 
-        {/* 슬라이더 시작  */}
+        {/* 슬라이더 시작 */}
         <div className="row mt-5">
           <div
             id="carouselExampleControls"
@@ -47,7 +58,7 @@ function Review() {
                   {sliderItems.slice(0, 3).map((item) => (
                     <div
                       key={item.id}
-                      className="m-3 p-5"
+                      className="m-3 p-5 hover-item"
                       style={{
                         border: "1px solid black",
                         borderRadius: "20px",
@@ -57,7 +68,7 @@ function Review() {
                     >
                       <img
                         src={item.imgSrc}
-                        alt={item.description}
+                        alt=""
                         style={{ width: "80%", height: "auto" }}
                       />
                       <p>{item.description}</p>
@@ -72,7 +83,7 @@ function Review() {
                   {sliderItems.slice(3, 6).map((item) => (
                     <div
                       key={item.id}
-                      className="m-3 p-5"
+                      className="m-3 p-5 hover-item"
                       style={{
                         border: "1px solid black",
                         borderRadius: "20px",
@@ -82,7 +93,7 @@ function Review() {
                     >
                       <img
                         src={item.imgSrc}
-                        alt={item.description}
+                        alt=""
                         style={{ width: "80%", height: "auto" }}
                       />
                       <p>{item.description}</p>
@@ -91,32 +102,6 @@ function Review() {
                 </div>
               </div>
             </div>
-
-            {/* 슬라이더 컨트롤*/}
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleControls"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleControls"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
           </div>
         </div>
         {/* 슬라이더 끝 */}
