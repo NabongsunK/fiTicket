@@ -20,14 +20,14 @@ USE `localticket` ;
 -- -----------------------------------------------------
 -- Table `localticket`.`paid_tickets`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `localticket`.`paid_tickets` ;
+DROP TABLE IF EXISTS `localticket`.`paid` ;
 
-CREATE TABLE IF NOT EXISTS `localticket`.`paid_tickets` (
+CREATE TABLE IF NOT EXISTS `localticket`.`paid` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `paid_amount` BIGINT NOT NULL,
-  `login_id` BIGINT NOT NULL,
-  `pay_finished` TINYINT NOT NULL DEFAULT 0,
-  `tickets_deleted` TINYINT NOT NULL DEFAULT 0,
+  `user_id` BIGINT NOT NULL,
+  `paid_done` TINYINT NOT NULL DEFAULT 0,
+  `paid_deleted` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
