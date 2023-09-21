@@ -4,14 +4,14 @@ import CartList from "./CartList";
 import CartSummary from "./CartSummary";
 import { useSelector } from "react-redux";
 import Payment from "./Payment";
-import CartLeft from "./CartLeft";
+import Left from "./Left";
 
 const Cart = function (props) {
   const cartItems = useSelector((state) => state.myCartSlice.myCarts);
   const [amount, setAmount] = useState(0);
 
   useEffect(() => {
-    props.setCartNo(cartItems.length);
+    props.actions.setCartNo(cartItems.length);
     setAmount(calculateTotalAmount());
   }, [cartItems]);
 
@@ -32,24 +32,15 @@ const Cart = function (props) {
 
   return (
     <>
-      {/* cart 오버레이 되는 부분 */}
       <div
         className={
-          props.isActive
-            ? "cart-bg-overlay"
-            : "cart-bg-overlay cart-bg-overlay-on"
-        }
-      ></div>
-
-      <div
-        className={
-          props.isActive
-            ? "right-side-cart-area"
-            : "right-side-cart-area cart-on"
+          props.states.isActive && props.states.isCart
+            ? "right-side-cart-area cart-on"
+            : "right-side-cart-area"
         }
         style={{ zIndex: "21474899" }}
       >
-        <CartLeft cartNo={props.cartNo} handleToggle={props.handleToggle} />
+        <Left cartNo={props.cartNo} actions={props.actions} />
 
         <div className="cart-content">
           {/* Cart Summary */}
@@ -62,7 +53,7 @@ const Cart = function (props) {
           {/* Cart List Area */}
           <CartList cartItems={cartItems} />
 
-          <Payment amount={amount} handleToggle={props.handleToggle} />
+          <Payment amount={amount} handleToggle={props.actions.handleToggle} />
         </div>
       </div>
     </>

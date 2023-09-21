@@ -110,7 +110,7 @@ function Payment(props) {
             // TODO: 안먹음
             console.log("로그인하세요");
             props.handleToggle();
-            navigate("/signIn");
+            navigate("/login");
           }
         }}
       >
