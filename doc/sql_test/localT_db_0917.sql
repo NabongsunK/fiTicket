@@ -201,3 +201,18 @@ CREATE TABLE IF NOT EXISTS `localticket`.`slt` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 insert into slt(a) value("akdqklfqwopp14214kl124129r12rklf12f21f201412412jk214210");
+
+--  주차장 테이블
+
+-- DROP TABLE IF EXISTS `localticket`.`parking` ;
+
+-- CREATE TABLE IF NOT EXISTS `localticket`.`parking` (
+--   `id` BIGINT NOT NULL AUTO_INCREMENT,
+--   `prkplaceNm` VARCHAR(1000) NOT NULL, -- 주차장명
+--   `rdnmadr` VARCHAR(1000) NOT NULL, -- 소재지 도로명 주소
+--   `prkcmprt` VARCHAR(1000) NOT NULL, -- 주차구획수
+--   `latitude` VARCHAR(1000) NOT NULL, -- 위도
+--   `longitude` VARCHAR(1000) NOT NULL, -- 경도
+--   PRIMARY KEY (`id`))
+-- ENGINE = InnoDB
+-- DEFAULT CHARACTER SET = utf8mb3;
