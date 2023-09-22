@@ -4,7 +4,7 @@ import Payment from "./Payment";
 function Geuljae() {
   return (
     <div>
-      <Payment />
+      {/* <Payment /> */}
       <CommentList />
     </div>
   );

@@ -12,3 +12,4 @@ DEFAULT CHARACTER SET = utf8mb3;
 insert into slt(a) value("akdqklfqwopp14214kl124129r12rklf12f21f201412412jk214210");
 
 select * from slt;
+
