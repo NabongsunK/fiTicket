@@ -128,43 +128,48 @@ function Review() {
                     key={item.id}
                     style={{
                       margin: "10px",
+                      position: "relative",
+                      width: "100%",
+                      height: "300px",
+                      overflow: "visible",
                     }}
                   >
-                    <div
+                    <img
+                      src={item.first_imgae}
+                      alt={item.title}
                       style={{
-                        backgroundImage: `url(${item.first_imgae})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        position: "relative",
                         width: "100%",
                         height: "300px",
-                        margin: "10px auto",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "-10px",
+                        right: "-10px",
+                        backgroundColor: "rgba(255, 255, 255, 0.7)",
+                        padding: "10px",
+                        borderRadius: "5px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
-                      <div
-                        style={{
-                          position: "absolute",
-                          bottom: "10px",
-                          left: "10px",
-                          backgroundColor: "rgba(255, 255, 255, 0.7)",
-                          padding: "10px",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        <h6 className="card-subtitle mb-2 text-muted">
-                          {item.rating}
-                        </h6>
-                        <h5 className="card-title">{item.title}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">
-                          {item.event_start_date} ~ {item.event_end_date}
-                        </h6>
-                        <h6 className="card-subtitle mb-2 text-muted">
-                          {item.name}
-                        </h6>
-                        <h6 className="card-subtitle mb-2 text-muted">
-                          {item.content}
-                        </h6>
-                      </div>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        {item.rating}
+                      </h6>
+                      <h5 className="card-title">{item.title}</h5>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        {item.event_start_date} ~ {item.event_end_date}
+                      </h6>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        {item.name}
+                      </h6>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        {item.content}
+                      </h6>
                     </div>
                   </div>
                 ))}
