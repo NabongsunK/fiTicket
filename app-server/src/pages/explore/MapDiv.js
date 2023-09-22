@@ -110,7 +110,7 @@ const MapDiv = function (props) {
     props.states.regionId.current = localInfos[val].id;
   };
 
-  //처음마운트 될때 위치정보 얻기
+  // TODO: 처음마운트 될때 위치정보 얻기
   useEffect(getCurrentPos, []);
 
   const LocalSelectList = localInfos.map((localInfo) => (

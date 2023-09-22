@@ -8,6 +8,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import re
 
+
 def extract_url_from_homepage(homepage):
     parsed = urlparse(homepage)
     if parsed.scheme and parsed.netloc:
@@ -17,14 +18,17 @@ def extract_url_from_homepage(homepage):
         return match.group(0)
     return None
 
+
 def remove_html_tags(text):
     clean = re.compile('<.*?>')
     return re.sub(clean, '', text)
 
+
 def fetch_data_from_api(pageNo):
     api_url = f"http://apis.data.go.kr/B551011/KorService1/searchFestival1?eventStartDate=20230916&eventEndDate=20240213&areaCode=&sigunguCode=&ServiceKey=6l%2F8UQvwdYWWiJbjj%2BnretaNCG3OGmuhlU8dtbSj%2BZvaw4Hqq7NQeb%2FDUIC1lnJOorVsaDToNa1IzlYsLAjK%2Fg%3D%3D&listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=12&pageNo={pageNo}"
 
-    retries = Retry(total=5, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
+    retries = Retry(total=5, backoff_factor=1,
+                    status_forcelist=[500, 502, 503, 504])
     session = requests.Session()
     session.mount('http://', HTTPAdapter(max_retries=retries))
 
@@ -42,7 +46,8 @@ def fetch_data_from_api(pageNo):
     for item in items:
         content_id = item.find("contentid").text
         area_code_element = item.find("areacode")
-        area_code = int(area_code_element.text) if area_code_element is not None else None
+        area_code = int(
+            area_code_element.text) if area_code_element is not None else None
 
         api_detail_url = f"http://apis.data.go.kr/B551011/KorService1/detailCommon1?ServiceKey=6l%2F8UQvwdYWWiJbjj%2BnretaNCG3OGmuhlU8dtbSj%2BZvaw4Hqq7NQeb%2FDUIC1lnJOorVsaDToNa1IzlYsLAjK%2Fg%3D%3D&contentTypeId=15&contentId={content_id}&MobileOS=ETC&MobileApp=AppTest&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y"
 
@@ -50,11 +55,13 @@ def fetch_data_from_api(pageNo):
             response_detail = session.get(api_detail_url)
             response_detail.raise_for_status()
             root_detail = ET.fromstring(response_detail.content)
-            homepage = remove_html_tags(root_detail.findtext(".//homepage", default=""))
+            homepage = remove_html_tags(
+                root_detail.findtext(".//homepage", default=""))
             url_from_homepage = extract_url_from_homepage(homepage)
 
             overview_element = root_detail.find(".//item/overview")
-            overview = remove_html_tags(overview_element.text) if overview_element is not None else None
+            overview = remove_html_tags(
+                overview_element.text) if overview_element is not None else None
         except requests.RequestException as e:
             print(f"상세 정보 API 요청 오류: {e}")
             continue
@@ -72,7 +79,8 @@ def fetch_data_from_api(pageNo):
             continue
 
         root_time_festival = ET.fromstring(response_time_festival.content)
-        usetimefestival = remove_html_tags(root_time_festival.findtext(".//usetimefestival", default=""))
+        usetimefestival = remove_html_tags(
+            root_time_festival.findtext(".//usetimefestival", default=""))
         playtime = root_time_festival.findtext(".//playtime", default="")
 
         data = {
@@ -118,6 +126,11 @@ def fetch_data_from_api(pageNo):
             password="Localticket12$$",
             db="localticket",
             charset="utf8mb4",
+            # host="localhost",
+            # user="root",
+            # password="1234",
+            # db="localticket",
+            # charset="utf8mb4",
         )
 
         cursor = conn.cursor()
@@ -197,6 +210,7 @@ def fetch_data_from_api(pageNo):
 
     return len(data_list)
 
+
 def main():
     total_pages = 23
     for pageNo in range(1, total_pages + 1):
@@ -205,6 +219,7 @@ def main():
         if saved_count:
             print(f"{pageNo} 페이지에서 데이터베이스에 {saved_count}개의 레코드를 저장했습니다.")
         time.sleep(60)
+
 
 if __name__ == "__main__":
     main()

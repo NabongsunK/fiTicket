@@ -100,7 +100,74 @@ function Review() {
     groupedItems.push(items.slice(i, i + 3));
   }
 
-  console.log(items);
+  const data = groupedItems.map((group, idx) => (
+    <Carousel.Item key={idx}>
+      <div className="row justify-content-center">
+        {group.map((item) => (
+          <div
+            className="col-md-3 card-body"
+            key={item.id}
+            style={{
+              margin: "10px",
+              position: "relative",
+              width: "100%",
+              height: "300px",
+              overflow: "visible",
+            }}
+          >
+            <Link to={`/explore/${295}`}>
+              <img
+                src={item.first_image}
+                alt={item.title}
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  objectFit: "cover",
+                  borderRadius: "23px",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "-10px",
+                  right: "-10px",
+                  backgroundColor: "rgba(255, 255, 255, 0.7)",
+                  padding: "10px",
+                  borderRadius: "5px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                }}
+              >
+                <h6 className="card-subtitle mb-2 text-muted">
+                  {item.rating}점
+                </h6>
+                <Link to="/explore" style={{ color: "#000" }}>
+                  <h5 className="card-title" style={{ cursor: "pointer" }}>
+                    {item.ticket_name}
+                  </h5>
+                </Link>
+                <h6 className="card-subtitle mb-2 text-muted">
+                  {item.event_start_date} ~ {item.event_end_date}
+                </h6>
+                <h6 className="card-subtitle mb-2 text-muted">
+                  {item.user_name.substring(0, 1)}**님
+                </h6>
+                <div style={{ padding: "10px 25px" }}>
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    {item.content.substring(0, 32)}{" "}
+                    {item.content.length > 32 ? "..." : ""}
+                  </h6>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </Carousel.Item>
+  ));
 
   return (
     <div className="container" style={{ marginTop: "150px" }}>
@@ -133,75 +200,7 @@ function Review() {
           nextIcon={null}
           prevIcon={null}
         >
-          {groupedItems.map((group, idx) => (
-            <Carousel.Item key={idx}>
-              <div className="row justify-content-center">
-                {group.map((item) => (
-                  <div
-                    className="col-md-3 card-body"
-                    key={item.id}
-                    style={{
-                      margin: "10px",
-                      position: "relative",
-                      width: "100%",
-                      height: "300px",
-                      overflow: "visible",
-                    }}
-                  >
-                    <img
-                      src={item.first_image}
-                      alt={item.title}
-                      style={{
-                        width: "100%",
-                        height: "300px",
-                        objectFit: "cover",
-                        borderRadius: "23px",
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "-10px",
-                        right: "-10px",
-                        backgroundColor: "rgba(255, 255, 255, 0.7)",
-                        padding: "10px",
-                        borderRadius: "5px",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <h6 className="card-subtitle mb-2 text-muted">
-                        {item.rating}점
-                      </h6>
-                      <Link to="/explore" style={{ color: "#000" }}>
-                        <h5
-                          className="card-title"
-                          style={{ cursor: "pointer" }}
-                        >
-                          {item.ticket_name}
-                        </h5>
-                      </Link>
-                      <h6 className="card-subtitle mb-2 text-muted">
-                        {item.event_start_date} ~ {item.event_end_date}
-                      </h6>
-                      <h6 className="card-subtitle mb-2 text-muted">
-                        {item.user_name.substring(0, 1)}**님
-                      </h6>
-                      <div style={{ padding: "10px 25px" }}>
-                        <h6 className="card-subtitle mb-2 text-muted">
-                          {item.content.substring(0, 32)}{" "}
-                          {item.content.length > 32 ? "..." : ""}
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Carousel.Item>
-          ))}
+          {data}
         </Carousel>
       </div>
     </div>
