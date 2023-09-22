@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { useSearchParams } from "react-router-dom";
+=======
+>>>>>>> 8e2cf30d1f48a05c21f299e72fc76ff8b3d06756
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import localList from "../../data/locallist.json";
 import festivalsData from "../../data/_festivals.json";
-import { next, prev } from "../../store/pageSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { move } from "../../store/pageSlice";
-import { Link } from "react-router-dom";
+
 
 const Recommend = function () {
   const [selectedLocal, setSelectedLocal] = useState(0); // 선택한 지역의 ID를 저장하는 상태
@@ -35,6 +35,7 @@ const Recommend = function () {
     </ToggleButton>
   ));
 
+
   const festivalList = festivals.map((festival) => (
     <div key={festival.id}>
       <img src={festival.firstimage} />
@@ -43,25 +44,6 @@ const Recommend = function () {
     </div>
   ));
 
-  //페이징 처리
-
-  const page = useSelector((state) => state.viewPageSlice.page);
-
-  const listPerPage = 4;
-  const lastPage = Math.floor(
-    (listPerPage + festivals.length - 1) / listPerPage
-  );
-  const skip = (page - 1) * listPerPage;
-
-  const pageResult = festivals.slice(skip, skip + listPerPage);
-
-  const totalPage = [];
-  for (let i = 1; i <= lastPage; i++) {
-    totalPage.push(i);
-  }
-  const currPage = skip / listPerPage + 1;
-
-  const dispatch = useDispatch();
 
   return (
     <div className="container" style={{ marginTop: "150px" }}>
