@@ -96,24 +96,25 @@ function Payment(props) {
     return paid_id;
   };
 
+  const handlePayment = () => {
+    if (is_signed) {
+      props.handleToggle();
+      toServer();
+      onClickPayment();
+    } else {
+      // TODO: 안먹음
+      props.handleToggle(() => {
+        navigate("/login");
+      });
+    }
+  };
+
   return (
     <div className="checkout-btn mt-100">
       <Link
         className="btn essence-btn"
         style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
-        onClick={() => {
-          if (is_signed) {
-            navigate("/login");
-            props.handleToggle();
-            toServer();
-            onClickPayment();
-          } else {
-            // TODO: 안먹음
-            console.log("로그인하세요");
-            props.handleToggle();
-            navigate("/login");
-          }
-        }}
+        onClick={handlePayment}
       >
         결제하기
       </Link>
