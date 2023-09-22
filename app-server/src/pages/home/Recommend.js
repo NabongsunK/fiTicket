@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from "react-router-dom";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import localList from "../../data/locallist.json";
@@ -9,14 +9,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { move } from "../../store/pageSlice";
 import { Link } from "react-router-dom";
 
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const areaRec = async function () {
+  const res = await axios.get(`/explore/recommends`);
+  return res.data;
+};
+
+const recList = await areaRec();
+
 const Recommend = function () {
   const [selectedLocal, setSelectedLocal] = useState(0); // 선택한 지역의 ID를 저장하는 상태
-  const [festivals, setFestivals] = useState(festivalsData); // 선택한 지역의 행사 정보를 저장하는 상태
+  const [festivals, setFestivals] = useState(recList); // 선택한 지역의 행사 정보를 저장하는 상태
 
   useEffect(() => {
     // 선택한 지역의 ID가 변경될 때마다 해당 지역의 행사 정보
-    const selectedLocalFestivals = festivalsData.filter(
-      (festival) => festival.areacode === selectedLocal
+    const selectedLocalFestivals = recList.filter(
+      (festival) => festival.area_code == selectedLocal
     );
     setFestivals(selectedLocalFestivals);
   }, [selectedLocal]);
@@ -36,13 +47,14 @@ const Recommend = function () {
   ));
 
   const festivalList = festivals.map((festival) => (
-    <div key={festival.id}>
-      <img src={festival.firstimage} />
+    <div key={festival.id} className="col-3">
+      <img src={festival.first_image} />
       <h6>{festival.title}</h6>
       {/* 이 밑에 원하는 행사 정보 표시 내용 추가 */}
     </div>
   ));
-  
+
+  console.log(festivals);
 
   //페이징 처리
 
@@ -99,9 +111,7 @@ const Recommend = function () {
             </ToggleButtonGroup>
 
             {/* 행사 리스트 */}
-            <div className="col-md-3 card-body">
-              {festivalList}
-            </div>
+            <div className="row">{festivalList}</div>
             {/* pagination */}
             <div className="col-lg-12">
               <ul className="page-numbers">
