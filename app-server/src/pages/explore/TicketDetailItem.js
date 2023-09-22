@@ -1,7 +1,28 @@
+import { Link } from "react-router-dom";
+import { push, pop } from "../../store/cartSlice";
+import { useDispatch } from "react-redux";
+
+//const dispatch = useDispatch();
+
 const TicketDetailItem = function (props) {
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <h4>{props.festival.title}</h4>
+      {/* 홈페이지 연결 */}
+      <div
+        className="explore_list_button"
+        style={{ float: "left", paddingRight: "10px" }}
+      >
+        <Link to={props.festival.home_page} target="_blank">
+          <i className="fa fa-home"></i>
+        </Link>
+      </div>
+      {/* 장바구니 담기 */}
+      <div className="explore_list_button" onClick={props.toCart}>
+        <Link>
+          <i className="fa fa-cart-plus"></i>
+        </Link>
+      </div>
       <form>
         <div className="content">
           <i className="fa fa-clock" style={{ float: "left" }}></i>
