@@ -419,7 +419,14 @@ const Teams = function () {
               <div className="col-3">
                 <h4>
                   <div className="border-button">
-                    <Link to="/teams">보내기</Link>
+                    <Link
+                      to="/teams"
+                      onClick={() => {
+                        alert("전송 완료");
+                      }}
+                    >
+                      보내기
+                    </Link>
                   </div>
                 </h4>
               </div>

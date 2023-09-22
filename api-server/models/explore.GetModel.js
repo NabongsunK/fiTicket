@@ -165,7 +165,8 @@ const ExploreGetModel = {
         first_image,
         over_view,
         home_page,
-        datediff(event_end_date, now()) as d_day
+        datediff(event_end_date, now()) as d_day,
+        area_code
       from festival_api
       where rec is true
       order by festival_api.event_end_date
