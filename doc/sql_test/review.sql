@@ -29,10 +29,9 @@ CREATE TABLE IF NOT EXISTS `localticket`.`review` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `rating` INT NOT NULL COMMENT '1 ~ 10',
   `ticket_id` BIGINT NOT NULL,
-  `ticket_name` VARCHAR(45) NOT NULL,
   `user_id` BIGINT NOT NULL,
-  `user_name` VARCHAR(45) NOT NULL COMMENT '성 + \"**\"',
   `content` VARCHAR(512) NULL,
+  `best_review` TINYINT NOT NULL DEFAULT '0' COMMENT '홈 화면 보여질 리뷰',
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_users_TO_review`
     FOREIGN KEY (`user_id`)
