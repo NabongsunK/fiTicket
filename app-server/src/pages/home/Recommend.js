@@ -22,7 +22,6 @@ const Recommend = function () {
   const onChangeToggle = (selectedValue) => {
     setSelectedLocal(selectedValue);
   };
-  
 
   const LocalSelectList = localList.map((localItem) => (
     <ToggleButton
@@ -33,14 +32,17 @@ const Recommend = function () {
       {localItem.localTitle}
     </ToggleButton>
   ));
-  
+
   const festivalList = festivals.map((festival) => (
     <div key={festival.id}>
-      <img src={festival.firstimage}/>
+      <img src={festival.firstimage} />
       <h3>{festival.title}</h3>
       {/* 이 밑에 원하는 행사 정보 표시 내용 추가 */}
     </div>
   ));
+  console.log(festivalList);
+  console.log(festivals);
+  console.log(festivalsData);
 
   return (
     <div className="container" style={{ marginTop: "150px" }}>

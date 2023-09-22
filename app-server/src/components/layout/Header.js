@@ -20,14 +20,19 @@ const Header = function (props) {
   const [isActive, setActive] = useState(false);
   const [isCart, setCart] = useState(true);
   const [cartNo, setCartNo] = useState(0);
-  const handleToggle = function () {
+  const handleToggle = function (next) {
     setActive(!isActive);
+    setTimeout(() => {
+      next?.();
+    }, 1000);
   };
-  const goCart = function () {
+  const goCart = function (next) {
     setCart(true);
+    next?.();
   };
-  const goUser = function () {
+  const goUser = function (next) {
     setCart(false);
+    next?.();
   };
   const [login_id, setLogin_id] = useState("");
 
@@ -77,8 +82,7 @@ const Header = function (props) {
               {is_signed ? (
                 <NavLink
                   onClick={() => {
-                    handleToggle();
-                    goUser();
+                    goUser(handleToggle);
                   }}
                 >
                   <img src="/assets/images/core-img/user.svg" alt="" />
@@ -94,8 +98,7 @@ const Header = function (props) {
               <Link
                 id="essenceCartBtn"
                 onClick={() => {
-                  handleToggle();
-                  goCart();
+                  goCart(handleToggle);
                 }}
               >
                 <img src="/assets/images/core-img/bag.svg" alt="" />{" "}
