@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-// import { Link } from "react-router-dom";
 import StarRating from "./StartRating";
+// import { Link } from "react-router-dom";
 
 const CommentList = () => {
   const [comment, setComment] = useState("");
@@ -27,7 +27,10 @@ const CommentList = () => {
             <div className="row">
               <h4
                 className="mb-4 col-9"
-                style={{ color: "#22b3c1", paddingLeft: "50px" }}
+                style={{
+                  color: "#22b3c1",
+                  paddingTop: "50px",
+                }}
               >
                 리뷰 작성
               </h4>
@@ -83,6 +86,7 @@ const CommentList = () => {
                   }
                   onClick={post}
                   disabled={!isValid}
+                  style={{ width: "100px" }}
                 >
                   등록하기
                 </button>
