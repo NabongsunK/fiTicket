@@ -22,9 +22,6 @@ const Filter = function () {
                       id="chooseLocation" /* onChange="this.form.click()" */
                     >
                       <option defaultValue>지역</option>
-                      <option type="checkbox" name="option1" value="Italy">
-                        Italy
-                      </option>
                       <option value="1">서울</option>
                       <option value="2">경인</option>
                       <option value="3">강원</option>

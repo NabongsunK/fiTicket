@@ -2,9 +2,8 @@ import { useOutletContext, useParams } from "react-router";
 
 const TicketDetailItem = function () {
   const { id } = useParams();
-  const { regionList, setRegionList } = useOutletContext();
-  const festival = regionList.filter((fes) => fes.id === Number(id))[0];
-  console.log(regionList);
+  const { allListData } = useOutletContext();
+  const festival = allListData.filter((fes) => fes.id === Number(id))[0];
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <h4>{festival.title}</h4>

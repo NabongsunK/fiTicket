@@ -111,7 +111,7 @@ const MapDiv = function (props) {
   };
 
   // TODO: 처음마운트 될때 위치정보 얻기
-  // useEffect(getCurrentPos, []);
+  useEffect(getCurrentPos, []);
 
   const LocalSelectList = localInfos.map((localInfo) => (
     <ToggleButton

@@ -61,7 +61,7 @@ const Explore = function () {
             </div>
 
             <div className="col-lg-12">
-              <Outlet context={{ regionList, setRegionList }} />
+              <Outlet context={{ regionList, setRegionList, allListData }} />
             </div>
           </div>
         </div>
