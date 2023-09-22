@@ -94,7 +94,7 @@ figcaption {
   outline: 0;
 }
 body {
-  background-color: #fff;
+  background-image: url("../images/back.png");
 }
 
 .clearfix:after {
@@ -2493,7 +2493,64 @@ body {
 }
 
 /* 추가 */
+.login_page {
+  position: relative;
+  top: 70;
+  width: 95%;
+  min-height: 900px;
+  height: 80vh;
+  margin: 0 auto;
+  margin-top: 70px;
+  background-image: url("../images/login_bg_night.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  background-position-y: 0vh;
+}
+@media (max-width: 1200px) {
+  .login_page {
+    min-height: 550px;
+  }
+}
 
+@media (max-width: 992px) {
+  .login_page {
+    height: 80vh;
+  }
+}
+
+.login-container {
+  position: inherit;
+  padding: 10px 10px 0;
+  top: 15%;
+  right: -50%;
+  width: 18rem;
+  background-color: rgb(34, 179, 193, 0.75);
+  border-radius: 13px;
+}
+.login-container form .text-center p {
+  color: #212529;
+  /* font-weight: 600; */
+}
+.signup_page {
+  position: relative;
+  top: 70;
+  min-height: 800px;
+  margin: 0 auto;
+  height: 90vh;
+  background-image: url("../images/signup_bg.jpg");
+  background-size: ;
+}
+.signup-container {
+  position: inherit;
+  padding: 10px 10px 0;
+  top: 10%;
+  right: -20%;
+  width: 18rem;
+  background-color: rgb(34, 179, 193, 0.75);
+  border-radius: 13px;
+  margin: 0;
+}
 .search-form #explore-search-form {
   background-color: #22b3c1;
   border-radius: 23px;

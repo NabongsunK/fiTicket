@@ -26,98 +26,98 @@ function Login() {
     console.log(res);
   };
   return (
-    // 이쪽 수정부탁
+    <section className="login_page">
+      <div className="login-container">
+        <form>
+          {/* <!-- ID input --> */}
+          <div className="form-outline">
+            <label className="form-label" htmlFor="form2Example1">
+              ID
+            </label>
 
-    <div
-      style={{ width: "18rem", margin: "10rem", backgroundColor: "#22b3c1" }}
-    >
-      <form>
-        {/* <!-- ID input --> */}
-        <div className="form-outline mb-4">
-          <input
-            type="email"
-            id="form2Example1"
-            className="form-control"
-            onChange={(e) => setLoginId(e.target.value)}
-          />
-          <label className="form-label" htmlFor="form2Example1">
-            ID
-          </label>
-        </div>
+            <input
+              type="email"
+              id="form2Example1"
+              className="form-control"
+              onChange={(e) => setLoginId(e.target.value)}
+            />
+          </div>
 
-        {/* <!-- Password input --> */}
-        <div className="form-outline mb-4">
-          <input
-            type="password"
-            id="form2Example2"
-            className="form-control"
-            onChange={(e) => setLoginPw(e.target.value)}
-          />
-          <label className="form-label" htmlFor="form2Example2">
-            Password
-          </label>
-        </div>
+          {/* <!-- Password input --> */}
+          <div className="form-outline">
+            <label className="form-label" htmlFor="form2Example2">
+              Password
+            </label>
 
-        {/* <!-- 2 column grid layout for inline styling --> */}
-        <div className="row mb-4">
-          <div className="col d-flex justify-content-center">
-            {/* <!-- Checkbox --> */}
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="form2Example31"
-                defaultChecked
-              />
-              <label className="form-check-label" htmlFor="form2Example31">
-                {" "}
-                Remember me{" "}
-              </label>
+            <input
+              type="password"
+              id="form2Example2"
+              className="form-control"
+              onChange={(e) => setLoginPw(e.target.value)}
+            />
+          </div>
+
+          {/* <!-- 2 column grid layout for inline styling --> */}
+          <div className="row mb-4">
+            <div className="col d-flex justify-content-center">
+              {/* <!-- Checkbox --> */}
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="form2Example31"
+                  defaultChecked
+                />
+                <label className="form-check-label" htmlFor="form2Example31">
+                  {" "}
+                  Remember me{" "}
+                </label>
+              </div>
+            </div>
+
+            <div className="col">
+              {/* <!-- Simple link --> */}
+              <Link to="/signup">Forgot password?</Link>
             </div>
           </div>
 
-          <div className="col">
-            {/* <!-- Simple link --> */}
-            <Link to="/signup">Forgot password?</Link>
+          {/* <!-- Submit button --> */}
+          <button
+            type="button"
+            className="btn btn-primary btn-block mb-4"
+            onClick={() => {
+              signIn();
+            }}
+          >
+            Sign in
+          </button>
+
+          {/* <!-- Register buttons --> */}
+          <div className="text-center">
+            <p>
+              Not a member? <Link to="/signup">Register</Link>
+            </p>
+            <p>or sign up with:</p>
+            <button type="button" className="btn btn-link btn-floating mx-1">
+              <i className="fab fa-facebook-f"></i>
+            </button>
+
+            <button type="button" className="btn btn-link btn-floating mx-1">
+              <i className="fab fa-google"></i>
+            </button>
+
+            <button type="button" className="btn btn-link btn-floating mx-1">
+              <i className="fab fa-twitter"></i>
+            </button>
+
+            <button type="button" className="btn btn-link btn-floating mx-1">
+              <i className="fab fa-github"></i>
+            </button>
           </div>
-        </div>
-
-        {/* <!-- Submit button --> */}
-        <button
-          type="button"
-          className="btn btn-primary btn-block mb-4"
-          onClick={() => {
-            signIn();
-          }}
-        >
-          Sign in
-        </button>
-
-        {/* <!-- Register buttons --> */}
-        <div className="text-center">
-          <p>
-            Not a member? <Link to="/signup">Register</Link>
-          </p>
-          <p>or sign up with:</p>
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-facebook-f"></i>
-          </button>
-
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-google"></i>
-          </button>
-
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-twitter"></i>
-          </button>
-
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-github"></i>
-          </button>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </section>
   );
 }
 
