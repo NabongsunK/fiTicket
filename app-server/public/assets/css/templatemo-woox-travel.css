@@ -1441,13 +1441,14 @@ About Page Style
 }
 
 .weekly-offers .item {
-  margin: 0px 15px;
+  margin: 0px 35px;
   position: relative;
   min-height: 420px;
 }
 
 .weekly-offers .item .thumb img {
-  padding-right: 160px;
+  height: 315px;
+  padding-right: 60px;
   border-radius: 23px;
 }
 
@@ -1455,7 +1456,10 @@ About Page Style
   position: absolute;
   background-color: #fff;
   border-radius: 23px;
-  right: 0;
+  width: 230px;
+  height: 320px;
+  overflow: hidden;
+  right: -35px;
   top: 50%;
   transform: translateY(-50%);
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
