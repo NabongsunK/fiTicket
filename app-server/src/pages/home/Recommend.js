@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from 'react-router-dom';
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import localList from "../../data/locallist.json";
 import festivalsData from "../../data/_festivals.json";
+import { next, prev } from "../../store/pageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { move } from "../../store/pageSlice";
 import { Link } from "react-router-dom";
@@ -36,13 +38,31 @@ const Recommend = function () {
   const festivalList = festivals.map((festival) => (
     <div key={festival.id}>
       <img src={festival.firstimage} />
-      <h3>{festival.title}</h3>
+      <h6>{festival.title}</h6>
       {/* 이 밑에 원하는 행사 정보 표시 내용 추가 */}
     </div>
   ));
-  console.log(festivalList);
-  console.log(festivals);
-  console.log(festivalsData);
+  
+
+  //페이징 처리
+
+  const page = useSelector((state) => state.viewPageSlice.page);
+
+  const listPerPage = 4;
+  const lastPage = Math.floor(
+    (listPerPage + festivals.length - 1) / listPerPage
+  );
+  const skip = (page - 1) * listPerPage;
+
+  const pageResult = festivals.slice(skip, skip + listPerPage);
+
+  const totalPage = [];
+  for (let i = 1; i <= lastPage; i++) {
+    totalPage.push(i);
+  }
+  const currPage = skip / listPerPage + 1;
+
+  const dispatch = useDispatch();
 
   return (
     <div className="container" style={{ marginTop: "150px" }}>
@@ -79,7 +99,45 @@ const Recommend = function () {
             </ToggleButtonGroup>
 
             {/* 행사 리스트 */}
-            <div className="festival-list">{festivalList}</div>
+            <div className="col-md-3 card-body">
+              {festivalList}
+            </div>
+            {/* pagination */}
+            <div className="col-lg-12">
+              <ul className="page-numbers">
+                <li>
+                  <Link
+                    to=""
+                    onClick={() => {
+                      if (page > 1) {
+                        dispatch(prev({ step: 1 }));
+                      }
+                    }}
+                  >
+                    <i className="fa fa-arrow-left"></i>
+                  </Link>
+                </li>
+
+                {totalPage.map((page) => (
+                  <li key={page} className={page === currPage ? "active" : ""}>
+                    <Link to="#">{page}</Link>
+                  </li>
+                ))}
+
+                <li>
+                  <Link
+                    to=""
+                    onClick={() => {
+                      if (page < lastPage) {
+                        dispatch(next({ step: 1 }));
+                      }
+                    }}
+                  >
+                    <i className="fa fa-arrow-right"></i>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

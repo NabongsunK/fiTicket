@@ -10,7 +10,9 @@ import store from "./store/store";
 import Signup from "./pages/signup";
 import Explore from "./pages/explore";
 import Teams from "./pages/teams";
-import Geoljae from "./pages/geuljae";
+
+import TicketBody from "./pages/explore/TicketBody";
+import TicketDetail from "./pages/explore/TicketDetail";
 
 function App() {
   return (
@@ -20,11 +22,14 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/deals" element={<Deal festivals={festivals} />} />
-            <Route path="/explore" element={<Explore />} />
+            <Route path="/explore" element={<Explore />}>
+              <Route index element={<TicketBody />} />
+              <Route path=":id" element={<TicketDetail />} />
+              {/* <Route path="/:id/review" element={<Review />} /> */}
+            </Route>
             <Route path="/teams" element={<Teams />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            {/* <Route path="/test" element={<Geoljae />} /> */}
           </Route>
         </Routes>
       </Router>

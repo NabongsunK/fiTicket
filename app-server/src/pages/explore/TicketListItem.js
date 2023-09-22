@@ -48,8 +48,6 @@ const TicketListItem = function (props) {
   }
 
   const toCart = function () {
-    // console.log(props.festival);
-
     dispatch(
       push({
         ticket: {
@@ -59,7 +57,7 @@ const TicketListItem = function (props) {
           quantity: 1,
           // 여기 가격추가
           price: props.festival.id,
-          image: props.festival.first_image,
+          image: props.festival.first_image2,
           ticket_id: props.festival.id,
           index: myCart.length,
         },
@@ -72,7 +70,11 @@ const TicketListItem = function (props) {
         <div className="row">
           <div className="col-lg-3">
             <div className="image">
-              <img className="poster" src={props.festival.first_image} alt="" />
+              <img
+                className="poster"
+                src={props.festival.first_image2}
+                alt=""
+              />
             </div>
           </div>
           <div className="col-lg-7 align-self-center" onClick={openModal}>

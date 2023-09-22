@@ -23,7 +23,9 @@ const Header = function (props) {
   const handleToggle = function (next) {
     setActive(!isActive);
     setTimeout(() => {
-      next?.();
+      if (typeof next === "function") {
+        next?.();
+      }
     }, 1000);
   };
   const goCart = function (next) {

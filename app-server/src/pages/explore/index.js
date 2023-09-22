@@ -5,6 +5,7 @@ import axios from "axios";
 import SecondHead from "./SecondHead";
 import BodyTop from "./BodyTop";
 import TicketBody from "./TicketBody";
+import { Outlet } from "react-router";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -59,12 +60,8 @@ const Explore = function () {
               />
             </div>
 
-            {/* 축제 목록 리스트 */}
             <div className="col-lg-12">
-              <TicketBody
-                regionList={regionList}
-                setRegionList={setRegionList}
-              />
+              <Outlet context={{ regionList, setRegionList }} />
             </div>
           </div>
         </div>
