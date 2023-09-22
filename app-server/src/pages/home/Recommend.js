@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from "react-router-dom";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import localList from "../../data/locallist.json";
@@ -42,7 +42,6 @@ const Recommend = function () {
       {/* 이 밑에 원하는 행사 정보 표시 내용 추가 */}
     </div>
   ));
-  
 
   //페이징 처리
 
@@ -99,9 +98,8 @@ const Recommend = function () {
             </ToggleButtonGroup>
 
             {/* 행사 리스트 */}
-            <div className="col-md-3 card-body">
-              {festivalList}
-            </div>
+            <div className="col-md-3 card-body">{festivalList}</div>
+
             {/* pagination */}
             <div className="col-lg-12">
               <ul className="page-numbers">

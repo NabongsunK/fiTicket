@@ -87,6 +87,7 @@ const TicketListItem = function (props) {
               <TicketDetailItem
                 festival={props.festival}
                 openModal={openModal}
+                toCart={toCart}
               />
             </Modal>
 
