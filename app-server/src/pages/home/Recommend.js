@@ -31,8 +31,9 @@ const Recommend = function () {
     </ToggleButton>
   ));
 
+
   const festivalList = festivals.map((festival) => (
-    <div key={festival.id} style={{display: "inline-block", margin: "10px"}}>
+    <div key={festival.id}>
       <img src={festival.firstimage} />
       <h6>{festival.title}</h6>
       {/* 이 밑에 원하는 행사 정보 표시 내용 추가 */}
