@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import GoToMap from "../../components/common/GoToMap";
 import TeamsPageHeading from "./TeamsPageHeading";
+import TeamsPageHeading2 from "./TeamsPageHeading copy";
 
 const Teams = function () {
   return (
     <>
       <TeamsPageHeading />
+      <TeamsPageHeading2 />
 
       <div className="cities-town">
         <div className="container">
@@ -400,6 +402,7 @@ const Teams = function () {
         </div>
       </div>
 
+      {/* 문의하기 */}
       <div
         className="container"
         style={{ padding: "0 200px", marginTop: "50px" }}
