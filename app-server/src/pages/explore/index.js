@@ -31,11 +31,11 @@ const Explore = function () {
   //경도,위도,사이즈
   const [mapItude, setMapItude] = useState([]);
   const [mapCode, setMapCode] = useState(0);
-  const [listData, setListData] = useState(allListData);
+  const [regionList, setRegionList] = useState(allListData);
   let regionId = useRef(0);
 
   useEffect(() => {
-    getRegionList(mapCode).then((response) => setListData(response));
+    getRegionList(mapCode).then((response) => setRegionList(response));
   }, [mapCode]);
 
   return (
@@ -61,7 +61,10 @@ const Explore = function () {
 
             {/* 축제 목록 리스트 */}
             <div className="col-lg-12">
-              <TicketBody festivals={listData} />
+              <TicketBody
+                regionList={regionList}
+                setRegionList={setRegionList}
+              />
             </div>
           </div>
         </div>
