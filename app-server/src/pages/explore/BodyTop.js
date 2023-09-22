@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const BodyTop = function () {
   return (
     <div className="amazing-deals">

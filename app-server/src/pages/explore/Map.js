@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const { kakao } = window;
 
 const Map = function (props) {
+  const mapItude = useSelector((state) => state.myMapSlice.mapItude);
   let map = useRef(null);
   let polygons = useRef([]);
   var infoWindows = [];
@@ -17,7 +19,7 @@ const Map = function (props) {
     map.current = new kakao.maps.Map(document.getElementById("map"), {
       // 지도를 표시할 div
       center: new kakao.maps.LatLng(35.95, 128.25), // 지도의 중심좌표
-      level: props.mapItude[2], // 지도의 확대 레벨
+      level: mapItude[2], // 지도의 확대 레벨
     });
 
     // 마커 클러스터러를 생성합니다
@@ -85,11 +87,9 @@ const Map = function (props) {
         });
       }
 
-      if (props.mapItude[1]) {
-        map.current.setCenter(
-          new kakao.maps.LatLng(props.mapItude[1], props.mapItude[0])
-        );
-        map.current.setLevel(props.mapItude[2]);
+      if (mapItude[1]) {
+        map.current.setCenter(new kakao.maps.LatLng(mapItude[1], mapItude[0]));
+        map.current.setLevel(mapItude[2]);
       }
       return () => {
         if (props.boundary) {

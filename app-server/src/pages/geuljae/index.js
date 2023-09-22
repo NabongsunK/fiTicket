@@ -1,11 +1,13 @@
 import CommentList from "./CommentList";
 import Payment from "./Payment";
+import Exp from "./exp";
 
 function Geuljae() {
   return (
     <div>
       {/* <Payment /> */}
-      <CommentList />
+      {/* <CommentList /> */}
+      <Exp />
     </div>
   );
 }
