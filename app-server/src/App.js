@@ -24,7 +24,7 @@ function App() {
             <Route path="/teams" element={<Teams />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/test" element={<Geoljae />} />
+            {/* <Route path="/test" element={<Geoljae />} /> */}
           </Route>
         </Routes>
       </Router>
