@@ -17,7 +17,7 @@ const areaRec = async function () {
 const recList = await areaRec();
 
 const Recommend = function () {
-  const [selectedLocal, setSelectedLocal] = useState(0); // 선택한 지역의 ID를 저장하는 상태
+  const [selectedLocal, setSelectedLocal] = useState(1); // 선택한 지역의 ID를 저장하는 상태
   const [festivals, setFestivals] = useState(recList); // 선택한 지역의 행사 정보를 저장하는 상태
 
   useEffect(() => {
@@ -44,8 +44,8 @@ const Recommend = function () {
 
   const festivalList = festivals.map((festival) => (
     <div key={festival.id} className="col-3">
-      <Link to={`/explore/${festival.festival_id}`}>
-        <img src={festival.firstimage} />
+      <Link to={`/explore/${festival.id}`}>
+        <img src={festival.first_image} />
         <h6>{festival.title}</h6>
       </Link>
     </div>
