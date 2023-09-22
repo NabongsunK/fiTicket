@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import localList from "../../data/locallist.json";
 import festivalsData from "../../data/_festivals.json";
-import { next, prev } from "../../store/pageSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { move } from "../../store/pageSlice";
 import { Link } from "react-router-dom";
 
 const Recommend = function () {
