@@ -5,7 +5,7 @@ import { pop, change } from "../../store/cartSlice";
 const UserListItem = function (props) {
   return (
     <div className="single-cart-item">
-      <Link to="/test" className="product-image" onClick={props.handleToggle}>
+      <Link to="/review" className="product-image" onClick={props.handleToggle}>
         <img
           src={props.item.first_image}
           className="cart-thumb"

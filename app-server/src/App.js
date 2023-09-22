@@ -13,6 +13,7 @@ import Teams from "./pages/teams";
 
 import TicketBody from "./pages/explore/TicketBody";
 import TicketDetail from "./pages/explore/TicketDetail";
+import Review from "./pages/writeReview";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/teams" element={<Teams />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/review" element={<Review />} />
           </Route>
         </Routes>
       </Router>

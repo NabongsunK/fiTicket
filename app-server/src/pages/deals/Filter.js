@@ -25,14 +25,13 @@ const Filter = function () {
                       <option type="checkbox" name="option1" value="Italy">
                         Italy
                       </option>
-                      <option value="France">France</option>
-                      <option value="Switzerland">Switzerland</option>
-                      <option value="Thailand">Thailand</option>
-                      <option value="Australia">Australia</option>
-                      <option value="India">India</option>
-                      <option value="Indonesia">Indonesia</option>
-                      <option value="Malaysia">Malaysia</option>
-                      <option value="Singapore">Singapore</option>
+                      <option value="1">서울</option>
+                      <option value="2">경인</option>
+                      <option value="3">강원</option>
+                      <option value="4">충청</option>
+                      <option value="5">전라</option>
+                      <option value="6">경상</option>
+                      <option value="7">제주</option>
                     </select>
                   </fieldset>
                 </div>
@@ -44,12 +43,11 @@ const Filter = function () {
                       aria-label="Default select example"
                       id="choosePrice" /* onChange="this.form.click()" */
                     >
-                      <option defaultValue>행사 분야</option>
-                      <option value="100">$100 - $250</option>
-                      <option value="250">$250 - $500</option>
-                      <option value="500">$500 - $1,000</option>
-                      <option value="1000">$1,000 - $2,500</option>
-                      <option value="2500+">$2,500+</option>
+                      <option defaultValue>축제 분야</option>
+                      <option value="100">먹거리</option>
+                      <option value="250">공연</option>
+                      <option value="500">전시</option>
+                      <option value="1000">체험</option>
                     </select>
                   </fieldset>
                 </div>

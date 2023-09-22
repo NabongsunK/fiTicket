@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { useSearchParams } from "react-router-dom";
-=======
->>>>>>> 8e2cf30d1f48a05c21f299e72fc76ff8b3d06756
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import localList from "../../data/locallist.json";
 import festivalsData from "../../data/_festivals.json";
-
+import { next, prev } from "../../store/pageSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { move } from "../../store/pageSlice";
+import { Link } from "react-router-dom";
 
 const Recommend = function () {
   const [selectedLocal, setSelectedLocal] = useState(0); // 선택한 지역의 ID를 저장하는 상태
@@ -35,15 +35,14 @@ const Recommend = function () {
     </ToggleButton>
   ));
 
-
   const festivalList = festivals.map((festival) => (
-    <div key={festival.id}>
-      <img src={festival.firstimage} />
-      <h6>{festival.title}</h6>
-      {/* 이 밑에 원하는 행사 정보 표시 내용 추가 */}
+    <div key={festival.id} className="col-3">
+      <Link to={`/explore/${festival.festival_id}`}>
+        <img src={festival.firstimage} />
+        <h6>{festival.title}</h6>
+      </Link>
     </div>
   ));
-
 
   return (
     <div className="container" style={{ marginTop: "150px" }}>
@@ -80,44 +79,7 @@ const Recommend = function () {
             </ToggleButtonGroup>
 
             {/* 행사 리스트 */}
-            <div className="col-md-3 card-body">{festivalList}</div>
-
-            {/* pagination */}
-            <div className="col-lg-12">
-              <ul className="page-numbers">
-                <li>
-                  <Link
-                    to=""
-                    onClick={() => {
-                      if (page > 1) {
-                        dispatch(prev({ step: 1 }));
-                      }
-                    }}
-                  >
-                    <i className="fa fa-arrow-left"></i>
-                  </Link>
-                </li>
-
-                {totalPage.map((page) => (
-                  <li key={page} className={page === currPage ? "active" : ""}>
-                    <Link to="#">{page}</Link>
-                  </li>
-                ))}
-
-                <li>
-                  <Link
-                    to=""
-                    onClick={() => {
-                      if (page < lastPage) {
-                        dispatch(next({ step: 1 }));
-                      }
-                    }}
-                  >
-                    <i className="fa fa-arrow-right"></i>
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <div className="row">{festivalList}</div>
           </div>
         </div>
       </div>

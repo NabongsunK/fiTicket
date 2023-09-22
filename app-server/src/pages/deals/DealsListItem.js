@@ -6,8 +6,8 @@ axios.defaults.baseURL = "http://localhost:4400/api";
 
 const DealsListItem = function (props) {
   return (
-    <>
-      <div className="col-lg-6 col-sm-6">
+    <div className="col-lg-6 col-sm-6">
+      <Link to={`/explore/${props.festival.id}`}>
         <div className="item">
           <div className="row">
             <div className="col-lg-6">
@@ -58,8 +58,8 @@ const DealsListItem = function (props) {
             </div>
           </div>
         </div>
-      </div>
-    </>
+      </Link>
+    </div>
   );
 };
 

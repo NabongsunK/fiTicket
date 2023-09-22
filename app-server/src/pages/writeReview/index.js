@@ -1,5 +1,4 @@
 import CommentList from "./CommentList";
-import Payment from "./Payment";
 
 function Geuljae() {
   return (
