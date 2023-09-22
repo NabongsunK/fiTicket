@@ -42,6 +42,7 @@ const reviewModel = {
         review.id as id, 
           rating, 
           festival_api.title as ticket_name, 
+          festival_api.first_image as first_image,
           users.name as user_name, 
           content
         from review
