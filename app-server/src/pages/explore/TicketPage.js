@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { move, next, prev } from "../../store/pageSlice";
 
-const TicketBody = function (props) {
+const TicketPage = function (props) {
   //페이징 처리
   const dispatch = useDispatch();
   const page = useSelector((state) => state.viewPageSlice.page);
@@ -70,4 +70,4 @@ const TicketBody = function (props) {
   );
 };
 
-export default TicketBody;
+export default TicketPage;

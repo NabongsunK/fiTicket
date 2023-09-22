@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 
 import axios from "axios";
+import { Link } from "react-router-dom";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -175,17 +176,26 @@ function Review() {
                       <h6 className="card-subtitle mb-2 text-muted">
                         {item.rating}점
                       </h6>
-                      <h5 className="card-title">{item.ticket_name}</h5>
+                      <Link to="/explore" style={{ color: "#000" }}>
+                        <h5
+                          className="card-title"
+                          style={{ cursor: "pointer" }}
+                        >
+                          {item.ticket_name}
+                        </h5>
+                      </Link>
                       <h6 className="card-subtitle mb-2 text-muted">
                         {item.event_start_date} ~ {item.event_end_date}
                       </h6>
                       <h6 className="card-subtitle mb-2 text-muted">
                         {item.user_name.substring(0, 1)}**님
                       </h6>
-                      <h6 className="card-subtitle mb-2 text-muted">
-                        {item.content.substring(0, 32)}{" "}
-                        {item.content.length > 32 ? "..." : ""}
-                      </h6>
+                      <div style={{ padding: "10px 25px" }}>
+                        <h6 className="card-subtitle mb-2 text-muted">
+                          {item.content.substring(0, 32)}{" "}
+                          {item.content.length > 32 ? "..." : ""}
+                        </h6>
+                      </div>
                     </div>
                   </div>
                 ))}

@@ -48,7 +48,10 @@ const User = function (props) {
       <Left cartNo={props.cartNo} actions={props.actions} />
 
       <div className="cart-content">
-        <UserList userItems={userItems} />
+        <UserList
+          userItems={userItems}
+          handleToggle={props.actions.handleToggle}
+        />
       </div>
     </div>
   );
