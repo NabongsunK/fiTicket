@@ -3,6 +3,7 @@ import Left from "./Left";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CartList from "./CartList";
+import UserList from "./UserList";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -10,7 +11,7 @@ axios.defaults.baseURL = "http://localhost:4400/api";
 const getList = async function (user_id) {
   const url = "/cart/tickethistory/" + user_id;
   const res = await axios.get(url);
-  return res.data;
+  return res.data.data;
 };
 
 const cartItems = [
@@ -28,7 +29,7 @@ const cartItems = [
 
 const User = function (props) {
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
-  const [cartItemss, setCartItems] = useState([]);
+  const [userItems, setCartItems] = useState([]);
   useEffect(() => {
     getList(user_id).then((response) => {
       setCartItems(response);
@@ -47,7 +48,7 @@ const User = function (props) {
       <Left cartNo={props.cartNo} actions={props.actions} />
 
       <div className="cart-content">
-        <CartList cartItems={cartItems} />
+        <UserList userItems={userItems} />
       </div>
     </div>
   );

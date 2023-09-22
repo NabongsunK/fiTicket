@@ -103,6 +103,7 @@ function Payment(props) {
         style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
         onClick={() => {
           if (is_signed) {
+            navigate("/login");
             props.handleToggle();
             toServer();
             onClickPayment();
