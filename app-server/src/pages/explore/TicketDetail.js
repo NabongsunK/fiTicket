@@ -4,6 +4,7 @@ const TicketDetailItem = function () {
   const { id } = useParams();
   const { regionList, setRegionList } = useOutletContext();
   const festival = regionList.filter((fes) => fes.id === Number(id))[0];
+  console.log(regionList);
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <h4>{festival.title}</h4>
