@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useOutletContext, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { push } from "../../store/cartSlice";
@@ -23,7 +23,7 @@ const TicketDetailItem = function () {
   const { allListData } = useOutletContext();
   const festival = allListData.filter((fes) => fes.id === Number(id))[0];
   const dispatch = useDispatch();
-
+  const myCart = useSelector((state) => state.myCartSlice.myCarts);
   const [reviewData, setReviewData] = useState([]);
 
   // TODO: MAPDIV의 getcurrent보다 늦게 실행되야됨 settimeout 안쓰고 이거떄문에 맵이 두개생김
@@ -47,7 +47,7 @@ const TicketDetailItem = function () {
           price: festival.id,
           image: festival.first_image2,
           ticket_id: festival.id,
-          index: length,
+          index: myCart.length,
         },
       })
     );
