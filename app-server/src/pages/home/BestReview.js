@@ -5,6 +5,17 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import React from "react";
 import BestReviewListItem from "./BestReviewListItems";
 
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const bestReview = async function () {
+  const res = await axios.get("/review/best");
+  return res.data;
+};
+var bestReviewList = await bestReview();
+console.log(bestReviewList);
+
 const BestReview = function () {
   const restReviews = [
     {
@@ -124,7 +135,7 @@ const BestReview = function () {
                 className="owl-carousel owl-theme"
                 {...options}
               >
-                {restReviews.map((bestReviewItem) => (
+                {bestReviewList.map((bestReviewItem) => (
                   <BestReviewListItem
                     bestReviewListItems={bestReviewItem}
                     key={bestReviewItem.id}
