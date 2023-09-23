@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Top() {
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   return (
     <section id="section-1">
       <div className="content-slider">
@@ -37,7 +39,7 @@ function Top() {
                 <h1>포항 이가리닻</h1>
                 {/* 회원가입 페이지로 이동 */}
                 <div className="border-button">
-                  <Link to="/login">지금 가입하기</Link>
+                  {is_signed ? "" : <Link to="/login">지금 가입하기</Link>}
                 </div>
               </div>
               <div className="container">
