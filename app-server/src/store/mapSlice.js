@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const mapSlice = createSlice({
   name: "myMap",
-  initialState: { mapItude: [], mapCode: 0 },
+  initialState: { mapItude: [], mapCode: 0, mapData: [] },
   reducers: {
     setMapItude(state, action) {
       state.mapItude = action.payload.newMapItude;
@@ -10,8 +10,8 @@ const mapSlice = createSlice({
     setMapCode(state, action) {
       state.mapCode = action.payload.newMapCode;
     },
-    change(state, action) {
-      state.myCarts[action.payload.index] = action.payload.updateItem;
+    setMapData(state, action) {
+      state.mapData = action.payload.newMapData;
     },
     deletes(state, action) {
       state.myCarts = [];
@@ -20,4 +20,4 @@ const mapSlice = createSlice({
 });
 
 export default mapSlice;
-export const { setMapItude, setMapCode } = mapSlice.actions;
+export const { setMapItude, setMapCode, setMapData } = mapSlice.actions;

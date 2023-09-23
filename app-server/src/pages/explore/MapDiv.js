@@ -138,10 +138,7 @@ const MapDiv = function (props) {
         </label>
       </div>
 
-      <Map
-        data={props.data}
-        boundary={localInfos[props.states.regionId.current].boundary}
-      />
+      <Map boundary={localInfos[props.states.regionId.current].boundary} />
 
       <ToggleButtonGroup
         type="radio"
