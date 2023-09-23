@@ -52,10 +52,43 @@ const TicketDetailItem = function () {
       })
     );
   };
+  const [isActive, setActive] = useState("false");
+  const alertHandler = () => {
+    setActive(!isActive);
+    setTimeout(() => {
+      setActive(isActive);
+    }, 3000);
+  };
 
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <Outlet />
+      {/* 알람창 놓고싶은데 넣기*/}
+      <div
+        className={
+          isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
+        }
+        role="alert"
+        aria-live="assertive"
+        data-delay="3000"
+        aria-atomic="true"
+        style={{ position: "absolute", right: "30%", zIndex: 200 }}
+      >
+        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
+          <img
+            src="../../../public/assets/images/logo2.png"
+            alt=""
+            className="img-fluid m-r-5"
+            style={{ width: "150px" }}
+          />
+          <strong className="mr-auto"></strong>
+          <small className="text-muted"></small>
+        </div>
+        <div className="toast-body">
+          <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
+        </div>
+      </div>
+
       <h4>{festival.title}</h4>
       {/* 홈페이지 연결 */}
       <div
@@ -68,7 +101,7 @@ const TicketDetailItem = function () {
       </div>
       {/* 장바구니 담기 */}
       <div className="explore_list_button" onClick={toCart}>
-        <Link>
+        <Link onClick={alertHandler}>
           <i className="fa fa-cart-plus"></i>
         </Link>
       </div>
