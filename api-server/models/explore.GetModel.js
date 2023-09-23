@@ -32,7 +32,9 @@ const ExploreGetModel = {
         event_start_date,
         event_end_date,
         home_page,
-        over_view
+        over_view,
+        map_x,
+        map_y
       FROM festival_api
 
       WHERE

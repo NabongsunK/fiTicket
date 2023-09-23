@@ -3,13 +3,21 @@ import { useDispatch } from "react-redux";
 import { Outlet, useOutletContext, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { push } from "../../store/cartSlice";
-
+import { setMapItude } from "../../store/mapSlice";
 const TicketDetailItem = function () {
   const { id } = useParams();
   const { allListData } = useOutletContext();
   const festival = allListData.filter((fes) => fes.id === Number(id))[0];
   const dispatch = useDispatch();
 
+  // TODO: MAPDIV의 getcurrent보다 늦게 실행되야됨 settimeout 안쓰고 이거떄문에 맵이 두개생김
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(
+        setMapItude({ newMapItude: [festival.map_x, festival.map_y, 5] })
+      );
+    }, 50);
+  }, []);
   const toCart = function () {
     dispatch(
       push({
