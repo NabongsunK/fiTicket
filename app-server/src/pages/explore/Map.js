@@ -62,7 +62,6 @@ const Map = function () {
 
       // 클러스터러에 마커들을 추가합니다
       clusterer.addMarkers(markers);
-      console.log("마커 추가됨");
     },
     [mapData]
   );
