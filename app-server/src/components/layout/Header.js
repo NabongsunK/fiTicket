@@ -30,11 +30,15 @@ const Header = function (props) {
   };
   const goCart = function (next) {
     setCart(true);
-    next?.();
+    if (typeof next === "function") {
+      next?.();
+    }
   };
   const goUser = function (next) {
     setCart(false);
-    next?.();
+    if (typeof next === "function") {
+      next?.();
+    }
   };
   const [login_id, setLogin_id] = useState("");
 

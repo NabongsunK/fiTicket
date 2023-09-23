@@ -14,9 +14,9 @@ const TicketDetailItem = function () {
   useEffect(() => {
     setTimeout(() => {
       dispatch(
-        setMapItude({ newMapItude: [festival.map_x, festival.map_y, 5] })
+        setMapItude({ newMapItude: [festival.map_x, festival.map_y, 4] })
       );
-    }, 3000);
+    }, 50);
   }, []);
   const toCart = function () {
     dispatch(
