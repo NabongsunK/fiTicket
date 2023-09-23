@@ -1,8 +1,10 @@
 import React from "react";
 
-const BestReviewListItems = ({ BestReviewListItem }) => {
-  const { title, name, rating, content, first_image } = BestReviewListItem;
-  console.log("BestReviewListItem: " + BestReviewListItem);
+const BestReviewListItems = (props) => {
+  console.log(props);
+  const { title, name, rating, content, first_image } =
+    props.bestReviewListItems;
+  console.log("BestReviewListItem: " + props.bestReviewListItems);
 
   return (
     <>

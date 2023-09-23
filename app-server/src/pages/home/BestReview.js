@@ -124,10 +124,10 @@ const BestReview = function () {
                 className="owl-carousel owl-theme"
                 {...options}
               >
-                {restReviews.map((restReviewItem) => (
+                {restReviews.map((bestReviewItem) => (
                   <BestReviewListItem
-                    RestReviewListItems={restReviewItem}
-                    key={restReviewItem.id}
+                    bestReviewListItems={bestReviewItem}
+                    key={bestReviewItem.id}
                   />
                 ))}
               </OwlCarousel>
