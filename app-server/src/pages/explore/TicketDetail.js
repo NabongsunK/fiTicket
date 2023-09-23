@@ -1,22 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useOutletContext, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { push } from "../../store/cartSlice";
 import { setMapItude } from "../../store/mapSlice";
+import axios from "axios";
+import ReviewList from "./ReviewList";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const getReview = async function (ticket_id) {
+  try {
+    const res = await axios.get(`/review/reviews/${ticket_id}`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const TicketDetailItem = function () {
   const { id } = useParams();
   const { allListData } = useOutletContext();
   const festival = allListData.filter((fes) => fes.id === Number(id))[0];
   const dispatch = useDispatch();
 
+  const [reviewData, setReviewData] = useState([]);
+
   // TODO: MAPDIV의 getcurrent보다 늦게 실행되야됨 settimeout 안쓰고 이거떄문에 맵이 두개생김
   useEffect(() => {
+    getReview(id).then((response) => setReviewData(response));
     setTimeout(() => {
       dispatch(
-        setMapItude({ newMapItude: [festival.map_x, festival.map_y, 5] })
+        setMapItude({ newMapItude: [festival.map_x, festival.map_y, 4] })
       );
-    }, 3000);
+    }, 50);
   }, []);
   const toCart = function () {
     dispatch(
@@ -70,7 +87,8 @@ const TicketDetailItem = function () {
           <br />
           {"상세 정보"}
           <p>{festival.over_view}</p>
-          {"베스트 리뷰"}
+          {"리뷰"}
+          <ReviewList reviewData={reviewData} />
         </div>
       </form>
     </div>

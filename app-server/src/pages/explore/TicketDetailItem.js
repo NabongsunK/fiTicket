@@ -5,31 +5,32 @@ import BestReview from "../home/BestReview copy";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import ReviewList from "./ReviewList";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
-const getReview = async function (ticket_id) {
-  try {
-    const res = await axios.get(`/review/reviews/${ticket_id}`);
-    console.log(res.data);
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
+// const getReview = async function (ticket_id) {
+//   try {
+//     const res = await axios.get(`/review/reviews/${ticket_id}`);
+//     return res.data;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
 const TicketDetailItem = function (props) {
   const [isActive, setActive] = useState("false");
+  // const [reviewData, setReviewData] = useState([]);
   const alertHandler = () => {
     setActive(!isActive);
     setTimeout(() => {
       setActive(isActive);
     }, 3000);
   };
-  console.log(props);
-  useEffect(() => {
-    getReview(props.festival.id).then((res) => console.log(res));
-  }, []);
+
+  // useEffect(() => {
+  //   getReview(props.festival.id).then((response) => setReviewData(response));
+  // }, []);
 
   return (
     <div onClick={(e) => e.stopPropagation()}>
@@ -95,6 +96,7 @@ const TicketDetailItem = function (props) {
           <br />
           {"상세 정보"}
           <p>{props.festival.over_view}</p>
+          {/* <ReviewList reviewData={reviewData} /> */}
         </div>
       </form>
       <button onClick={props.openModal}>close</button>

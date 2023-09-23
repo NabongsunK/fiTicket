@@ -10,11 +10,6 @@ const BestReviewListItems = (props) => {
     <>
       <div className="item">
         <div className="thumb">
-          <img
-            src={first_image}
-            alt=""
-            style={{ width: "221px", height: "311px" }}
-          />
           <div className="text">
             <h6 style={{ float: "left" }}>★★★★★</h6>
             <br />
