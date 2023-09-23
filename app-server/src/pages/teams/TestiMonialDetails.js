@@ -15,7 +15,8 @@ const TestiMonialsDetails = ({ testiMonialDetail }) => {
           <div className="text">
             <h6 style={{ float: "left" }}>★★★★★</h6>
             <br />
-            <h4 style={{ float: "left" }}>
+            <br />
+            <h4>
               {title}
               <br />
               <span>

@@ -8,14 +8,6 @@ import TestiMonialsDetails from "./TestiMonialDetails";
 // import userPic from "../../../public/assets/images/best-02.jpg";
 
 const TeamsPageHeading2 = function () {
-  const [isActive, setActive] = useState("false");
-  const alertHandler = () => {
-    setActive(!isActive);
-    setTimeout(() => {
-      setActive(isActive);
-    }, 3000);
-  };
-
   const testiMonials = [
     {
       id: 1,
@@ -107,7 +99,7 @@ const TeamsPageHeading2 = function () {
         items: 1,
       },
       600: {
-        items: 3,
+        items: 2,
       },
       1000: {
         items: 3,
@@ -138,58 +130,12 @@ const TeamsPageHeading2 = function () {
                   return (
                     <TestiMonialsDetails
                       testiMonialDetail={testiMonialDetail}
-                      key={testiMonialDetail._key}
+                      key={testiMonialDetail.id}
                     />
                   );
                 })}
               </OwlCarousel>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="col-sm-6">
-        <div className="card">
-          <div className="card-header">
-            <h5>Data-delay</h5>
-          </div>
-          <div className="card-body">
-            <div className="bg-light p-4 mb-2" style={{ height: "250px" }}>
-              <div
-                className={
-                  isActive
-                    ? "toast toast-3s fade hide"
-                    : "toast toast-3s fade show"
-                }
-                role="alert"
-                aria-live="assertive"
-                data-delay="3000"
-                aria-atomic="true"
-              >
-                <div
-                  className="toast-header"
-                  style={{ backgroundColor: "#22b3c1" }}
-                >
-                  <img
-                    src="assets/images/logo2.png"
-                    alt=""
-                    className="img-fluid m-r-5"
-                    style={{ width: "150px" }}
-                  />
-                  <strong className="mr-auto"></strong>
-                  <small className="text-muted"></small>
-                </div>
-                <div className="toast-body">
-                  <strong className="mr-auto">
-                    티켓이 장바구니에 담겼습니다.
-                  </strong>
-                </div>
-              </div>
-            </div>
-
-            <button className="btn  btn-primary" onClick={alertHandler}>
-              3 sec
-            </button>
           </div>
         </div>
       </div>
