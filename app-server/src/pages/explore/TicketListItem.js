@@ -64,18 +64,18 @@ const TicketListItem = function (props) {
       })
     );
   };
+  const poster =
+    props.festival.first_image2 == "" ? (
+      <img className="poster" src="assets/images/fes_default.jpg" alt="" />
+    ) : (
+      <img className="poster" src={props.festival.first_image2} alt="" />
+    );
   return (
     <div className="col-lg-6 col-sm-3">
       <div className="item">
         <div className="row">
           <div className="col-lg-3">
-            <div className="image">
-              <img
-                className="poster"
-                src={props.festival.first_image2}
-                alt=""
-              />
-            </div>
+            <div className="image">{poster}</div>
           </div>
           <div className="col-lg-7 align-self-center" onClick={openModal}>
             <Modal

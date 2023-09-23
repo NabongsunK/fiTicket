@@ -1,8 +1,10 @@
 import React from "react";
 
 const BestReviewListItems = (props) => {
-  const { title, name, rating, content, first_image } =
+  // console.log(props);
+  const { ticket_name, user_name, rating, content, first_image } =
     props.bestReviewListItems;
+  // console.log("BestReviewListItem: " + props.bestReviewListItems);
 
   return (
     <>
@@ -18,14 +20,14 @@ const BestReviewListItems = (props) => {
             <br />
             <br />
             <h4>
-              {title}
+              {ticket_name}
               <br />
-              <span>
-                <i className="fa fa-users"></i> {name.substring(0, 1)}** 님
+              <span style={{ float: "right", margin: "5px" }}>
+                <i className="fa fa-users"></i> {user_name.substring(0, 1)}** 님
               </span>
             </h4>
-            <div className="line-dec"></div>
-            <ul>
+            <div className="line-dec" style={{ margin: 0, padding: 0 }}></div>
+            <ul style={{ marginTop: "4px", paddingTop: "12px" }}>
               <li>리뷰</li>
               <li>{content}</li>
             </ul>

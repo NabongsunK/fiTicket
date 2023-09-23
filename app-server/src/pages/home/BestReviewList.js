@@ -1,6 +1,9 @@
 import React from "react";
-
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
 const ReviewList = function (props) {
+  console.log(props.bestReviewList);
   return (
     <div className="row mt-5">
       <div
