@@ -94,10 +94,6 @@ const Map = function () {
         });
       }
 
-      if (mapItude[1]) {
-        map.current.setCenter(new kakao.maps.LatLng(mapItude[1], mapItude[0]));
-        map.current.setLevel(mapItude[2]);
-      }
       return () => {
         if (boundary) {
           polygons.current.forEach((pl) => {
@@ -109,6 +105,12 @@ const Map = function () {
     },
     [regionId]
   );
+  useEffect(() => {
+    if (mapItude[1]) {
+      map.current.setCenter(new kakao.maps.LatLng(mapItude[1], mapItude[0]));
+      map.current.setLevel(mapItude[2]);
+    }
+  }, [mapItude]);
 
   return (
     <div

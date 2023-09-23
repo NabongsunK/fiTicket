@@ -5,6 +5,7 @@ const mapSlice = createSlice({
   initialState: { mapItude: [], mapCode: 0, mapData: [], regionId: 0 },
   reducers: {
     setMapItude(state, action) {
+      console.log("맵바뀜", action.payload.newMapItude);
       state.mapItude = action.payload.newMapItude;
     },
     setMapCode(state, action) {
