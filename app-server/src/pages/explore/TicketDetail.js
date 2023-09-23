@@ -62,7 +62,7 @@ const TicketDetailItem = function () {
           <br />
           {"상세 정보"}
           <p>{festival.over_view}</p>
-          {"리플"}
+          {"베스트 리뷰"}
         </div>
       </form>
     </div>

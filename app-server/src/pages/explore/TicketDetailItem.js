@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
-import Review from "../home/Review";
+import BestReview from "../home/BestReview";
 import { useEffect, useState } from "react";
 
 const TicketDetailItem = function (props) {
@@ -77,9 +77,8 @@ const TicketDetailItem = function (props) {
           <br />
           {"상세 정보"}
           <p>{props.festival.over_view}</p>
-          {"리플"}
         </div>
-        <Review />
+        <BestReview />
       </form>
       <button onClick={props.openModal}>close</button>
     </div>
