@@ -117,7 +117,7 @@ const TicketListItem = function (props) {
 
             {/* 장바구니 담기 */}
             <div className="explore_list_button" onClick={toCart}>
-              <Link>
+              <Link onClick={props.alertHandler}>
                 <i className="fa fa-cart-plus"></i>
               </Link>
             </div>
