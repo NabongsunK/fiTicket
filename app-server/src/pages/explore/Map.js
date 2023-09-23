@@ -5,7 +5,7 @@ import localInfos from "../../data/localInfos.json";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const { kakao } = window;
 
-const Map = function () {
+const Map = function (props) {
   const mapItude = useSelector((state) => state.myMapSlice.mapItude);
   const mapData = useSelector((state) => state.myMapSlice.mapData);
   const regionId = useSelector((state) => state.myMapSlice.regionId);
@@ -18,14 +18,15 @@ const Map = function () {
   }
 
   //첫마운트 될때,
+  useEffect(function () {
+    map.current = new kakao.maps.Map(document.getElementById("map"), {
+      // 지도를 표시할 div
+      center: new kakao.maps.LatLng(35.95, 128.25), // 지도의 중심좌표
+      level: mapItude[2], // 지도의 확대 레벨
+    });
+  }, []);
   useEffect(
     function () {
-      map.current = new kakao.maps.Map(document.getElementById("map"), {
-        // 지도를 표시할 div
-        center: new kakao.maps.LatLng(35.95, 128.25), // 지도의 중심좌표
-        level: mapItude[2], // 지도의 확대 레벨
-      });
-
       // 마커 클러스터러를 생성합니다
       var clusterer = new kakao.maps.MarkerClusterer({
         map: map.current, // 마커들을 클러스터로 관리하고 표시할 지도 객체
@@ -103,7 +104,7 @@ const Map = function () {
         }
       };
     },
-    [regionId]
+    [mapItude]
   );
   useEffect(() => {
     if (mapItude[1]) {

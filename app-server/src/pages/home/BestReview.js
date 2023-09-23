@@ -14,7 +14,6 @@ const bestReview = async function () {
   return res.data;
 };
 var bestReviewList = await bestReview();
-console.log(bestReviewList);
 
 const BestReview = function () {
   //Owl Carousel Settings

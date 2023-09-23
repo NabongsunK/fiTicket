@@ -59,7 +59,7 @@ const Explore = function () {
           <div className="row">
             {/* 지도 */}
             <div className="col-lg-12">
-              <MapDiv />
+              <MapDiv mapCode={mapCode} />
             </div>
 
             <div className="col-lg-12">

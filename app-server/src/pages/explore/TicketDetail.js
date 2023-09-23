@@ -16,7 +16,7 @@ const TicketDetailItem = function () {
       dispatch(
         setMapItude({ newMapItude: [festival.map_x, festival.map_y, 5] })
       );
-    }, 50);
+    }, 3000);
   }, []);
   const toCart = function () {
     dispatch(
