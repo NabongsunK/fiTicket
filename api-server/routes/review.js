@@ -3,6 +3,17 @@ var router = express.Router();
 
 const reviewModel = require("../models/review.model");
 
+//review 조회
+router.get("/reviews", async (req, res, next) => {
+  try {
+    const review = await reviewModel.findReview();
+    console.log(review);
+    res.json(review);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // review ticket_id로 조회
 router.get("/reviews/:ticket", async (req, res, next) => {
   try {
@@ -15,7 +26,7 @@ router.get("/reviews/:ticket", async (req, res, next) => {
 });
 
 // review 작성
-router.post("/", async (req, res, next) => {
+router.post("/write", async (req, res, next) => {
   // req.body = {rating,ticket_id,user_id,content}
   try {
     const review = await reviewModel.create(req.body);

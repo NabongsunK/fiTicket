@@ -1,8 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
 import BestReview from "../home/BestReview copy";
 import { useEffect, useState } from "react";
+
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const getReview = async function (ticket_id) {
+  try {
+    const res = await axios.get(`/review/reviews/${ticket_id}`);
+    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 const TicketDetailItem = function (props) {
   const [isActive, setActive] = useState("false");
@@ -12,6 +26,10 @@ const TicketDetailItem = function (props) {
       setActive(isActive);
     }, 3000);
   };
+  console.log(props);
+  useEffect(() => {
+    getReview(props.festival.id).then((res) => console.log(res));
+  }, []);
 
   return (
     <div onClick={(e) => e.stopPropagation()}>
@@ -78,7 +96,6 @@ const TicketDetailItem = function (props) {
           {"상세 정보"}
           <p>{props.festival.over_view}</p>
         </div>
-        <BestReview />
       </form>
       <button onClick={props.openModal}>close</button>
     </div>
