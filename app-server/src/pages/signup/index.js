@@ -20,6 +20,8 @@ function Signup() {
   const [SignupAuth, setSignupAuth] = useState("");
   const [SignupName, setSignupName] = useState("");
 
+  const [isActive, setActive] = useState("false");
+
   const signUp = async function () {
     const res = await axios.post("/login/signup", {
       login_id: SignupId,
@@ -41,6 +43,10 @@ function Signup() {
       login_id: SignupId,
       phone_number: SignupPn,
     });
+    setActive(!isActive);
+    setTimeout(() => {
+      setActive(isActive);
+    }, 3000);
     console.log(res);
   };
   // 여기 인증번호 한아이디에 한개씩이 안됨 확인해야됨
@@ -56,6 +62,32 @@ function Signup() {
   return (
     // 이쪽 수정부탁
     <section className="signup_page">
+      {/* 핸드폰 인증하기 팝업 */}
+      <div
+        className={
+          isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
+        }
+        role="alert"
+        aria-live="assertive"
+        data-delay="2000"
+        aria-atomic="true"
+        style={{ position: "absolute", top: "25%", right: "30%", zIndex: 200 }}
+      >
+        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
+          <img
+            src="assets/images/logo2.png"
+            alt=""
+            className="img-fluid m-r-5"
+            style={{ width: "150px" }}
+          />
+          <strong className="mr-auto"></strong>
+          <small className="text-muted"></small>
+        </div>
+        <div className="toast-body">
+          <strong className="mr-auto">전송받은 인증번호를 입력해주세요.</strong>
+        </div>
+      </div>
+
       <div className="signup-container">
         <form>
           {/* <!-- ID input --> */}
