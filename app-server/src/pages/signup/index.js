@@ -21,7 +21,6 @@ function Signup() {
   const [SignupName, setSignupName] = useState("");
 
   const [isActive, setActive] = useState("false");
-  const [isActive, setActive] = useState("false");
 
   const signUp = async function () {
     const res = await axios.post("/login/signup", {
