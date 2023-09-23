@@ -46,24 +46,25 @@ const DealsListItem = function (props) {
           </div>
           <div className="col-lg-6 align-self-center">
             <div className="content">
-              <span className="info">*D-{props.festival.d_day}</span>
               <Link to={`/explore/${props.festival.id}`}>
+                <span className="info">*D-{props.festival.d_day}</span>
                 <h4>{props.festival.title}</h4>
+
+                <div className="row">
+                  <div className="col-11">
+                    <i className="fa fa-clock"></i>
+                    <span className="list">
+                      {props.festival.event_start_date} -
+                      {props.festival.event_end_date}
+                    </span>
+                  </div>
+                </div>
+                <p>
+                  {props.festival.over_view.substring(0, 64)}{" "}
+                  {props.festival.over_view.length > 64 ? "......" : ""}
+                </p>
               </Link>
 
-              <div className="row">
-                <div className="col-11">
-                  <i className="fa fa-clock"></i>
-                  <span className="list">
-                    {props.festival.event_start_date} -
-                    {props.festival.event_end_date}
-                  </span>
-                </div>
-              </div>
-              <p>
-                {props.festival.over_view.substring(0, 64)}{" "}
-                {props.festival.over_view.length > 64 ? "......" : ""}
-              </p>
               <div className="row">
                 <div className="col-lg-3">
                   {/* 홈페이지 연결 */}

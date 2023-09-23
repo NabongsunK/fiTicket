@@ -81,6 +81,7 @@ const Recommend = function () {
               name="options"
               defaultValue={0}
               onChange={onChangeToggle}
+              style={{ marginTop: "5px", marginLeft: "5%" }}
             >
               {LocalSelectList}
             </ToggleButtonGroup>

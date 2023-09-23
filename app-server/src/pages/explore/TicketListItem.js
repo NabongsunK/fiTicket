@@ -77,7 +77,11 @@ const TicketListItem = function (props) {
           <div className="col-lg-3">
             <div className="image">{poster}</div>
           </div>
-          <div className="col-lg-7 align-self-center" onClick={openModal}>
+          <div
+            className="col-lg-7 align-self-center"
+            onClick={openModal}
+            style={{ cursor: "pointer" }}
+          >
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={openModal}
