@@ -42,9 +42,8 @@ const TicketDetailItem = function (props) {
           <br />
           {"상세 정보"}
           <p>{props.festival.over_view}</p>
-          {"리플"}
+          {"베스트 리뷰"}
         </div>
-        <Review />
       </form>
       <button onClick={props.openModal}>close</button>
     </div>

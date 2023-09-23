@@ -16,14 +16,9 @@ router.get("/reviews/:ticket", async (req, res, next) => {
 
 // review 작성
 router.post("/", async (req, res, next) => {
+  // req.body = {rating,ticket_id,user_id,content}
   try {
-    const article = {
-      rating: Number(req.body.rating),
-      ticket_id: 205,
-      user_id: 1,
-      content: req.body.content,
-    };
-    const review = await reviewModel.create(article);
+    const review = await reviewModel.create(req.body);
     res.json({ review });
   } catch (err) {
     next(err);

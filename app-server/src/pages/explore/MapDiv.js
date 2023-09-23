@@ -6,7 +6,7 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { move } from "../../store/pageSlice";
-import { setMapCode, setMapItude } from "../../store/mapSlice";
+import { setMapCode, setMapItude, setRegionId } from "../../store/mapSlice";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 
 // x:경도 y:위도 로 지역찾기
@@ -56,7 +56,7 @@ const getItude = async function (query = "서울") {
   }
 };
 
-const MapDiv = function (props) {
+const MapDiv = function () {
   const dispatch = useDispatch();
   //mapItude를 현재위치로 변경
   const getCurrentPos = function () {
@@ -70,7 +70,7 @@ const MapDiv = function (props) {
           dispatch(setMapItude({ newMapItude: [lon, lat, 8] }));
           Object.values(localInfos).forEach(async (localInfo) => {
             if ((await getAdress(lon, lat)) === localInfo.region_1depth_name) {
-              props.states.regionId.current = localInfo.id;
+              dispatch(setRegionId({ newRegionId: localInfo.id }));
               dispatch(setMapCode({ newMapCode: localInfo.area_code }));
             }
           });
@@ -111,7 +111,7 @@ const MapDiv = function (props) {
       );
     }
     dispatch(setMapCode({ newMapCode: localInfos[val].area_code }));
-    props.states.regionId.current = localInfos[val].id;
+    dispatch(setRegionId({ newRegionId: localInfos[val].id }));
   };
 
   // TODO: 처음마운트 될때 위치정보 얻기
@@ -138,7 +138,7 @@ const MapDiv = function (props) {
         </label>
       </div>
 
-      <Map boundary={localInfos[props.states.regionId.current].boundary} />
+      <Map />
 
       <ToggleButtonGroup
         type="radio"

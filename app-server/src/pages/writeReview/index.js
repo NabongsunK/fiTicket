@@ -1,20 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import StarRating from "./StartRating";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router";
 // import { Link } from "react-router-dom";
 
-const WriteReview = () => {
-  const [comment, setComment] = useState("");
-  const [feedComments, setFeedComments] = useState([]);
-  const [isValid, setIsValid] = useState(false);
+axios.defaults.baseURL = "http://localhost:4400/api";
 
-  const post = (e) => {
-    const copyFeedComents = [...feedComments];
-    copyFeedComents.push(comment);
-    setFeedComments(copyFeedComents);
-    setComment("");
+const submit = async function (article) {
+  const res = await axios.post("/review", article);
+  return res.data.data;
+};
+
+const WriteReview = function () {
+  const [comment, setComment] = useState("");
+  const [isValid, setIsValid] = useState(false);
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const [rating, setRating] = useState(5);
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+  const post = function () {
+    const article = {
+      rating,
+      ticket_id: id,
+      user_id,
+      content: comment,
+    };
+    submit(article);
+    navigate("/");
   };
-  //const userName = "UserName"; // 사용자 이름을 설정하십시오.
 
   return (
     <>
@@ -38,29 +55,14 @@ const WriteReview = () => {
             </div>
             <form>
               <div className="row g-3">
-                <div className="col-12 col-sm-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="이름"
-                  />
-                </div>
-                <div className="col-12 col-sm-6">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="이메일"
-                  />
-                </div>
-                <div className="col-12 col-sm-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="회원ID"
-                  />
-                </div>
-                <div className="col-12 col-sm-6"></div>
                 <div className="col-12">
+                  <input
+                    type="text"
+                    value={rating}
+                    onChange={(e) => {
+                      setRating(e.target.value);
+                    }}
+                  ></input>
                   <textarea
                     className="form-control"
                     rows="5"
@@ -70,9 +72,7 @@ const WriteReview = () => {
                       setComment(e.target.value);
                     }}
                     onKeyUp={(e) => {
-                      e.target.value.length > 0
-                        ? setIsValid(true)
-                        : setIsValid(false);
+                      e.target.value ? setIsValid(true) : setIsValid(false);
                     }}
                     value={comment}
                   ></textarea>
@@ -80,12 +80,10 @@ const WriteReview = () => {
                 <button
                   type="button"
                   className={
-                    comment.length > 0
-                      ? "submitCommentActive"
-                      : "submitCommentInactive"
+                    comment ? "submitCommentActive" : "submitCommentInactive"
                   }
                   onClick={post}
-                  disabled={!isValid}
+                  disabled={!isValid || !is_signed}
                   style={{ width: "100px" }}
                 >
                   등록하기

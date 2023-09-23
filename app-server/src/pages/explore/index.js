@@ -33,7 +33,6 @@ const Explore = function () {
   //경도,위도,사이즈
   const mapCode = useSelector((state) => state.myMapSlice.mapCode);
   const [regionList, setRegionList] = useState([]);
-  const regionId = useRef(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,7 +59,7 @@ const Explore = function () {
           <div className="row">
             {/* 지도 */}
             <div className="col-lg-12">
-              <MapDiv states={{ regionId }} />
+              <MapDiv />
             </div>
 
             <div className="col-lg-12">
