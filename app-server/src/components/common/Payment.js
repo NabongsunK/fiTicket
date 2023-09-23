@@ -36,7 +36,7 @@ function Payment(props) {
       pay_method: "kakaopay", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
       amount: props.amount, // 결제금액
-      name: "아임포트 결제 데이터 분석", // 주문명
+      name: "Loca!T 티켓 구매", // 주문명
       buyer_name: user.name, // 구매자 이름
       buyer_tel: user.phone_number, // 구매자 전화번호
       buyer_email: user.email, // 구매자 이메일
