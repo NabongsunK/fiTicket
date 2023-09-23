@@ -59,7 +59,7 @@ const Header = function (props) {
             <div className="">
               <nav className="main-nav">
                 <Link to="/" className="logo">
-                  <img src="assets/images/logo2.png" alt="" />
+                  <img src="assets/images/logo2.jpg" alt="" />
                 </Link>
                 <ul className="nav">
                   <li>
