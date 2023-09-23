@@ -8,7 +8,6 @@ import { useOutletContext } from "react-router";
 
 const TicketBody = function () {
   const { regionList, setRegionList } = useOutletContext();
-
   // 검색어
   const [keyword, setKeyword] = useState("");
   // 페이지별 리스트
@@ -53,7 +52,7 @@ const TicketBody = function () {
         <TicketFind keyword={keyword} setKeyword={setKeyword} />
 
         {/* pagination */}
-        <TicketPage pages={lastPage} />
+        <TicketPage lastPage={lastPage} />
       </div>
     </div>
   );

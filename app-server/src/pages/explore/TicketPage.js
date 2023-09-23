@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { move, next, prev } from "../../store/pageSlice";
+import { useEffect } from "react";
 
 const TicketPage = function (props) {
   //페이징 처리
@@ -12,7 +13,7 @@ const TicketPage = function (props) {
   const totalPage = [];
   for (
     let i = Math.max(1, page - 2);
-    i <= Math.min(props.pages.lastPage, Math.max(page + 2, 5));
+    i <= Math.min(props.lastPage, Math.max(page + 2, 5));
     i++
   ) {
     totalPage.push(i);
@@ -36,7 +37,7 @@ const TicketPage = function (props) {
   return (
     //  pagination
     <div className="col-lg-12">
-      <div>{`총 ${props.pages.lastPage} 페이지 있습니다.`}</div>
+      <div>{`총 ${props.lastPage} 페이지 있습니다.`}</div>
       <ul className="page-numbers">
         <li>
           <Link
@@ -57,7 +58,7 @@ const TicketPage = function (props) {
           <Link
             to=""
             onClick={() => {
-              if (page < props.pages.lastPage) {
+              if (page < props.lastPage) {
                 dispatch(next({ step: 1 }));
               }
             }}
