@@ -121,16 +121,16 @@ def fetch_data_from_api(pageNo):
 
     try:
         conn = pymysql.connect(
-            # host="43.202.150.252",
-            # user="localticket",
-            # password="Localticket12$$",
-            # db="localticket",
-            # charset="utf8mb4",
-            host="localhost",
-            user="root",
-            password="1234",
+            host="43.202.150.252",
+            user="localticket",
+            password="Localticket12$$",
             db="localticket",
             charset="utf8mb4",
+            # host="localhost",
+            # user="root",
+            # password="1234",
+            # db="localticket",
+            # charset="utf8mb4",
         )
 
         cursor = conn.cursor()

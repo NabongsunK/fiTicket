@@ -4,8 +4,9 @@ import localInfos from "../../data/localInfos.json";
 import Map from "./Map";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { move } from "../../store/pageSlice";
+import { setMapCode, setMapItude } from "../../store/mapSlice";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 
 // x:경도 y:위도 로 지역찾기
@@ -66,32 +67,31 @@ const MapDiv = function (props) {
         function (position) {
           var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
-          props.actions.setMapItude([lon, lat, 8]);
+          dispatch(setMapItude({ newMapItude: [lon, lat, 8] }));
           Object.values(localInfos).forEach(async (localInfo) => {
             if ((await getAdress(lon, lat)) === localInfo.region_1depth_name) {
-              props.actions.setMapCode(localInfo.area_code);
               props.states.regionId.current = localInfo.id;
+              dispatch(setMapCode({ newMapCode: localInfo.area_code }));
             }
           });
         },
         function (error) {
           // 실패했을때 실행
-          props.actions.setMapItude([35.95, 128.25, 13]);
+          dispatch(setMapItude({ newMapItude: [35.95, 128.25, 13] }));
         }
       );
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      props.actions.setMapItude([35.95, 128.25, 13]);
+      dispatch(setMapItude({ newMapItude: [35.95, 128.25, 13] }));
     }
   };
 
   //쿼리입력되면, 값변경
   const onChangeQuery = async function (e) {
     if (e.target.value) {
-      return props.actions.setMapItude([
-        ...(await getItude(e.target.value)),
-        8,
-      ]);
+      return dispatch(
+        setMapItude({ newMapItude: [...(await getItude(e.target.value)), 8] })
+      );
     }
   };
   //토글 변경되면, 값변경
@@ -100,13 +100,17 @@ const MapDiv = function (props) {
     if (val === 0) {
       getCurrentPos();
     } else {
-      props.actions.setMapItude([
-        localInfos[val].centerLon,
-        localInfos[val].centerLat,
-        localInfos[val].localMapLevel,
-      ]);
+      dispatch(
+        setMapItude({
+          newMapItude: [
+            localInfos[val].centerLon,
+            localInfos[val].centerLat,
+            localInfos[val].localMapLevel,
+          ],
+        })
+      );
     }
-    props.actions.setMapCode(localInfos[val].area_code);
+    dispatch(setMapCode({ newMapCode: localInfos[val].area_code }));
     props.states.regionId.current = localInfos[val].id;
   };
 
@@ -122,9 +126,6 @@ const MapDiv = function (props) {
       {localInfo.localTitle}
     </ToggleButton>
   ));
-  // useEffect(() => {
-  //   // console.log(props.states.regionId.current);
-  // }, [props]);
 
   return (
     <>
@@ -137,11 +138,7 @@ const MapDiv = function (props) {
         </label>
       </div>
 
-      <Map
-        mapItude={props.states.mapItude}
-        data={props.data}
-        boundary={localInfos[props.states.regionId.current].boundary}
-      />
+      <Map boundary={localInfos[props.states.regionId.current].boundary} />
 
       <ToggleButtonGroup
         type="radio"

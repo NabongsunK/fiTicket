@@ -5,14 +5,25 @@ import localList from "../../data/locallist.json";
 import festivalsData from "../../data/_festivals.json";
 import { Link } from "react-router-dom";
 
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const areaRec = async function () {
+  const res = await axios.get(`/explore/recommends`);
+  return res.data;
+};
+
+const recList = await areaRec();
+
 const Recommend = function () {
-  const [selectedLocal, setSelectedLocal] = useState(0); // 선택한 지역의 ID를 저장하는 상태
-  const [festivals, setFestivals] = useState(festivalsData); // 선택한 지역의 행사 정보를 저장하는 상태
+  const [selectedLocal, setSelectedLocal] = useState(1); // 선택한 지역의 ID를 저장하는 상태
+  const [festivals, setFestivals] = useState(recList); // 선택한 지역의 행사 정보를 저장하는 상태
 
   useEffect(() => {
     // 선택한 지역의 ID가 변경될 때마다 해당 지역의 행사 정보
-    const selectedLocalFestivals = festivalsData.filter(
-      (festival) => festival.areacode === selectedLocal
+    const selectedLocalFestivals = recList.filter(
+      (festival) => festival.area_code == selectedLocal
     );
     setFestivals(selectedLocalFestivals);
   }, [selectedLocal]);
@@ -33,8 +44,8 @@ const Recommend = function () {
 
   const festivalList = festivals.map((festival) => (
     <div key={festival.id} className="col-3">
-      <Link to={`/explore/${festival.festival_id}`}>
-        <img src={festival.firstimage} />
+      <Link to={`/explore/${festival.id}`}>
+        <img src={festival.first_image} />
         <h6>{festival.title}</h6>
       </Link>
     </div>

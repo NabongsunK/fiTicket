@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const ExplorePageHeading= function(){
+const ExplorePageHeading = function () {
   return (
     <div className="second-page-heading">
       <div className="container">
@@ -14,10 +15,7 @@ const ExplorePageHeading= function(){
               주저말고 지금 바로 즐기세요
             </p>
             <div className="border-button">
-              <Link
-                to="/login"
-                style={{ color: "#fff", borderColor: "#fff" }}
-              >
+              <Link to="/login" style={{ color: "#fff", borderColor: "#fff" }}>
                 로그인
               </Link>
             </div>
@@ -25,7 +23,6 @@ const ExplorePageHeading= function(){
         </div>
       </div>
     </div>
-
   );
 };
 

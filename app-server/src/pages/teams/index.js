@@ -2,8 +2,17 @@ import { Link } from "react-router-dom";
 import GoToMap from "../../components/common/GoToMap";
 import TeamsPageHeading from "./TeamsPageHeading";
 import TeamsPageHeading2 from "./TeamsPageHeading copy";
+import { useState } from "react";
 
 const Teams = function () {
+  const [isActive, setActive] = useState("false");
+  const alertHandler = () => {
+    setActive(!isActive);
+    setTimeout(() => {
+      setActive(isActive);
+    }, 3000);
+  };
+
   return (
     <>
       <TeamsPageHeading />
@@ -19,58 +28,6 @@ const Teams = function () {
                     Loca!T’s <em>Story &amp; Information</em>
                   </h2>
                 </div>
-                <div className="col-lg-12">
-                  <div className="owl-cites-town owl-carousel">
-                    <div className="item">
-                      <div className="thumb">
-                        <img src="/assets/images/cities-01.jpg" alt="" />
-                        <h4>Havana</h4>
-                      </div>
-                    </div>
-                    <div className="item">
-                      <div className="thumb">
-                        <img src="/assets/images/cities-02.jpg" alt="" />
-                        <h4>Kingston</h4>
-                      </div>
-                    </div>
-                    <div className="item">
-                      <div className="thumb">
-                        <img src="/assets/images/cities-03.jpg" alt="" />
-                        <h4>George Town</h4>
-                      </div>
-                    </div>
-                    <div className="item">
-                      <div className="thumb">
-                        <img src="/assets/images/cities-04.jpg" alt="" />
-                        <h4>Santo Domingo</h4>
-                      </div>
-                    </div>
-                    <div className="item">
-                      <div className="thumb">
-                        <img src="/assets/images/cities-01.jpg" alt="" />
-                        <h4>Havana</h4>
-                      </div>
-                    </div>
-                    <div className="item">
-                      <div className="thumb">
-                        <img src="/assets/images/cities-02.jpg" alt="" />
-                        <h4>Kingston</h4>
-                      </div>
-                    </div>
-                    <div className="item">
-                      <div className="thumb">
-                        <img src="/assets/images/cities-03.jpg" alt="" />
-                        <h4>George Town</h4>
-                      </div>
-                    </div>
-                    <div className="item">
-                      <div className="thumb">
-                        <img src="/assets/images/cities-04.jpg" alt="" />
-                        <h4>Santo Domingo</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -84,230 +41,6 @@ const Teams = function () {
               <div className="section-heading text-center">
                 <h2>Loca!T와 함께 다양한 축제를 즐기세요</h2>
                 <p>축제를 더욱 더 알차게 즐길 수 있도록 힘쓰겠습니다</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="owl-weekly-offers owl-carousel">
-                <div className="item">
-                  <div className="thumb">
-                    <img src="assets/images/offers-01.jpg" alt="" />
-                    <div className="text">
-                      <h4>
-                        Havana
-                        <br />
-                        <span>
-                          <i className="fa fa-users"></i> 234 Check Ins
-                        </span>
-                      </h4>
-                      <h6>
-                        $420
-                        <br />
-                        <span>/person</span>
-                      </h6>
-                      <div className="line-dec"></div>
-                      <ul>
-                        <li>Deal Includes:</li>
-                        <li>
-                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
-                          Included
-                        </li>
-                        <li>
-                          <i className="fa fa-plane"></i> Airplane Bill Included
-                        </li>
-                        <li>
-                          <i className="fa fa-building"></i> Daily Places Visit
-                        </li>
-                      </ul>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="thumb">
-                    <img src="assets/images/offers-02.jpg" alt="" />
-                    <div className="text">
-                      <h4>
-                        Kingston
-                        <br />
-                        <span>
-                          <i className="fa fa-users"></i> 234 Check Ins
-                        </span>
-                      </h4>
-                      <h6>
-                        $420
-                        <br />
-                        <span>/person</span>
-                      </h6>
-                      <div className="line-dec"></div>
-                      <ul>
-                        <li>Deal Includes:</li>
-                        <li>
-                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
-                          Included
-                        </li>
-                        <li>
-                          <i className="fa fa-plane"></i> Airplane Bill Included
-                        </li>
-                        <li>
-                          <i className="fa fa-building"></i> Daily Places Visit
-                        </li>
-                      </ul>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="thumb">
-                    <img src="assets/images/offers-03.jpg" alt="" />
-                    <div className="text">
-                      <h4>
-                        George Town
-                        <br />
-                        <span>
-                          <i className="fa fa-users"></i> 234 Check Ins
-                        </span>
-                      </h4>
-                      <h6>
-                        $420
-                        <br />
-                        <span>/person</span>
-                      </h6>
-                      <div className="line-dec"></div>
-                      <ul>
-                        <li>Deal Includes:</li>
-                        <li>
-                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
-                          Included
-                        </li>
-                        <li>
-                          <i className="fa fa-plane"></i> Airplane Bill Included
-                        </li>
-                        <li>
-                          <i className="fa fa-building"></i> Daily Places Visit
-                        </li>
-                      </ul>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="thumb">
-                    <img src="assets/images/offers-01.jpg" alt="" />
-                    <div className="text">
-                      <h4>
-                        Havana
-                        <br />
-                        <span>
-                          <i className="fa fa-users"></i> 234 Check Ins
-                        </span>
-                      </h4>
-                      <h6>
-                        $420
-                        <br />
-                        <span>/person</span>
-                      </h6>
-                      <div className="line-dec"></div>
-                      <ul>
-                        <li>Deal Includes:</li>
-                        <li>
-                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
-                          Included
-                        </li>
-                        <li>
-                          <i className="fa fa-plane"></i> Airplane Bill Included
-                        </li>
-                        <li>
-                          <i className="fa fa-building"></i> Daily Places Visit
-                        </li>
-                      </ul>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="thumb">
-                    <img src="assets/images/offers-02.jpg" alt="" />
-                    <div className="text">
-                      <h4>
-                        Kingston
-                        <br />
-                        <span>
-                          <i className="fa fa-users"></i> 234 Check Ins
-                        </span>
-                      </h4>
-                      <h6>
-                        $420
-                        <br />
-                        <span>/person</span>
-                      </h6>
-                      <div className="line-dec"></div>
-                      <ul>
-                        <li>Deal Includes:</li>
-                        <li>
-                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
-                          Included
-                        </li>
-                        <li>
-                          <i className="fa fa-plane"></i> Airplane Bill Included
-                        </li>
-                        <li>
-                          <i className="fa fa-building"></i> Daily Places Visit
-                        </li>
-                      </ul>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="thumb">
-                    <img src="assets/images/offers-03.jpg" alt="" />
-                    <div className="text">
-                      <h4>
-                        George Town
-                        <br />
-                        <span>
-                          <i className="fa fa-users"></i> 234 Check Ins
-                        </span>
-                      </h4>
-                      <h6>
-                        $420
-                        <br />
-                        <span>/person</span>
-                      </h6>
-                      <div className="line-dec"></div>
-                      <ul>
-                        <li>Deal Includes:</li>
-                        <li>
-                          <i className="fa fa-taxi"></i> 5 Days Trip ~ Hotel
-                          Included
-                        </li>
-                        <li>
-                          <i className="fa fa-plane"></i> Airplane Bill Included
-                        </li>
-                        <li>
-                          <i className="fa fa-building"></i> Daily Places Visit
-                        </li>
-                      </ul>
-                      <div className="main-button">
-                        <Link to="reservation.html">Make a Reservation</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -404,60 +137,91 @@ const Teams = function () {
 
       {/* 문의하기 */}
       <div
+        className={
+          isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
+        }
+        role="alert"
+        aria-live="assertive"
+        data-delay="3000"
+        aria-atomic="true"
+        style={{ position: "absolute", right: "30%", zIndex: "100" }}
+      >
+        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
+          <img
+            src="assets/images/logo2.png"
+            alt=""
+            className="img-fluid m-r-5"
+            style={{ width: "150px" }}
+          />
+          <strong className="mr-auto"></strong>
+          <small className="text-muted"></small>
+        </div>
+        <div className="toast-body">
+          <strong className="mr-auto">전송이 완료되었습니다.</strong>
+        </div>
+      </div>
+
+      <div
         className="container"
         style={{ padding: "0 200px", marginTop: "50px" }}
       >
-        <div className="row">
-          <div className="col-lg-12">
+        <div className="card-body">
+          <div className="bg-light p-4 mb-2">
             <div className="row">
-              <h4
-                className="mb-4 col-9"
-                style={{ color: "#22b3c1", paddingLeft: "50px" }}
-              >
-                문의하기
-              </h4>
-              <div className="col-3">
-                <h4>
-                  <div className="border-button">
-                    <Link to="/teams">보내기</Link>
+              <div className="col-lg-12">
+                <div className="row">
+                  <h4
+                    className="mb-4 col-9"
+                    style={{ color: "#22b3c1", paddingLeft: "50px" }}
+                  >
+                    문의하기
+                  </h4>
+                  <div className="col-3">
+                    <h4>
+                      <div className="border-button">
+                        <Link to="/teams" onClick={alertHandler}>
+                          보내기
+                        </Link>
+                      </div>
+                    </h4>
                   </div>
-                </h4>
+                </div>
+
+                <form>
+                  <div className="row g-3">
+                    <div className="col-12 col-sm-6">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="이름"
+                      />
+                    </div>
+                    <div className="col-12 col-sm-6">
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="이메일"
+                      />
+                    </div>
+                    <div className="col-12 col-sm-6">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="연락처"
+                      />
+                    </div>
+                    <div className="col-12 col-sm-6"></div>
+                    <div className="col-12">
+                      <textarea
+                        className="form-control"
+                        rows="5"
+                        placeholder="문의 내용"
+                      ></textarea>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
-
-            <form>
-              <div className="row g-3">
-                <div className="col-12 col-sm-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="이름"
-                  />
-                </div>
-                <div className="col-12 col-sm-6">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="이메일"
-                  />
-                </div>
-                <div className="col-12 col-sm-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="연락처"
-                  />
-                </div>
-                <div className="col-12 col-sm-6"></div>
-                <div className="col-12">
-                  <textarea
-                    className="form-control"
-                    rows="5"
-                    placeholder="문의 내용"
-                  ></textarea>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
       </div>

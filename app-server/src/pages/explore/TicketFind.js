@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const TicketFind = function (props) {
   var query = "";
   const search = function () {
