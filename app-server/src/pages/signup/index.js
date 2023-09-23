@@ -33,7 +33,7 @@ function Signup() {
     });
     // 회원가입성공시 성공시
     if (res.data.ok) {
-      dispatch(signin({ user_id: res.data.user_id }));
+      // dispatch(signin({ user_id: res.data.user_id }));
       navigate("/");
     }
     console.log(res);
