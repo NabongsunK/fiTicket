@@ -35,7 +35,7 @@ const Map = function (props) {
       });
 
       // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-      var markers = mapData.map(function (position) {
+      var markers = mapData["15"].map(function (position) {
         var marker = new kakao.maps.Marker({
           position: new kakao.maps.LatLng(position.map_y, position.map_x),
           clickable: true,
