@@ -21,6 +21,7 @@ function Signup() {
   const [SignupName, setSignupName] = useState("");
 
   const [isActive, setActive] = useState("false");
+  const [isSend, setSend] = useState("false");
 
   const signUp = async function () {
     const res = await axios.post("/login/signup", {
@@ -57,6 +58,11 @@ function Signup() {
       phone_number: SignupPn,
       authentication_number: SignupAuth,
     });
+    setSend(!isSend);
+    setTimeout(() => {
+      setSend(isSend);
+    }, 3000);
+
     console.log(res);
   };
   return (
@@ -85,6 +91,32 @@ function Signup() {
         </div>
         <div className="toast-body">
           <strong className="mr-auto">전송받은 인증번호를 입력해주세요.</strong>
+        </div>
+      </div>
+
+      {/* 인증번호 제출 */}
+      <div
+        className={
+          isSend ? "toast toast-3s fade hide" : "toast toast-3s fade show"
+        }
+        role="alert"
+        aria-live="assertive"
+        data-delay="2000"
+        aria-atomic="true"
+        style={{ position: "absolute", top: "25%", right: "30%", zIndex: 200 }}
+      >
+        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
+          <img
+            src="assets/images/logo2.png"
+            alt=""
+            className="img-fluid m-r-5"
+            style={{ width: "150px" }}
+          />
+          <strong className="mr-auto"></strong>
+          <small className="text-muted"></small>
+        </div>
+        <div className="toast-body">
+          <strong className="mr-auto">아래 회원가입을 진행해주세요.</strong>
         </div>
       </div>
 
