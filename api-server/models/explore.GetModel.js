@@ -2,7 +2,7 @@ const pool = require("./pool");
 
 const ExploreGetModel = {
   // 중복검사
-  async getListMap(conn = pool) {
+  async getListMap(content_type_id, conn = pool) {
     try {
       const sql = `
       select
@@ -11,8 +11,9 @@ const ExploreGetModel = {
         map_x,
         map_y
       from festival_api
+        where content_type_id = ?
       `;
-      const [result] = await conn.query(sql);
+      const [result] = await conn.query(sql, [content_type_id]);
       return result;
     } catch (err) {
       throw new Error("DB Error", { cause: err });

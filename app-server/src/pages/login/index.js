@@ -12,8 +12,8 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // redux 이용하기
-  const [LoginId, setLoginId] = useState("");
-  const [LoginPw, setLoginPw] = useState("");
+  const [LoginId, setLoginId] = useState();
+  const [LoginPw, setLoginPw] = useState();
 
   const signIn = async function () {
     const res = await axios.post("/login/signin", {
