@@ -28,21 +28,48 @@ const DealsListItem = function (props) {
     );
   };
 
+  const img = props.festival.first_image;
+  console.log(img);
+
   const poster =
     props.festival.first_image === "" ? (
-      <img src="assets/images/fes_default.jpg" alt="" />
+      <Link to={`/explore/${props.festival.id}`}>
+        <div
+          className="image"
+          style={{
+            backgroundImage: "url('assets/images/fes_default.jpg')",
+            width: "100%",
+            height: "100%",
+            backgroundSize: "cover",
+          }}
+        ></div>
+      </Link>
     ) : (
-      <img src={props.festival.first_image} alt="" />
+      <Link to={`/explore/${props.festival.id}`}>
+        <div
+          className="image"
+          style={{
+            backgroundImage: `url('${img}')`,
+            width: "100%",
+            height: "100%",
+            backgroundPosition: "center center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></div>
+      </Link>
     );
+
   return (
     <div className="col-lg-6 col-sm-6">
       <div className="item">
         <div className="row">
-          <div className="col-lg-6">
-            <div className="image">
-              <Link to={`/explore/${props.festival.id}`}>{poster}</Link>
-              {/* <img src="http://tong.visitkorea.or.kr/cms/resource/75/2769775_image2_1.JPG" alt="" /> */}
-            </div>
+          <div
+            className="col-lg-6"
+            style={{ paddingRight: "45px", overflow: "hidden" }}
+          >
+            {/* 축제 사진 */}
+            {poster}
           </div>
           <div className="col-lg-6 align-self-center">
             <div className="content">
