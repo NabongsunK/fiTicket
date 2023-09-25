@@ -98,12 +98,12 @@ const TicketListItem = function (props) {
     <div className="col-lg-6 col-sm-3">
       <div className="item">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-4">
             {/* 축제 사진 */}
             {poster}
           </div>
           <div
-            className="col-lg-7 align-self-center"
+            className="col-lg-6 align-self-center"
             onClick={openModal}
             style={{ cursor: "pointer" }}
           >
