@@ -12,13 +12,13 @@ function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // redux 이용하기
-  const [SignupId, setSignupId] = useState("");
-  const [SignupPn, setSignupPn] = useState("");
-  const [SignupPw, setSignupPw] = useState("");
-  const [SignupRole, setSignupRole] = useState("");
-  const [SignupEm, setSignupEm] = useState("");
-  const [SignupAuth, setSignupAuth] = useState("");
-  const [SignupName, setSignupName] = useState("");
+  const [SignupId, setSignupId] = useState();
+  const [SignupPn, setSignupPn] = useState();
+  const [SignupPw, setSignupPw] = useState();
+  const [SignupRole, setSignupRole] = useState();
+  const [SignupEm, setSignupEm] = useState();
+  const [SignupAuth, setSignupAuth] = useState();
+  const [SignupName, setSignupName] = useState();
 
   const [isActive, setActive] = useState("false");
   const [isSend, setSend] = useState("false");
