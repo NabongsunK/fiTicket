@@ -51,18 +51,11 @@ const WriteReview = function () {
               >
                 리뷰 작성
               </h4>
-              <StarRating />
+              <StarRating setRating={setRating} rating={rating} />
             </div>
             <form>
               <div className="row g-3">
                 <div className="col-12">
-                  <input
-                    type="text"
-                    value={rating}
-                    onChange={(e) => {
-                      setRating(e.target.value);
-                    }}
-                  ></input>
                   <textarea
                     className="form-control"
                     rows="5"

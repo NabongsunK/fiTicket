@@ -57,33 +57,33 @@ const HiddenText = styled.p`
   ${({ show }) => (show === "true" ? `display:block` : `display: none`)}
 `;
 
-function Score() {
+function Score(props) {
   const [hovered, setHovered] = useState(null);
-  const [clicked, setClicked] = useState(null);
 
+  const starText = [1, 2, 3, 4, 5].map((num) => (
+    <HiddenText key={num} show={hovered === num ? "true" : "false"}>
+      {textList[num - 1]}
+    </HiddenText>
+  ));
+
+  const starList = [1, 2, 3, 4, 5].map((el) => (
+    <i
+      className={`fas fa-star ${
+        (props.rating >= el) | (hovered >= el) && "yellowStar"
+      }`}
+      key={el}
+      onMouseEnter={() => setHovered(el)}
+      onMouseLeave={() => setHovered(null)}
+      onClick={() => props.setRating(el)}
+    />
+  ));
   return (
     <ReviewBox>
       <ReviewTextBox>
         <p>축제에 대한 평점을 남겨주세요</p>
-        {[1, 2, 3, 4, 5].map((num) => (
-          <HiddenText key={num} show={hovered === num ? "true" : "false"}>
-            {textList[num - 1]}
-          </HiddenText>
-        ))}
+        {starText}
       </ReviewTextBox>
-      <StarContainer>
-        {[1, 2, 3, 4, 5].map((el) => (
-          <i
-            className={`fas fa-star ${
-              (clicked >= el) | (hovered >= el) && "yellowStar"
-            }`}
-            key={el}
-            onMouseEnter={() => setHovered(el)}
-            onMouseLeave={() => setHovered(null)}
-            onClick={() => setClicked(el)}
-          />
-        ))}
-      </StarContainer>
+      <StarContainer>{starList}</StarContainer>
     </ReviewBox>
   );
 }
