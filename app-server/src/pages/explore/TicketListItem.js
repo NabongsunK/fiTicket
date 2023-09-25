@@ -64,18 +64,43 @@ const TicketListItem = function (props) {
       })
     );
   };
+  const img = props.festival.first_image2;
+  console.log(img);
   const poster =
-    props.festival.first_image2 == "" ? (
-      <img className="poster" src="assets/images/fes_default.jpg" alt="" />
+    props.festival.first_image2 === "" ? (
+      <Link to={`/explore/${props.id}`}>
+        <div
+          className="image"
+          style={{
+            backgroundImage: "url('/assets/images/fes_default.jpg')",
+            width: "100%",
+            height: "100%",
+            backgroundSize: "cover",
+          }}
+        ></div>
+      </Link>
     ) : (
-      <img className="poster" src={props.festival.first_image2} alt="" />
+      <Link to={`/explore/${props.festival.id}`}>
+        <div
+          className="image"
+          style={{
+            backgroundImage: `url("${img}")`,
+            width: "100%",
+            height: "100%",
+            backgroundPosition: "center center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></div>
+      </Link>
     );
   return (
     <div className="col-lg-6 col-sm-3">
       <div className="item">
         <div className="row">
           <div className="col-lg-3">
-            <div className="image">{poster}</div>
+            {/* 축제 사진 */}
+            {poster}
           </div>
           <div
             className="col-lg-7 align-self-center"
@@ -96,7 +121,10 @@ const TicketListItem = function (props) {
             </Modal>
 
             <div className="content">
-              <span className="info">*d-4 / 4일 후 축제가 끝나요</span>
+              <span className="info">
+                *D-{props.festival.d_day}
+                끝나요
+              </span>
               <h4>{props.festival.title}</h4>
               <div className="row">
                 <div className="col-12">
@@ -108,7 +136,10 @@ const TicketListItem = function (props) {
                   </span>
                 </div>
               </div>
-              <p>티켓 팝니다</p>
+              <p>
+                {props.festival.over_view.substring(0, 38)}{" "}
+                {props.festival.over_view.length > 38 ? ". . ." : ""}
+              </p>
             </div>
           </div>
           <div className="col-lg-2 align-self-center">
