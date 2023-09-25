@@ -497,8 +497,8 @@ Header Style
 
 .header-area .main-nav .nav li a {
   display: block;
-  font-weight: 400;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 20px;
   text-transform: capitalize;
   color: #fff;
   -webkit-transition: all 0.3s ease 0s;
@@ -1448,7 +1448,6 @@ About Page Style
 
 .weekly-offers .item .thumb img {
   height: 315px;
-  padding-right: 60px;
   border-radius: 23px;
 }
 
