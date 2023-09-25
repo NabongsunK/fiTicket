@@ -18,11 +18,23 @@ const TicketPage = function (props) {
   ) {
     totalPage.push(i);
   }
+
+  while (totalPage.length < 5) {
+    if (totalPage[0] == 1) {
+      if (totalPage || totalPage[totalPage.length - 1] == props.lastPage) {
+        break;
+      }
+      totalPage.push(totalPage[totalPage.length - 1] + 1);
+    } else {
+      if (totalPage[0]) totalPage.unshift(totalPage[0] - 1);
+      else break;
+    }
+  }
   // TODO:
 
   // 페이지 버튼
   const pageButtons = totalPage.map((paging) => (
-    <li key={paging} className={paging === page ? "active" : ""}>
+    <li key={paging} className={paging == page ? "active" : ""}>
       <Link
         onClick={() => {
           // 누른 페이지로 이동
