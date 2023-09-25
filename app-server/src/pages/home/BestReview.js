@@ -23,7 +23,7 @@ const BestReview = function () {
     items: 3,
     margin: 0,
     autoplay: true,
-    dots: true,
+    dots: false,
     autoplayTimeout: 8500,
     smartSpeed: 450,
     nav: false,
@@ -31,10 +31,10 @@ const BestReview = function () {
       0: {
         items: 1,
       },
-      600: {
+      460: {
         items: 2,
       },
-      1000: {
+      1280: {
         items: 3,
       },
     },
