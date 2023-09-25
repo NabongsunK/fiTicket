@@ -59,6 +59,33 @@ def get_areaBased(pageNo):
         return []
 
 
+def get_festival(pageNo):
+    apiUrl = "http://apis.data.go.kr/B551011/KorService1/searchFestival1"
+    apiKey = api["db"][api['i'] % len(api["db"])]
+    api['i'] = api['i']+1
+    apiParams = {
+        'numOfRows': 12,
+        'pageNo': pageNo,
+        'MobileOS': 'ETC',
+        'MobileApp': 'AppTest',
+        'ServiceKey': apiKey,
+        '_type': 'json',
+        'listYN': 'Y',
+        'arrange': 'Q',
+        'eventStartDate': 20230925,
+        'eventEndDate': 20231225,
+
+    }
+    try:
+        response = requests.get(apiUrl, apiParams, timeout=4)
+        return response.json()["response"]["body"]["items"]["item"]
+    except:
+        # err_msg = traceback.format_exc()
+        # print(err_msg)
+        print(api["i"]-1, "번째 api key 에서 문제발생")
+        return []
+
+
 def get_detailCommon1(data):
     apiUrl = "http://apis.data.go.kr/B551011/KorService1/detailCommon1"
     apiKey = api["db"][api['i'] % len(api["db"])]
@@ -116,6 +143,7 @@ def get_detailIntro1(data):
 
 
 def pushDB(res):
+    print(res)
     try:
         conn = pymysql.connect(
             host="43.202.150.252",
@@ -186,7 +214,7 @@ def main():
     total_pages = 5000
     while pageNo <= total_pages:
         print(f"{pageNo} 페이지 실행 시작")
-        ret = get_areaBased(pageNo)
+        ret = get_festival(pageNo)
 
         if not ret:
             print(f"{pageNo} 페이지의 가져오기 실패. 30초 후에 다시시작")
