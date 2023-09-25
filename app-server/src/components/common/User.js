@@ -35,7 +35,6 @@ const User = function (props) {
     getList(user_id).then((response) => {
       setCartItems(response);
     });
-    console.log(userItems);
   }, [user_id, myCart]);
 
   return (

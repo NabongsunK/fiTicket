@@ -2,7 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const mapSlice = createSlice({
   name: "myMap",
-  initialState: { mapItude: [], mapCode: 0, mapData: [], regionId: 0 },
+  initialState: {
+    mapItude: [],
+    mapCode: 0,
+    mapData: { 12: [], 14: [], 15: [], 39: [] },
+    regionId: 0,
+  },
   reducers: {
     setMapItude(state, action) {
       state.mapItude = action.payload.newMapItude;
