@@ -27,7 +27,10 @@ const BestReviewListItems = (props) => {
             <div className="line-dec" style={{ margin: 0, padding: 0 }}></div>
             <ul style={{ marginTop: "4px", paddingTop: "12px" }}>
               <li>리뷰</li>
-              <li>{content}</li>
+              <li>
+                {" "}
+                {content.substring(0, 36)} {content.length > 36 ? "......" : ""}
+              </li>
             </ul>
           </div>
         </div>

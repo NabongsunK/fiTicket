@@ -35,7 +35,8 @@ const ExploreGetModel = {
         home_page,
         over_view,
         map_x,
-        map_y
+        map_y,
+        datediff(event_end_date, now()) as d_day
       FROM festival_api
 
       WHERE
