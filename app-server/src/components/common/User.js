@@ -30,11 +30,13 @@ const cartItems = [
 const User = function (props) {
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
   const [userItems, setCartItems] = useState([]);
+  const myCart = useSelector((state) => state.myCartSlice.myCarts);
   useEffect(() => {
     getList(user_id).then((response) => {
       setCartItems(response);
     });
-  }, [user_id]);
+    console.log(userItems);
+  }, [user_id, myCart]);
 
   return (
     <div

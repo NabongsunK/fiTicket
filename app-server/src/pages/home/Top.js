@@ -90,7 +90,7 @@ function Top() {
                 <h2>물 위를 걷는 느낌</h2>
                 <h1>속초 영랑호수윗길</h1>
                 <div className="border-button">
-                  <Link to="/login">지금 가입하기</Link>
+                  {is_signed ? "" : <Link to="/login">지금 가입하기</Link>}
                 </div>
               </div>
               <div className="container">
@@ -142,7 +142,7 @@ function Top() {
                 </h2>
                 <h1>연천 댑싸리공원</h1>
                 <div className="border-button">
-                  <Link to="/login">지금 가입하기</Link>
+                  {is_signed ? "" : <Link to="/login">지금 가입하기</Link>}
                 </div>
               </div>
               <div className="container">
@@ -192,7 +192,7 @@ function Top() {
                 <h2>자연을 느끼고 싶다면 태백으로 놀어오세요</h2>
                 <h1>태백 당골광장</h1>
                 <div className="border-button">
-                  <Link to="/login">지금 가입하기</Link>
+                  {is_signed ? "" : <Link to="/login">지금 가입하기</Link>}
                 </div>
               </div>
               <div className="container">
