@@ -151,8 +151,6 @@ const AuthModel = {
     hmac.update(accessKey);
 
     var hash = hmac.finalize();
-    console.log(hash.toString(CryptoJS.enc.Base64));
-    console.log(time);
     return hash.toString(CryptoJS.enc.Base64);
   },
 };
