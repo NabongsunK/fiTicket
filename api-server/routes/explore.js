@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 
 const ExploreService = require("../services/explore.service");
-const ExploreGetModel = require("../models/explore.GetModel");
 const RecommendService = require("../services/recommend.service");
 
 // explore list에 필요한 리스트 받기

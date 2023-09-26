@@ -29,10 +29,7 @@ const ExploreGetModel = {
       fs.createReadStream(parkingFilePath)
         .pipe(csv({}))
         .on("data", (data) => results.push(data))
-        .on("end", () => {
-          console.log(results);
-        });
-      //console.log(results);
+        .on("end", () => {});
       return results;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
@@ -54,10 +51,7 @@ const ExploreGetModel = {
           };
           results.push(selectedData);
         })
-        .on("end", () => {
-          console.log(results);
-        });
-      //console.log(results);
+        .on("end", () => {});
       return results;
     } catch (err) {
       throw new Error("DB Error", { cause: err });

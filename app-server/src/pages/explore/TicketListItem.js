@@ -27,7 +27,6 @@ const customStyles = {
 
 const TicketListItem = function (props) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true); // 이미지를 보이거나 숨기기 위한 상태 추가
   const appElement = document.getElementById("root");
   const dispatch = useDispatch();
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
@@ -113,8 +112,8 @@ const TicketListItem = function (props) {
             <div className="content">
               <span className="info">
                 *D-{props.festival.d_day}
-                끝나요
-                {isVisible && (
+                끝나요?
+                {props.festival.rec && (
                   <img
                     src="/assets/images/good.jpg"
                     alt="Good"
