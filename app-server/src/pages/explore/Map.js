@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import localInfos from "../../data/localInfos.json";
 
-var markerHeight = { 12: 0, 14: 36, 15: 36, 39: 72 };
+var markerHeight = { 28: 72, 14: 36, 15: 36, 39: 0 };
 var markerImageSrc =
   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png"; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
@@ -18,7 +18,7 @@ const Map = function (props) {
   let polygons = useRef([]);
   var infoWindows = [];
 
-  var markers_group = useRef({ 12: [], 14: [], 15: [], 39: [] });
+  var markers_group = useRef({ 14: [], 15: [], 39: [], 28: [] });
 
   function changeMarker(type) {
     clusterer.current.clear();
@@ -27,7 +27,7 @@ const Map = function (props) {
       Menus[key] = document.getElementById("category_" + key);
     }
 
-    ["12", "14", "15", "39"].forEach((tp) => {
+    ["14", "15", "39", "28"].forEach((tp) => {
       if (tp === type) {
         Menus[tp].className = "menu_selected";
         setMarkers(map.current, tp);
@@ -37,7 +37,6 @@ const Map = function (props) {
         setMarkers(null, tp);
       }
     });
-    console.log(Menus);
   }
 
   function closeInfoWindow() {
@@ -185,9 +184,9 @@ const Map = function (props) {
             음식점
           </li>
           <li
-            id="category_12"
+            id="category_28"
             onClick={() => {
-              changeMarker("12");
+              changeMarker("28");
             }}
           >
             <span className="ico_comm ico_carpark"></span>

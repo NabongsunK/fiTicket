@@ -13,7 +13,7 @@ const ExploreService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
 
-      const content_type_id_arr = [12, 14, 15, 39];
+      const content_type_id_arr = [14, 15, 39];
       const data = {};
       content_type_id_arr.forEach(async (content_type_id) => {
         data[content_type_id] = await ExploreGetModel.getListMap(
