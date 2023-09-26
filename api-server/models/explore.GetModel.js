@@ -36,6 +36,7 @@ const ExploreGetModel = {
         over_view,
         map_x,
         map_y,
+        rec,
         datediff(event_end_date, now()) as d_day
       FROM festival_api
 
@@ -67,6 +68,7 @@ const ExploreGetModel = {
         event_start_date,
         event_end_date,
         home_page,
+        rec,
         over_view
       FROM festival_api
 
@@ -99,6 +101,7 @@ const ExploreGetModel = {
       event_start_date,
       event_end_date,
       home_page,
+      rec,
       over_view
       FROM festival_api
 

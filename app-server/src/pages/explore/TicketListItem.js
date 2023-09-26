@@ -65,7 +65,6 @@ const TicketListItem = function (props) {
     );
   };
   const img = props.festival.first_image2;
-  console.log(img);
   const poster =
     props.festival.first_image2 === "" ? (
       <Link to={`/explore/${props.id}`}>
