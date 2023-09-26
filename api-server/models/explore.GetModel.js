@@ -1,4 +1,6 @@
 const pool = require("./pool");
+const csv = require("csv-parser");
+const fs = require("fs");
 
 const ExploreGetModel = {
   // 중복검사
@@ -15,6 +17,31 @@ const ExploreGetModel = {
       `;
       const [result] = await conn.query(sql, [content_type_id]);
       return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
+  async getListParking() {
+    try {
+      // const sql = `
+      // select
+      //   id,
+      //   title,
+      //   map_x,
+      //   map_y
+      // from festival_api
+      //   where content_type_id = ?
+      // `;
+      const results = [];
+      fs.createReadStream("parking.csv")
+        .pipe(csv({}))
+        .on("data", (data) => results.push(data))
+        .on("end", () => {
+          console.log(results);
+        });
+      //console.log(results);
+      return results;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
