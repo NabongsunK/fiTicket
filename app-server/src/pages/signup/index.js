@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signin, signout } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
-
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
+import Auth from "./Auth";
 
 function Signup() {
   const navigate = useNavigate();
@@ -257,6 +255,7 @@ function Signup() {
             <button type="button" className="btn btn-link btn-floating mx-1">
               <i className="fab fa-github"></i>
             </button>
+            <Auth />
           </div>
         </form>
       </div>

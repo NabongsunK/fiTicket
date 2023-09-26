@@ -24,7 +24,7 @@ const ReviewService = {
     const conn = await pool.getConnection();
     try {
       // 트랜젝션 작업 시작
-      await conn.beginTreansaction();
+      await conn.beginTransaction();
 
       const review = await reviewModel.findByTicket(ticket_id);
       // DB에 작업 반영
@@ -32,7 +32,45 @@ const ReviewService = {
       return review;
     } catch (err) {
       // DB 작업 취소
-      await conn.roolback();
+      await conn.rollback();
+      throw new Error("DB Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
+  async writeReview(article) {
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+
+      const review = await reviewModel.create(article);
+      // DB에 작업 반영
+      await conn.commit();
+      return review;
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("DB Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
+  async getBestReview() {
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+
+      const list = await reviewModel.bestReview();
+      // DB에 작업 반영
+      await conn.commit();
+      return list;
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
       throw new Error("DB Error", { cause: err });
     } finally {
       // 커넥션 반납
