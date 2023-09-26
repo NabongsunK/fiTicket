@@ -60,14 +60,15 @@ const UserService = {
           curr_time: now,
           expiration_time: end,
         };
-
         id = await AuthModel.insertAuth(article, conn);
       }
       // result = {id,curr_time,expiration_time,count,authentication_number}
       const data = await AuthModel.getAuthByPID(id, conn);
+      await AuthModel.postSms(article.phone_number, data.authentication_number);
       // DB에 작업 반영
       await conn.commit();
-      return { ...data, ok: true };
+      // return { ...data, ok: true };
+      return { ok: true };
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();
@@ -217,6 +218,31 @@ const UserService = {
       const data = await LoginModel.getSlt();
       await conn.commit();
       return data;
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
+  async postSms() {
+    const conn = await pool.getConnection();
+    try {
+      await AuthModel.postSms("01020597105", "abcd");
+
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      //
+      //
+      //
+
+      //
+      //
+      //
+      await conn.commit();
+      return true;
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();

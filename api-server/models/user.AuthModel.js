@@ -1,5 +1,9 @@
 const pool = require("./pool");
-
+const axios = require("axios");
+const CryptoJS = require("crypto-js");
+const test = axios.create({
+  baseURL: "https://sens.apigw.ntruss.com",
+});
 const AuthModel = {
   // 중복검사
   async findSame(article, conn = pool) {
@@ -93,6 +97,61 @@ const AuthModel = {
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
+  },
+
+  async postSms(phone_number, authentication_number) {
+    const url =
+      "/sms/v2/services/ncp%3asms%3akr%3a314852427266%3alocalt/messages";
+    const body = {
+      type: "SMS",
+      from: "01020597105",
+      content: "포스트맨 localT test 입니다.",
+      messages: [
+        {
+          to: phone_number,
+          content: authentication_number,
+        },
+      ],
+    };
+    const currentTime = Date.now().toString();
+    const access_key = "g5OTKOM5XcOo5EEUO2KG";
+    const secret_key = "JOJqIxWV7vB1Z0IAquhxqPX2Vi737UC9d54HU42P";
+    const headers = {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-ncp-apigw-timestamp": currentTime,
+      "x-ncp-iam-access-key": access_key,
+      "x-ncp-apigw-signature-v2": this.makeSignature(
+        access_key,
+        secret_key,
+        currentTime
+      ),
+    };
+
+    const res = await test.post(url, body, { headers: headers });
+    return res;
+  },
+
+  makeSignature(access_key, secret_key, time) {
+    var space = " "; // one space
+    var newLine = "\n"; // new line
+    var method = "POST"; // method
+    var url =
+      "/sms/v2/services/ncp%3asms%3akr%3a314852427266%3alocalt/messages"; // url (include query string)
+    var timestamp = time; // current timestamp (epoch)
+    var accessKey = access_key; // access key id (from portal or Sub Account)
+    var secretKey = secret_key; // secret key (from portal or Sub Account)
+
+    var hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, secretKey);
+    hmac.update(method);
+    hmac.update(space);
+    hmac.update(url);
+    hmac.update(newLine);
+    hmac.update(timestamp);
+    hmac.update(newLine);
+    hmac.update(accessKey);
+
+    var hash = hmac.finalize();
+    return hash.toString(CryptoJS.enc.Base64);
   },
 };
 

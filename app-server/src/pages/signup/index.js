@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signin, signout } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
-import Auth from "./Auth";
 
 function Signup() {
   const navigate = useNavigate();
@@ -255,7 +254,6 @@ function Signup() {
             <button type="button" className="btn btn-link btn-floating mx-1">
               <i className="fab fa-github"></i>
             </button>
-            <Auth />
           </div>
         </form>
       </div>

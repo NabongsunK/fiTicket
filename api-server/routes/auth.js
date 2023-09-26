@@ -27,4 +27,16 @@ router.post("/doauth", async (req, res, next) => {
   }
 });
 
+// 네이버 SMS
+router.post("/postsms", async (req, res, next) => {
+  // req.body =
+  // res =
+  try {
+    const result = await UserService.postSms();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

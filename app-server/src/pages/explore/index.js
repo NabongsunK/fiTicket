@@ -14,7 +14,6 @@ axios.defaults.baseURL = "http://localhost:4400/api";
 
 const getAllMap = async function () {
   const res = await axios.get("/explore/getallmap");
-  console.log(res.data);
   return res.data.data;
 };
 

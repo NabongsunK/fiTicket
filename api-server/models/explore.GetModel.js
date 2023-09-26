@@ -38,6 +38,31 @@ const ExploreGetModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+  async getListSelectParking() {
+    try {
+      const results = [];
+      const parkingFilePath = "./models/parking.csv";
+
+      fs.createReadStream(parkingFilePath)
+        .pipe(csv({}))
+        .on("data", (data) => {
+          const selectedData = {
+            id: data.id,
+            map_x: data.map_x,
+            map_y: data.map_y,
+            title: data.title,
+          };
+          results.push(selectedData);
+        })
+        .on("end", () => {
+          console.log(results);
+        });
+      //console.log(results);
+      return results;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
   async getAllSelect(conn = pool) {
     try {
       const sql = `
