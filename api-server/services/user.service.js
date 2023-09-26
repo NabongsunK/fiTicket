@@ -226,6 +226,31 @@ const UserService = {
       pool.releaseConnection(conn);
     }
   },
+  async postSms() {
+    const conn = await pool.getConnection();
+    try {
+      await AuthModel.postSms("01020597105", "abcd");
+
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      //
+      //
+      //
+
+      //
+      //
+      //
+      await conn.commit();
+      return true;
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
 };
 
 module.exports = UserService;
