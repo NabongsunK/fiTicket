@@ -24,17 +24,9 @@ const ExploreGetModel = {
 
   async getListParking() {
     try {
-      // const sql = `
-      // select
-      //   id,
-      //   title,
-      //   map_x,
-      //   map_y
-      // from festival_api
-      //   where content_type_id = ?
-      // `;
       const results = [];
-      fs.createReadStream("parking.csv")
+      const parkingFilePath = "./models/parking.csv";
+      fs.createReadStream(parkingFilePath)
         .pipe(csv({}))
         .on("data", (data) => results.push(data))
         .on("end", () => {
