@@ -21,6 +21,7 @@ const ExploreService = {
           conn
         );
       });
+      await ExploreGetModel.getListParking();
       // DB에 작업 반영
       await conn.commit();
       return { data, ok: true, length: data.length };

@@ -21,13 +21,13 @@ var recommendsList = await allRecommends();
 
 const Deal = function () {
   const [isActive, setActive] = useState("false");
+
   const alertHandler = () => {
     setActive(!isActive);
     setTimeout(() => {
       setActive(isActive);
     }, 3000);
   };
-
   //페이징 처리
 
   const page = useSelector((state) => state.viewPageSlice.page);
@@ -53,6 +53,7 @@ const Deal = function () {
       key={festival.id}
       festival={festival}
       alertHandler={alertHandler}
+      showImage={false}
     />
   ));
 
@@ -62,6 +63,7 @@ const Deal = function () {
 
       {/* 필터 */}
       <Filter />
+
       {/* 알람창 놓고싶은데 넣기*/}
       <div
         className={
