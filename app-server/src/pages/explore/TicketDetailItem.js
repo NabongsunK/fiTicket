@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
-import BestReview from "../home/BestReview copy";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
