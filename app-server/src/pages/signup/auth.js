@@ -1,10 +1,10 @@
 import axios from "axios";
 import CryptoJS from "crypto-js";
+const test = axios.create({
+  baseURL: "https://sens.apigw.ntruss.com",
+});
 
-// axios 기본 url 정의
-axios.defaults.baseURL = "https://sens.apigw.ntruss.com";
-
-function Signup() {
+function Auth() {
   const postSms = async function (phone_number) {
     const url = "/sms/v2/services/ncp:sms:kr:314852427266:localt/messages";
     const body = {
@@ -29,7 +29,7 @@ function Signup() {
       "x-ncp-apigw-signature-v2": makeSignature(access_key, secret_key),
     };
 
-    const res = await axios.post(url, { body: body }, { headers: headers });
+    const res = await test.post(url, { body: body }, { headers: headers });
     console.log(res);
   };
 
@@ -60,4 +60,4 @@ function Signup() {
   return <div>인증</div>;
 }
 
-export default Signup;
+export default Auth;
