@@ -113,7 +113,7 @@ const TicketListItem = function (props) {
             <div className="content">
               <span className="info">
                 *D-{props.festival.d_day}
-                끝나요?
+                끝나요
                 {isVisible && (
                   <img
                     src="/assets/images/good.jpg"
