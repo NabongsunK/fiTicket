@@ -114,13 +114,40 @@ const Map = function (props) {
   }, [mapItude]);
 
   return (
-    <div
-      id="map"
-      style={{
-        width: "100%",
-        height: "550px",
-      }}
-    />
+    <div id="mapwrap">
+      <div id="map" style={{ width: "100%", height: "550px" }}></div>
+      <div className="category">
+        <ul>
+          <li
+            id="coffeeMenu"
+            // onClick={() => {
+            //   changeMarker("coffee");
+            // }}
+          >
+            <span className="ico_comm ico_coffee"></span>
+            커피숍
+          </li>
+          <li
+            id="storeMenu"
+            // onClick={() => {
+            //   changeMarker("store");
+            // }}
+          >
+            <span className="ico_comm ico_store"></span>
+            편의점
+          </li>
+          <li
+            id="carparkMenu"
+            // onClick={() => {
+            //   changeMarker("carpark");
+            // }}
+          >
+            <span className="ico_comm ico_carpark"></span>
+            주차장
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 };
 
