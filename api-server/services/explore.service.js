@@ -21,7 +21,10 @@ const ExploreService = {
           conn
         );
       });
-      await ExploreGetModel.getListParking();
+      // getListSelectParking()은 parking.csv에서 id, map_x, map_y, title만 받아온다
+      // parking.csv의 전체를 받아오려면 getListParking()을 쓰면 된다.
+      const parking = await ExploreGetModel.getListSelectParking();
+      data["28"] = parking;
       // DB에 작업 반영
       await conn.commit();
       return { data, ok: true, length: data.length };
