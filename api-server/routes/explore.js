@@ -3,6 +3,7 @@ var router = express.Router();
 
 const ExploreService = require("../services/explore.service");
 const ExploreGetModel = require("../models/explore.GetModel");
+const RecommendService = require("../services/recommend.service");
 
 // explore list에 필요한 리스트 받기
 router.get("/getalllist", async (req, res, next) => {
@@ -61,7 +62,7 @@ router.post("/gettickets", async (req, res, next) => {
 router.get("/recommends/:code", async (req, res, next) => {
   try {
     const code = Number(req.params.code);
-    const result = await ExploreGetModel.areaRecommends(code);
+    const result = await RecommendService.getAreaRecommends(code);
     res.json(result);
   } catch (err) {
     next(err);
@@ -70,7 +71,7 @@ router.get("/recommends/:code", async (req, res, next) => {
 // 추천 축제 리스트
 router.get("/recommends", async (req, res, next) => {
   try {
-    const result = await ExploreGetModel.recommends(req);
+    const result = await RecommendService.getRecommends(req);
     res.json(result);
   } catch (err) {
     next(err);
