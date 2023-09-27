@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const TicketPage = function (props) {
   //페이징 처리
   const dispatch = useDispatch();
-  const page = useSelector((state) => state.viewPageSlice.page);
+  const page = useSelector((state) => state.myPageSlice.page);
 
   // 페이지 갯수
   const totalPage = [];

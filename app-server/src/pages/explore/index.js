@@ -8,6 +8,7 @@ import TicketBody from "./TicketBody";
 import { Outlet } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setMapData } from "../../store/mapSlice";
+import { setAllList } from "../../store/pageSlice";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -27,24 +28,22 @@ const getRegionList = async function (code) {
   return res.data.data;
 };
 
-const allListData = await getAllList();
-
+const db = await getAllList();
+const dbs = await getAllMap();
 const Explore = function () {
   //경도,위도,사이즈
   const mapCode = useSelector((state) => state.myMapSlice.mapCode);
+  const mapItude = useSelector((state) => state.myMapSlice.mapItude);
   const [regionList, setRegionList] = useState([]);
   const dispatch = useDispatch();
+  const mapData = useSelector((state) => state.myMapSlice.mapData);
 
   useEffect(() => {
     getRegionList(mapCode).then((response) => setRegionList(response));
   }, [mapCode]);
 
-  useEffect(() => {
-    getAllMap().then((response) =>
-      dispatch(setMapData({ newMapData: response }))
-    );
-  }, []);
-
+  dispatch(setAllList({ newAllList: db }));
+  dispatch(setMapData({ newMapData: dbs }));
   return (
     <>
       {/* 두번째 헤더 */}
@@ -63,7 +62,7 @@ const Explore = function () {
             </div>
 
             <div className="col-lg-12">
-              <Outlet context={{ regionList, setRegionList, allListData }} />
+              <Outlet context={{ regionList, setRegionList }} />
             </div>
           </div>
         </div>

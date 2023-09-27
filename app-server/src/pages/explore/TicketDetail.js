@@ -20,8 +20,8 @@ const getReview = async function (ticket_id) {
 
 const TicketDetailItem = function () {
   const { id } = useParams();
-  const { allListData } = useOutletContext();
-  const festival = allListData.filter((fes) => fes.id === Number(id))[0];
+  const allList = useSelector((state) => state.myPageSlice.allList);
+  const festival = allList.filter((fes) => fes.id === Number(id))[0];
   const dispatch = useDispatch();
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
   const [reviewData, setReviewData] = useState([]);
