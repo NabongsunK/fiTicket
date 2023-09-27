@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import localInfos from "../../data/localInfos.json";
 import axios from "axios";
-import { setPageList } from "../../store/pageSlice";
+import { pushList, setPageList } from "../../store/pageSlice";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -28,7 +28,6 @@ const Map = function (props) {
   var markers_group = useRef({ 14: [], 15: [], 39: [], 28: [] });
 
   function changeMarker(type) {
-    console.log(type);
     clusterer.current.clear();
     var Menus = {};
     for (var key in mapData) {
@@ -44,7 +43,6 @@ const Map = function (props) {
         setMarkers(null, tp);
       }
     });
-    console.log(Menus);
   }
 
   function closeInfoWindow() {
@@ -116,12 +114,11 @@ const Map = function (props) {
             closeInfoWindow();
             infowindow.open(map.current, marker);
 
-            console.log(allList);
             const festival = allList.filter(
               (fes) => fes.id === Number(position.id)
             )[0];
-            console.log(festival);
-            dispatch(setPageList({ newPageList: [festival, ...pageList] }));
+            console.log(pageList);
+            dispatch(pushList({ newPage: festival }));
           });
 
           return marker;

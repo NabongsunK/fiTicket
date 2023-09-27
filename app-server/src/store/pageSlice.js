@@ -16,6 +16,10 @@ const pagingSlice = createSlice({
     setPageList(state, action) {
       state.pageList = action.payload.newPageList;
     },
+    pushList(state, action) {
+      state.pageList.unshift(action.payload.newPage);
+      state.pageList = state.pageList.slice(0, -1);
+    },
     setAllList(state, action) {
       state.allList = action.payload.newAllList;
     },
@@ -23,5 +27,5 @@ const pagingSlice = createSlice({
 });
 
 export default pagingSlice;
-export const { next, prev, move, setPageList, setAllList } =
+export const { next, prev, move, setPageList, setAllList, pushList } =
   pagingSlice.actions;
