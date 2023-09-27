@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import GoToMap from "../../components/common/GoToMap";
 import TeamsPageHeading from "./TeamsPageHeading";
-import TeamsPageHeading2 from "./TeamsPageHeading copy";
+// import TeamsPageHeading2 from "./TeamsPageHeading copy";
 import { useState } from "react";
 
 const Teams = function () {
@@ -16,7 +16,7 @@ const Teams = function () {
   return (
     <>
       <TeamsPageHeading />
-      <TeamsPageHeading2 />
+      {/* <TeamsPageHeading2 /> */}
 
       <div className="cities-town">
         <div className="container">
