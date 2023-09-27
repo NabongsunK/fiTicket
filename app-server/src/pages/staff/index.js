@@ -1,4 +1,4 @@
-import DataTable from "./DataTable";
+import FestivalDataTable from "./DataTable";
 
 import axios from "axios";
 
@@ -8,7 +8,7 @@ axios.defaults.baseURL = "http://localhost:4400/api";
 const StaffONly = function () {
   return (
     <>
-      <DataTable />
+      <FestivalDataTable />
     </>
   );
 };
