@@ -40,7 +40,7 @@ const Explore = function () {
 
   useEffect(() => {
     getRegionList(mapCode).then((response) => setRegionList(response));
-  }, [mapCode]);
+  }, [mapItude]);
 
   dispatch(setAllList({ newAllList: db }));
   dispatch(setMapData({ newMapData: dbs }));

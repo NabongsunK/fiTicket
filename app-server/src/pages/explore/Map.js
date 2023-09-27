@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import localInfos from "../../data/localInfos.json";
 import axios from "axios";
 import { pushList, setPageList } from "../../store/pageSlice";
+import { setMapItude } from "../../store/mapSlice";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -26,6 +27,17 @@ const Map = function (props) {
   const pageList = useSelector((state) => state.myPageSlice.pageList);
 
   var markers_group = useRef({ 14: [], 15: [], 39: [], 28: [] });
+
+  function getInfo() {
+    // 지도의 현재 중심좌표를 얻어옵니다
+    var center = map.current.getCenter();
+
+    var message = "지도 중심좌표는 위도 " + center.getLat() + ", <br>";
+    message += "경도 " + center.getLng() + " 이고 <br>";
+    dispatch(
+      setMapItude({ newMapItude: [center.getLng(), center.getLat(), 4] })
+    );
+  }
 
   function changeMarker(type) {
     clusterer.current.clear();
@@ -113,7 +125,6 @@ const Map = function (props) {
           kakao.maps.event.addListener(marker, "click", async () => {
             closeInfoWindow();
             infowindow.open(map.current, marker);
-            console.log(position);
             if (position.content_type_id === "15") {
               const festival = allList.filter(
                 (fes) => fes.id === Number(position.id)
@@ -177,6 +188,7 @@ const Map = function (props) {
   return (
     <div id="mapwrap">
       <div id="map" style={{ width: "100%", height: "550px" }}></div>
+      <div onClick={getInfo}>버튼</div>
       <div className="category">
         <ul>
           <li
