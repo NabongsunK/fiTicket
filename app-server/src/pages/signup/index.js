@@ -13,7 +13,6 @@ function Signup() {
   const [SignupPn, setSignupPn] = useState();
   const [SignupPw, setSignupPw] = useState();
   const [SignupPwConfirm, setSignupPwConfirm] = useState();
-  const [SignupUser, setSignupUser] = useState();
   const [SignupEm, setSignupEm] = useState();
   const [SignupAuth, setSignupAuth] = useState();
   const [SignupName, setSignupName] = useState();
@@ -84,7 +83,7 @@ function Signup() {
       login_id: SignupId,
       phone_number: SignupPn,
       password: await hasing(SignupPw),
-      role: SignupUser,
+      role: "user",
       email: SignupEm,
       name: SignupName,
     });
@@ -279,19 +278,6 @@ function Signup() {
               비밀번호 확인
             </label>
           </div>
-
-          {/* <!-- 역할 --> */}
-          {/* <div className="form-outline mb-4">
-            <input
-              type="text"
-              id="role"
-              className="form-control"
-              onChange={(e) => setSignupUser(e.target.value)}
-            />
-            <label className="form-label" htmlFor="role">
-              유저/관리자
-            </label>
-          </div> */}
 
           {/* <!-- 이메일주소 --> */}
           <div className="form-outline mb-4">
