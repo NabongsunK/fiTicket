@@ -75,7 +75,8 @@ const ExploreGetModel = {
         map_x,
         map_y,
         rec,
-        datediff(event_end_date, now()) as d_day
+        datediff(event_end_date, now()) as d_day,
+        area_code
       FROM festival_api
 
       WHERE
