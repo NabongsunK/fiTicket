@@ -60,7 +60,7 @@ const TicketListItem = function (props) {
   const img = props.festival.first_image2;
   const poster =
     props.festival.first_image2 === "" ? (
-      <Link to={`/explore/${props.id}`}>
+      <Link to={`/explore/${props.festival.id}`}>
         <div
           className="image"
           style={{
@@ -89,6 +89,18 @@ const TicketListItem = function (props) {
 
   return (
     <div className="col-lg-6 col-sm-3">
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={openModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <TicketDetailItem
+          festival={props.festival}
+          openModal={openModal}
+          toCart={toCart}
+        />
+      </Modal>
       <div className="item">
         <div className="row">
           <div className="col-lg-4">{poster}</div>
@@ -97,18 +109,6 @@ const TicketListItem = function (props) {
             onClick={openModal}
             style={{ cursor: "pointer" }}
           >
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={openModal}
-              style={customStyles}
-              contentLabel="Example Modal"
-            >
-              <TicketDetailItem
-                festival={props.festival}
-                openModal={openModal}
-                toCart={toCart}
-              />
-            </Modal>
             <div className="content">
               <span className="info">
                 *D-{props.festival.d_day}

@@ -117,7 +117,6 @@ const Map = function (props) {
             const festival = allList.filter(
               (fes) => fes.id === Number(position.id)
             )[0];
-            console.log(pageList);
             dispatch(pushList({ newPage: festival }));
           });
 

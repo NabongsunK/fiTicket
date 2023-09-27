@@ -12,7 +12,6 @@ const TicketList = function () {
     }, 3000);
   };
 
-  console.log(pageList);
   const list = pageList.map((festival) => {
     return (
       <TicketListItem

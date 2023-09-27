@@ -3,7 +3,7 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React from "react";
-import BestReviewListItem from "./BestReviewListItems";
+import BestReviewListItem from "./BestReviewListItem";
 
 import axios from "axios";
 // axios 기본 url 정의

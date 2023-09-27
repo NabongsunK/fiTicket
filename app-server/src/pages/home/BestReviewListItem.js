@@ -1,13 +1,15 @@
 import React from "react";
 
-const BestReviewListItems = (props) => {
+const BestReviewListItem = (props) => {
   const { ticket_name, user_name, rating, content, first_image } =
     props.bestReviewListItems;
 
   // 별표를 동적으로 생성하는 함수
   const renderStars = (rating) => {
-    const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-    return <h6 style={{fontWeight: 200, float: "left" }}>{stars}</h6>;
+    if (rating > 0 && rating < 6) {
+      const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+      return <h6 style={{ fontWeight: 200, float: "left" }}>{stars}</h6>;
+    }
   };
 
   return (
@@ -45,4 +47,4 @@ const BestReviewListItems = (props) => {
   );
 };
 
-export default BestReviewListItems;
+export default BestReviewListItem;

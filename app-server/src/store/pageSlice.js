@@ -18,7 +18,7 @@ const pagingSlice = createSlice({
     },
     pushList(state, action) {
       state.pageList.unshift(action.payload.newPage);
-      state.pageList = state.pageList.slice(0, -1);
+      state.pageList = state.pageList.slice(0, 4);
     },
     setAllList(state, action) {
       state.allList = action.payload.newAllList;

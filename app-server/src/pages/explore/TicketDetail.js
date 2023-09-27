@@ -20,7 +20,7 @@ const getReview = async function (ticket_id) {
 
 const TicketDetailItem = function () {
   const { id } = useParams();
-  const allList = useSelector((state) => state.pagingSlice.allList);
+  const allList = useSelector((state) => state.myPageSlice.allList);
   const festival = allList.filter((fes) => fes.id === Number(id))[0];
   const dispatch = useDispatch();
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
