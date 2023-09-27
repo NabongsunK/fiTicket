@@ -9,6 +9,8 @@ const ExploreGetModel = {
       const sql = `
       select
         id,
+        addr1,
+        first_image2,
         title,
         map_x,
         map_y
