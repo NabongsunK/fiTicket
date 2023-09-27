@@ -177,10 +177,10 @@ p {
   color: #afafaf;
 }
 
-img {
+/* img {
   width: 60%;
   overflow: hidden;
-}
+} */
 .poster {
   width: auto;
   height: 100%;

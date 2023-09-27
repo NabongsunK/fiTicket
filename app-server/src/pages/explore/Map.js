@@ -112,34 +112,18 @@ const Map = function (props) {
 
           var content = `
             <div className="wrap">
-              <div className="info">
+              <div className="info" style="width: 100%, height: 100%">
                 <div className="title">
-                  카카오 스페이스닷원
+                    ${position.title}
                   <div className="close" title="닫기"></div>
                 </div>
                 <div className="body">
                   <div className="img">
-                    <img
-                      src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png"
-                      width="73"
-                      height="70"
-                    />
+                    <img src=${position.first_image2} width="73" height="70"/>
                   </div>
                   <div className="desc">
                     <div className="ellipsis">
-                      제주특별자치도 제주시 첨단로 242
-                    </div>
-                    <div className="jibun ellipsis">
-                      (우) 63309 (지번) 영평동 2181
-                    </div>
-                    <div>
-                      <link
-                        to="https://www.kakaocorp.com/main"
-                        target="_blank"
-                        className="link"
-                      >
-                        홈페이지
-                      </link>
+                      ${position.addr1}
                     </div>
                   </div>
                 </div>
@@ -150,7 +134,7 @@ const Map = function (props) {
           // 인포윈도우를 생성합니다
           var infowindow = new kakao.maps.InfoWindow({
             content: content,
-            removable: false,
+            removable: true,
           });
           // 마커 위에 인포윈도우를 표시합니다
           infoWindows.push(infowindow);
