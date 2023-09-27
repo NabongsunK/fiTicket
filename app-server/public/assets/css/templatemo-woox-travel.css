@@ -2644,3 +2644,12 @@ body {
 .category .ico_carpark {
   background-position: -10px -72px;
 }
+
+/* data-table */
+.data-table {
+  margin-top: 200px;
+  padding: 5px 150px;
+}
+.data-table .data-table-title {
+  padding-left: 50px;
+}

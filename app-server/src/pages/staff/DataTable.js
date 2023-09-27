@@ -1,4 +1,9 @@
-import DataTableItem from "./DataTableItem";
+import React, { useEffect, useMemo, useState } from "react";
+import DataTable, { ExpanderComponentProps } from "react-data-table-component";
+import "bootstrap/dist/js/bootstrap.bundle.js";
+import "bootstrap/dist/css/bootstrap.css";
+import styled from "styled-components";
+
 import axios from "axios";
 
 // axios 기본 url 정의
@@ -11,327 +16,189 @@ const getAllList = async function () {
 
 const allListData = await getAllList();
 
-const DataTable = function () {
-  const list = allListData.map((festival) => (
-    <DataTableItem key={festival.id} festival={festival} />
-  ));
+function getNumberOfPages(rowCount, rowsPerPage) {
+  return Math.ceil(rowCount / rowsPerPage);
+}
+
+function toPages(pages) {
+  const results = [];
+
+  for (let i = 1; i < pages; i++) {
+    results.push(i);
+  }
+
+  return results;
+}
+
+const columns = [
+  {
+    name: "id",
+    selector: (row) => row.id,
+    sortable: true,
+    right: true,
+    maxWidth: "10px",
+  },
+  {
+    name: "rec",
+    selector: (row) => row.rec,
+    sortable: true,
+    right: true,
+    maxWidth: "10px",
+  },
+  {
+    name: "area",
+    selector: (row) => row.area_code,
+    sortable: true,
+    maxWidth: "10px",
+    right: true,
+  },
+  {
+    name: "D-day",
+    selector: (row) => row.d_day,
+    sortable: true,
+    right: true,
+    maxWidth: "10px",
+  },
+  {
+    name: "title",
+    id: "data-table-title",
+    selector: (row) => row.title,
+    sortable: true,
+    style: { marginLeft: "50px" },
+  },
+];
+
+// RDT exposes the following internal pagination properties
+const BootyPagination = ({
+  rowsPerPage,
+  rowCount,
+  onChangePage,
+  onChangeRowsPerPage,
+  currentPage,
+}) => {
+  const handleBackButtonClick = () => {
+    onChangePage(currentPage - 1);
+  };
+
+  const handleNextButtonClick = () => {
+    onChangePage(currentPage + 1);
+  };
+
+  const handlePageNumber = (e) => {
+    onChangePage(Number(e.target.value));
+  };
+
+  const pages = getNumberOfPages(rowCount, rowsPerPage);
+  const pageItems = toPages(pages);
+  const nextDisabled = currentPage === pageItems.length;
+  const previosDisabled = currentPage === 1;
+
   return (
-    <div className="data-table-area" style={{ marginTop: "200px" }}>
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div className="data-table-list">
-              <div className="basic-tb-hd">
-                <h2>festival Api data</h2>
-                <p>축제 정보들</p>
-              </div>
-              <div className="table-responsive">
-                <div
-                  id="data-table-basic_wrapper"
-                  className="dataTables_wrapper"
-                >
-                  {/* 보이는 행 갯수 정하는 */}
-                  <div
-                    className="dataTables_length"
-                    id="data-table-basic_length"
-                  >
-                    <label>
-                      Show{" "}
-                      <select
-                        name="data-table-basic_length"
-                        aria-controls="data-table-basic"
-                        className=""
-                      >
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                      </select>{" "}
-                      entries
-                    </label>
-                  </div>
-                  {/* 검색 */}
-                  <div
-                    id="data-table-basic_filter"
-                    className="dataTables_filter"
-                  >
-                    <label>
-                      Search:
-                      <input
-                        type="search"
-                        className=""
-                        placeholder=""
-                        aria-controls="data-table-basic"
-                      />
-                    </label>
-                  </div>
-                  {/* 테이블 시작 */}
-                  <table
-                    id="data-table-basic"
-                    className="table table-striped dataTable"
-                    role="grid"
-                    aria-describedby="data-table-basic_info"
-                  >
-                    {/* 테이블 열 이름 */}
-                    <thead>
-                      <tr role="row">
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Age: activate to sort column ascending"
-                          style={{ width: "30px" }}
-                        >
-                          id
-                        </th>
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Age: activate to sort column ascending"
-                          style={{ width: "30px" }}
-                        >
-                          rec
-                        </th>
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Age: activate to sort column ascending"
-                          style={{ width: "30px" }}
-                        >
-                          d_day
-                        </th>
+    <nav>
+      <ul className="pagination">
+        <li className="page-item">
+          <button
+            className="page-link"
+            onClick={handleBackButtonClick}
+            disabled={previosDisabled}
+            aria-disabled={previosDisabled}
+            aria-label="previous page"
+          >
+            Previous
+          </button>
+        </li>
+        {pageItems.map((page) => {
+          const className =
+            page === currentPage ? "page-item active" : "page-item";
 
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Age: activate to sort column ascending"
-                          style={{ width: "80px" }}
-                        >
-                          area
-                        </th>
+          return (
+            <li key={page} className={className}>
+              <button
+                className="page-link"
+                onClick={handlePageNumber}
+                value={page}
+              >
+                {page}
+              </button>
+            </li>
+          );
+        })}
+        <li className="page-item">
+          <button
+            className="page-link"
+            onClick={handleNextButtonClick}
+            disabled={nextDisabled}
+            aria-disabled={nextDisabled}
+            aria-label="next page"
+          >
+            Next
+          </button>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-                        <th
-                          className="sorting_asc"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-sort="ascending"
-                          aria-label="Name: activate to sort column descending"
-                          style={{ width: "200px" }}
-                        >
-                          title
-                        </th>
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Position: activate to sort column ascending"
-                          style={{ width: "292px" }}
-                        >
-                          addr1
-                        </th>
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Office: activate to sort column ascending"
-                          style={{ width: "50px" }}
-                        >
-                          first_image
-                        </th>
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Start date: activate to sort column ascending"
-                          style={{ width: "125px" }}
-                        >
-                          Start_date
-                        </th>
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Start date: activate to sort column ascending"
-                          style={{ width: "125px" }}
-                        >
-                          end_date
-                        </th>
+const ExpandedComponent = ({ data }) => (
+  <pre>{JSON.stringify(data, null, 2)}</pre>
+);
 
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Salary: activate to sort column ascending"
-                          style={{ width: "116px" }}
-                        >
-                          over_view
-                        </th>
-                        <th
-                          className="sorting"
-                          tabIndex="0"
-                          aria-controls="data-table-basic"
-                          rowSpan="1"
-                          colSpan="1"
-                          aria-label="Salary: activate to sort column ascending"
-                          style={{ width: "116px" }}
-                        >
-                          tel
-                        </th>
-                      </tr>
-                    </thead>
-                    {/* 테이블 내용물 */}
-                    <tbody>{list}</tbody>
-                    <tfoot>
-                      <tr>
-                        <th rowSpan="1" colSpan="1">
-                          id
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          rec
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          d_day
-                        </th>
+const FestivalDataTable = function () {
+  // const list = allListData.map((festival) => (
+  //   <DataTableItem key={festival.id} festival={festival} />
+  // ));
 
-                        <th rowSpan="1" colSpan="1">
-                          area
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          title
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          addr1
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          first_image
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          start_date
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          end_date
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          over_view
-                        </th>
-                        <th rowSpan="1" colSpan="1">
-                          tel
-                        </th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                  <div
-                    className="dataTables_info"
-                    id="data-table-basic_info"
-                    role="status"
-                    aria-live="polite"
-                  >
-                    Showing 1 to 10 of 57 entries
-                  </div>
-                  <div
-                    className="dataTables_paginate paging_simple_numbers"
-                    id="data-table-basic_paginate"
-                  >
-                    <a
-                      className="paginate_button previous disabled"
-                      aria-controls="data-table-basic"
-                      data-dt-idx="0"
-                      tabIndex="0"
-                      id="data-table-basic_previous"
-                    >
-                      Previous
-                    </a>
-                    <span>
-                      <a
-                        className="paginate_button current"
-                        aria-controls="data-table-basic"
-                        data-dt-idx="1"
-                        tabIndex="0"
-                      >
-                        1
-                      </a>
-                      <a
-                        className="paginate_button "
-                        aria-controls="data-table-basic"
-                        data-dt-idx="2"
-                        tabIndex="0"
-                      >
-                        2
-                      </a>
-                      <a
-                        className="paginate_button "
-                        aria-controls="data-table-basic"
-                        data-dt-idx="3"
-                        tabIndex="0"
-                      >
-                        3
-                      </a>
-                      <a
-                        className="paginate_button "
-                        aria-controls="data-table-basic"
-                        data-dt-idx="4"
-                        tabIndex="0"
-                      >
-                        4
-                      </a>
-                      <a
-                        className="paginate_button "
-                        aria-controls="data-table-basic"
-                        data-dt-idx="5"
-                        tabIndex="0"
-                      >
-                        5
-                      </a>
-                      <a
-                        className="paginate_button "
-                        aria-controls="data-table-basic"
-                        data-dt-idx="6"
-                        tabIndex="0"
-                      >
-                        6
-                      </a>
-                    </span>
-                    <a
-                      className="paginate_button next"
-                      aria-controls="data-table-basic"
-                      data-dt-idx="7"
-                      tabIndex="0"
-                      id="data-table-basic_next"
-                    >
-                      Next
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  /* filtering */
+  // 검색어
+  const [keyword, setKeyword] = useState("");
+  const [searchResult, setSearchResult] = useState(allListData);
+
+  // 키워드 바뀌면
+  const search = function (event) {
+    const searchKeyword = event.target.value;
+    setKeyword(searchKeyword);
+    const regExp = new RegExp(searchKeyword, "i");
+    setSearchResult(
+      allListData.filter((festival) => regExp.test(festival.title))
+    );
+  };
+
+  return (
+    <div className="data-table">
+      <div
+        id="explore-search-form"
+        name="gs"
+        method="submit"
+        role="search"
+        action="#"
+      >
+        <input
+          className="form-control"
+          type="text"
+          id="value"
+          placeholder="축제 찾기"
+          value={keyword}
+          onChange={search}
+        />
+      </div>
+      <div>
+        <DataTable
+          columns={columns}
+          data={searchResult}
+          defaultSortFieldID={1}
+          pagination
+          paginationComponent={BootyPagination}
+          selectableRows
+          expandOnRowClicked
+          expandableRows
+          expandableRowsComponent={ExpandedComponent}
+          responsive
+          subHeader
+          // subHeaderComponent={subHeaderComponentMemo}
+        />
       </div>
     </div>
   );
 };
 
-export default DataTable;
+export default FestivalDataTable;
