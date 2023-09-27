@@ -117,7 +117,7 @@ const Map = function (props) {
               <div className=${styles.info} style="width: 100%, height: 100%">
                 <div className=${styles.title}>
                     ${position.title}
-                  <div className=${styles.close} title="닫기"></div>
+                  <div className="close" style="width:15%" title="닫기"></div>
                 </div>
                 <div className="body">
                   <div className="img">

@@ -1,3 +1,8 @@
+.close img {
+  width: 15%;
+  overflow: hidden;
+}
+
 #mapwrap {
   position: relative;
   overflow: hidden;
