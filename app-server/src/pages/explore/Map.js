@@ -109,15 +109,48 @@ const Map = function (props) {
 
           //여기에 title 말고도 first_image2 , addr1, 들어갈 수 있게
           // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-          var iwContent = `<div style="padding:5px;">${
-              key + position.title
-            }</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-            iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+          var content = `
+            <div className="wrap">
+              <div className="info">
+                <div className="title">
+                  카카오 스페이스닷원
+                  <div className="close" title="닫기"></div>
+                </div>
+                <div className="body">
+                  <div className="img">
+                    <img
+                      src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png"
+                      width="73"
+                      height="70"
+                    />
+                  </div>
+                  <div className="desc">
+                    <div className="ellipsis">
+                      제주특별자치도 제주시 첨단로 242
+                    </div>
+                    <div className="jibun ellipsis">
+                      (우) 63309 (지번) 영평동 2181
+                    </div>
+                    <div>
+                      <link
+                        to="https://www.kakaocorp.com/main"
+                        target="_blank"
+                        className="link"
+                      >
+                        홈페이지
+                      </link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            `;
 
           // 인포윈도우를 생성합니다
           var infowindow = new kakao.maps.InfoWindow({
-            content: iwContent,
-            removable: iwRemoveable,
+            content: content,
+            removable: false,
           });
           // 마커 위에 인포윈도우를 표시합니다
           infoWindows.push(infowindow);
