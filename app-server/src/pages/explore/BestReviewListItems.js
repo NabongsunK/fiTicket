@@ -6,12 +6,18 @@ const BestReviewListItems = (props) => {
     props.bestReviewListItems;
   // console.log("BestReviewListItem: " + props.bestReviewListItems);
 
+  // 별표를 동적으로 생성하는 함수
+  const renderStars = (rating) => {
+    const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    return <h6 style={{ float: "left" }}>{stars}</h6>;
+  };
+
   return (
     <>
       <div className="item">
         <div className="thumb">
           <div className="text">
-            <h6 style={{ float: "left" }}>★★★★★</h6>
+          {renderStars(rating)}
             <br />
             <br />
             <h4>
