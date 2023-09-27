@@ -109,15 +109,32 @@ const Map = function (props) {
 
           //여기에 title 말고도 first_image2 , addr1, 들어갈 수 있게
           // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-          var iwContent = `<div style="padding:5px;">${
-              key + position.title
-            }</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-            iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+          var content = `
+            <div className="wrap">
+              <div className="info" style="width: 100%, height: 100%">
+                <div className="title">
+                    ${position.title}
+                  <div className="close" title="닫기"></div>
+                </div>
+                <div className="body">
+                  <div className="img">
+                    <img src=${position.first_image2} width="73" height="70"/>
+                  </div>
+                  <div className="desc">
+                    <div className="ellipsis">
+                      ${position.addr1}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            `;
 
           // 인포윈도우를 생성합니다
           var infowindow = new kakao.maps.InfoWindow({
-            content: iwContent,
-            removable: iwRemoveable,
+            content: content,
+            removable: true,
           });
           // 마커 위에 인포윈도우를 표시합니다
           infoWindows.push(infowindow);
