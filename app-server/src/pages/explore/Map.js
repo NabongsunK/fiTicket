@@ -95,6 +95,7 @@ const Map = function (props) {
             image: markerImage,
           });
 
+          //여기에 title 말고도 first_image2 , addr1, 들어갈 수 있게
           // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
           var iwContent = `<div style="padding:5px;">${
               key + position.title
