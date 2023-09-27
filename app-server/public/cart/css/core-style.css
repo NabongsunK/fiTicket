@@ -273,6 +273,34 @@ img {
   }
 }
 
+.sticky {
+  background-color: #22b3c1;
+  border-radius: 0;
+  bottom: 120px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  font-size: 24px;
+  height: 40px;
+  line-height: 40px;
+  right: 60px;
+  text-align: center;
+  width: 40px;
+  position: fixed;
+}
+@media only screen and (max-width: 767px) {
+  .sticky {
+    bottom: 30px;
+    right: 30px;
+  }
+}
+.sticky > #essenceCartBtn {
+  width: 41px;
+  line-height: 38px;
+  z-index: 21474836;
+}
+.sticky span {
+  display: none;
+}
 /* Essence Button */
 .essence-btn {
   display: inline-block;
@@ -2489,5 +2517,5 @@ img {
 
 /* 모달창 zindex */
 .ReactModal__Overlay {
-  z-index: 999;
+  z-index: 99;
 }
