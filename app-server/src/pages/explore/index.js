@@ -28,26 +28,22 @@ const getRegionList = async function (code) {
   return res.data.data;
 };
 
+const db = await getAllList();
+const dbs = await getAllMap();
 const Explore = function () {
   //경도,위도,사이즈
   const mapCode = useSelector((state) => state.myMapSlice.mapCode);
   const mapItude = useSelector((state) => state.myMapSlice.mapItude);
   const [regionList, setRegionList] = useState([]);
   const dispatch = useDispatch();
+  const mapData = useSelector((state) => state.myMapSlice.mapData);
 
   useEffect(() => {
     getRegionList(mapCode).then((response) => setRegionList(response));
   }, [mapCode]);
 
-  useEffect(() => {
-    getAllMap().then((response) =>
-      dispatch(setMapData({ newMapData: response }))
-    );
-    getAllList().then((response) => {
-      dispatch(setAllList({ newAllList: response }));
-    });
-  }, [mapItude]);
-
+  dispatch(setAllList({ newAllList: db }));
+  dispatch(setMapData({ newMapData: dbs }));
   return (
     <>
       {/* 두번째 헤더 */}
