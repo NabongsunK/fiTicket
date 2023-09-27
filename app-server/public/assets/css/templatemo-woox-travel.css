@@ -2585,3 +2585,12 @@ body {
   background-color: #f5f5f5;
   transform: scale(1.1);
 }
+
+/* data-table */
+.data-table {
+  margin-top: 200px;
+  padding: 5px 150px;
+}
+.data-table .data-table-title {
+  padding-left: 50px;
+}
