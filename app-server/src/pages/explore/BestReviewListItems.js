@@ -9,7 +9,7 @@ const BestReviewListItems = (props) => {
   // 별표를 동적으로 생성하는 함수
   const renderStars = (rating) => {
     const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-    return <h6 style={{ float: "left" }}>{stars}</h6>;
+    return <h6 style={{fontWeight: 200, float: "left" }}>{stars}</h6>;
   };
 
   return (
