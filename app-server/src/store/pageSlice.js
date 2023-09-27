@@ -16,9 +16,16 @@ const pagingSlice = createSlice({
     setPageList(state, action) {
       state.pageList = action.payload.newPageList;
     },
+    // 이러면 무결성 깨짐 다른방법 강구해볼것
     pushList(state, action) {
-      state.pageList.unshift(action.payload.newPage);
-      state.pageList = state.pageList.slice(0, 4);
+      var ch = true;
+      state.pageList.forEach((page) => {
+        if (page.id == action.payload.newPage.id) ch = false;
+      });
+      if (ch) {
+        state.pageList.unshift(action.payload.newPage);
+        state.pageList = state.pageList.slice(0, 4);
+      }
     },
     setAllList(state, action) {
       state.allList = action.payload.newAllList;
