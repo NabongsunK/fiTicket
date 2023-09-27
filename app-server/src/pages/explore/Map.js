@@ -7,6 +7,8 @@ import { setMapItude } from "../../store/mapSlice";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
+import styles from "./map.module.css";
+
 var markerHeight = { 28: 72, 14: 36, 15: 36, 39: 0 };
 var markerImageSrc =
   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png"; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
@@ -111,11 +113,11 @@ const Map = function (props) {
           // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 
           var content = `
-            <div className="wrap">
-              <div className="info" style="width: 100%, height: 100%">
-                <div className="title">
+            <div className=${styles.wrap}>
+              <div className=${styles.info} style="width: 100%, height: 100%">
+                <div className=${styles.title}>
                     ${position.title}
-                  <div className="close" title="닫기"></div>
+                  <div className=${styles.close} title="닫기"></div>
                 </div>
                 <div className="body">
                   <div className="img">
@@ -204,10 +206,10 @@ const Map = function (props) {
   );
 
   return (
-    <div id="mapwrap">
+    <div id={styles.mapwrap}>
       <div id="map" style={{ width: "100%", height: "550px" }}></div>
       <div onClick={getInfo}>버튼</div>
-      <div className="category">
+      <div className={styles.category}>
         <ul>
           <li
             id="category_15"
@@ -215,7 +217,7 @@ const Map = function (props) {
               changeMarker("15");
             }}
           >
-            <span className="ico_comm ico_store"></span>
+            <span className={styles.ico_store}></span>
             축제
           </li>
           <li
@@ -224,7 +226,7 @@ const Map = function (props) {
               changeMarker("39");
             }}
           >
-            <span className="ico_comm ico_coffee"></span>
+            <span className={styles.ico_coffee}></span>
             음식점
           </li>
           <li
@@ -233,7 +235,7 @@ const Map = function (props) {
               changeMarker("28");
             }}
           >
-            <span className="ico_comm ico_carpark"></span>
+            <span className={styles.ico_carpark}></span>
             주차장
           </li>
           <li
@@ -242,7 +244,7 @@ const Map = function (props) {
               changeMarker("14");
             }}
           >
-            <span className="ico_comm ico_carpark"></span>
+            <span className={styles.ico_carpark}></span>
             내위치
           </li>
         </ul>
