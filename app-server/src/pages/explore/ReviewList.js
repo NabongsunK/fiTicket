@@ -3,7 +3,7 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React from "react";
-import BestReviewListItem from "./BestReviewListItems";
+import ReviewListItem from "./ReviewListItem";
 
 import axios from "axios";
 // axios 기본 url 정의
@@ -35,7 +35,7 @@ const ReviewList = function (props) {
   };
 
   const reviewList = props.reviewData.map((bestReviewItem) => (
-    <BestReviewListItem
+    <ReviewListItem
       bestReviewListItems={bestReviewItem}
       key={bestReviewItem.id}
     />

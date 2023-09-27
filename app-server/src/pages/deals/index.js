@@ -30,7 +30,7 @@ const Deal = function () {
   };
   //페이징 처리
 
-  const page = useSelector((state) => state.viewPageSlice.page);
+  const page = useSelector((state) => state.myPageSlice.page);
 
   const listPerPage = 4;
   const lastPage = Math.floor(

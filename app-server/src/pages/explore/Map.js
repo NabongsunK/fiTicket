@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import localInfos from "../../data/localInfos.json";
+import axios from "axios";
+import { pushList, setPageList } from "../../store/pageSlice";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
 
 var markerHeight = { 28: 72, 14: 36, 15: 36, 39: 0 };
 var markerImageSrc =
@@ -17,6 +21,9 @@ const Map = function (props) {
   let clusterer = useRef(null);
   let polygons = useRef([]);
   var infoWindows = [];
+  const dispatch = useDispatch();
+  const allList = useSelector((state) => state.myPageSlice.allList);
+  const pageList = useSelector((state) => state.myPageSlice.pageList);
 
   var markers_group = useRef({ 14: [], 15: [], 39: [], 28: [] });
 
@@ -26,7 +33,6 @@ const Map = function (props) {
     for (var key in mapData) {
       Menus[key] = document.getElementById("category_" + key);
     }
-
     ["14", "15", "39", "28"].forEach((tp) => {
       if (tp === type) {
         Menus[tp].className = "menu_selected";
@@ -100,12 +106,18 @@ const Map = function (props) {
             content: iwContent,
             removable: iwRemoveable,
           });
-          // 마커에 클릭이벤트를 등록합니다
-          infoWindows.push(infowindow);
           // 마커 위에 인포윈도우를 표시합니다
-          kakao.maps.event.addListener(marker, "click", function () {
+          infoWindows.push(infowindow);
+
+          // 마커에 클릭이벤트를 등록합니다
+          kakao.maps.event.addListener(marker, "click", async () => {
             closeInfoWindow();
             infowindow.open(map.current, marker);
+
+            const festival = allList.filter(
+              (fes) => fes.id === Number(position.id)
+            )[0];
+            dispatch(pushList({ newPage: festival }));
           });
 
           return marker;
