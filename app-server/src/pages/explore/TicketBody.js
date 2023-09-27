@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import TicketList from "./TicketList";
 import TicketFind from "./TicketFind";
 import TicketPage from "./TicketPage";
-import { move } from "../../store/pageSlice";
+import { move, setPageList } from "../../store/pageSlice";
 import { useOutletContext } from "react-router";
 
 const TicketBody = function () {
@@ -11,7 +11,6 @@ const TicketBody = function () {
   // 검색어
   const [keyword, setKeyword] = useState("");
   // 페이지별 리스트
-  const [pageResult, setPageResult] = useState([]);
   const dispatch = useDispatch();
 
   // 키워드 바뀌면
@@ -24,7 +23,7 @@ const TicketBody = function () {
   }, [keyword]);
 
   //슬라이스에서 현재 페이지 가지고옴
-  var page = useSelector((state) => state.viewPageSlice.page);
+  var page = useSelector((state) => state.myPageSlice.page);
 
   // 한페이지당 출력되야되는 리스트
   const listPerPage = 4;
@@ -34,7 +33,11 @@ const TicketBody = function () {
   //검색에의해서 바뀌거나 page가 바뀌면
   useEffect(() => {
     skip = (page - 1) * listPerPage;
-    setPageResult(regionList.slice(skip, skip + listPerPage));
+    dispatch(
+      setPageList({
+        newPageList: regionList.slice(skip, skip + listPerPage),
+      })
+    );
   }, [regionList, page]);
 
   // 마지막페이지 계산
@@ -46,7 +49,7 @@ const TicketBody = function () {
     <div className="amazing-deals">
       <div className="container">
         {/* 리스트 */}
-        <TicketList pageResult={pageResult} />
+        <TicketList />
 
         {/* 찾기 페이지 */}
         <TicketFind keyword={keyword} setKeyword={setKeyword} />

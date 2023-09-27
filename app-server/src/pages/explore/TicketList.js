@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import TicketListItem from "./TicketListItem";
+import { useSelector } from "react-redux";
 
-const TicketList = function (props) {
+const TicketList = function () {
   const [isActive, setActive] = useState("false");
+  const pageList = useSelector((state) => state.myPageSlice.pageList);
   const alertHandler = () => {
     setActive(!isActive);
     setTimeout(() => {
@@ -10,7 +12,7 @@ const TicketList = function (props) {
     }, 3000);
   };
 
-  const list = props.pageResult.map((festival) => {
+  const list = pageList.map((festival) => {
     return (
       <TicketListItem
         key={festival.id}
