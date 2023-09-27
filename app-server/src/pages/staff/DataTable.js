@@ -22,12 +22,8 @@ const DataTable = function () {
           <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div className="data-table-list">
               <div className="basic-tb-hd">
-                <h2>Basic Example</h2>
-                <p>
-                  Its just that simple. Turn your simple table into a
-                  sophisticated data table and offer your users a nice
-                  experience and great features without any effort.
-                </p>
+                <h2>festival Api data</h2>
+                <p>축제 정보들</p>
               </div>
               <div className="table-responsive">
                 <div
