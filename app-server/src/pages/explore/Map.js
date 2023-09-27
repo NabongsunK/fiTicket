@@ -113,12 +113,13 @@ const Map = function (props) {
           kakao.maps.event.addListener(marker, "click", async () => {
             closeInfoWindow();
             infowindow.open(map.current, marker);
-
-            const festival = allList.filter(
-              (fes) => fes.id === Number(position.id)
-            )[0];
-
-            dispatch(pushList({ newPage: festival }));
+            console.log(position);
+            if (position.content_type_id === "15") {
+              const festival = allList.filter(
+                (fes) => fes.id === Number(position.id)
+              )[0];
+              dispatch(pushList({ newPage: festival }));
+            }
           });
 
           return marker;

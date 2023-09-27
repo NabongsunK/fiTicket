@@ -13,7 +13,8 @@ const ExploreGetModel = {
         first_image2,
         title,
         map_x,
-        map_y
+        map_y,
+        content_type_id
       from festival_api
         where content_type_id = ?
       `;
@@ -50,6 +51,8 @@ const ExploreGetModel = {
             map_x: data.map_x,
             map_y: data.map_y,
             title: data.title,
+            content_type_id: "28",
+            addr1: data.addr1,
           };
           results.push(selectedData);
         })
