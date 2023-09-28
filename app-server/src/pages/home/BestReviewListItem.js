@@ -25,15 +25,25 @@ const BestReviewListItem = (props) => {
             {renderStars(rating)}
             <br />
             <br />
-            <h4>
-              {ticket_name}
-              <br />
-              <span style={{ float: "right", margin: "5px" }}>
-                <i className="fa fa-users"></i> {user_name.substring(0, 1)}** 님
-              </span>
-            </h4>
+            <div className="row">
+              <div className="col align-self-start">
+                <h4>{ticket_name}</h4>
+
+                <br />
+                <div className="col align-self-end">
+                  <span
+                    style={{ float: "right", margin: "5px", color: "#afafaf" }}
+                  >
+                    <i className="fa fa-users"></i> {user_name.substring(0, 1)}
+                    ** 님
+                  </span>
+                </div>
+              </div>
+            </div>
             <div className="line-dec" style={{ margin: 0, padding: 0 }}></div>
-            <ul style={{ marginTop: "4px", paddingTop: "12px" }}>
+            <ul
+              style={{ marginTop: "4px", paddingTop: "12px", paddingLeft: 0 }}
+            >
               <li>리뷰</li>
               <li>
                 {" "}
