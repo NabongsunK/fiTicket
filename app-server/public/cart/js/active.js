@@ -83,9 +83,9 @@
   // :: Sticky Active Code
   $window.on("scroll", function () {
     if ($window.scrollTop() > 0) {
-      $(".header_area").addClass("sticky");
+      $(".cart-area").addClass("sticky");
     } else {
-      $(".header_area").removeClass("sticky");
+      $(".cart-area").removeClass("sticky");
     }
   });
 

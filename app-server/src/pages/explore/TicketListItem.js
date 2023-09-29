@@ -103,24 +103,32 @@ const TicketListItem = function (props) {
       </Modal>
       <div className="item">
         <div className="row">
-          <div className="col-lg-4">{poster}</div>
+          <div className="col-lg-4">
+            {props.festival.rec == 0 ? (
+              ""
+            ) : (
+              <span>
+                <i
+                  className="fa fa-thumbs-up"
+                  style={{
+                    color: "#22b3c1",
+                    position: "absolute",
+                    top: "10%",
+                    left: "15%",
+                    fontSize: "24px",
+                  }}
+                ></i>
+              </span>
+            )}
+            {poster}
+          </div>
           <div
             className="col-lg-6 align-self-center"
             onClick={openModal}
             style={{ cursor: "pointer" }}
           >
             <div className="content">
-              <span className="info">
-                *D-{props.festival.d_day}
-                끝나요?
-                {props.festival.rec && (
-                  <img
-                    src="/assets/images/good.jpg"
-                    alt="Good"
-                    style={{ width: "30px" }}
-                  />
-                )}
-              </span>
+              <span className="info">*D-{props.festival.d_day}</span>
               <h4>{props.festival.title}</h4>
               <div className="row">
                 <div className="col-12">
