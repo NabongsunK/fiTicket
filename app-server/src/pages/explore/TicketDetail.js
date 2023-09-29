@@ -26,14 +26,10 @@ const TicketDetailItem = function () {
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
   const [reviewData, setReviewData] = useState([]);
 
-  // TODO: MAPDIV의 getcurrent보다 늦게 실행되야됨 settimeout 안쓰고 이거떄문에 맵이 두개생김
+  // 랜더링되면 mapItdue바꿈
   useEffect(() => {
     getReview(id).then((response) => setReviewData(response));
-    setTimeout(() => {
-      dispatch(
-        setMapItude({ newMapItude: [festival.map_x, festival.map_y, 4] })
-      );
-    }, 50);
+    dispatch(setMapItude({ newMapItude: [festival.map_x, festival.map_y, 4] }));
   }, []);
   const toCart = function () {
     dispatch(

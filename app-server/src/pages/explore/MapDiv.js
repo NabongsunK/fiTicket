@@ -7,6 +7,7 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../store/pageSlice";
 import { setMapCode, setMapItude, setRegionId } from "../../store/mapSlice";
+import { useNavigate } from "react-router";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 
 // 쿼리로 경위도 찾기
@@ -36,6 +37,7 @@ const getItude = async function (query = "서울") {
 
 const MapDiv = function () {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //mapItude를 현재위치로 변경
   const getCurrentPos = function () {
     if (navigator.geolocation) {
@@ -82,6 +84,7 @@ const MapDiv = function () {
         })
       );
     }
+    navigate("/explore");
   };
 
   // TODO: 처음마운트 될때 위치정보 얻기

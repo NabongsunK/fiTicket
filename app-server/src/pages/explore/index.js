@@ -66,14 +66,29 @@ const getRegionId = function (regionName) {
   return ret;
 };
 
-const db = await getAllList();
-const dbs = await getAllMap();
-
 const Explore = function () {
   //경도,위도,사이즈
   const mapItude = useSelector((state) => state.myMapSlice.mapItude);
   const regionId = useSelector((state) => state.myMapSlice.regionId);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  // 처음 랜더링되면
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 데이터를 가져온 후에 Redux 상태를 업데이트합니다.
+        dispatch(setAllList({ newAllList: await getAllList() }));
+        dispatch(setMapData({ newMapData: await getAllMap() }));
+
+        setLoading(false); // 데이터 로딩이 완료되면 로딩 상태를 false로 설정
+      } catch (error) {
+        console.error("데이터를 불러오는 동안 오류 발생:", error);
+        setLoading(false); // 에러 발생 시에도 로딩 상태를 false로 설정
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // mapItude가 바뀌면
   useEffect(() => {
@@ -87,8 +102,7 @@ const Explore = function () {
       }
       const regionName = await getAdress(mapItude[0], mapItude[1]);
       if (!regionName) return;
-      const newRegionId = getRegionId(regionName);
-      dispatch(setRegionId({ newRegionId: newRegionId }));
+      dispatch(setRegionId({ newRegionId: getRegionId(regionName) }));
     };
     setMap();
   }, [mapItude]);
@@ -97,14 +111,19 @@ const Explore = function () {
   useEffect(() => {
     // regionList를 새로 가지고 온다.
     const getList = async () => {
-      const newRegionList = await getRegionList(localInfos[regionId].area_code);
-      dispatch(setRegionList({ newRegionList: newRegionList }));
+      dispatch(
+        setRegionList({
+          newRegionList: await getRegionList(localInfos[regionId].area_code),
+        })
+      );
     };
     getList();
   }, [regionId]);
 
-  dispatch(setAllList({ newAllList: db }));
-  dispatch(setMapData({ newMapData: dbs }));
+  // 로딩 중이면 로딩 메시지를 보여줍니다.
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       {/* 두번째 헤더 */}
