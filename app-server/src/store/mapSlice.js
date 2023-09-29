@@ -6,7 +6,7 @@ const mapSlice = createSlice({
     mapItude: [],
     mapCode: 0,
     mapData: { 28: [], 14: [], 15: [], 39: [] },
-    regionId: 0,
+    regionId: 2,
   },
   reducers: {
     setMapItude(state, action) {

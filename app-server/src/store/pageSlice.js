@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const pagingSlice = createSlice({
   name: "viewPage",
-  initialState: { page: 1, pageList: [], allList: [] },
+  initialState: { page: 1, pageList: [], allList: [], regionList: [] },
   reducers: {
     prev(state, action) {
       state.page -= action.payload.step;
@@ -10,8 +10,8 @@ const pagingSlice = createSlice({
     next(state, action) {
       state.page += action.payload.step;
     },
-    move(state, action) {
-      state.page = action.payload.point;
+    setPage(state, action) {
+      state.page = action.payload.newPage;
     },
     setPageList(state, action) {
       state.pageList = action.payload.newPageList;
@@ -30,9 +30,19 @@ const pagingSlice = createSlice({
     setAllList(state, action) {
       state.allList = action.payload.newAllList;
     },
+    setRegionList(state, action) {
+      state.regionList = action.payload.newRegionList;
+    },
   },
 });
 
 export default pagingSlice;
-export const { next, prev, move, setPageList, setAllList, pushList } =
-  pagingSlice.actions;
+export const {
+  next,
+  prev,
+  setPage,
+  setPageList,
+  setAllList,
+  pushList,
+  setRegionList,
+} = pagingSlice.actions;

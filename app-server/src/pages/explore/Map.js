@@ -26,7 +26,6 @@ const Map = function (props) {
   var infoWindows = [];
   const dispatch = useDispatch();
   const allList = useSelector((state) => state.myPageSlice.allList);
-  const pageList = useSelector((state) => state.myPageSlice.pageList);
 
   var markers_group = useRef({ 14: [], 15: [], 39: [], 28: [] });
 
@@ -202,7 +201,7 @@ const Map = function (props) {
         }
       };
     },
-    [mapItude]
+    [regionId]
   );
 
   return (
