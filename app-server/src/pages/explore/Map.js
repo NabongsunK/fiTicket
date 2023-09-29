@@ -50,7 +50,7 @@ const Map = function (props) {
     }
     ["14", "15", "39", "28"].forEach((tp) => {
       if (tp === type) {
-        Menus[tp].className = "menu_selected";
+        Menus[tp].className = styles.menu_selected;
         setMarkers(map.current, tp);
         clusterer.current.addMarkers(markers_group.current[tp]);
       } else {
