@@ -5,10 +5,6 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import React from "react";
 import ReviewListItem from "./ReviewListItem";
 
-import axios from "axios";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
-
 const ReviewList = function (props) {
   //Owl Carousel Settings
   const options = {

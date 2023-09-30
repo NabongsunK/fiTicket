@@ -1,11 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import localInfos from "../../data/localInfos.json";
-import axios from "axios";
 import { pushList, setPageList } from "../../store/pageSlice";
 import { setMapItude } from "../../store/mapSlice";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 import styles from "./map.module.css";
 import { useNavigate } from "react-router";
