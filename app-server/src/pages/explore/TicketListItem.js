@@ -4,10 +4,7 @@ import Modal from "react-modal";
 import TicketDetailItem from "./TicketDetailItem";
 
 import { push, pop } from "../../store/cartSlice";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 const customStyles = {
   content: {

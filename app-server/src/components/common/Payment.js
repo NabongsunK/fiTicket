@@ -17,6 +17,7 @@ function Payment(props) {
   const [user, setUser] = useState([]);
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const amount = useSelector((state) => state.myCartSlice.amount);
 
   useEffect(() => {
     getUser(user_id).then((response) => {
@@ -35,7 +36,7 @@ function Payment(props) {
       pg: "kakaopay", // PG사
       pay_method: "kakaopay", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: props.amount, // 결제금액
+      amount: amount, // 결제금액
       name: "Loca!T 티켓 구매", // 주문명
       buyer_name: user.name, // 구매자 이름
       buyer_tel: user.phone_number, // 구매자 전화번호
@@ -70,7 +71,7 @@ function Payment(props) {
       try {
         const tmp = {
           // TODO: 결제취소시에 페이지에 저장된 금액으로 검색함, 결제성공시에도 데이터에 에러핸들러가 필요할듯
-          paid_amount: props.amount,
+          paid_amount: amount,
           user_id: user.id,
           paid_id: paid_id,
         };
@@ -89,7 +90,7 @@ function Payment(props) {
     const tmp = {
       tickets: tickets,
       user_id: user.id,
-      paid_amount: props.amount,
+      paid_amount: amount,
     };
     paid_id = (await axios.post("/cart", tmp)).data.paid_id;
 

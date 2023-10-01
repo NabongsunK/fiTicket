@@ -26,15 +26,26 @@ const TicketDetailItem = function () {
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
   const [reviewData, setReviewData] = useState([]);
 
-  // TODO: MAPDIV의 getcurrent보다 늦게 실행되야됨 settimeout 안쓰고 이거떄문에 맵이 두개생김
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  // 처음 랜더링되면
   useEffect(() => {
-    getReview(id).then((response) => setReviewData(response));
-    setTimeout(() => {
-      dispatch(
-        setMapItude({ newMapItude: [festival.map_x, festival.map_y, 4] })
-      );
-    }, 50);
+    const fetchData = async () => {
+      try {
+        // 데이터를 가져온 후에 Redux 상태를 업데이트합니다.
+        setReviewData(await getReview(id));
+        dispatch(
+          setMapItude({ newMapItude: [festival.map_x, festival.map_y, 4] })
+        );
+        setLoading(false); // 데이터 로딩이 완료되면 로딩 상태를 false로 설정
+      } catch (error) {
+        console.error("데이터를 불러오는 동안 오류 발생:", error);
+        setLoading(false); // 에러 발생 시에도 로딩 상태를 false로 설정
+      }
+    };
+
+    fetchData();
   }, []);
+
   const toCart = function () {
     dispatch(
       push({
@@ -59,6 +70,11 @@ const TicketDetailItem = function () {
       setActive(isActive);
     }, 3000);
   };
+
+  // 로딩 중이면 로딩 메시지를 보여줍니다.
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div onClick={(e) => e.stopPropagation()}>

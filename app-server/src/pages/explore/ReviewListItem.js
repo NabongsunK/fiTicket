@@ -1,7 +1,6 @@
 import React from "react";
 
 const ReviewListItem = (props) => {
-  // console.log(props);
   const { ticket_name, user_name, rating, content, first_image } =
     props.bestReviewListItems;
   // console.log("BestReviewListItem: " + props.bestReviewListItems);

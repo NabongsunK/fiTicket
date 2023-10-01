@@ -79,6 +79,7 @@ function Signup() {
     }
 
     // 서버 요청 실행
+    // 서버에서 user로 자동변환
     const res = await axios.post("/login/signup", {
       login_id: SignupId,
       phone_number: SignupPn,

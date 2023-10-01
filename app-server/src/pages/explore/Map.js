@@ -1,13 +1,11 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import localInfos from "../../data/localInfos.json";
-import axios from "axios";
 import { pushList, setPageList } from "../../store/pageSlice";
 import { setMapItude } from "../../store/mapSlice";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 import styles from "./map.module.css";
+import { useNavigate } from "react-router";
 
 var markerHeight = { 28: 72, 14: 36, 15: 36, 39: 0 };
 var markerImageSrc =
@@ -20,13 +18,13 @@ const Map = function (props) {
   const mapItude = useSelector((state) => state.myMapSlice.mapItude);
   const mapData = useSelector((state) => state.myMapSlice.mapData);
   const regionId = useSelector((state) => state.myMapSlice.regionId);
+  const navigate = useNavigate();
   let map = useRef(null);
   let clusterer = useRef(null);
   let polygons = useRef([]);
   var infoWindows = [];
   const dispatch = useDispatch();
   const allList = useSelector((state) => state.myPageSlice.allList);
-  const pageList = useSelector((state) => state.myPageSlice.pageList);
 
   var markers_group = useRef({ 14: [], 15: [], 39: [], 28: [] });
 
@@ -49,7 +47,7 @@ const Map = function (props) {
     }
     ["14", "15", "39", "28"].forEach((tp) => {
       if (tp === type) {
-        Menus[tp].className = "menu_selected";
+        Menus[tp].className = styles.menu_selected;
         setMarkers(map.current, tp);
         clusterer.current.addMarkers(markers_group.current[tp]);
       } else {
@@ -143,6 +141,7 @@ const Map = function (props) {
 
           // 마커에 클릭이벤트를 등록합니다
           kakao.maps.event.addListener(marker, "click", async () => {
+            navigate("/explore");
             closeInfoWindow();
             infowindow.open(map.current, marker);
             if (position.content_type_id === "15") {
@@ -189,10 +188,6 @@ const Map = function (props) {
           polygon.setMap(map.current);
         });
       }
-      if (mapItude[1]) {
-        map.current.setCenter(new kakao.maps.LatLng(mapItude[1], mapItude[0]));
-        map.current.setLevel(mapItude[2]);
-      }
       return () => {
         if (boundary) {
           polygons.current.forEach((pl) => {
@@ -202,8 +197,15 @@ const Map = function (props) {
         }
       };
     },
-    [mapItude]
+    [regionId]
   );
+  // mapItude바뀌면 위치바뀜
+  useEffect(() => {
+    if (mapItude[1]) {
+      map.current.setCenter(new kakao.maps.LatLng(mapItude[1], mapItude[0]));
+      map.current.setLevel(mapItude[2]);
+    }
+  }, [mapItude]);
 
   return (
     <div id={styles.mapwrap}>

@@ -69,13 +69,13 @@ const columns = [
 ];
 
 // RDT exposes the following internal pagination properties
-const BootyPagination = ({
+const BootyPagination = function ({
   rowsPerPage,
   rowCount,
   onChangePage,
   onChangeRowsPerPage,
   currentPage,
-}) => {
+}) {
   const handleBackButtonClick = () => {
     onChangePage(currentPage - 1);
   };

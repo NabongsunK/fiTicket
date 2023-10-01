@@ -5,32 +5,11 @@ import Map from "./Map";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { useDispatch, useSelector } from "react-redux";
-import { move } from "../../store/pageSlice";
+import { setPage } from "../../store/pageSlice";
 import { setMapCode, setMapItude, setRegionId } from "../../store/mapSlice";
+import { useNavigate } from "react-router";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 
-// x:경도 y:위도 로 지역찾기
-const getAdress = async function (x, y) {
-  try {
-    const res = await axios.get(
-      "https://dapi.kakao.com/v2/local/geo/coord2regioncode.json",
-      {
-        params: {
-          x: x,
-          y: y,
-        },
-        headers: {
-          Authorization: "KakaoAK 8e8301f6d873da44dfc2345e960bae20",
-        },
-      }
-    );
-    return res.data.documents[0].region_1depth_name;
-  } catch (error) {
-    // 오류 처리
-    console.error("오류:", error);
-    throw error; // 오류를 상위로 전파하거나 다른 방식으로 처리할 수 있습니다.
-  }
-};
 // 쿼리로 경위도 찾기
 const getItude = async function (query = "서울") {
   try {
@@ -58,6 +37,7 @@ const getItude = async function (query = "서울") {
 
 const MapDiv = function () {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //mapItude를 현재위치로 변경
   const getCurrentPos = function () {
     if (navigator.geolocation) {
@@ -68,12 +48,6 @@ const MapDiv = function () {
           var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
           dispatch(setMapItude({ newMapItude: [lon, lat, 8] }));
-          Object.values(localInfos).forEach(async (localInfo) => {
-            if ((await getAdress(lon, lat)) === localInfo.region_1depth_name) {
-              dispatch(setRegionId({ newRegionId: localInfo.id }));
-              dispatch(setMapCode({ newMapCode: localInfo.area_code }));
-            }
-          });
         },
         function (error) {
           // 실패했을때 실행
@@ -96,7 +70,7 @@ const MapDiv = function () {
   };
   //토글 변경되면, 값변경
   const onChangeToggle = async function (val) {
-    dispatch(move({ point: 1 }));
+    dispatch(setPage({ newPage: 1 }));
     if (val === 0) {
       getCurrentPos();
     } else {
@@ -110,8 +84,7 @@ const MapDiv = function () {
         })
       );
     }
-    dispatch(setMapCode({ newMapCode: localInfos[val].area_code }));
-    dispatch(setRegionId({ newRegionId: localInfos[val].id }));
+    navigate("/explore");
   };
 
   // TODO: 처음마운트 될때 위치정보 얻기

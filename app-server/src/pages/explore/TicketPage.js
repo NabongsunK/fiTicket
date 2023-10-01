@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { move, next, prev } from "../../store/pageSlice";
+import { setPage, next, prev } from "../../store/pageSlice";
 import { useEffect } from "react";
 
 const TicketPage = function (props) {
@@ -38,7 +38,7 @@ const TicketPage = function (props) {
       <Link
         onClick={() => {
           // 누른 페이지로 이동
-          dispatch(move({ point: paging }));
+          dispatch(setPage({ newPage: paging }));
         }}
       >
         {paging}

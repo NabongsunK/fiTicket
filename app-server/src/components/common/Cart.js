@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CartList from "./CartList";
 import CartSummary from "./CartSummary";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Payment from "./Payment";
 import Left from "./Left";
+import { setAmount } from "../../store/cartSlice";
 
 const Cart = function (props) {
   const cartItems = useSelector((state) => state.myCartSlice.myCarts);
-  const [amount, setAmount] = useState(0);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     props.actions.setCartNo(cartItems.length);
-    setAmount(calculateTotalAmount());
+    dispatch(setAmount({ newAmount: calculateTotalAmount() }));
   }, [cartItems]);
 
   const calculateTotalAmount = () => {
@@ -53,7 +53,7 @@ const Cart = function (props) {
           {/* Cart List Area */}
           <CartList cartItems={cartItems} />
 
-          <Payment amount={amount} handleToggle={props.actions.handleToggle} />
+          <Payment handleToggle={props.actions.handleToggle} />
         </div>
       </div>
     </>

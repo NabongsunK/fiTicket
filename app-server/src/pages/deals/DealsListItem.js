@@ -2,10 +2,6 @@ import { Link } from "react-router-dom";
 import { push, pop } from "../../store/cartSlice";
 
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 const DealsListItem = function (props) {
   const dispatch = useDispatch();
