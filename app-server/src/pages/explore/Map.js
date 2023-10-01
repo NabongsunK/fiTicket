@@ -19,14 +19,24 @@ const Map = function (props) {
   const mapData = useSelector((state) => state.myMapSlice.mapData);
   const regionId = useSelector((state) => state.myMapSlice.regionId);
   const navigate = useNavigate();
-  let map = useRef(null);
-  let clusterer = useRef(null);
+  //let map = useRef(null);
+  //let clusterer = useRef(null);
+  const map = useRef(null);
+  const clusterer = useRef(null);
+
   let polygons = useRef([]);
   var infoWindows = [];
   const dispatch = useDispatch();
   const allList = useSelector((state) => state.myPageSlice.allList);
 
   var markers_group = useRef({ 14: [], 15: [], 39: [], 28: [] });
+
+  const menusRefs = {
+    14: useRef(null),
+    15: useRef(null),
+    39: useRef(null),
+    28: useRef(null),
+  };
 
   function getInfo() {
     // 지도의 현재 중심좌표를 얻어옵니다
@@ -41,17 +51,18 @@ const Map = function (props) {
 
   function changeMarker(type) {
     clusterer.current.clear();
-    var Menus = {};
-    for (var key in mapData) {
-      Menus[key] = document.getElementById("category_" + key);
-    }
+    // var Menus = {};
+    // for (var key in mapData) {
+    //   Menus[key] = document.getElementById("category_" + key);
+    // }
+
     ["14", "15", "39", "28"].forEach((tp) => {
       if (tp === type) {
-        Menus[tp].className = styles.menu_selected;
+        menusRefs[tp].current.className = styles.menu_selected;
         setMarkers(map.current, tp);
         clusterer.current.addMarkers(markers_group.current[tp]);
       } else {
-        Menus[tp].className = "";
+        menusRefs[tp].current.className = "";
         setMarkers(null, tp);
       }
     });
@@ -71,7 +82,7 @@ const Map = function (props) {
 
   //첫마운트 될때,
   useEffect(function () {
-    map.current = new kakao.maps.Map(document.getElementById("map"), {
+    map.current = new kakao.maps.Map(map.current, {
       // 지도를 표시할 div
       center: new kakao.maps.LatLng(35.95, 128.25), // 지도의 중심좌표
       level: mapItude[2], // 지도의 확대 레벨
@@ -209,12 +220,12 @@ const Map = function (props) {
 
   return (
     <div id={styles.mapwrap}>
-      <div id="map" style={{ width: "100%", height: "550px" }}></div>
+      <div ref={map} style={{ width: "100%", height: "550px" }}></div>
       <div onClick={getInfo}>버튼</div>
       <div className={styles.category}>
         <ul>
           <li
-            id="category_15"
+            ref={menusRefs["15"]}
             onClick={() => {
               changeMarker("15");
             }}
@@ -223,7 +234,7 @@ const Map = function (props) {
             축제
           </li>
           <li
-            id="category_39"
+            ref={menusRefs["39"]}
             onClick={() => {
               changeMarker("39");
             }}
@@ -232,7 +243,7 @@ const Map = function (props) {
             음식점
           </li>
           <li
-            id="category_28"
+            ref={menusRefs["28"]}
             onClick={() => {
               changeMarker("28");
             }}
@@ -241,7 +252,7 @@ const Map = function (props) {
             주차장
           </li>
           <li
-            id="category_14"
+            ref={menusRefs["14"]}
             onClick={() => {
               changeMarker("14");
             }}
