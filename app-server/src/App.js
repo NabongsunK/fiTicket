@@ -15,7 +15,7 @@ import Teams from "./pages/teams";
 import TicketBody from "./pages/explore/TicketBody";
 import TicketDetail from "./pages/explore/TicketDetail";
 import Review from "./pages/writeReview";
-import StaffONly from "./pages/staff";
+import Staff from "./pages/staff";
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/review" element={<Review />} />
-            <Route path="/staff" element={<StaffONly />} />
+            <Route path="/staff" element={<Staff />} />
           </Route>
         </Routes>
       </Router>
