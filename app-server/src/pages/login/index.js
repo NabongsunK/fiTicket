@@ -1,31 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { signin, signout } from "../../store/loginSlice";
+import { useRef, useCallback, useEffect } from "react"; // useEffect를 추가합니다.
+import { useDispatch } from "react-redux";
+import { signin } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
-// axios 기본 url 정의
+
 axios.defaults.baseURL = "http://localhost:4400/api";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // redux 이용하기
-  const [LoginId, setLoginId] = useState();
-  const [LoginPw, setLoginPw] = useState();
 
-  const signIn = async function () {
+  const loginIdRef = useRef(null);
+  const loginPwRef = useRef(null);
+
+  const signIn = useCallback(async () => {
     const res = await axios.post("/login/signin", {
-      login_id: LoginId,
-      password: await hasing(LoginPw),
+      login_id: loginIdRef.current.value,
+      password: await hasing(loginPwRef.current.value),
     });
     if (res.data.ok) {
       dispatch(signin({ user_id: res.data.user_id }));
       navigate("/");
     }
     console.log(res);
-  };
+  }, [dispatch, navigate]);
 
   return (
     <section className="login_page">
@@ -36,12 +35,11 @@ function Login() {
             <label className="form-label" htmlFor="form2Example1">
               ID
             </label>
-
             <input
               type="email"
               id="form2Example1"
               className="form-control"
-              onChange={(e) => setLoginId(e.target.value)}
+              ref={loginIdRef}
             />
           </div>
 
@@ -50,12 +48,11 @@ function Login() {
             <label className="form-label" htmlFor="form2Example2">
               Password
             </label>
-
             <input
               type="password"
               id="form2Example2"
               className="form-control"
-              onChange={(e) => setLoginPw(e.target.value)}
+              ref={loginPwRef}
             />
           </div>
 
