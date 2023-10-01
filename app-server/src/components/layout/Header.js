@@ -20,6 +20,10 @@ const Header = function (props) {
   const [isActive, setActive] = useState(false);
   const [isCart, setCart] = useState(true);
   const [cartNo, setCartNo] = useState(0);
+  const [login_id, setLogin_id] = useState("");
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
+
   const handleToggle = function (next) {
     setActive(!isActive);
     setTimeout(() => {
@@ -40,10 +44,6 @@ const Header = function (props) {
       next?.();
     }
   };
-  const [login_id, setLogin_id] = useState("");
-
-  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
-  const user_id = useSelector((state) => state.myLoginSlice.user_id);
 
   useEffect(() => {
     getUser(user_id).then((response) => {

@@ -1,12 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const TicketFind = function (props) {
   var query = "";
+  const valueRef = useRef("value");
   const search = function () {
     props.setKeyword(query);
     //TODO: 이쪽 리액트하게 수정
-    var va = document.getElementById("value");
-    va.value = "";
+
+    // var va = document.getElementById("value");
+    // va.value = "";
+
+    valueRef.current = "";
   };
 
   const keyHandler = function (event) {

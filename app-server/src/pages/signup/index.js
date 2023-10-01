@@ -1,24 +1,24 @@
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signin, signout } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
 
 function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // redux 이용하기
-  const [SignupId, setSignupId] = useState();
-  const [SignupPn, setSignupPn] = useState();
-  const [SignupPw, setSignupPw] = useState();
-  const [SignupPwConfirm, setSignupPwConfirm] = useState();
-  const [SignupEm, setSignupEm] = useState();
-  const [SignupAuth, setSignupAuth] = useState();
-  const [SignupName, setSignupName] = useState();
 
-  const [isActive, setActive] = useState("false");
-  const [isSend, setSend] = useState("false");
+  const idRef = useRef(null);
+  const pnRef = useRef(null);
+  const pwRef = useRef(null);
+  const pwConfirmRef = useRef(null);
+  const emailRef = useRef(null);
+  const nameRef = useRef(null);
+  const authRef = useRef(null);
+
+  const [isActive, setActive] = useState(false);
+  const [isSend, setSend] = useState(false);
 
   const isValidPhoneNumber = (phoneNumber) => {
     const regex = /^010-?\d{4}-?\d{4}$/;
@@ -45,35 +45,35 @@ function Signup() {
     return regex.test(id);
   };
 
-  const signUp = async function () {
-    // 유효성 검사
+  //유효성 검사 함수들
 
-    if (!isValidName(SignupName)) {
+  const signUp = async function () {
+    if (!isValidName(nameRef.current.value)) {
       alert("이름은 한글만 가능합니다.");
       return;
     }
 
-    if (!isValidPassword(SignupPw)) {
+    if (!isValidPassword(pwRef.current.value)) {
       alert("비밀번호는 8자리 이상, 영문, 숫자, 특수문자를 포함해야 합니다.");
       return;
     }
 
-    if (!isValidEmail(SignupEm)) {
+    if (!isValidEmail(emailRef.current.value)) {
       alert("유효한 이메일 형식이 아닙니다.");
       return;
     }
 
-    if (!isValidId(SignupId)) {
+    if (!isValidId(idRef.current.value)) {
       alert("ID는 영어와 숫자만 가능합니다.");
       return;
     }
 
-    if (SignupPw !== SignupPwConfirm) {
+    if (pwRef.current.value !== pwConfirmRef.current.value) {
       alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
       return;
     }
 
-    if (!SignupPn) {
+    if (!pnRef.current.value) {
       alert("핸드폰 번호를 입력해주세요.");
       return;
     }
@@ -81,12 +81,12 @@ function Signup() {
     // 서버 요청 실행
     // 서버에서 user로 자동변환
     const res = await axios.post("/login/signup", {
-      login_id: SignupId,
-      phone_number: SignupPn,
-      password: await hasing(SignupPw),
+      login_id: idRef.current.value,
+      phone_number: pnRef.current.value,
+      password: await hasing(pwRef.current.value),
       role: "user",
-      email: SignupEm,
-      name: SignupName,
+      email: emailRef.current.value,
+      name: nameRef.current.value,
     });
     // 회원가입성공시 성공시
     if (res.data.ok) {
@@ -97,7 +97,12 @@ function Signup() {
   };
 
   const getAuth = async function () {
-    if (!isValidPhoneNumber(SignupPn)) {
+    if (!isValidPhoneNumber(pnRef.current.value)) {
+      setActive(true);
+      setTimeout(() => {
+        setActive(false);
+      }, 5000);
+
       alert(
         "핸드폰 번호는 010으로 시작하며, 중간,끝에는 4자리 숫자만 가능합니다."
       );
@@ -105,28 +110,27 @@ function Signup() {
     }
 
     const res = await axios.post("/auth/getauthnum", {
-      login_id: SignupId,
-      phone_number: SignupPn,
+      login_id: idRef.current.value,
+      phone_number: pnRef.current.value,
     });
-    setActive(!isActive);
+    setSend(true);
     setTimeout(() => {
-      setActive(isActive);
-    }, 3000);
+      setSend(false);
+    }, 5000);
     console.log(res);
   };
   // 여기 인증번호 한아이디에 한개씩이 안됨 확인해야됨
   // 아마 회원가입한사람만(userdb에 아이디가 저장된 사람만) 인증번호 받기로 했던거 같은데 이거 수정해야됨
   const doAuth = async function () {
     const res = await axios.post("/auth/doauth", {
-      login_id: SignupId,
-      phone_number: SignupPn,
-      authentication_number: SignupAuth,
+      login_id: idRef.current.value,
+      phone_number: pnRef.current.value,
+      authentication_number: authRef.current.value,
     });
-    setSend(!isSend);
+    setSend(true);
     setTimeout(() => {
-      setSend(isSend);
+      setSend(false);
     }, 3000);
-
     console.log(res);
   };
 
@@ -136,7 +140,7 @@ function Signup() {
       {/* 핸드폰 인증하기 팝업 */}
       <div
         className={
-          isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
+          isActive ? "toast toast-3s fade show" : "toast toast-3s fade hide"
         }
         role="alert"
         aria-live="assertive"
@@ -162,7 +166,7 @@ function Signup() {
       {/* 인증번호 제출 */}
       <div
         className={
-          isSend ? "toast toast-3s fade hide" : "toast toast-3s fade show"
+          isSend ? "toast toast-3s fade show" : "toast toast-3s fade hide"
         }
         role="alert"
         aria-live="assertive"
@@ -193,7 +197,7 @@ function Signup() {
               type="text"
               id="login_id"
               className="form-control"
-              onChange={(e) => setSignupId(e.target.value)}
+              ref={idRef}
             />
             <label className="form-label" htmlFor="login_id">
               ID
@@ -206,7 +210,7 @@ function Signup() {
               type="text"
               id="phone_number"
               className="form-control"
-              onChange={(e) => setSignupPn(e.target.value)}
+              ref={pnRef}
             />
             <label className="form-label" htmlFor="phone_number">
               핸드폰 번호
@@ -215,9 +219,7 @@ function Signup() {
             <button
               type="button"
               className="btn btn-primary btn-block mb-4"
-              onClick={() => {
-                getAuth();
-              }}
+              onClick={getAuth}
             >
               핸드폰 인증하기
             </button>
@@ -225,7 +227,7 @@ function Signup() {
               type="text"
               id="authentication_number"
               className="form-control"
-              onChange={(e) => setSignupAuth(e.target.value)}
+              ref={authRef}
             />
             <label className="form-label" htmlFor="authentication_number">
               인증번호
@@ -233,9 +235,7 @@ function Signup() {
             <button
               type="button"
               className="btn btn-primary btn-block mb-4"
-              onClick={() => {
-                doAuth();
-              }}
+              onClick={doAuth}
             >
               인증번호 제출
             </button>
@@ -247,7 +247,7 @@ function Signup() {
               type="text"
               id="name"
               className="form-control"
-              onChange={(e) => setSignupName(e.target.value)}
+              ref={nameRef}
             />
             <label className="form-label" htmlFor="name">
               이름
@@ -260,7 +260,7 @@ function Signup() {
               type="password"
               id="password"
               className="form-control"
-              onChange={(e) => setSignupPw(e.target.value)}
+              ref={pwRef}
             />
             <label className="form-label" htmlFor="password">
               비밀번호
@@ -273,7 +273,7 @@ function Signup() {
               type="password"
               id="password_confirm"
               className="form-control"
-              onChange={(e) => setSignupPwConfirm(e.target.value)}
+              ref={pwConfirmRef}
             />
             <label className="form-label" htmlFor="password_confirm">
               비밀번호 확인
@@ -286,7 +286,7 @@ function Signup() {
               type="text"
               id="email"
               className="form-control"
-              onChange={(e) => setSignupEm(e.target.value)}
+              ref={emailRef}
             />
             <label className="form-label" htmlFor="email">
               이메일주소
