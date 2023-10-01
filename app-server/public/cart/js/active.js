@@ -82,7 +82,7 @@
 
   // :: Sticky Active Code
   $window.on("scroll", function () {
-    if ($window.scrollTop() > 0) {
+    if ($window.scrollTop() > 300) {
       $(".cart-area").addClass("sticky");
     } else {
       $(".cart-area").removeClass("sticky");
