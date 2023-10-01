@@ -76,4 +76,14 @@ router.get("/recommends", async (req, res, next) => {
     next(err);
   }
 });
+// 축제 추천 토글
+router.put("/rec/:id", async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const result = await ExploreService.toggleRec(id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
 module.exports = router;

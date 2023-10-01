@@ -229,6 +229,18 @@ const ExploreGetModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+  // 해당 축제 추천하기
+  async changeToRec(id, conn = pool) {
+    try {
+      const sql = `
+      update festival_api set rec=if(rec=1,0,1) where id= ?;
+        `;
+      const [result] = await conn.query(sql, [id]);
+      return result.affectedRows;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = ExploreGetModel;
