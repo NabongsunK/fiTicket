@@ -54,7 +54,7 @@ const TicketListItem = function (props) {
     );
   };
 
-  const img = props.festival.first_image2;
+  const img = props.festival.first_image;
   const poster =
     props.festival.first_image2 === "" ? (
       <Link to={`/explore/${props.festival.id}`}>

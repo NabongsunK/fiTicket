@@ -19,13 +19,11 @@ const Map = function (props) {
   const mapData = useSelector((state) => state.myMapSlice.mapData);
   const regionId = useSelector((state) => state.myMapSlice.regionId);
   const navigate = useNavigate();
-  //let map = useRef(null);
-  //let clusterer = useRef(null);
-  const map = useRef(null);
+  const map = useRef();
   const clusterer = useRef(null);
 
   let polygons = useRef([]);
-  var infoWindows = [];
+  var openOverlay = [null, null];
   const dispatch = useDispatch();
   const allList = useSelector((state) => state.myPageSlice.allList);
 
@@ -51,16 +49,15 @@ const Map = function (props) {
 
   function changeMarker(type) {
     clusterer.current.clear();
-    // var Menus = {};
-    // for (var key in mapData) {
-    //   Menus[key] = document.getElementById("category_" + key);
-    // }
 
     ["14", "15", "39", "28"].forEach((tp) => {
       if (tp === type) {
         menusRefs[tp].current.className = styles.menu_selected;
         setMarkers(map.current, tp);
-        clusterer.current.addMarkers(markers_group.current[tp]);
+        //TODO: 현재는 주차장일때 클러스터러를 표시 안하는 방식으로 했지만, 서버에서 클러스터러된 정보를 직접 보내는 경우도 생각해 볼것
+        if (type != "28") {
+          clusterer.current.addMarkers(markers_group.current[tp]);
+        }
       } else {
         menusRefs[tp].current.className = "";
         setMarkers(null, tp);
@@ -68,8 +65,11 @@ const Map = function (props) {
     });
   }
 
-  function closeInfoWindow() {
-    infoWindows.forEach((infowindow) => infowindow.close());
+  function closeAllOverlay() {
+    if (openOverlay[0]) {
+      openOverlay[0].setMap(null);
+    }
+    openOverlay[0] = openOverlay[1];
   }
 
   // 마커들의 지도 표시 여부를 설정하는 함수입니다
@@ -90,7 +90,8 @@ const Map = function (props) {
     // 마커 클러스터러를 생성합니다
     clusterer.current = new kakao.maps.MarkerClusterer({
       map: map.current, // 마커들을 클러스터로 관리하고 표시할 지도 객체
-      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      averageCenter: false, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minClusterSize: 4, // 클러스터에 포함시킬 마커의 갯수
       minLevel: 10, // 클러스터 할 최소 지도 레벨
     });
   }, []);
@@ -114,47 +115,66 @@ const Map = function (props) {
           );
           var marker = new kakao.maps.Marker({
             position: new kakao.maps.LatLng(position.map_y, position.map_x),
+            map: map.current,
             clickable: true,
             image: markerImage,
           });
 
-          //여기에 title 말고도 first_image2 , addr1, 들어갈 수 있게
           // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+          var content = document.createElement("div");
+          content.className = styles.wrap;
 
-          var content = `
-            <div className=${styles.wrap}>
-              <div className=${styles.info} style="width: 100%, height: 100%">
-                <div className=${styles.title}>
-                    ${position.title}
-                  <div className="close" style="width:15%" title="닫기"></div>
-                </div>
-                <div className="body">
-                  <div className="img">
-                    <img src=${position.first_image2} width="73" height="70"/>
-                  </div>
-                  <div className="desc">
-                    <div className="ellipsis">
-                      ${position.addr1}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            `;
+          var info = document.createElement("div");
+          info.className = styles.info;
+          content.appendChild(info);
 
-          // 인포윈도우를 생성합니다
-          var infowindow = new kakao.maps.InfoWindow({
+          var title = document.createElement("div");
+          title.className = styles.title;
+          title.appendChild(document.createTextNode(position.title));
+          info.appendChild(title);
+
+          var close = document.createElement("div");
+          close.className = styles.close;
+          // 닫기 이벤트 추가
+          close.onclick = function () {
+            overlay.setMap(null);
+          };
+          title.appendChild(close);
+
+          var body = document.createElement("div");
+          body.className = styles.body;
+          info.appendChild(body);
+
+          var imgDiv = document.createElement("div");
+          imgDiv.className = styles.img;
+          body.appendChild(imgDiv);
+
+          var img = document.createElement("img");
+          img.src = position.first_image2;
+          imgDiv.appendChild(img);
+
+          var desc = document.createElement("div");
+          desc.className = styles.desc;
+          body.appendChild(desc);
+
+          var ellipsis = document.createElement("div");
+          ellipsis.className = styles.ellipsis;
+          ellipsis.appendChild(document.createTextNode(position.addr1));
+          desc.appendChild(ellipsis);
+
+          // 마커 위에 커스텀오버레이를 표시합니다
+          // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+          var overlay = new kakao.maps.CustomOverlay({
             content: content,
-            removable: true,
+            position: marker.getPosition(),
           });
-          // 마커 위에 인포윈도우를 표시합니다
-          infoWindows.push(infowindow);
 
-          // 마커에 클릭이벤트를 등록합니다
-          kakao.maps.event.addListener(marker, "click", async () => {
+          // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+          kakao.maps.event.addListener(marker, "click", function () {
             navigate("/explore");
-            closeInfoWindow();
-            infowindow.open(map.current, marker);
+            openOverlay[1] = overlay;
+            closeAllOverlay();
+            overlay.setMap(map.current);
             if (position.content_type_id === "15") {
               const festival = allList.filter(
                 (fes) => fes.id === Number(position.id)
