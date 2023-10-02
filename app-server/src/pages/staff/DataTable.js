@@ -29,77 +29,6 @@ function toPages(pages) {
 
   return results;
 }
-// 추천 토글
-const toggleRecommend = async function (event) {
-  try {
-    console.log(event.target.value);
-    const id = event.target.value;
-    await axios.put(`/explore/rec/${id}`);
-  } catch (err) {
-    console.error(err);
-  }
-};
-const columns = [
-  {
-    button: true,
-    name: "id",
-    // selector: (row) => row.id,
-    sortable: true,
-    center: true,
-    maxWidth: "10px",
-    cell: (row) => (
-      <div className="App">
-        <div className="openbtn text-center">
-          <button
-            type="button"
-            className="btn btn-primary"
-            value={row.id}
-            onClick={toggleRecommend}
-          >
-            {row.id}
-          </button>
-        </div>
-      </div>
-    ),
-  },
-
-  {
-    name: "rec",
-    selector: (row) => row.rec,
-    sortable: true,
-    center: 1,
-    maxWidth: "10px",
-  },
-  {
-    name: "area",
-    selector: (row) => row.area_code,
-    sortable: true,
-    maxWidth: "10px",
-    center: true,
-  },
-  {
-    name: "D-day",
-    selector: (row) => row.d_day,
-    sortable: true,
-    center: 1,
-    maxWidth: "10px",
-  },
-  {
-    name: "end-date",
-    selector: (row) => row.event_end_date,
-    sortable: true,
-    center: 1,
-    maxWidth: "20px",
-  },
-  {
-    name: "title",
-    id: "data-table-title",
-    selector: (row) => row.title,
-    sortable: true,
-    maxWidth: "300px",
-    center: 1,
-  },
-];
 
 // RDT exposes the following internal pagination properties
 const BootyPagination = function ({
@@ -183,6 +112,79 @@ const FestivalDataTable = function () {
   // const list = allListData.map((festival) => (
   //   <DataTableItem key={festival.id} festival={festival} />
   // ));
+  // 추천 토글
+  const toggleRecommend = async function (event) {
+    try {
+      console.log(event.target.value);
+      const id = event.target.value;
+      const result = await axios.put(`/explore/rec/${id}`);
+      setSearchResult(result.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const columns = [
+    {
+      button: true,
+      name: "id",
+      // selector: (row) => row.id,
+      sortable: true,
+      center: true,
+      maxWidth: "10px",
+      cell: (row) => (
+        <div className="App">
+          <div className="openbtn text-center">
+            <button
+              type="button"
+              className="btn btn-primary"
+              value={row.id}
+              onClick={toggleRecommend}
+            >
+              {row.id}
+            </button>
+          </div>
+        </div>
+      ),
+    },
+
+    {
+      name: "rec",
+      selector: (row) => row.rec,
+      sortable: true,
+      center: 1,
+      maxWidth: "10px",
+    },
+    {
+      name: "area",
+      selector: (row) => row.area_code,
+      sortable: true,
+      maxWidth: "10px",
+      center: true,
+    },
+    {
+      name: "D-day",
+      selector: (row) => row.d_day,
+      sortable: true,
+      center: 1,
+      maxWidth: "10px",
+    },
+    {
+      name: "end-date",
+      selector: (row) => row.event_end_date,
+      sortable: true,
+      center: 1,
+      maxWidth: "20px",
+    },
+    {
+      name: "title",
+      id: "data-table-title",
+      selector: (row) => row.title,
+      sortable: true,
+      maxWidth: "300px",
+      center: 1,
+    },
+  ];
 
   /* filtering */
   // 검색어

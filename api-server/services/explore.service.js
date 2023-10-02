@@ -134,10 +134,11 @@ const ExploreService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
 
-      const result = await ExploreGetModel.changeToRec(id);
+      await ExploreGetModel.changeToRec(id);
+      const result = await ExploreService.getAllList();
       // DB에 작업 반영
       await conn.commit();
-      return result;
+      return result.data;
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();
