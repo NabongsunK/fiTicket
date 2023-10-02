@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
 import DataTable, { ExpanderComponentProps } from "react-data-table-component";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.css";
-import styled from "styled-components";
 
 import axios from "axios";
 
@@ -29,44 +29,6 @@ function toPages(pages) {
 
   return results;
 }
-
-const columns = [
-  {
-    name: "id",
-    selector: (row) => row.id,
-    sortable: true,
-    right: true,
-    maxWidth: "10px",
-  },
-  {
-    name: "rec",
-    selector: (row) => row.rec,
-    sortable: true,
-    right: true,
-    maxWidth: "10px",
-  },
-  {
-    name: "area",
-    selector: (row) => row.area_code,
-    sortable: true,
-    maxWidth: "10px",
-    right: true,
-  },
-  {
-    name: "D-day",
-    selector: (row) => row.d_day,
-    sortable: true,
-    right: true,
-    maxWidth: "10px",
-  },
-  {
-    name: "title",
-    id: "data-table-title",
-    selector: (row) => row.title,
-    sortable: true,
-    style: { marginLeft: "50px" },
-  },
-];
 
 // RDT exposes the following internal pagination properties
 const BootyPagination = function ({
@@ -140,13 +102,89 @@ const BootyPagination = function ({
 };
 
 const ExpandedComponent = ({ data }) => (
-  <pre>{JSON.stringify(data, null, 2)}</pre>
+  <>
+    <pre>{JSON.stringify(data, null, 2)}</pre>
+    <button>수정</button>
+  </>
 );
 
 const FestivalDataTable = function () {
   // const list = allListData.map((festival) => (
   //   <DataTableItem key={festival.id} festival={festival} />
   // ));
+  // 추천 토글
+  const toggleRecommend = async function (event) {
+    try {
+      console.log(event.target.value);
+      const id = event.target.value;
+      const result = await axios.put(`/explore/rec/${id}`);
+      setSearchResult(result.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const columns = [
+    {
+      button: true,
+      name: "id",
+      // selector: (row) => row.id,
+      sortable: true,
+      center: true,
+      maxWidth: "10px",
+      cell: (row) => (
+        <div className="App">
+          <div className="openbtn text-center">
+            <button
+              type="button"
+              className="btn btn-primary"
+              value={row.id}
+              onClick={toggleRecommend}
+            >
+              {row.id}
+            </button>
+          </div>
+        </div>
+      ),
+    },
+
+    {
+      name: "rec",
+      selector: (row) => row.rec,
+      sortable: true,
+      center: 1,
+      maxWidth: "10px",
+    },
+    {
+      name: "area",
+      selector: (row) => row.area_code,
+      sortable: true,
+      maxWidth: "10px",
+      center: true,
+    },
+    {
+      name: "D-day",
+      selector: (row) => row.d_day,
+      sortable: true,
+      center: 1,
+      maxWidth: "10px",
+    },
+    {
+      name: "end-date",
+      selector: (row) => row.event_end_date,
+      sortable: true,
+      center: 1,
+      maxWidth: "20px",
+    },
+    {
+      name: "title",
+      id: "data-table-title",
+      selector: (row) => row.title,
+      sortable: true,
+      maxWidth: "300px",
+      center: 1,
+    },
+  ];
 
   /* filtering */
   // 검색어
@@ -159,7 +197,9 @@ const FestivalDataTable = function () {
     setKeyword(searchKeyword);
     const regExp = new RegExp(searchKeyword, "i");
     setSearchResult(
-      allListData.filter((festival) => regExp.test(festival.title))
+      allListData.filter(
+        (festival) => regExp.test(festival.title) || regExp.test(festival.id)
+      )
     );
   };
 
@@ -188,7 +228,7 @@ const FestivalDataTable = function () {
           defaultSortFieldID={1}
           pagination
           paginationComponent={BootyPagination}
-          selectableRows
+          // selectableRows
           expandOnRowClicked
           expandableRows
           expandableRowsComponent={ExpandedComponent}
