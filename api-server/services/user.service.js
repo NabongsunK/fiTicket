@@ -143,6 +143,10 @@ const UserService = {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
       const getPid = await LoginModel.findSame(article, conn);
+      if (!getPid || !getPid.id) {
+        throw new Error("사용자를 찾을 수 없습니다.");
+      }
+      await LoginModel.chTrue(getPid.id, conn);
       await LoginModel.chTrue(getPid.id, conn);
       //여기에 로그인실패(패스워드, 없는닉네임 추가할것)
       await conn.commit();

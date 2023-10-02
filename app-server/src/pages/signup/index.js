@@ -9,13 +9,13 @@ function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const idRef = useRef(null);
-  const pnRef = useRef(null);
-  const pwRef = useRef(null);
-  const pwConfirmRef = useRef(null);
-  const emailRef = useRef(null);
-  const nameRef = useRef(null);
-  const authRef = useRef(null);
+  const idRef = useRef();
+  const pnRef = useRef();
+  const pwRef = useRef();
+  const pwConfirmRef = useRef();
+  const emailRef = useRef();
+  const nameRef = useRef();
+  const authRef = useRef();
 
   const [isActive, setActive] = useState(false);
   const [isSend, setSend] = useState(false);

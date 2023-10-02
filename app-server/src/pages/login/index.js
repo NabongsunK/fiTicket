@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useRef, useCallback, useEffect } from "react"; // useEffect를 추가합니다.
+import { useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { signin } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
@@ -11,19 +11,44 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const loginIdRef = useRef(null);
-  const loginPwRef = useRef(null);
+  const loginIdRef = useRef();
+  const loginPwRef = useRef();
 
   const signIn = useCallback(async () => {
-    const res = await axios.post("/login/signin", {
-      login_id: loginIdRef.current.value,
-      password: await hasing(loginPwRef.current.value),
-    });
-    if (res.data.ok) {
-      dispatch(signin({ user_id: res.data.user_id }));
-      navigate("/");
+    const loginId = loginIdRef.current.value;
+    const loginPw = loginPwRef.current.value;
+
+    if (!loginId.trim() && !loginPw.trim()) {
+      alert("아이디와 비밀번호를 입력해주세요.");
+      return;
     }
-    console.log(res);
+
+    if (!loginId.trim()) {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
+
+    if (!loginPw.trim()) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
+    try {
+      const res = await axios.post("/login/signin", {
+        login_id: loginId,
+        password: await hasing(loginPw),
+      });
+
+      if (res.data.ok) {
+        dispatch(signin({ user_id: res.data.user_id }));
+        navigate("/");
+      } else {
+        alert("아이디 또는 비밀번호를 다시 확인해주세요.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("잠시후 다시 시도해주세요.");
+    }
   }, [dispatch, navigate]);
 
   return (
