@@ -84,9 +84,6 @@ const BootyPagination = function ({
           {pageItems.map((page) => {
             const handlePageNumber = (e) => {
               onChangePage(Number(e.target.value));
-              console.log(page);
-              console.log(currentPage);
-              console.log(e.target.value);
             };
 
             const className =
@@ -142,8 +139,6 @@ const Reviews = function () {
     const updateFesDetail = async function (e) {
       e.preventDefault();
       const id = data.id;
-      // console.log(JSON.parse(article));
-      console.log(article);
       const result = await axios.put(`/explore/fes/${id}`, JSON.parse(article));
       setArticle();
       setSearchResult(result.data);
@@ -167,7 +162,6 @@ const Reviews = function () {
   // 추천 토글
   const toggleRecommend = async function (event) {
     try {
-      console.log(event.target.value);
       const id = event.target.value;
       const result = await axios.put(`/review/reviews/best/${id}`);
       setSearchResult(result.data);
