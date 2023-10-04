@@ -240,7 +240,7 @@ const Reviews = function () {
     },
     {
       name: "user-id",
-      selector: (row) => row.user_id,
+      selector: (row) => row.user_login_id,
       sortable: true,
       center: 1,
       maxWidth: "20px",
