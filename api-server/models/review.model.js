@@ -6,8 +6,10 @@ const reviewModel = {
     try {
       const sql = `
       select
-        *
+        review.*,
+        festival_api.title as ticket_name
       from review
+        left join festival_api on review.ticket_id = festival_api.id
       ORDER BY created_at desc
       `;
       const [result] = await conn.query(sql);
@@ -70,6 +72,30 @@ const reviewModel = {
       `;
       const [result] = await conn.query(sql, [review]);
       return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // best review toggle
+  async changeToBest(id, conn = pool) {
+    try {
+      const sql = `
+        update review set best_review=if(best_review=1,0,1) where id= ?;
+          `;
+      const [result] = await conn.query(sql, [id]);
+      return result.affectedRows;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // review delete
+  async deleteReview(id, conn = pool) {
+    try {
+      const sql = `
+        delete from review where id ?
+      `;
+      const [result] = await conn.query(sql, [id]);
+      return result.affectedRows;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }

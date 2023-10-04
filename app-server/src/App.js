@@ -16,6 +16,9 @@ import TicketBody from "./pages/explore/TicketBody";
 import TicketDetail from "./pages/explore/TicketDetail";
 import Review from "./pages/writeReview";
 import Staff from "./pages/staff";
+import Reviews from "./pages/staff/Reviews";
+import FestivalDataTable from "./pages/staff/DataTable";
+import StaffHome from "./pages/staff/StaffHome";
 
 function App() {
   return (
@@ -36,7 +39,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/review" element={<Review />} />
-            <Route path="/staff" element={<Staff />} />
+            <Route path="/staff" element={<Staff />}>
+              <Route index element={<StaffHome />} />
+              <Route path="fes_table" element={<FestivalDataTable />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Route>
           </Route>
         </Routes>
       </Router>

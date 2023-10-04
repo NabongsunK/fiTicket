@@ -241,6 +241,19 @@ const ExploreGetModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+  // 축제 수정
+  async updateFestival(id, article, conn = pool) {
+    try {
+      const sql = `
+        update festival_api set ? where id = ?
+      `;
+      const [result] = await conn.query(sql, [article, id]);
+      // console.log(result);
+      return result.affectedRows;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = ExploreGetModel;
