@@ -16,6 +16,14 @@ const CommentList = () => {
   };
   //const userName = "UserName"; // 사용자 이름을 설정하십시오.
 
+  const onChangeButton = (e) => {
+    setComment(e.target.value);
+  };
+
+  const onKeyUpButton = (e) => {
+    e.target.value.length > 0 ? setIsValid(true) : setIsValid(false);
+  };
+
   return (
     <>
       <div
@@ -66,14 +74,8 @@ const CommentList = () => {
                     rows="5"
                     placeholder="리뷰 내용"
                     type="text"
-                    onChange={(e) => {
-                      setComment(e.target.value);
-                    }}
-                    onKeyUp={(e) => {
-                      e.target.value.length > 0
-                        ? setIsValid(true)
-                        : setIsValid(false);
-                    }}
+                    onChange={onChangeButton}
+                    onKeyUp={onKeyUpButton}
                     value={comment}
                   ></textarea>
                 </div>
