@@ -7,9 +7,11 @@ const reviewModel = {
       const sql = `
       select
         review.*,
-        festival_api.title as ticket_name
+        festival_api.title as ticket_name,
+        users.login_id as user_login_id
       from review
         left join festival_api on review.ticket_id = festival_api.id
+        left join users on review.user_id = users.id
       ORDER BY created_at desc
       `;
       const [result] = await conn.query(sql);

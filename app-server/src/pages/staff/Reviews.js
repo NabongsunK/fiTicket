@@ -133,7 +133,7 @@ const Reviews = function () {
     const detail = JSON.stringify(data, ["content"], 2);
     const fixed = JSON.stringify(
       data,
-      ["id", "ticket_id", "user_id", "best_review"],
+      ["id", "ticket_id", "user_id", "user_login_id", "best_review"],
       2
     );
 
@@ -142,7 +142,7 @@ const Reviews = function () {
     const updateFesDetail = async function (e) {
       e.preventDefault();
       const id = data.id;
-      console.log(JSON.parse(article));
+      // console.log(JSON.parse(article));
       // console.log(data.id);
       const result = await axios.put(
         `/review/reviews/staff/${id}`,
@@ -181,7 +181,7 @@ const Reviews = function () {
   // 추천 토글
   const toggleRecommend = async function (event) {
     try {
-      console.log(event.target.value);
+      // console.log(event.target.value);
       const id = event.target.value;
       const result = await axios.put(`/review/reviews/best/${id}`);
       setSearchResult(result.data);
@@ -279,11 +279,11 @@ const Reviews = function () {
     setSearchResult(
       allListData.filter(
         (festival) =>
-          regExp.test(festival.ticket_id) || regExp.test(festival.id)
+          regExp.test(festival.ticket_name) ||
+          regExp.test(festival.user_login_id)
       )
     );
   };
-
   return (
     <>
       <div className="data-table">
