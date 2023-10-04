@@ -33,16 +33,23 @@ function Payment(props) {
     IMP.init("imp37467640");
     /* 2. 결제 데이터 정의하기 */
     const data = {
-      pg: "kakaopay", // PG사
-      pay_method: "kakaopay", // 결제수단
-      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: amount, // 결제금액
-      name: "Loca!T 티켓 구매", // 주문명
-      buyer_name: user.name, // 구매자 이름
-      buyer_tel: user.phone_number, // 구매자 전화번호
-      buyer_email: user.email, // 구매자 이메일
-      buyer_addr: "신사동 661-16", // 구매자 주소
-      buyer_postcode: "06018", // 구매자 우편번호
+      pg: "html5_inicis.INIpayTest{INIpayTest}", //테스트 시 html5_inicis.INIpayTest 기재
+      pay_method: "card",
+      merchant_uid: `mid_${new Date().getTime()}`, //상점에서 생성한 고유 주문번호
+      name: "Loca!T 티켓 구매",
+      amount: amount,
+      buyer_email: user.email,
+      buyer_name: user.name,
+      buyer_tel: user.phone_number, //필수 파라미터 입니다.
+      buyer_addr: "서울특별시 강남구 삼성동",
+      buyer_postcode: "123-456",
+      //m_redirect_url : '{모바일에서 결제 완료 후 리디렉션 될 URL}',
+      escrow: true, //에스크로 결제인 경우 설정
+      vbank_due: "YYYYMMDD",
+      period: {
+        from: "20230101", //YYYYMMDD
+        to: "20241231", //YYYYMMDD
+      },
     };
 
     /* 4. 결제 창 호출하기 */
