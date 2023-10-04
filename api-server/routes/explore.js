@@ -86,4 +86,15 @@ router.put("/rec/:id", async (req, res, next) => {
     next(err);
   }
 });
+// 축제 수정
+router.put("/fes/:id", async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const article = req.body;
+    const result = await ExploreService.updateFes(id, article);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
 module.exports = router;
