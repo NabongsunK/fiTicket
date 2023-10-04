@@ -92,9 +92,22 @@ const reviewModel = {
   async deleteReview(id, conn = pool) {
     try {
       const sql = `
-        delete from review where id ?
+        delete from review where id = ?
       `;
       const [result] = await conn.query(sql, [id]);
+      return result.affectedRows;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // review 수정
+  async updateReview(id, article, conn = pool) {
+    try {
+      const sql = `
+        update review set ? where id = ?
+      `;
+      const [result] = await conn.query(sql, [article, id]);
+      // console.log(result);
       return result.affectedRows;
     } catch (err) {
       throw new Error("DB Error", { cause: err });

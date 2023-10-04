@@ -144,6 +144,14 @@ const Reviews = function () {
       setSearchResult(result.data);
     };
 
+    const deleteHandler = async function () {
+      const id = JSON.parse(fixed).id;
+      const result = await axios.delete(`/review/reviews/staff/${id}`);
+      setArticle();
+      setSearchResult(result.data);
+      // console.log(JSON.parse(fixed).id);
+    };
+
     return (
       <form onSubmit={updateFesDetail}>
         <div>
@@ -155,6 +163,9 @@ const Reviews = function () {
           ></textarea>
         </div>
         <button type="submit">수정</button>
+        <button type="button" onClick={deleteHandler}>
+          삭제
+        </button>
       </form>
     );
   };

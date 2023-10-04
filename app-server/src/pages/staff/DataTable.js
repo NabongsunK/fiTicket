@@ -127,6 +127,7 @@ const FestivalDataTable = function () {
         // "map_y",
         // "rec",
         "area_code",
+        "price",
       ],
       2
     );
@@ -230,6 +231,13 @@ const FestivalDataTable = function () {
       sortable: true,
       maxWidth: "300px",
       center: 1,
+    },
+    {
+      name: "가격",
+      selector: (row) => row.price,
+      sortable: true,
+      center: 1,
+      maxWidth: "40px",
     },
   ];
 
