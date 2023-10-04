@@ -47,4 +47,37 @@ router.get("/best", async (req, res, next) => {
   }
 });
 
+// best review toggle
+router.put("/reviews/best/:id", async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const result = await ReviewService.toggleReview(id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// 리뷰 삭제
+router.delete("/reviews/staff/:id", async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const result = await ReviewService.deleteReview(id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+// 리뷰 수정
+router.put("/reviews/staff/:id", async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const article = req.body;
+    const result = await ReviewService.updateReview(id, article);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

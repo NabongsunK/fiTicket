@@ -46,20 +46,25 @@ const TicketPage = function (props) {
     </li>
   ));
 
+  const handleBackButtonClick = function () {
+    if (page > 1) {
+      dispatch(prev({ step: 1 }));
+    }
+  };
+
+  const handleNextButtonClick = function () {
+    if (page < props.lastPage) {
+      dispatch(next({ step: 1 }));
+    }
+  };
+
   return (
     //  pagination
     <div className="col-lg-12">
       <div>{`총 ${props.lastPage} 페이지 있습니다.`}</div>
       <ul className="page-numbers">
         <li>
-          <Link
-            to=""
-            onClick={() => {
-              if (page > 1) {
-                dispatch(prev({ step: 1 }));
-              }
-            }}
-          >
+          <Link to="" onClick={handleBackButtonClick}>
             <i className="fa fa-arrow-left"></i>
           </Link>
         </li>
@@ -67,14 +72,7 @@ const TicketPage = function (props) {
         {pageButtons}
 
         <li>
-          <Link
-            to=""
-            onClick={() => {
-              if (page < props.lastPage) {
-                dispatch(next({ step: 1 }));
-              }
-            }}
-          >
+          <Link to="" onClick={handleNextButtonClick}>
             <i className="fa fa-arrow-right"></i>
           </Link>
         </li>

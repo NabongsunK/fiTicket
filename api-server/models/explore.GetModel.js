@@ -81,7 +81,8 @@ const ExploreGetModel = {
         map_y,
         rec,
         datediff(event_end_date, now()) as d_day,
-        area_code
+        area_code,
+        price
       FROM festival_api
 
       WHERE
@@ -236,6 +237,19 @@ const ExploreGetModel = {
       update festival_api set rec=if(rec=1,0,1) where id= ?;
         `;
       const [result] = await conn.query(sql, [id]);
+      return result.affectedRows;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  // 축제 수정
+  async updateFestival(id, article, conn = pool) {
+    try {
+      const sql = `
+        update festival_api set ? where id = ?
+      `;
+      const [result] = await conn.query(sql, [article, id]);
+      // console.log(result);
       return result.affectedRows;
     } catch (err) {
       throw new Error("DB Error", { cause: err });

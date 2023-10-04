@@ -55,6 +55,23 @@ const TicketListItem = function (props) {
   };
 
   const img = props.festival.first_image;
+  const thumbsUp =
+    props.festival.rec == 0 ? (
+      ""
+    ) : (
+      <span>
+        <i
+          className="fa fa-thumbs-up"
+          style={{
+            color: "#22b3c1",
+            position: "absolute",
+            top: "10%",
+            left: "15%",
+            fontSize: "24px",
+          }}
+        ></i>
+      </span>
+    );
   const poster =
     props.festival.first_image2 === "" ? (
       <Link to={`/explore/${props.festival.id}`}>
@@ -101,22 +118,7 @@ const TicketListItem = function (props) {
       <div className="item">
         <div className="row">
           <div className="col-lg-4">
-            {props.festival.rec == 0 ? (
-              ""
-            ) : (
-              <span>
-                <i
-                  className="fa fa-thumbs-up"
-                  style={{
-                    color: "#22b3c1",
-                    position: "absolute",
-                    top: "10%",
-                    left: "15%",
-                    fontSize: "24px",
-                  }}
-                ></i>
-              </span>
-            )}
+            {thumbsUp}
             {poster}
           </div>
           <div
