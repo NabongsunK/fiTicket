@@ -142,11 +142,22 @@ const Reviews = function () {
     const updateFesDetail = async function (e) {
       e.preventDefault();
       const id = data.id;
-      // console.log(JSON.parse(article));
-      console.log(article);
-      const result = await axios.put(`/explore/fes/${id}`, JSON.parse(article));
+      console.log(JSON.parse(article));
+      // console.log(data.id);
+      const result = await axios.put(
+        `/review/reviews/staff/${id}`,
+        JSON.parse(article)
+      );
       setArticle();
       setSearchResult(result.data);
+    };
+
+    const deleteHandler = async function () {
+      const id = JSON.parse(fixed).id;
+      const result = await axios.delete(`/review/reviews/staff/${id}`);
+      setArticle();
+      setSearchResult(result.data);
+      // console.log(JSON.parse(fixed).id);
     };
 
     return (
@@ -160,6 +171,9 @@ const Reviews = function () {
           ></textarea>
         </div>
         <button type="submit">수정</button>
+        <button type="button" onClick={deleteHandler}>
+          삭제
+        </button>
       </form>
     );
   };
