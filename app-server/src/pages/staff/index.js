@@ -1,9 +1,12 @@
-import FestivalDataTable from "./DataTable";
+import { NavLink, Outlet } from "react-router-dom";
+import StaffNavigation from "./StaffNavigation";
 
 const Staff = function () {
   return (
     <>
-      <FestivalDataTable />
+      <StaffNavigation />
+
+      <Outlet />
     </>
   );
 };

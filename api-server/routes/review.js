@@ -47,4 +47,15 @@ router.get("/best", async (req, res, next) => {
   }
 });
 
+// best review toggle
+router.put("/reviews/best/:id", async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const result = await ReviewService.toggleReview(id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

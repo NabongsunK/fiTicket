@@ -13,6 +13,10 @@ var markerImageSrc =
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const { kakao } = window;
 
+const handleOpenNewTab = (url) => {
+  window.open(url, "_blank", "noopener, noreferrer");
+};
+
 const Map = function (props) {
   // 여긴 나중에 주차장 들어오면 추가하고 이미지도 수정해야할듯+상세정보 보기도 추가
   const mapItude = useSelector((state) => state.myMapSlice.mapItude);
@@ -162,6 +166,22 @@ const Map = function (props) {
           ellipsis.appendChild(document.createTextNode(position.addr1));
           desc.appendChild(ellipsis);
 
+          var findDesc = document.createElement("button");
+          findDesc.className = styles.findDesc;
+          findDesc.appendChild(document.createTextNode("길찾기"));
+          findDesc.onclick = () => {
+            handleOpenNewTab(
+              "https://map.kakao.com/link/to/" +
+                position.title +
+                "," +
+                position.map_y +
+                "," +
+                position.map_x
+            );
+          };
+          // console.log(position.title, position.map_x, position.map_y);
+          desc.appendChild(findDesc);
+
           // 마커 위에 커스텀오버레이를 표시합니다
           // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
           var overlay = new kakao.maps.CustomOverlay({
@@ -244,39 +264,19 @@ const Map = function (props) {
       <div onClick={getInfo}>버튼</div>
       <div className={styles.category}>
         <ul>
-          <li
-            ref={menusRefs["15"]}
-            onClick={() => {
-              changeMarker("15");
-            }}
-          >
+          <li ref={menusRefs["15"]} onClick={() => changeMarker("15")}>
             <span className={styles.ico_store}></span>
             축제
           </li>
-          <li
-            ref={menusRefs["39"]}
-            onClick={() => {
-              changeMarker("39");
-            }}
-          >
+          <li ref={menusRefs["39"]} onClick={() => changeMarker("39")}>
             <span className={styles.ico_coffee}></span>
             음식점
           </li>
-          <li
-            ref={menusRefs["28"]}
-            onClick={() => {
-              changeMarker("28");
-            }}
-          >
+          <li ref={menusRefs["28"]} onClick={() => changeMarker("28")}>
             <span className={styles.ico_carpark}></span>
             주차장
           </li>
-          <li
-            ref={menusRefs["14"]}
-            onClick={() => {
-              changeMarker("14");
-            }}
-          >
+          <li ref={menusRefs["14"]} onClick={() => changeMarker("14")}>
             <span className={styles.ico_carpark}></span>
             내위치
           </li>
