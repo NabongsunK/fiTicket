@@ -139,16 +139,12 @@ const Reviews = function () {
     const updateFesDetail = async function (e) {
       e.preventDefault();
       const id = data.id;
-<<<<<<< HEAD
       // console.log(JSON.parse(article));
       // console.log(data.id);
       const result = await axios.put(
         `/review/reviews/staff/${id}`,
         JSON.parse(article)
       );
-=======
-      const result = await axios.put(`/explore/fes/${id}`, JSON.parse(article));
->>>>>>> 90ad5a6cea8322b84b45980b5e1e64739ef4e5ad
       setArticle();
       setSearchResult(result.data);
     };
