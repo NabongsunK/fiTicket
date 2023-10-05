@@ -2,21 +2,22 @@ const pool = require("./pool");
 
 const FindModel = {
   // 이름, 전화번호 비교
-  async findSameId(article, conn = pool) {
+  async findSameLoginIdNum(article, conn = pool) {
     try {
+      // article = {login_id,password}
       const sql = `
       select
         id
       from users
       where
-        login_id = ? and
-        phone_number = ?
+        login_id = ? and 
+        phone_number =?
       `;
       const [result] = await conn.query(sql, [
-        article.name,
+        article.login_id,
         article.phone_number,
       ]);
-      return result[0];
+      return result.length;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
@@ -29,7 +30,7 @@ const FindModel = {
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
-  }
+  },
 };
 
-modeule.exports = FindModel;
+module.exports = FindModel;

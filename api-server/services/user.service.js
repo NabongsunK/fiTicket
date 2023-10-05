@@ -1,6 +1,7 @@
 const AuthModel = require("../models/user.AuthModel");
 const LoginModel = require("../models/user.LoginModel");
 const pool = require("../models/pool");
+const FindModel = require("../models/user.findModel");
 require("date-utils");
 
 //로그인상태를 어떻게 구별하지?
@@ -231,22 +232,66 @@ const UserService = {
       pool.releaseConnection(conn);
     }
   },
-  async postSms() {
+
+  async findPwGetAuth(article) {
+    //article = {login_id,phone_number}
     const conn = await pool.getConnection();
     try {
-      await AuthModel.postSms("01020597105", "abcd");
-
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
-      //
-      //
-      //
 
-      //
-      //
-      //
+      // userDB에 아이디,전화번호가 같은것이 가 1개라도 없으면
+      const sameIdsAtUserDB = await FindModel.findSameLoginIdNum(article, conn);
+      console.log(sameIdsAtUserDB);
+      if (sameIdsAtUserDB == 0) {
+        return { ok: false, message: "해당정보없음" };
+      }
+
+      // auth에서 중복 제거작업
+      const same = await AuthModel.findSame(article, conn);
+      let ch = true;
+      let id = 0;
+      same.forEach(async function (element) {
+        var curTime = new Date();
+        var beginTime = new Date(element.curr_time);
+        var endTime = new Date(element.expiration_time);
+
+        // 해당 인증정보가 유효하지않으면
+        if (
+          curTime.getTime() < beginTime.getTime() ||
+          curTime.getTime() > endTime.getTime()
+        ) {
+          //해당정보 삭제
+          await AuthModel.deleteByPID(element.id, conn);
+        } else {
+          // 유효한 정보가 있으면 해당 id 저장
+          ch = false;
+          id = element.id;
+        }
+      });
+      // 없으면 인증번호 생성후 해당 id 저장
+      if (ch) {
+        const auth = Math.floor(Math.random() * 65535)
+          .toString(16)
+          .toUpperCase();
+        const now = new Date();
+        var end = new Date();
+        end.setMinutes(end.getMinutes() + 3);
+        article = {
+          ...article,
+          authentication_number: auth,
+          curr_time: now,
+          expiration_time: end,
+        };
+        id = await AuthModel.insertAuth(article, conn);
+      }
+      // result = {id,curr_time,expiration_time,count,authentication_number}
+      const data = await AuthModel.getAuthByPID(id, conn);
+      await AuthModel.postSms(article.phone_number, data.authentication_number);
+      // DB에 작업 반영
       await conn.commit();
-      return true;
+      // return { ...data, ok: true };
+      return { ok: true };
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();
@@ -274,7 +319,7 @@ const UserService = {
       // 커넥션 반납
       pool.releaseConnection(conn);
     }
-  }
+  },
 };
 
 module.exports = UserService;
