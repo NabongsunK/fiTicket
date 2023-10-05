@@ -1,14 +1,14 @@
 var express = require("express");
 var router = express.Router();
 
-const reviewModel = require("../models/review.model");
+// const reviewModel = require("../models/review.model");
 const ReviewService = require("../services/review.service");
 
 //review 조회
 router.get("/reviews", async (req, res, next) => {
   try {
     const review = await ReviewService.getReview();
-    console.log(review);
+    // console.log(review);
     res.json(review);
   } catch (err) {
     next(err);

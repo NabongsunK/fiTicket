@@ -7,9 +7,12 @@ import { setMapItude } from "../../store/mapSlice";
 import styles from "./map.module.css";
 import { useNavigate } from "react-router";
 
-var markerHeight = { 28: 72, 14: 36, 15: 36, 39: 0 };
+var markerHeight = { 28: 144, 14: 36, 15: 0, 39: 36 };
+// var markerImageSrc =
+//   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png"; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
 var markerImageSrc =
-  "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png"; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
+  "https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu_on.png"; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
+
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const { kakao } = window;
 
@@ -107,13 +110,17 @@ const Map = function (props) {
         // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
         var markers = mapData[key].map(function (position) {
           // 마커이미지와 마커를 생성합니다
-          var imageSize = new kakao.maps.Size(22, 26),
+          var imageSize = new kakao.maps.Size(37, 36),
             imageOptions = {
-              spriteOrigin: new kakao.maps.Point(10, markerHeight[key]),
-              spriteSize: new kakao.maps.Size(36, 98),
+              // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+              spriteOrigin: new kakao.maps.Point(0, markerHeight[key]),
+              // 스프라이트 이미지의 전체 크기
+              spriteSize: new kakao.maps.Size(37, 360),
             };
           var markerImage = new kakao.maps.MarkerImage(
+            // 이미지 주소
             markerImageSrc,
+            // 마커의 크기
             imageSize,
             imageOptions
           );
@@ -134,6 +141,11 @@ const Map = function (props) {
 
           var title = document.createElement("div");
           title.className = styles.title;
+          title.onclick = function () {
+            if (position.content_type_id === "15") {
+              navigate("/explore/" + position.id);
+            }
+          };
           title.appendChild(document.createTextNode(position.title));
           info.appendChild(title);
 
@@ -151,6 +163,11 @@ const Map = function (props) {
 
           var imgDiv = document.createElement("div");
           imgDiv.className = styles.img;
+          imgDiv.onclick = function () {
+            if (position.content_type_id === "15") {
+              navigate("/explore/" + position.id);
+            }
+          };
           body.appendChild(imgDiv);
 
           var img = document.createElement("img");
@@ -260,16 +277,16 @@ const Map = function (props) {
 
   return (
     <div id={styles.mapwrap}>
-      <div ref={map} style={{ width: "100%", height: "550px" }}></div>
-      <div onClick={getInfo}>버튼</div>
+      <div ref={map} id={styles.map}></div>
+      {/* <div onClick={getInfo}>버튼</div> */}
       <div className={styles.category}>
         <ul>
           <li ref={menusRefs["15"]} onClick={() => changeMarker("15")}>
-            <span className={styles.ico_store}></span>
+            <span className={styles.ico_festival}></span>
             축제
           </li>
           <li ref={menusRefs["39"]} onClick={() => changeMarker("39")}>
-            <span className={styles.ico_coffee}></span>
+            <span className={styles.ico_food}></span>
             음식점
           </li>
           <li ref={menusRefs["28"]} onClick={() => changeMarker("28")}>
