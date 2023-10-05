@@ -114,7 +114,7 @@ const CartService = {
           ticket_quantity: item.ticket_quantity,
           reviews: review,
         };
-        data.pust(tmp);
+        data.push(tmp);
         // console.log(data.length);
       });
 
