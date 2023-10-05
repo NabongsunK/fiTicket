@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import TicketDetailItem from "./TicketDetailItem";
 
+import styles from "./ticketlistitem.module.css";
+
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -76,7 +78,7 @@ const TicketListItem = function (props) {
     props.festival.first_image2 === "" ? (
       <Link to={`/explore/${props.festival.id}`}>
         <div
-          className="image"
+          className={styles.image}
           style={{
             backgroundImage: "url('/assets/images/fes_default.jpg')",
             width: "100%",
@@ -88,7 +90,7 @@ const TicketListItem = function (props) {
     ) : (
       <Link to={`/explore/${props.festival.id}`}>
         <div
-          className="image"
+          className={styles.image}
           style={{
             backgroundImage: `url("${img}")`,
             width: "100%",
@@ -115,7 +117,7 @@ const TicketListItem = function (props) {
           toCart={toCart}
         />
       </Modal>
-      <div className="item">
+      <div className={styles.item}>
         <div className="row">
           <div className="col-lg-4">
             {thumbsUp}
@@ -126,21 +128,21 @@ const TicketListItem = function (props) {
             onClick={openModal}
             style={{ cursor: "pointer" }}
           >
-            <div className="content">
-              <span className="info">*D-{props.festival.d_day}</span>
+            <div className={styles.content}>
+              <span className={styles.info}>*D-{props.festival.d_day}</span>
               <h4>{props.festival.title}</h4>
               <div className="row">
                 <div className="col-12">
-                  <i className="fa fa-clock"></i>
-                  <span className="list">
+                  <div className={styles.list}>
+                    <i className="fa fa-clock"></i>
                     {props.festival.event_start_date} ~{" "}
                     {props.festival.event_end_date}
-                  </span>
+                  </div>
                 </div>
               </div>
               <p>
                 {props.festival.over_view.substring(0, 38)}
-                {props.festival.over_view.length > 38 ? ". . ." : ""}
+                {props.festival.over_view.length > 38 ? " . . ." : ""}
               </p>
             </div>
           </div>
