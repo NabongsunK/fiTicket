@@ -36,14 +36,15 @@ function Findpw() {
     }
 
     // 서버 요청 실행
-    const res = await axios.post("/findpw/changepw", {
+    const res = await axios.put(`/findpw/changepw/${LoginId}`, {
       password: await hasing(FindPw),
     });
     //비번변경 성공시
     if (res.data.ok) {
+      alert("비밀번호가 변경되었습니다. 변경된 비밀번호로 로그인해주세여.");
       navigate("/");
     }
-    console.log(res);
+    console.log(res.data);
   };
 
   const getAuth = async function () {
