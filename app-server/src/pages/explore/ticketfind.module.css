@@ -1,6 +1,22 @@
 #myinput {
   background-color: #22b3c1;
   border: 0px;
-  border-bottom: 1px solid;
+  border-bottom: 2px solid;
   border-radius: 0px;
+  text-align: center;
+  color: #eee;
+}
+
+#myinput::placeholder {
+  color: #eee;
+}
+
+#myrow ::selection {
+  background: #eee;
+  color: #22b3c1;
+}
+
+#myrow {
+  display: flex;
+  justify-content: center;
 }

@@ -95,7 +95,7 @@ figcaption {
   .btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #22b3c1;
-    --bs-btn-border-color: #22b3c1;
+    --bs-btn-border-color: #fff;
     --bs-btn-hover-color: #ccc;
     --bs-btn-hover-bg: #fff;
     --bs-btn-hover-border-color: #ffffff;
@@ -299,11 +299,13 @@ body {
   overflow: hidden;
 }
 .explore_list_button a {
-  font-size: 24px;
+  font-size: 28px;
   color: #fff;
   background-color: #22b3c1;
   border: 1px solid #22b3c1;
-  padding: 8px 12px;
+  padding: 8px 22px;
+  margin-top: 12px;
+  margin-bottom: 12px;
   display: inline-block;
   border-radius: 25px;
   font-weight: 500;
@@ -2098,14 +2100,15 @@ Deals Page Style
   background-color: #22b3c1;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
-  padding: 35px 10px;
+  padding: 30px 0px;
 }
 
 .search-form #search-form h4 {
-  color: #fff;
-  font-size: 30px;
+  color: #eee;
+  font-size: 26px;
   font-weight: 700;
   margin: 0px;
+  text-align: center;
 }
 
 .search-form #search-form select {

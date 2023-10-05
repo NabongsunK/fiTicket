@@ -133,21 +133,33 @@
   overflow: hidden;
   background: #fff;
 }
+
 .wrap .info:nth-child(1) {
   border: 0;
   box-shadow: 0px 1px 2px #888;
 }
 .info .title {
-  padding: 5px 0 0 10px;
+  padding: 0px;
   height: 30px;
   background: #eee;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
   font-size: 18px;
   font-weight: bold;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-top: 3px;
+  transition: all 0.3s;
 }
+
+.info .title:hover {
+  background-color: #22b3c1;
+  color: #fff;
+  border: 1px solid #22b3c1;
+}
+
 .info .close {
   position: absolute;
-  top: 10px;
+  top: 8px;
   right: 10px;
   color: #888;
   width: 17px;
@@ -185,6 +197,7 @@
   /* border: 1px solid #ddd; */
   color: #888;
   overflow: hidden;
+  text-align: center;
 }
 .info:after {
   content: "";
@@ -204,4 +217,28 @@
   width: auto;
   height: 100%;
   border-radius: 12px;
+}
+
+.desc .findDesc {
+  font-size: 16px;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #22b3c1;
+  padding: 4px 12px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.desc .findDesc:hover {
+  background-color: #22b3c1;
+  color: #fff;
+  border: 1px solid #22b3c1;
 }

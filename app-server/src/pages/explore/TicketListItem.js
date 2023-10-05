@@ -69,7 +69,7 @@ const TicketListItem = function (props) {
             position: "absolute",
             top: "10%",
             left: "15%",
-            fontSize: "24px",
+            fontSize: "32px",
           }}
         ></i>
       </span>
@@ -104,7 +104,7 @@ const TicketListItem = function (props) {
     );
 
   return (
-    <div className="col-lg-6 col-sm-3">
+    <div className="col-lg-6 col-sm-6 mb-3">
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={openModal}

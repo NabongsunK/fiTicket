@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../store/pageSlice";
 import { setMapCode, setMapItude, setRegionId } from "../../store/mapSlice";
 import { useNavigate } from "react-router";
-import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
-import Button from "react-bootstrap/esm/Button";
+
+import styles from "./map.module.css";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 
 // 쿼리로 경위도 찾기
@@ -94,6 +94,7 @@ const MapDiv = function () {
 
   const LocalSelectList = localInfos.map((localInfo) => (
     <ToggleButton
+      // className="m-3"
       id={"tbg-radio" + localInfo.id}
       value={localInfo.id}
       key={localInfo.id}
@@ -115,15 +116,17 @@ const MapDiv = function () {
 
       <Map />
 
-      <ToggleButtonGroup
-        className="btn-group-justified"
-        type="radio"
-        name="options"
-        defaultValue={0}
-        onChange={onChangeToggle}
-      >
-        {LocalSelectList}
-      </ToggleButtonGroup>
+      <div className={styles.mytogglegroup}>
+        <ToggleButtonGroup
+          className="btn-group-justified"
+          type="radio"
+          name="options"
+          defaultValue={0}
+          onChange={onChangeToggle}
+        >
+          {LocalSelectList}
+        </ToggleButtonGroup>
+      </div>
 
       {/* <div id="result" /> */}
     </>
