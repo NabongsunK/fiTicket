@@ -53,7 +53,7 @@ const BestReview = function () {
         </div>
         <div className="container-fluid" style={{ maxWidth: "1600px" }}>
           <div className="row justify-content-center">
-            <div className="col-md-10">
+            <div className="col-md-12">
               <OwlCarousel
                 id="customer-testimonoals"
                 className="owl-carousel owl-theme"
