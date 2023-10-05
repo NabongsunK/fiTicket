@@ -1,10 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import Cart from "../common/Cart";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import User from "../common/User";
 import Left from "../common/Left";
+import { useCookies } from "react-cookie";
+import { signin, signout } from "../../store/loginSlice";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -23,6 +25,7 @@ const Header = function (props) {
   const [login_id, setLogin_id] = useState("");
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const dispatch = useDispatch();
 
   const handleToggle = function (next) {
     setActive(!isActive);
@@ -45,10 +48,32 @@ const Header = function (props) {
     }
   };
 
+  const signOut = function () {
+    dispatch(signout());
+    removeCookies("is_signed");
+    removeCookies("user_id");
+    setCookies("is_signed", false, { path: "/" });
+  };
+
+  // 기존 쿠키 저장
+  const [cookies, setCookies, removeCookies] = useCookies(["id"]);
+
   useEffect(() => {
-    getUser(user_id).then((response) => {
-      setLogin_id(response ? response.name : "");
-    });
+    if (cookies.is_signed && cookies.user_id) {
+      dispatch(signin({ user_id: cookies.user_id }));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (is_signed) {
+      getUser(user_id).then((response) => {
+        setLogin_id(response ? response.name : "");
+        if (response && response.name) {
+          setCookies("user_id", user_id, { path: "/" });
+          setCookies("is_signed", true, { path: "/" });
+        }
+      });
+    }
   }, [is_signed]);
 
   return (
@@ -62,6 +87,9 @@ const Header = function (props) {
                   <img src="/assets/images/logo2.jpg" alt="" />
                 </Link>
                 <ul className="nav">
+                  <li>
+                    <NavLink onClick={signOut}>로그아웃</NavLink>
+                  </li>
                   <li>
                     <NavLink to="/ ">Home</NavLink>
                   </li>
