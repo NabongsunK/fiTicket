@@ -105,8 +105,7 @@ const CartService = {
       await conn.beginTransaction();
 
       const ticket_ids = await cartModel.getTicketIdsByUserId(id);
-      var data = {};
-      var i = 0;
+      var data = [];
       ticket_ids.forEach(async (item) => {
         const review = await reviewModel.findByUser(id, item.ticket_id, conn);
         // console.log(review);
@@ -115,14 +114,12 @@ const CartService = {
           ticket_quantity: item.ticket_quantity,
           reviews: review,
         };
-        data[i] = tmp;
-        i++;
+        data.pust(tmp);
         // console.log(data.length);
       });
 
       // DB에 작업 반영
       await conn.commit();
-      console.log("eee", data);
       return { ok: true, data };
     } catch (err) {
       // DB 작업 취소
