@@ -3,6 +3,8 @@ import { push, pop } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
+import styles from "./ticketDetailItem.module.css";
+
 const TicketDetailItem = function (props) {
   const [isActive, setActive] = useState("false");
   // const [reviewData, setReviewData] = useState([]);
