@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import TicketDetailItem from "./TicketDetailItem";
 
+import styles from "./ticketlistitem.module.css";
+
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -127,7 +129,7 @@ const TicketListItem = function (props) {
             style={{ cursor: "pointer" }}
           >
             <div className="content">
-              <span className="info">*D-{props.festival.d_day}</span>
+              <span className={styles.info}>*D-{props.festival.d_day}</span>
               <h4>{props.festival.title}</h4>
               <div className="row">
                 <div className="col-12">

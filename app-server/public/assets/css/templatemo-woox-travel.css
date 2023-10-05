@@ -1471,8 +1471,8 @@ About Page Style
 }
 
 .weekly-offers {
-  padding-bottom: 120px;
-  margin-top: 120px;
+  padding-bottom: 200px;
+  margin-top: 100px;
   border-bottom: 1px solid #eee;
 }
 
@@ -1622,6 +1622,7 @@ About Page Style
   background-color: #f7f7f7;
   border-radius: 10px;
   padding: 30px;
+  padding-bottom: 8px;
   margin-bottom: 30px;
 }
 
@@ -2150,14 +2151,6 @@ Deals Page Style
   margin-bottom: 7px;
 }
 
-.amazing-deals .item span.info {
-  color: #22b3c1;
-  font-size: 15px;
-  /* margin-bottom: 5px; */
-  display: block;
-  padding-left: 8px;
-}
-
 .amazing-deals .item h4 {
   font-size: 20px;
   font-weight: 700;
@@ -2169,9 +2162,6 @@ Deals Page Style
 .amazing-deals .item i {
   color: #777;
   margin: 0 2px;
-}
-
-.amazing-deals .item .explore_image {
 }
 
 .amazing-deals .item span.list {
@@ -2679,6 +2669,9 @@ body {
 .data-table {
   padding: 5px 150px;
 }
+.data-table > .col-10 {
+  float: right;
+}
 .data-table .data-table-title {
   padding-left: 50px;
 }
@@ -2687,4 +2680,94 @@ body {
 }
 div.owl-stage-outer > div {
   width: 40px;
+}
+
+/* teams */
+.fold-on {
+  display: none;
+}
+.info-item i {
+  font-size: 70px;
+  font-weight: 800;
+}
+.info-item button {
+  border: none;
+  background: none;
+}
+.info-item .fold::after {
+  content: "";
+  width: 40px;
+  height: 30px;
+  background-image: url(/assets/images/core-img/arrow-down.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 13px;
+  top: 0;
+  transition: 0.3s;
+}
+.info-item .unfold::after {
+  content: "";
+  width: 40px;
+  height: 30px;
+  background-image: url(/assets/images/core-img/arrow-up.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 13px;
+  top: 0;
+  transition: 0.3s;
+}
+
+.more-about .left-image .image img {
+  padding-top: 100px;
+  width: 150%;
+  /* height: 550px; */
+  /* background-image: url(/assets/images/about-left-image.jpg); */
+  background-position: center center;
+  background-size: cover;
+}
+#team_logo {
+  animation: rotate_logo 16s linear infinite;
+  position: absolute;
+  top: 154px;
+  right: 48%;
+}
+#team_name {
+  animation: rotate_image 16s linear infinite;
+  position: absolute;
+  top: 90px;
+  right: 40%;
+}
+
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate_logo {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+.localt_rotate {
+  margin-top: 30px;
+}
+.area_code {
+  float: right;
+  margin: 20px 0;
+}
+.codetable {
+  display: inline;
+  border: 1px;
+}
+.codetable tr::after {
+  content: "||";
+  float: right;
+  color: #ccc;
+  line-height: 14px;
+  margin: 0 8px;
+}
+.codetable:last-child tr::after {
+  content: "";
 }

@@ -4,10 +4,6 @@ import DataTable, { ExpanderComponentProps } from "react-data-table-component";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.css";
 
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
-
 import axios from "axios";
 
 // axios 기본 url 정의
@@ -42,16 +38,6 @@ const BootyPagination = function ({
   onChangeRowsPerPage,
   currentPage,
 }) {
-  //Owl Carousel Settings
-  const options = {
-    loop: false,
-    center: false,
-    items: 19,
-    margin: 0,
-    dots: false,
-    nav: false,
-  };
-
   const handleBackButtonClick = () => {
     onChangePage(currentPage - 1);
   };
@@ -65,9 +51,47 @@ const BootyPagination = function ({
   const nextDisabled = currentPage === pageItems.length;
   const previosDisabled = currentPage === 1;
 
+  // 페이지 갯수
+  const lastPage = pageItems.length;
+  const totalPage = [];
+  for (
+    let i = Math.max(1, currentPage - 5);
+    i <= Math.min(lastPage, Math.max(currentPage + 4, 10));
+    i++
+  ) {
+    totalPage.push(i);
+  }
+
+  while (totalPage.length < 10) {
+    if (totalPage[0] == 1) {
+      if (totalPage || totalPage[totalPage.length - 1] == lastPage) {
+        break;
+      }
+      totalPage.push(totalPage[totalPage.length - 1] + 1);
+    } else {
+      if (totalPage[0]) totalPage.unshift(totalPage[0] - 1);
+      else break;
+    }
+  }
+  // 페이지 버튼
+  const pageButtons = totalPage.map((page) => {
+    const handlePageNumber = (e) => {
+      onChangePage(Number(e.target.value));
+    };
+
+    const className = page === currentPage ? "page-item active" : "page-item";
+
+    return (
+      <li key={page} className={className}>
+        <button className="page-link" onClick={handlePageNumber} value={page}>
+          {page}
+        </button>
+      </li>
+    );
+  });
   return (
     <nav>
-      <ul className="pagination">
+      <ul className="pagination" style={{ justifyContent: "center" }}>
         <li className="page-item">
           <button
             className="page-link"
@@ -80,28 +104,7 @@ const BootyPagination = function ({
             <i className="fa fa-caret-left"></i>
           </button>
         </li>
-        <OwlCarousel className="owl-theme" {...options}>
-          {pageItems.map((page) => {
-            const handlePageNumber = (e) => {
-              onChangePage(Number(e.target.value));
-            };
-
-            const className =
-              page === currentPage ? "page-item active" : "page-item";
-
-            return (
-              <li key={page} className={className}>
-                <button
-                  className="page-link"
-                  onClick={handlePageNumber}
-                  value={page}
-                >
-                  {page}
-                </button>
-              </li>
-            );
-          })}
-        </OwlCarousel>
+        {pageButtons}
 
         <li className="page-item">
           <button
@@ -185,12 +188,13 @@ const Reviews = function () {
       console.error(err);
     }
   };
+  const stars = (e) => "★".repeat(e);
 
   const columns = [
     {
       button: true,
-      name: "id",
-      // selector: (row) => row.id,
+      name: "리뷰 id",
+      selector: (row) => row.id,
       sortable: true,
       center: true,
       maxWidth: "10px",
@@ -211,42 +215,55 @@ const Reviews = function () {
     },
 
     {
-      name: "rec",
+      name: "best 리뷰",
       selector: (row) => row.best_review,
       sortable: true,
       center: 1,
       maxWidth: "10px",
+      cell: (row) =>
+        row.best_review == 1 ? (
+          <div>
+            <i className="fa fa-thumbs-up" style={{ color: "#22b3c1" }}></i>
+          </div>
+        ) : (
+          <div>
+            <i className="fa fa-thumbs-down"></i>
+          </div>
+        ),
     },
     {
-      name: "rating",
+      name: "별점",
       selector: (row) => row.rating,
       sortable: true,
       maxWidth: "10px",
       center: true,
+      cell: (row) => (
+        <div style={{ color: "#22b3c1" }}>{stars(row.rating)}</div>
+      ),
     },
     {
-      name: "fes-id",
+      name: "축제 id",
       selector: (row) => row.ticket_id,
       sortable: true,
       center: 1,
       maxWidth: "10px",
     },
     {
-      name: "축제",
+      name: "축제명",
       selector: (row) => row.ticket_name,
       sortable: true,
       center: 1,
       maxWidth: "100px",
     },
     {
-      name: "user-id",
+      name: "ID",
       selector: (row) => row.user_login_id,
       sortable: true,
       center: 1,
       maxWidth: "20px",
     },
     {
-      name: "content",
+      name: "리뷰 내용",
       id: "data-table-title",
       selector: (row) => row.content,
       sortable: true,
