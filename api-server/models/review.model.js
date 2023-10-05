@@ -44,6 +44,22 @@ const reviewModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+  // user_id 별 review 조회
+  async findByUser(user, ticket, conn = pool) {
+    try {
+      const sql = `
+      select 
+        rating, 
+        content
+      from review
+      where (review.user_id = ? and review.ticket_id = ? )
+        `;
+      const [result] = await conn.query(sql, [user, ticket]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 
   // review 등록
   async create(article, conn = pool) {
