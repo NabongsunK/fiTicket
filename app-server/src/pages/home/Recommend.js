@@ -4,6 +4,7 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import localList from "../../data/locallist.json";
 import festivalsData from "../../data/_festivals.json";
 import { Link } from "react-router-dom";
+import styles from "./recommend.module.css";
 
 import axios from "axios";
 // axios 기본 url 정의
@@ -73,7 +74,7 @@ const Recommend = function () {
           <div className="w-100"></div>
           <div className="col-12 text-center">
             <Link to={`/explore/${festival.id}`}>
-              <h6>{festival.title}</h6>
+              <h6 style={{ color: "black" }}>{festival.title}</h6>
             </Link>
           </div>
         </div>
@@ -83,10 +84,10 @@ const Recommend = function () {
 
   return (
     <div className="amazing-deal">
-      <div className="container" style={{ marginTop: "150px" }}>
+      <div className={styles.container}>
         <div className="row">
-          <div className="col-12">
-            <div className="container">
+          <div className="col-12" style={{ padding: "0px" }}>
+            <div className="container" style={{ padding: "0px" }}>
               <div
                 className="slider-content"
                 style={{
@@ -107,12 +108,14 @@ const Recommend = function () {
               </div>
 
               {/* 토글버튼 */}
-              <div className="container text-center" style={{ margin: "5px" }}>
+              <div id={styles.container} className="container">
                 <ToggleButtonGroup
+                  className="btn-group-justified"
                   type="radio"
                   name="options"
                   defaultValue={0}
                   onChange={onChangeToggle}
+                  size="lg"
                 >
                   {LocalSelectList}
                 </ToggleButtonGroup>

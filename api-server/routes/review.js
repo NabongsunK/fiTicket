@@ -26,6 +26,18 @@ router.get("/reviews/:ticket", async (req, res, next) => {
   }
 });
 
+// review user_id로 조회
+router.get("/reviews/:user/:ticket", async (req, res, next) => {
+  try {
+    const user = Number(req.params.user);
+    const ticket = Number(req.params.ticket);
+    const article = await ReviewService.findReviewByUser(user, ticket);
+    res.json(article);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // review 작성
 router.post("/write", async (req, res, next) => {
   // req.body = {rating,ticket_id,user_id,content}
