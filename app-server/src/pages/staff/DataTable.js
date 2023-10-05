@@ -4,6 +4,9 @@ import DataTable, { ExpanderComponentProps } from "react-data-table-component";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.css";
 
+import areaCode from "../../data/locallist.json";
+import CodeTable from "./CodeTable";
+
 import axios from "axios";
 
 // axios 기본 url 정의
@@ -55,9 +58,44 @@ const BootyPagination = function ({
   const nextDisabled = currentPage === pageItems.length;
   const previosDisabled = currentPage === 1;
 
+  // 페이지 갯수
+  const lastPage = pageItems.length;
+  const totalPage = [];
+  for (
+    let i = Math.max(1, currentPage - 5);
+    i <= Math.min(lastPage, Math.max(currentPage + 4, 10));
+    i++
+  ) {
+    totalPage.push(i);
+  }
+
+  while (totalPage.length < 10) {
+    if (totalPage[0] == 1) {
+      if (totalPage || totalPage[totalPage.length - 1] == lastPage) {
+        break;
+      }
+      totalPage.push(totalPage[totalPage.length - 1] + 1);
+    } else {
+      if (totalPage[0]) totalPage.unshift(totalPage[0] - 1);
+      else break;
+    }
+  }
+  // 페이지 버튼
+  const pageButtons = totalPage.map((page) => {
+    const className = page === currentPage ? "page-item active" : "page-item";
+
+    return (
+      <li key={page} className={className}>
+        <button className="page-link" onClick={handlePageNumber} value={page}>
+          {page}
+        </button>
+      </li>
+    );
+  });
+
   return (
     <nav>
-      <ul className="pagination">
+      <ul className="pagination" style={{ justifyContent: "center" }}>
         <li className="page-item">
           <button
             className="page-link"
@@ -70,22 +108,7 @@ const BootyPagination = function ({
             <i className="fa fa-caret-left"></i>
           </button>
         </li>
-        {pageItems.map((page) => {
-          const className =
-            page === currentPage ? "page-item active" : "page-item";
-
-          return (
-            <li key={page} className={className}>
-              <button
-                className="page-link"
-                onClick={handlePageNumber}
-                value={page}
-              >
-                {page}
-              </button>
-            </li>
-          );
-        })}
+        {pageButtons}
         <li className="page-item">
           <button
             className="page-link"
@@ -107,6 +130,11 @@ const FestivalDataTable = function () {
   // const list = allListData.map((festival) => (
   //   <DataTableItem key={festival.id} festival={festival} />
   // ));
+
+  // 지역 코드 표시
+  const code = areaCode.map((list) => (
+    <CodeTable key={list._key} list={list} />
+  ));
   // 축제 더보기 및 수정
   const ExpandedComponent = function ({ data }) {
     const detail = JSON.stringify(
@@ -171,12 +199,11 @@ const FestivalDataTable = function () {
       console.error(err);
     }
   };
-
   const columns = [
     {
       button: true,
-      name: "id",
-      // selector: (row) => row.id,
+      name: "축제 id",
+      selector: (row) => row.id,
       sortable: true,
       center: true,
       maxWidth: "10px",
@@ -197,14 +224,24 @@ const FestivalDataTable = function () {
     },
 
     {
-      name: "rec",
+      name: "추천",
       selector: (row) => row.rec,
       sortable: true,
       center: 1,
       maxWidth: "10px",
+      cell: (row) =>
+        row.rec == 1 ? (
+          <div>
+            <i className="fa fa-thumbs-up" style={{ color: "#22b3c1" }}></i>
+          </div>
+        ) : (
+          <div>
+            <i className="fa fa-thumbs-down"></i>
+          </div>
+        ),
     },
     {
-      name: "area",
+      name: "지역코드",
       selector: (row) => row.area_code,
       sortable: true,
       maxWidth: "10px",
@@ -225,7 +262,7 @@ const FestivalDataTable = function () {
       maxWidth: "20px",
     },
     {
-      name: "title",
+      name: "축제명",
       id: "data-table-title",
       selector: (row) => row.title,
       sortable: true,
@@ -234,7 +271,7 @@ const FestivalDataTable = function () {
     },
     {
       name: "가격",
-      selector: (row) => row.price,
+      selector: (row) => "₩ " + row.price,
       sortable: true,
       center: 1,
       maxWidth: "40px",
@@ -262,6 +299,7 @@ const FestivalDataTable = function () {
     <>
       <div className="data-table">
         <div
+          className=" col-10"
           id="explore-search-form"
           name="gs"
           method="submit"
@@ -278,6 +316,7 @@ const FestivalDataTable = function () {
             style={{ width: "300px", float: "right" }}
           />
         </div>
+        <div className="area_code">{code}</div>
         <div>
           <DataTable
             columns={columns}
@@ -290,7 +329,7 @@ const FestivalDataTable = function () {
             expandableRows
             expandableRowsComponent={ExpandedComponent}
             responsive
-            subHeader
+            // subHeader
             // subHeaderComponent={subHeaderComponentMemo}
           />
         </div>
