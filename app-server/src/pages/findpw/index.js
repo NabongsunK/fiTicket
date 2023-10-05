@@ -36,7 +36,7 @@ function Findpw() {
     }
 
     // 서버 요청 실행
-    const res = await axios.post("/findpw/changepw", {
+    const res = await axios.put("/findpw/changepw", {
       password: await hasing(FindPw),
     });
     //비번변경 성공시

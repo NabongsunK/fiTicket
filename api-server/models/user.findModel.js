@@ -26,7 +26,7 @@ const FindModel = {
     try {
       const sql = `update users set password = ? WHERE id = ?`;
       const [result] = await conn.query(sql, [article]);
-      return result.affectedRows > 0;
+      return result.affectedRows;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
