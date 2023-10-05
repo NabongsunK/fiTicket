@@ -2,6 +2,7 @@ const cartModel = require("../models/cart.model");
 const paidModel = require("../models/paid.model");
 const ExploreGetModel = require("../models/explore.GetModel");
 const pool = require("../models/pool");
+const reviewModel = require("../models/review.model");
 
 const CartService = {
   // 결제승인전
@@ -104,18 +105,24 @@ const CartService = {
       await conn.beginTransaction();
 
       const ticket_ids = await cartModel.getTicketIdsByUserId(id);
-
-      var data = [];
+      var data = {};
+      var i = 0;
       ticket_ids.forEach(async (item) => {
+        const review = await reviewModel.findByUser(id, item.ticket_id, conn);
+        // console.log(review);
         const tmp = {
           ...(await ExploreGetModel.getTicketById(item.ticket_id, conn)),
           ticket_quantity: item.ticket_quantity,
+          reviews: review,
         };
-        data.push(tmp);
+        data[i] = tmp;
+        i++;
+        // console.log(data.length);
       });
 
       // DB에 작업 반영
       await conn.commit();
+      console.log("eee", data);
       return { ok: true, data };
     } catch (err) {
       // DB 작업 취소
