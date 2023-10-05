@@ -2150,14 +2150,6 @@ Deals Page Style
   margin-bottom: 7px;
 }
 
-.amazing-deals .item span.info {
-  color: #22b3c1;
-  font-size: 15px;
-  /* margin-bottom: 5px; */
-  display: block;
-  padding-left: 8px;
-}
-
 .amazing-deals .item h4 {
   font-size: 20px;
   font-weight: 700;
@@ -2169,9 +2161,6 @@ Deals Page Style
 .amazing-deals .item i {
   color: #777;
   margin: 0 2px;
-}
-
-.amazing-deals .item .explore_image {
 }
 
 .amazing-deals .item span.list {
