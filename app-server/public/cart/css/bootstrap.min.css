@@ -3070,8 +3070,8 @@ input[type="submit"].btn-block {
 }
 .btn-group > .btn-group:not(:first-child) > .btn,
 .btn-group > .btn:not(:first-child) {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  border-top-left-radius: 10;
+  border-bottom-left-radius: 10;
 }
 .dropdown-toggle-split {
   padding-right: 0.5625rem;

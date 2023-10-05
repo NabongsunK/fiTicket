@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../store/pageSlice";
 import { setMapCode, setMapItude, setRegionId } from "../../store/mapSlice";
 import { useNavigate } from "react-router";
+import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
+import Button from "react-bootstrap/esm/Button";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 
 // 쿼리로 경위도 찾기
@@ -102,18 +104,19 @@ const MapDiv = function () {
 
   return (
     <>
-      <div className="form-outline mb-4" onChange={onChangeQuery}>
-        <input type="text" id="form2Example1" className="form-control" />
-        {/* 여기에 검색도중 추천리스트가 나오게 설정 */}
+      {/* <div className="form-outline mb-4" onChange={onChangeQuery}>*/}
+      {/* <input type="text" id="form2Example1" className="form-control" /> */}
+      {/* 여기에 검색도중 추천리스트가 나오게 설정 */}
 
-        <label className="form-label" htmlFor="form2Example1">
+      {/* <label className="form-label" htmlFor="form2Example1">
           지역
-        </label>
-      </div>
+        </label> */}
+      {/* </div> */}
 
       <Map />
 
       <ToggleButtonGroup
+        className="btn-group-justified"
         type="radio"
         name="options"
         defaultValue={0}
@@ -122,7 +125,7 @@ const MapDiv = function () {
         {LocalSelectList}
       </ToggleButtonGroup>
 
-      <div id="result" />
+      {/* <div id="result" /> */}
     </>
   );
 };
