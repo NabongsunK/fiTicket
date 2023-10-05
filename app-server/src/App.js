@@ -3,7 +3,7 @@ import Home from "./pages/home";
 import Layout from "./components/layout";
 import Deal from "./pages/deals";
 import Login from "./pages/login";
-// import Findpw from "./pages/findpw"
+import Findpw from "./pages/findpw"
 
 import festivals from "./data/_festivals.json";
 import { Provider } from "react-redux";
@@ -34,7 +34,7 @@ function App() {
                 <Route path="review" element={<Review />} />
               </Route>
             </Route>
-            {/* <Route path="/findpw" element={<Findpw />} /> */}
+            <Route path="/findpw" element={<Findpw />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

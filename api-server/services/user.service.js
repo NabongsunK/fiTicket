@@ -256,6 +256,25 @@ const UserService = {
       pool.releaseConnection(conn);
     }
   },
+  // 비밀번호번경
+  async changePw(article) {
+    // article = {password}
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      const password = await FindModel.changePw(article, conn);
+      await conn.commit();
+      return { ok: true, message: "비밀번호변경완료", password: password };
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  }
 };
 
 module.exports = UserService;
