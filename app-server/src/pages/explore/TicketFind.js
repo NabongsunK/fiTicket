@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import styles from "./ticketfind.module.css";
 
 const TicketFind = function (props) {
   var query = "";
@@ -26,20 +27,21 @@ const TicketFind = function (props) {
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div
-              id="explore-search-form"
+              id="search-form"
               name="gs"
               method="submit"
               role="search"
               action="#"
             >
-              <div className="row justify-content-center">
+              <div className="row">
+                <h4 className="col-lg-3">축제 찾기: </h4>
                 <div className="col-lg-6">
                   {/* TODO: 여기서 onkeyup fillter() 정의해서 데이터 유효성 챙기기*/}
                   <input
                     className="form-control"
                     type="text"
-                    id="value"
-                    placeholder="축제 찾기"
+                    id={styles.myinput}
+                    placeholder="검색"
                     onChange={(e) => (query = e.target.value)}
                     onKeyUp={keyHandler}
                   />

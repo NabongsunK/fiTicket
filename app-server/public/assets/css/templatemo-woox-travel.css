@@ -313,6 +313,7 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 .explore_list_button a i.fa {
   color: #fff;
 }
@@ -324,6 +325,20 @@ body {
 }
 .explore_list_button a:hover i.fa {
   color: #22b3c1;
+}
+
+.explore_list_button a:hover {
+  background-color: #fff;
+  color: #22b3c1;
+  border: 1px solid #22b3c1;
+  font-size: 24px;
+}
+.explore_list_button a:hover i.fa {
+  color: #22b3c1;
+}
+
+.explore_list_button a:link {
+  font-size: 24px;
 }
 
 .main-button a:hover {
@@ -2081,16 +2096,16 @@ Deals Page Style
 
 .search-form #search-form {
   background-color: #22b3c1;
-  border-bottom-left-radius: 23px;
-  border-bottom-right-radius: 23px;
-  padding: 35px 60px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding: 35px 10px;
 }
 
 .search-form #search-form h4 {
   color: #fff;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 700;
-  margin-top: 10px;
+  margin: 0px;
 }
 
 .search-form #search-form select {
