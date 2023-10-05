@@ -1,0 +1,16 @@
+.toastPosition {
+  position: absolute;
+  top: 25%;
+  right: 30%;
+  z-index: 200;
+}
+
+.toastHeaderColor {
+  background-color: #22b3c1;
+}
+
+.logoStyle {
+  width: 150px;
+}
+.signup-form {
+}

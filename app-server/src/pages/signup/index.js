@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { signin, signout } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
+import styles from "./signup.module.css";
 
 function Signup() {
   const navigate = useNavigate();
@@ -140,20 +141,20 @@ function Signup() {
       {/* 핸드폰 인증하기 팝업 */}
       <div
         className={
-          isActive ? "toast toast-3s fade show" : "toast toast-3s fade hide"
+          isActive
+            ? `toast toast-3s fade show ${styles.toastPosition}`
+            : `toast toast-3s fade hide ${styles.toastPosition}`
         }
         role="alert"
         aria-live="assertive"
         data-delay="2000"
         aria-atomic="true"
-        style={{ position: "absolute", top: "25%", right: "30%", zIndex: 200 }}
       >
-        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
+        <div className={`toast-header ${styles.toastHeaderColor}`}>
           <img
             src="assets/images/logo2.png"
             alt=""
-            className="img-fluid m-r-5"
-            style={{ width: "150px" }}
+            className={`img-fluid m-r-5 ${styles.logoStyle}`}
           />
           <strong className="mr-auto"></strong>
           <small className="text-muted"></small>
@@ -166,20 +167,20 @@ function Signup() {
       {/* 인증번호 제출 */}
       <div
         className={
-          isSend ? "toast toast-3s fade show" : "toast toast-3s fade hide"
+          isSend
+            ? `toast toast-3s fade show ${styles.toastPosition}`
+            : `toast toast-3s fade hide ${styles.toastPosition}`
         }
         role="alert"
         aria-live="assertive"
         data-delay="2000"
         aria-atomic="true"
-        style={{ position: "absolute", top: "25%", right: "30%", zIndex: 200 }}
       >
-        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
+        <div className={`toast-header ${styles.toastHeaderColor}`}>
           <img
             src="assets/images/logo2.png"
             alt=""
-            className="img-fluid m-r-5"
-            style={{ width: "150px" }}
+            className={`img-fluid m-r-5 ${styles.logoStyle}`}
           />
           <strong className="mr-auto"></strong>
           <small className="text-muted"></small>
@@ -190,7 +191,7 @@ function Signup() {
       </div>
 
       <div className="signup-container">
-        <form>
+        <form className="signup-form">
           {/* <!-- ID input --> */}
           <div className="form-outline mb-4">
             <input
