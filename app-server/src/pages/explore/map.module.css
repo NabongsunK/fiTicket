@@ -7,6 +7,11 @@
   position: relative;
   overflow: hidden;
 }
+
+#mapwrap #map {
+  width: 100%;
+  height: 800px;
+}
 .category,
 .category * {
   margin: 0;
@@ -18,22 +23,21 @@
   overflow: hidden;
   top: 10px;
   left: 10px;
-  width: 210px;
-  height: 50px;
+  height: 63px;
   z-index: 10;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
   font-size: 12px;
   text-align: center;
-  background-color: #fff;
+  background-color: #ffffffb5;
 }
-.category .menu_selected {
+/* .category .menu_selected {
   background: #ff5f4a;
   color: #fff;
   border-left: 1px solid #915b2f;
   border-right: 1px solid #915b2f;
   margin: 0 -1px;
-}
+} */
 .category li {
   list-style: none;
   float: left;
@@ -43,32 +47,64 @@
   cursor: pointer;
 }
 
-.category .ico_coffee {
+.category .menu_selected .ico_festival {
   display: block;
   margin: 0 auto 2px;
-  width: 22px;
-  height: 26px;
-  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png")
+  width: 37px;
+  height: 36px;
+  background: url("https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu_on.png")
     no-repeat;
-  background-position: -10px 0;
+  background-position: 0px 0px;
 }
-.category .ico_store {
+
+.category .ico_festival {
   display: block;
   margin: 0 auto 2px;
-  width: 22px;
-  height: 26px;
-  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png")
+  width: 37px;
+  height: 36px;
+  background: url("https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu.png")
     no-repeat;
-  background-position: -10px -36px;
+  background-position: 0px 0px;
 }
+
+.category .menu_selected .ico_food {
+  display: block;
+  margin: 0 auto 2px;
+  width: 37px;
+  height: 36px;
+  background: url("https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu_on.png")
+    no-repeat;
+  background-position: 0px -36px;
+}
+
+.category .ico_food {
+  display: block;
+  margin: 0 auto 2px;
+  width: 37px;
+  height: 36px;
+  background: url("https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu.png")
+    no-repeat;
+  background-position: 0px -36px;
+}
+
+.category .menu_selected .ico_carpark {
+  display: block;
+  margin: 0 auto 2px;
+  width: 37px;
+  height: 36px;
+  background: url("https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu_on.png")
+    no-repeat;
+  background-position: 0px -144px;
+}
+
 .category .ico_carpark {
   display: block;
   margin: 0 auto 2px;
-  width: 22px;
-  height: 26px;
-  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png")
+  width: 37px;
+  height: 36px;
+  background: url("https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu.png")
     no-repeat;
-  background-position: -10px -72px;
+  background-position: 0px -144px;
 }
 
 .wrap {
