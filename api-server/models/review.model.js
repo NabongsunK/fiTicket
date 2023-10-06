@@ -55,7 +55,7 @@ const reviewModel = {
       where (review.user_id = ? and review.ticket_id = ? )
         `;
       const [result] = await conn.query(sql, [user, ticket]);
-      return result;
+      return result[0];
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
