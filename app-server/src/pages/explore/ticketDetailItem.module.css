@@ -2,7 +2,7 @@
   display: flex;
   gap: 20px;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 120px;
 }
 
 #buttonContainer .button {
@@ -27,41 +27,36 @@
 }
 
 .modalContainer {
-  display: flex;
+  margin-top: 25px;
   gap: 20px;
   position: relative;
 }
 
-.modalLeft {
-  flex: 1;
-  padding: 10px;
-  text-align: center;
-}
-
-.modalImage {
-  max-width: 100%;
-  height: auto;
-}
-
-.modalRight > * + * {
-  flex: 2;
-  padding: 10px;
+.modalContent >:nth-child(n+2) {
+  padding: 5px;
   border-top: 1px dotted grey;
 }
 
-.modalRight .modalTitle {
+.modalContent .modalTitle {
   font-weight: bold;
   font-size: 25px;
-  text-align: center;
   color: #3fa3ac;
+  margin-left: 25px;
+}
+
+.listdate{
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .address {
-  margin-top: 10px;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 .overview {
-  margin-top: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #closeButton {
