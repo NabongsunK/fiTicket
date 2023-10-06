@@ -87,21 +87,12 @@ const Recommend = function () {
       <div className={styles.container}>
         <div className="row">
           <div className="col-12" style={{ padding: "0px" }}>
-            <div className="container" style={{ padding: "0px" }}>
-              <div
-                className="slider-content"
-                style={{
-                  padding: "10px",
-                  width: "100%",
-                  textAlign: "center",
-                  borderRadius: "7px",
-                  backgroundColor: "#22b3c1",
-                }}
-              >
+            <div className={`container ${styles.containerStyle}`}>
+              <div className={styles.slider_content}>
                 <div className="row justify-content-center align-items-center">
                   <div className="col-5 align-middle">
-                    <h2 style={{ margin: "0", color: "#fff" }}>
-                      <em style={{ color: "#fff" }}>지역별 행사 추천</em>
+                    <h2 className={styles.title}>
+                      <em className={styles.emphasis}>지역별 행사 추천</em>
                     </h2>
                   </div>
                 </div>
