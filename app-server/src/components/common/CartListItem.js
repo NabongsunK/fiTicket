@@ -38,36 +38,68 @@ const CartListItem = function (props) {
       }
     });
   };
+  const img = props.item.image;
+
+  const poster =
+    props.item.image === "" ? (
+      <div
+        className="cart-thumb"
+        style={{
+          backgroundImage: "url('/assets/images/fes_default.jpg')",
+          // width: "",
+          height: "100%",
+          backgroundSize: "cover",
+        }}
+      ></div>
+    ) : (
+      <div
+        className="cart-thumb"
+        style={{
+          backgroundImage: `url("${img}")`,
+          width: "100%",
+          height: "200px",
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      ></div>
+    );
+
   return (
     <div className="single-cart-item">
       <Link to="#" className="product-image">
-        <img
-          src={props.item.image}
-          className="cart-thumb"
-          alt={props.item.name}
-        />
-        <div className="cart-item-desc">
-          <span className="product-remove">
-            <i
-              className="fa fa-close"
-              aria-hidden="true"
-              onClick={() => removeItem(props.item.index)}
-            ></i>
-          </span>
-          <span className="badge">{props.item.badge}</span>
-          <h6>{props.item.name}</h6>
-          <p className="size">
-            수량:{" "}
-            <button onClick={() => decreaseQuantity(props.item.index)}>
-              -
-            </button>
-            {props.item.quantity}
-            <button onClick={() => increaseQuantity(props.item.index)}>
-              +
-            </button>
-          </p>
-          <p className="color">할인: {props.item.discount}%</p>
-          {/* <p className="price">{props.item.price.toLocaleString()}원</p> */}
+        <div className="row">
+          <div className="col-5" style={{ height: "200px" }}>
+            {/* <img
+              src={props.item.image}
+              className="cart-thumb"
+              alt={props.item.name}
+            /> */}
+            {poster}
+          </div>
+          <div className="cart-item-desc">
+            <span className="product-remove">
+              <i
+                className="fa fa-close"
+                aria-hidden="true"
+                onClick={() => removeItem(props.item.index)}
+              ></i>
+            </span>
+            <span className="badge">{props.item.badge}</span>
+            <h6>{props.item.name}</h6>
+            <p className="size">
+              수량:{" "}
+              <button onClick={() => decreaseQuantity(props.item.index)}>
+                -
+              </button>
+              {props.item.quantity}
+              <button onClick={() => increaseQuantity(props.item.index)}>
+                +
+              </button>
+            </p>
+            <p className="color">할인: {props.item.discount}%</p>
+            {/* <p className="price">{props.item.price.toLocaleString()}원</p> */}
+          </div>
         </div>
       </Link>
     </div>
