@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 const Staff = function () {
   const is_manager = useSelector((state) => state.myLoginSlice.is_manager);
 
-  console.log(is_manager);
   if (!is_manager) {
     return <div>...권한이 없습니다.</div>;
   }
