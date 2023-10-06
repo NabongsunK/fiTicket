@@ -82,17 +82,19 @@ const TicketDetailItem = function (props) {
         </div>
       </div>
 
-      <div className= {styles.buttonContainer}>
+      <div id= {styles.buttonContainer}>
         {/* 홈페이지 연결 */}
-        <div
-        className={styles.button}
-        onClick={() => {
-        window.open(props.festival.home_page, '_blank');
-        }}>
-          <a>홈페이지</a>
+        <div className="explore_list_button">
+          <div
+          className={styles.button}
+          onClick={() => {
+          window.open(props.festival.home_page, '_blank');
+          }}>
+            <a>홈페이지</a>
+          </div>
         </div>
         {/* 장바구니 담기 */}
-        <div onClick={alertHandler}>
+        <div className="explore_list_button" onClick={alertHandler}>
           <div className={styles.button} onClick={props.toCart}>
             <a>장바구니</a>
           </div>

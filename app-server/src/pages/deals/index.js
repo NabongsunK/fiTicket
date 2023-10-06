@@ -12,12 +12,12 @@ import axios from "axios";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
-const allRecommends = async function () {
-  const res = await axios.get("/explore/recommends");
-  return res.data;
+const getAllList = async function () {
+  const res = await axios.get("/explore/getalllist");
+  return res.data.data;
 };
 
-var recommendsList = await allRecommends();
+var fesAllList = await getAllList();
 
 const Deal = function () {
   const [isActive, setActive] = useState("false");
@@ -28,27 +28,19 @@ const Deal = function () {
       setActive(isActive);
     }, 3000);
   };
-  //페이징 처리
 
-  const page = useSelector((state) => state.myPageSlice.page);
+  /* filtering */
+  // 검색어
+  const [type, setType] = useState(1);
+  const [dealslist, setDealslist] = useState(fesAllList);
 
-  const listPerPage = 4;
-  const lastPage = Math.floor(
-    (listPerPage + recommendsList.length - 1) / listPerPage
-  );
-  const skip = (page - 1) * listPerPage;
+  // 분야 바뀌면
+  useEffect(() => {
+    const regExp = new RegExp(type, "i");
+    setDealslist(fesAllList.filter((festival) => regExp.test(festival.deals)));
+  }, [type]);
 
-  const pageResult = recommendsList.slice(skip, skip + listPerPage);
-
-  const totalPage = [];
-  for (let i = 1; i <= lastPage; i++) {
-    totalPage.push(i);
-  }
-  const currPage = skip / listPerPage + 1;
-
-  const dispatch = useDispatch();
-
-  const list = pageResult.map((festival) => (
+  const list = dealslist.map((festival) => (
     <DealsListItem
       key={festival.id}
       festival={festival}
@@ -62,7 +54,7 @@ const Deal = function () {
       <DealsPageHeading />
 
       {/* 필터 */}
-      <Filter />
+      <Filter type={type} setType={setType} />
 
       {/* 알람창 놓고싶은데 넣기*/}
       <div
@@ -90,15 +82,15 @@ const Deal = function () {
         </div>
       </div>
 
-      <div className="amazing-deals">
+      <div className="amazing-deals" style={{ marginBottom: "200px" }}>
         <div className="container">
           <div className="row">
             {/* 추천 행사 타이틀 */}
             <div className="col-lg-6 offset-lg-3">
               <div className="section-heading text-center">
-                <h2>이번주 Loca!T가 추천하는 축제</h2>
+                <h2>Loca!T가 추천하는 축제 Top 6!!</h2>
                 <p>
-                  여러 도시들에서 축제가 진행중입니다. 그 중 인기있는 축제들을
+                  여러 지역들에서 축제가 진행중입니다. 그 중 인기있는 축제들을
                   소개합니다.
                 </p>
               </div>
@@ -108,7 +100,7 @@ const Deal = function () {
             {list}
 
             {/* pagination */}
-            <div className="col-lg-12">
+            {/* <div className="col-lg-12">
               <ul className="page-numbers">
                 <li>
                   <Link
@@ -142,7 +134,7 @@ const Deal = function () {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
