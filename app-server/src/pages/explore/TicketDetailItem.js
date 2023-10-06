@@ -43,46 +43,61 @@ const TicketDetailItem = function (props) {
         </div>
       </div>
 
-      <h4>{props.festival.title}</h4>
-      {/* 홈페이지 연결 */}
-      <div
-        className="explore_list_button"
-        style={{ float: "left", paddingRight: "10px" }}
-      >
-        <Link to={props.festival.home_page} target="_blank">
-          <i className="fa fa-home"></i>
-        </Link>
-      </div>
-      {/* 장바구니 담기 */}
-      <div className="explore_list_button" onClick={props.toCart}>
-        <Link onClick={alertHandler}>
-          <i className="fa fa-cart-plus"></i>
-        </Link>
+      {/* close */}
+      <div id={styles.closeButton}>
+        <div className="close-button"
+            id="rightSideClose"
+            onClick={props.openModal}
+          >
+            <i className="fa fa-close fa-close-cart" aria-hidden="true"></i>
+        </div>
       </div>
 
-      <form>
-        <div className="content">
-          <i className="fa fa-clock" style={{ float: "left" }}></i>
-          <h6 className="list">
-            {"운영기간 "}
-            {props.festival.event_start_date} ~ {props.festival.event_end_date}
-          </h6>
-          {props.festival.addr1}
-          <br />
-          {props.festival.use_time_festival}
+      <div onClick={(e) => e.stopPropagation()} className={styles.modalContainer}>
+        {/* 모달 왼쪽 영역 */}
+        <div className={styles.modalLeft}>
           <img
-            className="modal_image1"
+            className={styles.modalImage}
             src={props.festival.first_image}
             alt=""
           />
-          <br />
-          <br />
-          {"상세 정보"}
-          <p>{props.festival.over_view}</p>
-          {/* <ReviewList reviewData={reviewData} /> */}
         </div>
-      </form>
-      <button onClick={props.openModal}>close</button>
+
+        {/* 모달 오른쪽 영역 */}
+        <div className={styles.modalRight}>
+          <h4>{props.festival.title}</h4>
+          <div className={styles.address}>
+            {props.festival.addr1}
+          </div>
+          <br></br>
+          <h6 className="list">
+            {"운영기간: "}
+            {props.festival.event_start_date} ~ {props.festival.event_end_date}
+          </h6>
+          {props.festival.use_time_festival}
+          <div className={styles.overview}>
+            {"상세 정보"}
+            <p>{props.festival.over_view}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className= {styles.buttonContainer}>
+        {/* 홈페이지 연결 */}
+        <div
+        className={styles.button}
+        onClick={() => {
+        window.open(props.festival.home_page, '_blank');
+        }}>
+          <a>홈페이지</a>
+        </div>
+        {/* 장바구니 담기 */}
+        <div onClick={alertHandler}>
+          <div className={styles.button} onClick={props.toCart}>
+            <a>장바구니</a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
