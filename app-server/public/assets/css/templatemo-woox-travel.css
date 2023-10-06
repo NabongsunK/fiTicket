@@ -1488,7 +1488,7 @@ About Page Style
 }
 
 .weekly-offers {
-  padding-bottom: 100px;
+  padding-bottom: 6px;
   margin-top: 100px;
   border-bottom: 1px solid #eee;
 }
@@ -2745,17 +2745,22 @@ div.owl-stage-outer > div {
   background-position: center center;
   background-size: cover;
 }
+.localt_rotate {
+  position: relative;
+  margin-top: 30px;
+}
+.localt_rotate figure {
+  max-width: 250px;
+  margin: 0 auto;
+}
 #team_logo {
-  animation: rotate_logo 16s linear infinite;
   position: absolute;
-  top: 154px;
-  right: 48%;
+  top: 40%;
+  left: 46%;
+  animation: rotate_logo 16s linear infinite;
 }
 #team_name {
   animation: rotate_image 16s linear infinite;
-  position: absolute;
-  top: 90px;
-  right: 40%;
 }
 
 @keyframes rotate_image {
@@ -2767,9 +2772,6 @@ div.owl-stage-outer > div {
   100% {
     transform: rotate(-360deg);
   }
-}
-.localt_rotate {
-  margin-top: 30px;
 }
 .area_code {
   float: right;
