@@ -115,6 +115,7 @@ const ExploreGetModel = {
         home_page,
         rec,
         over_view
+        price
       FROM festival_api
 
       WHERE
@@ -148,7 +149,8 @@ const ExploreGetModel = {
       home_page,
       rec,
       datediff(event_end_date, now()) as d_day,
-      over_view
+      over_view,
+      price
       FROM festival_api
 
       WHERE
