@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { push, pop } from "../../store/cartSlice";
 
 import { useDispatch, useSelector } from "react-redux";
+import HomepageBtn from "../../components/common/HomepageBtn";
 
 const DealsListItem = function (props) {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const DealsListItem = function (props) {
           badge: props.festival.addr1 + " " + props.festival.addr2,
           name: props.festival.title,
           quantity: 1,
-          price: props.festival.id,
+          price: props.festival.price,
           image: props.festival.first_image2,
           ticket_id: props.festival.id,
           index: myCart.length,
@@ -98,13 +99,10 @@ const DealsListItem = function (props) {
           </div>
           <div className="col-lg-1 align-self-center">
             <div className="explore_list_button">
-              <Link
-                to="https://www.chf.or.kr/short/8sQs"
-                target="_blank"
-                style={{ marginBottom: 0 }}
-              >
-                <i className="fa fa-home"></i>
-              </Link>
+              <HomepageBtn
+                key={props.festival.id}
+                homepage_src={props.festival.home_page}
+              />
             </div>
             <div className="explore_list_button" onClick={toCart}>
               <Link onClick={props.alertHandler} style={{ marginTop: 0 }}>

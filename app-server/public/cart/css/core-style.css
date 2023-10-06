@@ -610,6 +610,22 @@ img {
   border-top: 1px #22b3c1;
   background-color: #f5f7f9;
 }
+
+.right-side-cart-area .cart-button a:hover {
+  border-left: 1px solid var(--cart--item--hover--subcolor);
+  background-color: var(--cart--item--hover--btncolor);
+}
+
+.right-side-cart-area .user-button a:hover {
+  border-left: 1px solid var(--cart--item--hover--subcolor);
+  background-color: var(--cart--item--hover--btncolor);
+}
+
+.right-side-cart-area .close-button a:hover {
+  border-left: 1px solid var(--cart--item--hover--subcolor);
+  background-color: var(--cart--item--hover--btncolor);
+}
+
 @media only screen and (max-width: 767px) {
   .right-side-cart-area .user-button a {
     width: 50px;
@@ -724,7 +740,8 @@ img {
 
   --cart--item--hover--bgcolor: #22b3c1;
   --cart--item--hover--color: #f7f7f7;
-  --cart--item--hover--subcolor: yellow;
+  --cart--item--hover--subcolor: gold;
+  --cart--item--hover--btncolor: #aaaaaa;
 }
 
 .right-side-cart-area
@@ -797,6 +814,15 @@ img {
   .cart-item-desc
   .product-remove {
   color: var(--cart--item--hover--subcolor);
+}
+.right-side-cart-area
+  .cart-content
+  .cart-list
+  .single-cart-item
+  .product-image
+  .cart-item-desc
+  .product-remove:hover {
+  color: var(--cart--item--hover--color);
 }
 
 @media only screen and (max-width: 767px) {

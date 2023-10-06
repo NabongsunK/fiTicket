@@ -7,6 +7,7 @@ import styles from "./ticketlistitem.module.css";
 
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import HomepageBtn from "../../components/common/HomepageBtn";
 
 const customStyles = {
   content: {
@@ -147,11 +148,7 @@ const TicketListItem = function (props) {
             </div>
           </div>
           <div className="col-lg-2 align-self-center">
-            <div className="explore_list_button">
-              <Link to={props.festival.home_page} target="_blank">
-                <i className="fa fa-home"></i>
-              </Link>
-            </div>
+            <HomepageBtn homepage_src={props.festival.home_page} />
             <div className="explore_list_button" onClick={toCart}>
               <Link onClick={props.alertHandler}>
                 <i className="fa fa-cart-plus"></i>
