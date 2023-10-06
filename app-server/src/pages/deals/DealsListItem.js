@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 const DealsListItem = function (props) {
   const dispatch = useDispatch();
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
-  console.log(props.festival);
+  // console.log(props.festival);
   const toCart = function () {
     dispatch(
       push({
@@ -34,7 +34,9 @@ const DealsListItem = function (props) {
             backgroundImage: "url('assets/images/fes_default.jpg')",
             width: "100%",
             height: "100%",
-            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            backgroundSize: "100% 100%",
+            backgroundRepeat: "no-repeat",
           }}
         ></div>
       </Link>
@@ -47,7 +49,7 @@ const DealsListItem = function (props) {
             width: "100%",
             height: "100%",
             backgroundPosition: "center center",
-            backgroundSize: "cover",
+            backgroundSize: "100% 100%",
             backgroundRepeat: "no-repeat",
           }}
         ></div>
@@ -55,16 +57,16 @@ const DealsListItem = function (props) {
     );
 
   return (
-    <div className="col-lg-6 col-sm-6">
+    <div className="col-lg-10 col-sm-6 offset-lg-1">
       <div className="item">
         <div className="row">
           <div
-            className="col-lg-6"
+            className="col-lg-4"
             style={{ paddingRight: "45px", overflow: "hidden" }}
           >
             {poster}
           </div>
-          <div className="col-lg-6 align-self-center">
+          <div className="col-lg-7 align-self-center">
             <div className="content">
               <Link to={`/explore/${props.festival.id}`}>
                 <span className="info">
@@ -79,7 +81,7 @@ const DealsListItem = function (props) {
                 </span>
                 <h4>{props.festival.title}</h4>
                 <div className="row">
-                  <div className="col-11">
+                  <div className="col-11" style={{ marginBottom: "4px" }}>
                     <i className="fa fa-clock"></i>
                     <span className="list">
                       {props.festival.event_start_date} -
@@ -92,23 +94,22 @@ const DealsListItem = function (props) {
                   {props.festival.over_view.length > 64 ? "......" : ""}
                 </p>
               </Link>
-
-              <div className="row">
-                <div className="col-lg-3">
-                  <div className="explore_list_button">
-                    <Link to="https://www.chf.or.kr/short/8sQs" target="_blank">
-                      <i className="fa fa-home"></i>
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-lg-3">
-                  <div className="explore_list_button" onClick={toCart}>
-                    <Link onClick={props.alertHandler}>
-                      <i className="fa fa-cart-plus"></i>
-                    </Link>
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+          <div className="col-lg-1 align-self-center">
+            <div className="explore_list_button">
+              <Link
+                to="https://www.chf.or.kr/short/8sQs"
+                target="_blank"
+                style={{ marginBottom: 0 }}
+              >
+                <i className="fa fa-home"></i>
+              </Link>
+            </div>
+            <div className="explore_list_button" onClick={toCart}>
+              <Link onClick={props.alertHandler} style={{ marginTop: 0 }}>
+                <i className="fa fa-cart-plus"></i>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,9 +1,16 @@
-const Filter = function () {
+const Filter = function (props) {
+  const toggleType = function (e) {
+    props.setType(Number(e.target.value));
+  };
+  // console.log(toggleType());
+  // const type = function () {
+  //   props.setType(toggleType);
+  // };
   return (
     <div className="search-form">
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-lg-8 offset-lg-2">
             <form
               id="search-form"
               name="gs"
@@ -11,47 +18,41 @@ const Filter = function () {
               role="search"
               action="#"
             >
-              <div className="row">
-                <div className="col-lg-2">{/* <h4>Sort Deals By:</h4> */}</div>
-                <div className="col-lg-4">
-                  <fieldset>
-                    <select
-                      name="Location"
-                      className="form-select"
-                      aria-label="Default select example"
-                      id="chooseLocation" /* onChange="this.form.click()" */
-                    >
-                      <option defaultValue>지역</option>
-                      <option value="1">서울</option>
-                      <option value="2">경인</option>
-                      <option value="3">강원</option>
-                      <option value="4">충청</option>
-                      <option value="5">전라</option>
-                      <option value="6">경상</option>
-                      <option value="7">제주</option>
-                    </select>
-                  </fieldset>
+              <div className="row justify-content-center">
+                <div className="col-lg-2 align-self-center">
+                  <button
+                    value={1}
+                    type="button"
+                    onClick={toggleType}
+                    style={{ padding: "8px 11px" }}
+                  >
+                    기간 임박
+                  </button>
                 </div>
-                <div className="col-lg-4">
-                  <fieldset>
-                    <select
-                      name="Price"
-                      className="form-select"
-                      aria-label="Default select example"
-                      id="choosePrice" /* onChange="this.form.click()" */
-                    >
-                      <option defaultValue>축제 분야</option>
-                      <option value="100">먹거리</option>
-                      <option value="250">공연</option>
-                      <option value="500">전시</option>
-                      <option value="1000">체험</option>
-                    </select>
-                  </fieldset>
+                <div className="col-lg-2 align-self-center">
+                  <button
+                    value={2}
+                    type="button"
+                    onClick={toggleType}
+                    style={{ padding: "8px 11px" }}
+                  >
+                    먹거리
+                  </button>
                 </div>
-                <div className="col-lg-2">
-                  <fieldset>
-                    <button className="border-button">찾기</button>
-                  </fieldset>
+                <div className="col-lg-2 align-self-center">
+                  <button value={3} onClick={toggleType} type="button">
+                    체험
+                  </button>
+                </div>
+                <div className="col-lg-2 align-self-center">
+                  <button value={4} onClick={toggleType} type="button">
+                    공연
+                  </button>
+                </div>
+                <div className="col-lg-2 align-self-center">
+                  <button value={5} onClick={toggleType} type="button">
+                    전시
+                  </button>
                 </div>
               </div>
             </form>
