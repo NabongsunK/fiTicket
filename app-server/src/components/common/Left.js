@@ -13,6 +13,15 @@ const Left = function (props) {
       });
     }
   };
+  const handleFavorite = function () {
+    if (is_signed) props.actions.goFavorite();
+    else {
+      props.actions.handleToggle(() => {
+        navigate("/login");
+      });
+    }
+  };
+
   return (
     <>
       {/* Cart Button */}
@@ -27,6 +36,13 @@ const Left = function (props) {
       <div className="user-button">
         <Link id="rightSideUser" onClick={handleUser}>
           <img src="/assets/images/core-img/user2.svg" alt="" />
+        </Link>
+      </div>
+
+      {/* favorite button */}
+      <div className="favorite-button">
+        <Link id="rightSideFavorite" onClick={handleFavorite}>
+          <img src="/assets/images/core-img/heart-fill.svg" alt="" />
         </Link>
       </div>
 
