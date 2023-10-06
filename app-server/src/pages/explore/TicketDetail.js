@@ -104,7 +104,10 @@ const TicketDetailItem = function () {
           <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
         </div>
       </div>
-      <h1 className="display-6 fw-normal text-body-emphasis d-flex justify-content-center">
+      <h1
+        className="display-6 fw-normal text-body-emphasis d-flex justify-content-center"
+        style={{ marginTop: "40px" }}
+      >
         {festival.title}
       </h1>
       {/* 홈페이지 연결 */}
@@ -125,25 +128,29 @@ const TicketDetailItem = function () {
       <form>
         <div className="content ">
           <div className="d-flex justify-content-center">
-            <i className="fa fa-clock " style={{ float: "left" }}></i>
-            <h6 className="list">
-              {"운영기간 "}
-              {festival.event_start_date} ~ {festival.event_end_date}
-            </h6>
-            <br />
-            {festival.addr1}
-            <br />
-            {/* {festival.use_time_festival} */}
-            {"티켓 금액: "}
-            {festival.price}
-            {"원"}
+            <i className="fa fa-clock "></i>
+            <div className="text-center">
+              <h5 className="list" style={{ marginBottom: "40px" }}>
+                {"운영기간 "}
+                {festival.event_start_date} ~ {festival.event_end_date}
+                <br />
+                <br />
+                {festival.addr1}
+                <br />
+                <br />
+                {/* {festival.use_time_festival} */}
+                {"티켓 금액: "}
+                {festival.price}
+                {"원"}
+              </h5>
+            </div>
           </div>
           <div className="d-flex justify-content-center">
             <img className="modal_image1" src={festival.first_image} alt="" />
           </div>
           <br />
           <br />
-          <div className="d-flex justify-content-center">{"상세 정보"}</div>
+          <h5 className="d-flex justify-content-center">{"상세 정보"}</h5>
           <p>{festival.over_view}</p>
           <ReviewList reviewData={reviewData} />
         </div>
