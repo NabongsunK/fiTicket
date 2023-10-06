@@ -1,0 +1,65 @@
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buttonContainer .button {
+  width: 120px;
+  height: 50px;
+  background-color: #22b3c1;
+  color: #fff;
+  border-radius: 30px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.buttonContainer .button a {
+  font-size: 16px;
+  text-align: center;
+}
+
+.modalContainer {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.modalLeft {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+}
+
+.modalImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.modalRight {
+  flex: 2;
+  padding: 10px;
+}
+
+.address {
+  margin-top: 10px;
+}
+
+.overview {
+  margin-top: 20px;
+}
+
+#closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+#closeButton i {
+  font-size: 40px;
+}
