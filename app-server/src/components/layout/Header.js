@@ -58,6 +58,7 @@ const Header = function (props) {
     dispatch(signout());
     removeCookies("is_signed");
     removeCookies("user_id");
+    removeCookies("is_manager");
     setCookies("is_signed", false, { path: "/" });
   };
 
@@ -66,7 +67,9 @@ const Header = function (props) {
 
   useEffect(() => {
     if (cookies.is_signed && cookies.user_id) {
-      dispatch(signin({ user_id: cookies.user_id }));
+      dispatch(
+        signin({ user_id: cookies.user_id, is_manager: cookies.is_manager })
+      );
     }
   }, []);
 
@@ -77,6 +80,7 @@ const Header = function (props) {
         if (response && response.name) {
           setCookies("user_id", user_id, { path: "/" });
           setCookies("is_signed", true, { path: "/" });
+          setCookies("is_manager", response.role, { path: "/" });
         }
       });
     }
