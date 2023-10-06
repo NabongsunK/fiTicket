@@ -118,14 +118,13 @@ function Payment(props) {
   };
 
   return (
-    <div className="checkout-btn mt-100">
-      <Link
-        className="btn essence-btn"
-        style={{ backgroundColor: "#22b3c1", marginLeft: "10%" }}
-        onClick={handlePayment}
-      >
-        결제하기
-      </Link>
+    <div className="row">
+      <div className="col-lg-8 p-0"></div>
+      <div className="col-lg-4">
+        <div className="explore_list_button" onClick={handlePayment}>
+          <Link>결제하기</Link>
+        </div>
+      </div>
     </div>
   );
 }
