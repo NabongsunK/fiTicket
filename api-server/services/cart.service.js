@@ -107,15 +107,11 @@ const CartService = {
       const ticket_ids = await cartModel.getTicketIdsByUserId(id);
       var data = [];
       ticket_ids.forEach(async (item) => {
-        const review = await reviewModel.findByUser(id, item.ticket_id, conn);
-        // console.log(review);
         const tmp = {
           ...(await ExploreGetModel.getTicketById(item.ticket_id, conn)),
           ticket_quantity: item.ticket_quantity,
-          reviews: review,
         };
         data.push(tmp);
-        // console.log(data.length);
       });
 
       // DB에 작업 반영

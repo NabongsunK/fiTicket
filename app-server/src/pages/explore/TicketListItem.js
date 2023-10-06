@@ -7,6 +7,7 @@ import styles from "./ticketlistitem.module.css";
 
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import HomepageBtn from "../../components/common/HomepageBtn";
 
 const customStyles = {
   content: {
@@ -47,8 +48,8 @@ const TicketListItem = function (props) {
           badge: props.festival.addr1 + " " + props.festival.addr2,
           name: props.festival.title,
           quantity: 1,
-          price: props.festival.id,
-          image: props.festival.first_image2,
+          price: props.festival.price,
+          image: props.festival.first_image,
           ticket_id: props.festival.id,
           index: myCart.length,
         },
@@ -69,7 +70,7 @@ const TicketListItem = function (props) {
             position: "absolute",
             top: "10%",
             left: "15%",
-            fontSize: "24px",
+            fontSize: "32px",
           }}
         ></i>
       </span>
@@ -104,7 +105,7 @@ const TicketListItem = function (props) {
     );
 
   return (
-    <div className="col-lg-6 col-sm-3">
+    <div className="col-lg-6 col-sm-6 mb-3">
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={openModal}
@@ -147,11 +148,7 @@ const TicketListItem = function (props) {
             </div>
           </div>
           <div className="col-lg-2 align-self-center">
-            <div className="explore_list_button">
-              <Link to={props.festival.home_page} target="_blank">
-                <i className="fa fa-home"></i>
-              </Link>
-            </div>
+            <HomepageBtn homepage_src={props.festival.home_page} />
             <div className="explore_list_button" onClick={toCart}>
               <Link onClick={props.alertHandler}>
                 <i className="fa fa-cart-plus"></i>

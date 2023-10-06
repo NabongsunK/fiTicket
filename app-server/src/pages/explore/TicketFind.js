@@ -25,7 +25,7 @@ const TicketFind = function (props) {
     <div className="search-form">
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-lg-8">
+          <div className="col-lg-9">
             <div
               id="search-form"
               name="gs"
@@ -33,9 +33,9 @@ const TicketFind = function (props) {
               role="search"
               action="#"
             >
-              <div className="row">
+              <div className="row" id={styles.myrow}>
                 <h4 className="col-lg-3">축제 찾기: </h4>
-                <div className="col-lg-6">
+                <div className="col-lg-5">
                   {/* TODO: 여기서 onkeyup fillter() 정의해서 데이터 유효성 챙기기*/}
                   <input
                     className="form-control"

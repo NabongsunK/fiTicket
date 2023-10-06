@@ -60,23 +60,25 @@ const TicketPage = function (props) {
 
   return (
     //  pagination
-    <div className="col-lg-12">
-      <div>{`총 ${props.lastPage} 페이지 있습니다.`}</div>
-      <ul className="page-numbers">
-        <li>
-          <Link to="" onClick={handleBackButtonClick}>
-            <i className="fa fa-arrow-left"></i>
-          </Link>
-        </li>
+    <div className="row">
+      <div className="col-lg-4 mt-3 ms-5">{`총 ${props.lastPage} 페이지 있습니다.`}</div>
+      <div className="col-lg-12">
+        <ul className="page-numbers">
+          <li>
+            <Link to="" onClick={handleBackButtonClick}>
+              <i className="fa fa-arrow-left"></i>
+            </Link>
+          </li>
 
-        {pageButtons}
+          {pageButtons}
 
-        <li>
-          <Link to="" onClick={handleNextButtonClick}>
-            <i className="fa fa-arrow-right"></i>
-          </Link>
-        </li>
-      </ul>
+          <li>
+            <Link to="" onClick={handleNextButtonClick}>
+              <i className="fa fa-arrow-right"></i>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

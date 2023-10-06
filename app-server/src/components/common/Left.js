@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 const Left = function (props) {
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const navigate = useNavigate();
+  const cartNo = useSelector((state) => state.myCartSlice.myCarts).length;
   const handleUser = function () {
     if (is_signed) props.actions.goUser();
     else {
@@ -18,7 +19,7 @@ const Left = function (props) {
       <div className="cart-button">
         <NavLink id="rightSideCart" onClick={props.actions.goCart}>
           <img src="/assets/images/core-img/bag2.svg" alt="" />
-          <span>{props.cartNo}</span>
+          <span>{cartNo}</span>
         </NavLink>
       </div>
 

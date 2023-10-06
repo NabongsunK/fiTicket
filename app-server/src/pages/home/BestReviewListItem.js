@@ -1,7 +1,9 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const BestReviewListItem = (props) => {
-  const { ticket_name, user_name, rating, content, first_image } =
+  const navigate = useNavigate();
+  const { ticket_name, user_name, rating, content, first_image, ticket_id } =
     props.bestReviewListItems;
 
   // 별표를 동적으로 생성하는 함수
@@ -14,7 +16,12 @@ const BestReviewListItem = (props) => {
 
   return (
     <>
-      <div className="item">
+      <div
+        className="item"
+        onClick={() => {
+          navigate("/explore/" + ticket_id);
+        }}
+      >
         <div className="thumb">
           <img
             src={first_image}
@@ -32,7 +39,11 @@ const BestReviewListItem = (props) => {
                 <br />
                 <div className="col align-self-end">
                   <span
-                    style={{ float: "right", margin: "5px", color: "#afafaf" }}
+                    style={{
+                      float: "right",
+                      margin: "5px",
+                      color: "#afafaf",
+                    }}
                   >
                     <i className="fa fa-users"></i> {user_name.substring(0, 1)}
                     ** 님

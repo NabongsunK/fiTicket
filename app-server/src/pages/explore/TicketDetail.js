@@ -6,6 +6,7 @@ import { push } from "../../store/cartSlice";
 import { setMapItude } from "../../store/mapSlice";
 import axios from "axios";
 import ReviewList from "./ReviewList";
+import HomepageBtn from "../../components/common/HomepageBtn";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -55,8 +56,8 @@ const TicketDetailItem = function () {
           name: festival.title,
           quantity: 1,
           // 여기 가격추가
-          price: festival.id,
-          image: festival.first_image2,
+          price: festival.price,
+          image: festival.first_image,
           ticket_id: festival.id,
           index: myCart.length,
         },
@@ -104,17 +105,14 @@ const TicketDetailItem = function () {
           <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
         </div>
       </div>
-
-      <h4>{festival.title}</h4>
-      {/* 홈페이지 연결 */}
-      <div
-        className="explore_list_button"
-        style={{ float: "left", paddingRight: "10px" }}
+      <h1
+        className="display-6 fw-normal text-body-emphasis d-flex justify-content-center"
+        style={{ marginTop: "40px" }}
       >
-        <Link to={festival.home_page} target="_blank">
-          <i className="fa fa-home"></i>
-        </Link>
-      </div>
+        {festival.title}
+      </h1>
+      {/* 홈페이지 연결 */}
+      <HomepageBtn homepage_src={festival.home_page} />
       {/* 장바구니 담기 */}
       <div className="explore_list_button" onClick={toCart}>
         <Link onClick={alertHandler}>
@@ -122,21 +120,32 @@ const TicketDetailItem = function () {
         </Link>
       </div>
       <form>
-        <div className="content">
-          <i className="fa fa-clock" style={{ float: "left" }}></i>
-          <h6 className="list">
-            {"운영기간 "}
-            {festival.event_start_date} ~ {festival.event_end_date}
-          </h6>
-          {festival.addr1}
+        <div className="content ">
+          <div className="d-flex justify-content-center">
+            <i className="fa fa-clock "></i>
+            <div className="text-center">
+              <h5 className="list" style={{ marginBottom: "40px" }}>
+                {"운영기간 "}
+                {festival.event_start_date} ~ {festival.event_end_date}
+                <br />
+                <br />
+                {festival.addr1}
+                <br />
+                <br />
+                {/* {festival.use_time_festival} */}
+                {"티켓 금액: "}
+                {festival.price}
+                {"원"}
+              </h5>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center">
+            <img className="modal_image1" src={festival.first_image} alt="" />
+          </div>
           <br />
-          {festival.use_time_festival}
-          <img className="modal_image1" src={festival.first_image} alt="" />
           <br />
-          <br />
-          {"상세 정보"}
+          <h5 className="d-flex justify-content-center">{"상세 정보"}</h5>
           <p>{festival.over_view}</p>
-          {"리뷰"}
           <ReviewList reviewData={reviewData} />
         </div>
       </form>

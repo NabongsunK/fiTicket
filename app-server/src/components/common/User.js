@@ -46,7 +46,7 @@ const User = function (props) {
       }
       style={{ zIndex: "21474899" }}
     >
-      <Left cartNo={props.cartNo} actions={props.actions} />
+      <Left actions={props.actions} />
 
       <div className="cart-content">
         <UserList
