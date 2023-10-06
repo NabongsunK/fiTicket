@@ -54,14 +54,19 @@ function Login() {
   return (
     <section className="login_page">
       <div className="login-container">
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            signIn();
+          }}
+        >
           {/* <!-- ID input --> */}
           <div className="form-outline">
             <label className="form-label" htmlFor="form2Example1">
               ID
             </label>
             <input
-              type="email"
+              type="text"
               id="form2Example1"
               className="form-control"
               ref={loginIdRef}
@@ -102,25 +107,19 @@ function Login() {
 
             <div className="col">
               {/* <!-- Simple link --> */}
-              <Link to="/signup">Forgot password?</Link>
+              <Link to="/signup">비밀번호 찾기</Link>
             </div>
           </div>
 
           {/* <!-- Submit button --> */}
-          <button
-            type="button"
-            className="btn btn-primary btn-block mb-4"
-            onClick={() => {
-              signIn();
-            }}
-          >
+          <button type="submit" className="btn btn-primary btn-block mb-4">
             Sign in
           </button>
 
           {/* <!-- Register buttons --> */}
           <div className="text-center">
             <p>
-              Not a member? <Link to="/signup">Register</Link>
+              회원이 아니신가요? <Link to="/signup">회원가입</Link>
             </p>
             <p>or sign up with:</p>
             <button type="button" className="btn btn-link btn-floating mx-1">

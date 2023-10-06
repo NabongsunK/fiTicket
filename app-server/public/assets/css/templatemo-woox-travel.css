@@ -2562,7 +2562,7 @@ body {
   height: 80vh;
   margin: 0 auto;
   margin-top: 70px;
-  background-image: url("../images/login_bg_night.jpg");
+  /* background-image: url("../images/login_bg_night.jpg"); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;
@@ -2581,36 +2581,70 @@ body {
 }
 
 .login-container {
-  position: inherit;
+  position: relative;
   padding: 10px 10px 0;
-  top: 15%;
-  right: -50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 18rem;
-  background-color: rgb(34, 179, 193, 0.75);
+  background-color: rgba(34, 179, 193, 0.75);
   border-radius: 13px;
 }
 .login-container form .text-center p {
   color: #212529;
   /* font-weight: 600; */
 }
+.btn.btn-primary.btn-block.mb-4:hover {
+  color: #22b3c1;
+}
+
 .signup_page {
   position: relative;
   top: 70;
   min-height: 800px;
   margin: 0 auto;
   height: 90vh;
-  background-image: url("../images/signup_bg.jpg");
+  /* background-image: url("../images/signup_bg.jpg"); */
   /* background-size: ; */
 }
 .signup-container {
-  position: inherit;
+  position: absolute;
   padding: 10px 10px 0;
-  top: 10%;
-  right: -20%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
   width: 18rem;
-  background-color: rgb(34, 179, 193, 0.75);
+  background-color: rgba(34, 179, 193, 0.75);
   border-radius: 13px;
   margin: 0;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+/* 스크롤 안보이게 */
+/* .signup-container::-webkit-scrollbar {
+  display: none;
+} */
+
+/* 너비 */
+.signup-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* 색 */
+.signup-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* 호버시 색 */
+.signup-container::-webkit-scrollbar-thumb:hover {
+  background: #22b3c1;
+}
+
+/* 바탕 색 */
+.signup-container::-webkit-scrollbar-track {
+  background: #f1f3f3;
+  border-radius: 5px;
 }
 .search-form #explore-search-form {
   background-color: #22b3c1;
@@ -2706,8 +2740,6 @@ body {
 div.owl-stage-outer > div {
   width: 40px;
 }
-<<<<<<< HEAD
-=======
 
 /* teams */
 .fold-on {
@@ -2800,4 +2832,3 @@ div.owl-stage-outer > div {
 .codetable:last-child tr::after {
   content: "";
 }
->>>>>>> 174ef18f5d871c2c9fba5262e163acc025253521

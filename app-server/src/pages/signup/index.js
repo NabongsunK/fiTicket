@@ -97,6 +97,11 @@ function Signup() {
     console.log(res);
   };
 
+  const FormSubmit = (e) => {
+    e.preventDefault();
+    signUp();
+  };
+
   const getAuth = async function () {
     if (!isValidPhoneNumber(pnRef.current.value)) {
       setActive(true);
@@ -191,7 +196,7 @@ function Signup() {
       </div>
 
       <div className="signup-container">
-        <form className="signup-form">
+        <form className="signup-form" onSubmit={FormSubmit}>
           {/* <!-- ID input --> */}
           <div className="form-outline mb-4">
             <input
@@ -295,13 +300,7 @@ function Signup() {
           </div>
 
           {/* <!-- Submit button --> */}
-          <button
-            type="button"
-            className="btn btn-primary btn-block mb-4"
-            onClick={() => {
-              signUp();
-            }}
-          >
+          <button type="submit" className="btn btn-primary btn-block mb-4">
             회원가입
           </button>
 
