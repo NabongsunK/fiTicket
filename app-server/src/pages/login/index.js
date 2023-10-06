@@ -102,7 +102,7 @@ function Login() {
 
             <div className="col">
               {/* <!-- Simple link --> */}
-              <Link to="/signup">Forgot password?</Link>
+              <Link to="/findpw">Forgot password?</Link>
             </div>
           </div>
 
