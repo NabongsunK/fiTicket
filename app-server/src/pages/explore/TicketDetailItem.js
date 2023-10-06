@@ -65,11 +65,10 @@ const TicketDetailItem = function (props) {
 
         {/* 모달 오른쪽 영역 */}
         <div className={styles.modalRight}>
-          <h4>{props.festival.title}</h4>
+          <h4 className={styles.modalTitle}>{props.festival.title}</h4>
           <div className={styles.address}>
             {props.festival.addr1}
           </div>
-          <br></br>
           <h6 className="list">
             {"운영기간: "}
             {props.festival.event_start_date} ~ {props.festival.event_end_date}
@@ -90,13 +89,13 @@ const TicketDetailItem = function (props) {
           onClick={() => {
           window.open(props.festival.home_page, '_blank');
           }}>
-            <a>홈페이지</a>
+            <Link>홈페이지</Link>
           </div>
         </div>
         {/* 장바구니 담기 */}
         <div className="explore_list_button" onClick={alertHandler}>
           <div className={styles.button} onClick={props.toCart}>
-            <a>장바구니</a>
+            <Link>장바구니</Link>
           </div>
         </div>
       </div>
