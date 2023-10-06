@@ -11,7 +11,6 @@ const Cart = function (props) {
   const cartItems = useSelector((state) => state.myCartSlice.myCarts);
   const dispatch = useDispatch();
   useEffect(() => {
-    props.actions.setCartNo(cartItems.length);
     dispatch(setAmount({ newAmount: calculateTotalAmount() }));
   }, [cartItems]);
 
@@ -40,7 +39,7 @@ const Cart = function (props) {
         }
         style={{ zIndex: "21474899" }}
       >
-        <Left cartNo={props.cartNo} actions={props.actions} />
+        <Left actions={props.actions} />
 
         <div className="cart-content">
           {/* Cart Summary */}

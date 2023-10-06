@@ -55,8 +55,8 @@ const TicketDetailItem = function () {
           name: festival.title,
           quantity: 1,
           // 여기 가격추가
-          price: festival.id,
-          image: festival.first_image2,
+          price: festival.price,
+          image: festival.first_image,
           ticket_id: festival.id,
           index: myCart.length,
         },
