@@ -80,7 +80,8 @@ const LoginModel = {
         name,
         email,
         phone_number,
-        id
+        id,
+        role
       from users
       where
         id = ?
