@@ -82,7 +82,8 @@ const ExploreGetModel = {
         rec,
         datediff(event_end_date, now()) as d_day,
         area_code,
-        price
+        price,
+        deals
       FROM festival_api
 
       WHERE
@@ -92,6 +93,44 @@ const ExploreGetModel = {
         AND event_end_date IS NOT NULL
         AND over_view IS NOT NULL
       ORDER BY event_start_date ASC
+      `;
+      const [result] = await conn.query(sql);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  async getTypeSelect(type, conn = pool) {
+    try {
+      const sql = `
+      SELECT
+        id,
+        addr1,
+        addr2,
+        first_image,
+        first_image2,
+        tel,
+        title,
+        event_start_date,
+        event_end_date,
+        home_page,
+        over_view,
+        map_x,
+        map_y,
+        rec,
+        datediff(event_end_date, now()) as d_day,
+        area_code,
+        price
+      FROM festival_api
+
+      WHERE
+        first_image IS NOT NULL
+        AND title IS NOT NULL
+        AND event_start_date IS NOT NULL
+        AND event_end_date IS NOT NULL
+        AND over_view IS NOT NULL
+        and deals = ?
+      ORDER BY event_end_date ASC
       `;
       const [result] = await conn.query(sql);
       return result;
