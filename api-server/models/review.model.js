@@ -82,7 +82,8 @@ const reviewModel = {
           festival_api.title as ticket_name, 
           festival_api.first_image as first_image,
           users.name as user_name, 
-          content
+          content,
+          festival_api.id as ticket_id
         from review
           left join users on review.user_id = users.id
           left join festival_api on review.ticket_id = festival_api.id
