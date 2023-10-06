@@ -104,8 +104,9 @@ const TicketDetailItem = function () {
           <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
         </div>
       </div>
-
-      <h4>{festival.title}</h4>
+      <h1 className="display-6 fw-normal text-body-emphasis d-flex justify-content-center">
+        {festival.title}
+      </h1>
       {/* 홈페이지 연결 */}
       <div
         className="explore_list_button"
@@ -122,21 +123,28 @@ const TicketDetailItem = function () {
         </Link>
       </div>
       <form>
-        <div className="content">
-          <i className="fa fa-clock" style={{ float: "left" }}></i>
-          <h6 className="list">
-            {"운영기간 "}
-            {festival.event_start_date} ~ {festival.event_end_date}
-          </h6>
-          {festival.addr1}
+        <div className="content ">
+          <div className="d-flex justify-content-center">
+            <i className="fa fa-clock " style={{ float: "left" }}></i>
+            <h6 className="list">
+              {"운영기간 "}
+              {festival.event_start_date} ~ {festival.event_end_date}
+            </h6>
+            <br />
+            {festival.addr1}
+            <br />
+            {/* {festival.use_time_festival} */}
+            {"티켓 금액: "}
+            {festival.price}
+            {"원"}
+          </div>
+          <div className="d-flex justify-content-center">
+            <img className="modal_image1" src={festival.first_image} alt="" />
+          </div>
           <br />
-          {festival.use_time_festival}
-          <img className="modal_image1" src={festival.first_image} alt="" />
           <br />
-          <br />
-          {"상세 정보"}
+          <div className="d-flex justify-content-center">{"상세 정보"}</div>
           <p>{festival.over_view}</p>
-          {"리뷰"}
           <ReviewList reviewData={reviewData} />
         </div>
       </form>

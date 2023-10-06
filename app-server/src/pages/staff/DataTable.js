@@ -156,6 +156,7 @@ const FestivalDataTable = function () {
         // "rec",
         "area_code",
         "price",
+        "deals",
       ],
       2
     );
@@ -272,6 +273,13 @@ const FestivalDataTable = function () {
     {
       name: "가격",
       selector: (row) => "₩ " + row.price,
+      sortable: true,
+      center: 1,
+      maxWidth: "40px",
+    },
+    {
+      name: "분야",
+      selector: (row) => row.deals,
       sortable: true,
       center: 1,
       maxWidth: "40px",

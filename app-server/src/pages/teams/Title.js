@@ -28,8 +28,10 @@ const TeamTitle = function () {
                 <h2>Loca!T와 함께 다양한 축제를 즐기세요</h2>
                 <p>축제를 더욱 더 알차게 즐길 수 있도록 힘쓰겠습니다</p>
                 <div className="localt_rotate">
-                  <Logo id="team_logo" />
-                  <Name id="team_name" />
+                  <figure>
+                    <Name id="team_name" />
+                    <Logo id="team_logo" />
+                  </figure>
                 </div>
               </div>
             </div>
