@@ -54,22 +54,12 @@ const TicketDetailItem = function (props) {
       </div>
 
       <div onClick={(e) => e.stopPropagation()} className={styles.modalContainer}>
-        {/* 모달 왼쪽 영역 */}
-        <div className={styles.modalLeft}>
-          <img
-            className={styles.modalImage}
-            src={props.festival.first_image}
-            alt=""
-          />
-        </div>
-
-        {/* 모달 오른쪽 영역 */}
-        <div className={styles.modalRight}>
+        <div className={styles.modalContent}>
           <h4 className={styles.modalTitle}>{props.festival.title}</h4>
           <div className={styles.address}>
             {props.festival.addr1}
           </div>
-          <h6 className="list">
+          <h6 className={styles.listdate}>
             {"운영기간: "}
             {props.festival.event_start_date} ~ {props.festival.event_end_date}
           </h6>
