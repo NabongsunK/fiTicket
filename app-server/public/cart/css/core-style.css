@@ -2636,6 +2636,13 @@ img {
     line-height: 50px;
   }
 }
+.summary-on #rightSideCart {
+  background-color: #aaaaaa;
+}
+.user-on #rightSideUser {
+  background-color: #aaaaaa;
+}
+
 .bottom-up-detail-area .close-button a img {
   max-width: 20px;
 }

@@ -42,7 +42,7 @@ const User = function (props) {
     <div
       className={
         props.states.isActive && !props.states.isCart
-          ? "right-side-cart-area cart-on"
+          ? "right-side-cart-area cart-on user-on"
           : "right-side-cart-area "
       }
       style={{ zIndex: "21474899" }}
