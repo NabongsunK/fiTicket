@@ -30,32 +30,30 @@ const Cart = function (props) {
   };
 
   return (
-    <>
-      <div
-        className={
-          props.states.isActive && props.states.isCart
-            ? "right-side-cart-area cart-on"
-            : "right-side-cart-area"
-        }
-        style={{ zIndex: "21474899" }}
-      >
-        <Left actions={props.actions} />
+    <div
+      className={
+        props.states.isActive && props.states.isCart
+          ? "right-side-cart-area cart-on"
+          : "right-side-cart-area"
+      }
+      style={{ zIndex: "21474899" }}
+    >
+      <Left actions={props.actions} />
 
-        <div className="cart-content">
-          {/* Cart Summary */}
-          <CartSummary
-            calculateTotalAmount={calculateTotalAmount}
-            calculateTotalQuantity={calculateTotalQuantity}
-            calculateTotalDiscount={calculateTotalDiscount}
-          />
+      <div className="cart-content">
+        {/* Cart Summary */}
+        <CartSummary
+          calculateTotalAmount={calculateTotalAmount}
+          calculateTotalQuantity={calculateTotalQuantity}
+          calculateTotalDiscount={calculateTotalDiscount}
+        />
 
-          {/* Cart List Area */}
-          <CartList cartItems={cartItems} />
+        {/* Cart List Area */}
+        <CartList cartItems={cartItems} />
 
-          <Payment handleToggle={props.actions.handleToggle} />
-        </div>
+        <Payment handleToggle={props.actions.handleToggle} />
       </div>
-    </>
+    </div>
   );
 };
 
