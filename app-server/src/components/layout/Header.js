@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import User from "../common/User";
+import Favorite from "../common/Favorite";
 import Left from "../common/Left";
 import { useCookies } from "react-cookie";
 import { signin, signout } from "../../store/loginSlice";
@@ -20,6 +21,7 @@ const getUser = async function (user_id) {
 
 const Header = function (props) {
   const [isActive, setActive] = useState(false);
+  const [isFavor, setFavor] = useState(false);
   const [isCart, setCart] = useState(true);
   const [login_id, setLogin_id] = useState("");
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
@@ -46,6 +48,10 @@ const Header = function (props) {
     if (typeof next === "function") {
       next?.();
     }
+  };
+  const goFavorite = function () {
+    setCart(false);
+    setFavor(isFavor);
   };
 
   const signOut = function () {
@@ -129,6 +135,22 @@ const Header = function (props) {
               )}
             </div>
 
+            <div className="user-favorite-info">
+              {is_signed ? (
+                <NavLink
+                  onClick={() => {
+                    goFavorite(handleToggle);
+                  }}
+                >
+                  <img src="/assets/images/core-img/heart-fill2.svg" alt="" />
+                </NavLink>
+              ) : (
+                <NavLink to="/login">
+                  <img src="/assets/images/core-img/heart2.svg" alt="" />
+                </NavLink>
+              )}
+            </div>
+
             <div className="cart-area">
               <Link
                 id="essenceCartBtn"
@@ -154,11 +176,15 @@ const Header = function (props) {
 
       <Cart
         states={{ isActive, isCart }}
-        actions={{ handleToggle, goCart, goUser }}
+        actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
       <User
         states={{ isActive, isCart }}
-        actions={{ handleToggle, goCart, goUser, signOut }}
+        actions={{ handleToggle, goCart, goUser, goFavorite, signOut }}
+      />
+      <Favorite
+        states={{ isFavor, isCart }}
+        actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
     </>
   );
