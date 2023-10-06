@@ -6,6 +6,7 @@ import { push } from "../../store/cartSlice";
 import { setMapItude } from "../../store/mapSlice";
 import axios from "axios";
 import ReviewList from "./ReviewList";
+import HomepageBtn from "../../components/common/HomepageBtn";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -111,14 +112,7 @@ const TicketDetailItem = function () {
         {festival.title}
       </h1>
       {/* 홈페이지 연결 */}
-      <div
-        className="explore_list_button"
-        style={{ float: "left", paddingRight: "10px" }}
-      >
-        <Link to={festival.home_page} target="_blank">
-          <i className="fa fa-home"></i>
-        </Link>
-      </div>
+      <HomepageBtn homepage_src={festival.home_page} />
       {/* 장바구니 담기 */}
       <div className="explore_list_button" onClick={toCart}>
         <Link onClick={alertHandler}>

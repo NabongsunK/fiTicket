@@ -32,7 +32,7 @@ const Deal = function () {
   /* filtering */
   // 검색어
   const [type, setType] = useState(1);
-  const [dealslist, setDealslist] = useState(fesAllList);
+  const [dealslist, setDealslist] = useState([]);
 
   // 분야 바뀌면
   useEffect(() => {
@@ -98,43 +98,6 @@ const Deal = function () {
 
             {/* 추천 행사 리스트 */}
             {list}
-
-            {/* pagination */}
-            {/* <div className="col-lg-12">
-              <ul className="page-numbers">
-                <li>
-                  <Link
-                    to=""
-                    onClick={() => {
-                      if (page > 1) {
-                        dispatch(prev({ step: 1 }));
-                      }
-                    }}
-                  >
-                    <i className="fa fa-arrow-left"></i>
-                  </Link>
-                </li>
-
-                {totalPage.map((page) => (
-                  <li key={page} className={page === currPage ? "active" : ""}>
-                    <Link to="#">{page}</Link>
-                  </li>
-                ))}
-
-                <li>
-                  <Link
-                    to=""
-                    onClick={() => {
-                      if (page < lastPage) {
-                        dispatch(next({ step: 1 }));
-                      }
-                    }}
-                  >
-                    <i className="fa fa-arrow-right"></i>
-                  </Link>
-                </li>
-              </ul>
-            </div> */}
           </div>
         </div>
       </div>

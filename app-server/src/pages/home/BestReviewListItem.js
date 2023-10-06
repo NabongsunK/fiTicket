@@ -14,7 +14,6 @@ const BestReviewListItem = (props) => {
     }
   };
 
-  console.log(props);
   return (
     <>
       <div
