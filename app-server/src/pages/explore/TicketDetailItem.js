@@ -26,7 +26,13 @@ const TicketDetailItem = function (props) {
         aria-live="assertive"
         data-delay="3000"
         aria-atomic="true"
-        style={{ position: "absolute", right: "30%", zIndex: 200 }}
+        style={{
+          position: "fixed",
+          bottom: "10px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 200
+        }}
       >
         <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
           <img
