@@ -21,10 +21,10 @@ const getUser = async function (user_id) {
 const Header = function (props) {
   const [isActive, setActive] = useState(false);
   const [isCart, setCart] = useState(true);
-  const [cartNo, setCartNo] = useState(0);
   const [login_id, setLogin_id] = useState("");
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const cartNo = useSelector((state) => state.myCartSlice.myCarts).length;
   const dispatch = useDispatch();
 
   const handleToggle = function (next) {
@@ -148,15 +148,16 @@ const Header = function (props) {
         className={
           isActive ? "cart-bg-overlay cart-bg-overlay-on" : "cart-bg-overlay "
         }
+        onClick={handleToggle}
       ></div>
 
       <Cart
-        states={{ isActive, isCart, cartNo }}
-        actions={{ handleToggle, goCart, goUser, setCartNo }}
+        states={{ isActive, isCart }}
+        actions={{ handleToggle, goCart, goUser }}
       />
       <User
         states={{ isActive, isCart }}
-        actions={{ handleToggle, goCart, goUser, setCartNo }}
+        actions={{ handleToggle, goCart, goUser }}
       />
     </>
   );

@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { pop, change } from "../../store/cartSlice";
 
+import styles from "./cartlistitem.module.css";
+
 const CartListItem = function (props) {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.myCartSlice.myCarts);
@@ -38,36 +40,70 @@ const CartListItem = function (props) {
       }
     });
   };
+  const img = props.item.image;
+
+  const poster =
+    props.item.image === "" ? (
+      <div
+        className={styles.mycartitem}
+        style={{
+          backgroundImage: "url('/assets/images/fes_default.jpg')",
+          // width: "",
+          height: "200px",
+          backgroundSize: "cover",
+        }}
+      ></div>
+    ) : (
+      <div
+        className={styles.mycartitem}
+        style={{
+          backgroundImage: `url("${img}")`,
+          width: "100%",
+          height: "200px",
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      ></div>
+    );
+
   return (
     <div className="single-cart-item">
       <Link to="#" className="product-image">
-        <img
-          src={props.item.image}
-          className="cart-thumb"
-          alt={props.item.name}
-        />
-        <div className="cart-item-desc">
-          <span className="product-remove">
-            <i
-              className="fa fa-close"
-              aria-hidden="true"
-              onClick={() => removeItem(props.item.index)}
-            ></i>
-          </span>
-          <span className="badge">{props.item.badge}</span>
-          <h6>{props.item.name}</h6>
-          <p className="size">
-            수량:{" "}
-            <button onClick={() => decreaseQuantity(props.item.index)}>
-              -
-            </button>
-            {props.item.quantity}
-            <button onClick={() => increaseQuantity(props.item.index)}>
-              +
-            </button>
-          </p>
-          <p className="color">할인: {props.item.discount}%</p>
-          {/* <p className="price">{props.item.price.toLocaleString()}원</p> */}
+        <div className="row">
+          <div className="col-lg-4 p-0">{poster}</div>
+          <div className="col-lg-8">
+            <div className="cart-item-desc">
+              <span className="product-remove">
+                <i
+                  className="fa fa-close"
+                  aria-hidden="true"
+                  onClick={() => removeItem(props.item.index)}
+                ></i>
+              </span>
+              <span className="badge">{props.item.badge}</span>
+              <h6>{props.item.name}</h6>
+              <p className="size">
+                수량:{" "}
+                <button
+                  className="mybtn"
+                  onClick={() => decreaseQuantity(props.item.index)}
+                >
+                  <i className="fa fa-minus"></i>
+                </button>
+                {props.item.quantity}
+                <button
+                  className="mybtn"
+                  onClick={() => increaseQuantity(props.item.index)}
+                >
+                  <i className="fa fa-plus"></i>
+                </button>
+              </p>
+              <p className="price">
+                {(props.item.price * props.item.quantity).toLocaleString()}원
+              </p>
+            </div>
+          </div>
         </div>
       </Link>
     </div>
