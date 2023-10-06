@@ -116,17 +116,15 @@ const MapDiv = function () {
 
       <Map />
 
-      <div className={styles.mytogglegroup}>
-        <ToggleButtonGroup
-          className="btn-group-justified"
-          type="radio"
-          name="options"
-          defaultValue={0}
-          onChange={onChangeToggle}
-        >
-          {LocalSelectList}
-        </ToggleButtonGroup>
-      </div>
+      <ToggleButtonGroup
+        className="btn-group-justified"
+        type="radio"
+        name="options"
+        defaultValue={0}
+        onChange={onChangeToggle}
+      >
+        {LocalSelectList}
+      </ToggleButtonGroup>
 
       {/* <div id="result" /> */}
     </>
