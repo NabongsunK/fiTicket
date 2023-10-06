@@ -88,9 +88,6 @@ const Header = function (props) {
                 </Link>
                 <ul className="nav">
                   <li>
-                    <NavLink onClick={signOut}>로그아웃</NavLink>
-                  </li>
-                  <li>
                     <NavLink to="/ ">Home</NavLink>
                   </li>
                   <li>
@@ -157,7 +154,7 @@ const Header = function (props) {
       />
       <User
         states={{ isActive, isCart }}
-        actions={{ handleToggle, goCart, goUser }}
+        actions={{ handleToggle, goCart, goUser, signOut }}
       />
     </>
   );

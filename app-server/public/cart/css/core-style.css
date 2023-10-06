@@ -303,10 +303,9 @@ img {
 }
 /* Essence Button */
 .essence-btn {
-  display: inline-block;
   min-width: 170px;
   height: 50px;
-  color: #ffffff;
+  color: red;
   border: none;
   border-radius: 0;
   padding: 0 40px;
@@ -740,7 +739,7 @@ img {
 
   --cart--item--hover--bgcolor: #22b3c1;
   --cart--item--hover--color: #f7f7f7;
-  --cart--item--hover--subcolor: gold;
+  --cart--item--hover--subcolor: #ffee88;
   --cart--item--hover--btncolor: #aaaaaa;
 }
 
@@ -2637,6 +2636,13 @@ img {
     line-height: 50px;
   }
 }
+.summary-on #rightSideCart {
+  background-color: #aaaaaa;
+}
+.user-on #rightSideUser {
+  background-color: #aaaaaa;
+}
+
 .bottom-up-detail-area .close-button a img {
   max-width: 20px;
 }
