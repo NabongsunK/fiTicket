@@ -2620,32 +2620,10 @@ body {
   max-height: calc(100vh - 200px);
   overflow-y: auto;
 }
-/* 스크롤 안보이게 */
-/* .signup-container::-webkit-scrollbar {
-  display: none;
-} */
-
-/* 너비 */
 .signup-container::-webkit-scrollbar {
-  width: 10px;
+  display: none;
 }
 
-/* 색 */
-.signup-container::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
-}
-
-/* 호버시 색 */
-.signup-container::-webkit-scrollbar-thumb:hover {
-  background: #22b3c1;
-}
-
-/* 바탕 색 */
-.signup-container::-webkit-scrollbar-track {
-  background: #f1f3f3;
-  border-radius: 5px;
-}
 .search-form #explore-search-form {
   background-color: #22b3c1;
   border-radius: 23px;
