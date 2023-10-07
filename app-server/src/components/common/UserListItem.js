@@ -6,6 +6,7 @@ import styles from "./cartlistitem.module.css";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Button from "./Button";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -18,6 +19,27 @@ const userReview = async function (user_id, ticket_id) {
 const UserListItem = function (props) {
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
   const [review, setReview] = useState();
+  const [imgsrc, setImgsrc] = useState(); // 로딩 상태 추가
+
+  // 쿼리로 경위도 찾기
+  const getQR = async function (query) {
+    if (imgsrc) {
+      setImgsrc();
+    } else {
+      try {
+        const res = await axios.post("/auth/getqr", {
+          // query: "http://localhost:3000/" + query,
+          query: query,
+        });
+
+        setImgsrc(res.data.url);
+        return res;
+      } catch (error) {
+        alert("잠시후 다시 시도해주세요.");
+      }
+    }
+  };
+
   useEffect(() => {
     userReview(user_id, Number(props.item.id)).then((response) => {
       setReview(response);
@@ -36,7 +58,9 @@ const UserListItem = function (props) {
       <div
         className={styles.mycartitem}
         style={{
-          backgroundImage: "url('/assets/images/fes_default.jpg')",
+          backgroundImage: `url(${
+            imgsrc ? imgsrc : "/assets/images/fes_default.jpg"
+          })`,
           // width: "",
           height: "200px",
           backgroundSize: "cover",
@@ -46,7 +70,7 @@ const UserListItem = function (props) {
       <div
         className={styles.mycartitem}
         style={{
-          backgroundImage: `url("${img}")`,
+          backgroundImage: `url("${imgsrc ? imgsrc : img}")`,
           width: "100%",
           height: "200px",
           backgroundPosition: "center center",
@@ -63,20 +87,25 @@ const UserListItem = function (props) {
 
   return (
     <div className="single-cart-item">
-      <Link
-        to={`/explore/${props.item.id}/review`}
-        className="product-image"
-        onClick={props.handleToggle}
-      >
+      <Link to={`/explore/${props.item.id}/review`} className="product-image">
         <div className="row">
           <div className="col-lg-4 p-0">{poster}</div>
+
           <div className="col-lg-8">
             <div className="cart-item-desc">
-              <span className="badge">{props.item.addr1}</span>
-              <h6>{props.item.title}</h6>
-              <p className="size">수량: {props.item.ticket_quantity}</p>
-              <h4 className="badge">{stars(review ? review.rating : -1)}</h4>
-              <span className="color">{reviewText}</span>
+              <div onClick={props.handleToggle}>
+                <span className="badge">{props.item.addr1}</span>
+                <h6>{props.item.title}</h6>
+                <p className="size">수량: {props.item.ticket_quantity}</p>
+                <h4 className="badge">{stars(review ? review.rating : -1)}</h4>
+                <span className="color">{reviewText}</span>
+              </div>
+              <Button
+                next={async () => {
+                  await getQR(props.item.first_image);
+                }}
+                title={"QR코드 받기"}
+              />
             </div>
           </div>
         </div>

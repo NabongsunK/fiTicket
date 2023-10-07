@@ -108,6 +108,20 @@
 }
 
 .wrap {
+  --wrap--item--bgcolor: #22b3c1;
+  --wrap--item--color: #f7f7f7;
+  --wrap--item--subcolor: #f7f7f7;
+  --wrap--item--btncolor: #555;
+
+  --wrap--item--hover--bdcolor: #22b3c1;
+  --wrap--item--hover--bgcolor: #fff;
+  --wrap--item--hover--color: #22b3c1;
+  --wrap--item--hover--btncolor: #f7f7f7;
+
+  --wrap--item--hover--subcolor: #ffee88;
+}
+
+.wrap {
   position: absolute;
   left: 0;
   bottom: 40px;
@@ -128,10 +142,9 @@
   width: 286px;
   height: 120px;
   border-radius: 5px;
-  border-bottom: 2px solid #ccc;
-  border-right: 1px solid #ccc;
+  border-bottom: 2px solid var(--wrap--item--subcolor);
+  border-right: 1px solid var(--wrap--item--subcolor);
   overflow: hidden;
-  background: #fff;
 }
 
 .wrap .info:nth-child(1) {
@@ -141,37 +154,30 @@
 .info .title {
   padding: 0px;
   height: 30px;
-  background: #eee;
-  border: 1px solid #ddd;
+  background-color: var(--wrap--item--bgcolor);
+  color: var(--wrap--item--color);
+  border: var(--wrap--item--hover--bdcolor);
   font-size: 18px;
-  font-weight: bold;
   margin: 0 auto;
   padding-left: 10px;
   padding-top: 3px;
   transition: all 0.3s;
 }
 
-.info .title:hover {
-  background-color: #22b3c1;
-  color: #fff;
-  border: 1px solid #22b3c1;
-}
-
 .info .close {
   position: absolute;
-  top: 8px;
-  right: 10px;
-  color: #888;
-  width: 17px;
-  height: 17px;
-  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png");
+  top: 1px;
+  right: 12px;
+  color: var(--wrap--item--btncolor);
 }
 .info .close:hover {
   cursor: pointer;
+  color: var(--wrap--item--hover--btncolor);
 }
 .info .body {
   position: relative;
   overflow: hidden;
+  background-color: var(--wrap--item--subcolor);
 }
 .info .desc {
   position: relative;
@@ -180,6 +186,7 @@
 }
 .desc .ellipsis {
   overflow: hidden;
+  color: #22b3c1;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -190,8 +197,8 @@
 }
 .info .img {
   position: absolute;
-  top: 6px;
-  left: 5px;
+  top: 10px;
+  left: 6px;
   width: 73px;
   height: 71px;
   /* border: 1px solid #ddd; */
@@ -221,12 +228,13 @@
 
 .desc .findDesc {
   font-size: 16px;
-  color: #000;
-  background-color: #fff;
-  border: 1px solid #22b3c1;
-  padding: 4px 12px;
+  color: var(--wrap--item--hover--color);
+  background-color: var(--wrap--item--hover--bgcolor);
+  border: 1px solid var(--wrap--item--hover--bdcolor);
+  padding: 4px 16px;
   margin-top: 12px;
   margin-bottom: 12px;
+  margin-right: 16px;
   display: inline-block;
   border-radius: 25px;
   font-weight: 500;
@@ -235,6 +243,7 @@
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  float: right;
 }
 
 .desc .findDesc:hover {

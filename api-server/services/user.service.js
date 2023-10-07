@@ -242,7 +242,6 @@ const UserService = {
 
       // userDB에 아이디,전화번호가 같은것이 가 1개라도 없으면
       const sameIdsAtUserDB = await FindModel.findSameLoginIdNum(article, conn);
-      console.log(sameIdsAtUserDB);
       if (sameIdsAtUserDB == 0) {
         return { ok: false, message: "해당정보없음" };
       }
@@ -311,6 +310,27 @@ const UserService = {
       const password = await FindModel.changePw(LoginId, article);
       await conn.commit();
       return { ok: true, message: "비밀번호변경완료", password: password };
+    } catch (err) {
+      // DB 작업 취소
+      await conn.rollback();
+      throw new Error("Service Error", { cause: err });
+    } finally {
+      // 커넥션 반납
+      pool.releaseConnection(conn);
+    }
+  },
+
+  async getQR(article) {
+    //article = {login_id,phone_number}
+    const conn = await pool.getConnection();
+    try {
+      // 트랜젝션 작업 시작
+      await conn.beginTransaction();
+      const data = await AuthModel.getQR(article.query);
+      // DB에 작업 반영
+      await conn.commit();
+      // return { ...data, ok: true };
+      return { ok: true, url: data + ".qr" };
     } catch (err) {
       // DB 작업 취소
       await conn.rollback();
