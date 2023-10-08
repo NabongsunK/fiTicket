@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import CartList from "./CartList";
 import UserList from "./UserList";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -32,6 +33,7 @@ const User = function (props) {
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
   const [userItems, setUserItems] = useState([]);
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
+  const is_manager = useSelector((state) => state.myLoginSlice.is_manager);
   useEffect(() => {
     getList(user_id).then((response) => {
       setUserItems(response);
@@ -41,7 +43,7 @@ const User = function (props) {
   return (
     <div
       className={
-        props.states.isActive && !props.states.isCart
+        props.states.isActive == true && props.states.isCart === 2
           ? "right-side-cart-area cart-on user-on"
           : "right-side-cart-area "
       }
@@ -53,15 +55,22 @@ const User = function (props) {
         <div className="row">
           <div className="col-lg-8 p-0"></div>
           <div className="col-lg-4">
-            <div
-              className="explore_list_button"
+            {is_manager ? (
+              <Button
+                title="관리자페이지"
+                href="/staff"
+                onClick={props.actions.handleToggle}
+              />
+            ) : (
+              ""
+            )}
+            <Button
+              title="로그아웃"
               onClick={() => {
                 props.actions.signOut();
                 props.actions.handleToggle();
               }}
-            >
-              <Link>로그아웃</Link>
-            </div>
+            />
           </div>
         </div>
         <UserList

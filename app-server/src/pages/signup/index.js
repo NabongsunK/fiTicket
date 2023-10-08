@@ -84,8 +84,7 @@ function Signup() {
     const res = await axios.post("/login/signup", {
       login_id: idRef.current.value,
       phone_number: pnRef.current.value,
-      password: await hasing(pwRef.current.value),
-      role: "user",
+      password: await hasing(pwRef.current.value + idRef.current.value),
       email: emailRef.current.value,
       name: nameRef.current.value,
     });
@@ -94,7 +93,6 @@ function Signup() {
       // dispatch(signin({ user_id: res.data.user_id }));
       navigate("/");
     }
-    console.log(res);
   };
 
   const FormSubmit = (e) => {
@@ -123,7 +121,6 @@ function Signup() {
     setTimeout(() => {
       setSend(false);
     }, 5000);
-    console.log(res);
   };
   // 여기 인증번호 한아이디에 한개씩이 안됨 확인해야됨
   // 아마 회원가입한사람만(userdb에 아이디가 저장된 사람만) 인증번호 받기로 했던거 같은데 이거 수정해야됨
@@ -137,7 +134,6 @@ function Signup() {
     setTimeout(() => {
       setSend(false);
     }, 3000);
-    console.log(res);
   };
 
   return (

@@ -36,17 +36,18 @@ function Login() {
     try {
       const res = await axios.post("/login/signin", {
         login_id: loginId,
-        password: await hasing(loginPw),
+        password: await hasing(loginId + loginPw),
       });
 
       if (res.data.ok) {
-        dispatch(signin({ user_id: res.data.user_id }));
+        dispatch(
+          signin({ user_id: res.data.user_id, is_manager: res.data.role })
+        );
         navigate("/");
       } else {
         alert("아이디 또는 비밀번호를 다시 확인해주세요.");
       }
     } catch (error) {
-      console.error(error);
       alert("잠시후 다시 시도해주세요.");
     }
   }, [dispatch, navigate]);
@@ -107,7 +108,7 @@ function Login() {
 
             <div className="col">
               {/* <!-- Simple link --> */}
-              <Link to="/signup">비밀번호 찾기</Link>
+              <Link to="/findpw">비밀번호 찾기</Link>
             </div>
           </div>
 

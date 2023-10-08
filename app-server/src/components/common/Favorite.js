@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import CartList from "./CartList";
-import CartSummary from "./CartSummary";
 import { useDispatch, useSelector } from "react-redux";
-import Payment from "./Payment";
+
 import Left from "./Left";
 import { setAmount } from "../../store/cartSlice";
+import FavoriteList from "./FavoriteList";
 
-const Cart = function (props) {
+const favorite = function (props) {
   const cartItems = useSelector((state) => state.myCartSlice.myCarts);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,8 +30,8 @@ const Cart = function (props) {
   return (
     <div
       className={
-        props.states.isActive == true && props.states.isCart === 1
-          ? "right-side-cart-area cart-on summary-on"
+        props.states.isActive == true && props.states.isCart === 3
+          ? "right-side-cart-area cart-on favorite-on"
           : "right-side-cart-area"
       }
       style={{ zIndex: "21474899" }}
@@ -41,20 +39,11 @@ const Cart = function (props) {
       <Left actions={props.actions} />
 
       <div className="cart-content">
-        {/* Cart Summary */}
-        <CartSummary
-          calculateTotalAmount={calculateTotalAmount}
-          calculateTotalQuantity={calculateTotalQuantity}
-          calculateTotalDiscount={calculateTotalDiscount}
-        />
-
         {/* Cart List Area */}
-        <CartList cartItems={cartItems} />
-
-        <Payment handleToggle={props.actions.handleToggle} />
+        <FavoriteList cartItems={cartItems} />
       </div>
     </div>
   );
 };
 
-export default Cart;
+export default favorite;

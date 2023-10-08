@@ -39,4 +39,16 @@ router.post("/postsms", async (req, res, next) => {
   }
 });
 
+// 인증확인
+router.post("/getqr", async (req, res, next) => {
+  // req.body = {query}
+  // res = {check}
+  try {
+    const result = await UserService.getQR(req.body);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

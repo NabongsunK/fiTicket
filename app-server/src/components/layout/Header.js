@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import User from "../common/User";
+import Favorite from "../common/Favorite";
 import Left from "../common/Left";
 import { useCookies } from "react-cookie";
 import { signin, signout } from "../../store/loginSlice";
@@ -20,38 +21,42 @@ const getUser = async function (user_id) {
 
 const Header = function (props) {
   const [isActive, setActive] = useState(false);
-  const [isCart, setCart] = useState(true);
+  const [isCart, setCart] = useState();
   const [login_id, setLogin_id] = useState("");
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
   const cartNo = useSelector((state) => state.myCartSlice.myCarts).length;
   const dispatch = useDispatch();
 
-  const handleToggle = function (next) {
+  const handleToggle = function (e) {
     setActive(!isActive);
-    setTimeout(() => {
-      if (typeof next === "function") {
-        next?.();
-      }
-    }, 1000);
+    // setTimeout(() => {
+    //   if (typeof next === "function") {
+    //     next?.();
+    //   }
+    // }, 1000);
   };
-  const goCart = function (next) {
-    setCart(true);
-    if (typeof next === "function") {
-      next?.();
-    }
+  const goCart = () => {
+    setActive(true);
+    setCart(Number(1));
+    console.log(isActive);
   };
-  const goUser = function (next) {
-    setCart(false);
-    if (typeof next === "function") {
-      next?.();
-    }
+  const goUser = () => {
+    setCart(2);
+    setActive(true);
+    console.log(isActive);
+  };
+  const goFavorite = () => {
+    setCart(3);
+    setActive(true);
+    console.log(isActive);
   };
 
   const signOut = function () {
     dispatch(signout());
     removeCookies("is_signed");
     removeCookies("user_id");
+    removeCookies("is_manager");
     setCookies("is_signed", false, { path: "/" });
   };
 
@@ -60,7 +65,9 @@ const Header = function (props) {
 
   useEffect(() => {
     if (cookies.is_signed && cookies.user_id) {
-      dispatch(signin({ user_id: cookies.user_id }));
+      dispatch(
+        signin({ user_id: cookies.user_id, is_manager: cookies.is_manager })
+      );
     }
   }, []);
 
@@ -71,11 +78,12 @@ const Header = function (props) {
         if (response && response.name) {
           setCookies("user_id", user_id, { path: "/" });
           setCookies("is_signed", true, { path: "/" });
+          setCookies("is_manager", response.role, { path: "/" });
         }
       });
     }
   }, [is_signed]);
-
+  // console.log(isCart);
   return (
     <>
       <header className="header-area header-sticky">
@@ -111,11 +119,7 @@ const Header = function (props) {
             {is_signed ? <div>{login_id}</div> : <div>로그인하세요</div>}
             <div className="user-login-info">
               {is_signed ? (
-                <NavLink
-                  onClick={() => {
-                    goUser(handleToggle);
-                  }}
-                >
+                <NavLink onClick={goUser}>
                   <img src="/assets/images/core-img/user.svg" alt="" />
                 </NavLink>
               ) : (
@@ -125,13 +129,20 @@ const Header = function (props) {
               )}
             </div>
 
+            <div className="user-favorite-info">
+              {is_signed ? (
+                <NavLink onClick={goFavorite}>
+                  <img src="/assets/images/core-img/heart-fill2.svg" alt="" />
+                </NavLink>
+              ) : (
+                <NavLink to="/login">
+                  <img src="/assets/images/core-img/heart2.svg" alt="" />
+                </NavLink>
+              )}
+            </div>
+
             <div className="cart-area">
-              <Link
-                id="essenceCartBtn"
-                onClick={() => {
-                  goCart(handleToggle);
-                }}
-              >
+              <Link id="essenceCartBtn" onClick={goCart}>
                 <img src="/assets/images/core-img/bag.svg" alt="" />{" "}
                 <span>{cartNo}</span>
               </Link>
@@ -150,11 +161,15 @@ const Header = function (props) {
 
       <Cart
         states={{ isActive, isCart }}
-        actions={{ handleToggle, goCart, goUser }}
+        actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
       <User
         states={{ isActive, isCart }}
-        actions={{ handleToggle, goCart, goUser, signOut }}
+        actions={{ handleToggle, goCart, goUser, goFavorite, signOut }}
+      />
+      <Favorite
+        states={{ isActive, isCart }}
+        actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
     </>
   );

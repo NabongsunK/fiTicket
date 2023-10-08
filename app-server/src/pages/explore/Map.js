@@ -13,6 +13,8 @@ var markerHeight = { 28: 144, 14: 36, 15: 0, 39: 36 };
 var markerImageSrc =
   "https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu_on.png"; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
 
+var imgdefault = "/assets/images/fes_default.jpg";
+
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 const { kakao } = window;
 
@@ -162,6 +164,10 @@ const Map = function (props) {
           };
           title.appendChild(close);
 
+          var closeI = document.createElement("i");
+          closeI.className = "fa fa-close";
+          close.appendChild(closeI);
+
           var body = document.createElement("div");
           body.className = styles.body;
           info.appendChild(body);
@@ -176,7 +182,7 @@ const Map = function (props) {
           body.appendChild(imgDiv);
 
           var img = document.createElement("img");
-          img.src = position.first_image2;
+          img.src = position.first_image2 ? position.first_image2 : imgdefault;
           imgDiv.appendChild(img);
 
           var desc = document.createElement("div");
@@ -190,7 +196,6 @@ const Map = function (props) {
 
           var findDesc = document.createElement("button");
           findDesc.className = styles.findDesc;
-          findDesc.appendChild(document.createTextNode("길찾기"));
           findDesc.onclick = () => {
             handleOpenNewTab(
               "https://map.kakao.com/link/to/" +
@@ -201,6 +206,11 @@ const Map = function (props) {
                 position.map_x
             );
           };
+
+          var findDescI = document.createElement("i");
+          findDescI.className = "fa fa-map";
+          findDesc.appendChild(findDescI);
+
           // console.log(position.title, position.map_x, position.map_y);
           desc.appendChild(findDesc);
 
