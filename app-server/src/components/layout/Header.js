@@ -160,11 +160,11 @@ const Header = function (props) {
       ></div>
 
       <Cart
-        states={{ isActive, opened }}
+        states={{ isActive, isCart }}
         actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
       <User
-        states={{ isActive, opened }}
+        states={{ isActive, isCart }}
         actions={{ handleToggle, goCart, goUser, goFavorite, signOut }}
       />
       <Favorite
