@@ -36,8 +36,9 @@ function Findpw() {
     }
 
     // 서버 요청 실행
-    const res = await axios.put(`/findpw/changepw/${LoginId}`, {
-      password: await hasing(FindPw),
+    const res = await axios.post(`/findpw/change`, {
+      login_id: LoginId,
+      newPassword: await hasing(LoginId + FindPw),
     });
     //비번변경 성공시
     if (res.data.ok) {
@@ -48,7 +49,7 @@ function Findpw() {
   };
 
   const getAuth = async function () {
-    const res = await axios.post("/findpw/findpwgetauth", {
+    const res = await axios.post("/findpw/getauth", {
       login_id: LoginId,
       phone_number: FindPn,
     });

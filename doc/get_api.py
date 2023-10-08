@@ -146,7 +146,7 @@ def pushDB(res):
     print(res)
     try:
         conn = pymysql.connect(
-            host="43.202.150.252",
+            host="13.124.253.233",
             user="localticket",
             password="Localticket12$$",
             db="localticket",

@@ -36,7 +36,7 @@ function Login() {
     try {
       const res = await axios.post("/login/signin", {
         login_id: loginId,
-        password: await hasing(loginPw + loginId),
+        password: await hasing(loginId + loginPw),
       });
 
       if (res.data.ok) {
@@ -108,7 +108,7 @@ function Login() {
 
             <div className="col">
               {/* <!-- Simple link --> */}
-              <Link to="/signup">비밀번호 찾기</Link>
+              <Link to="/findpw">비밀번호 찾기</Link>
             </div>
           </div>
 

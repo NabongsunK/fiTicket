@@ -62,7 +62,7 @@ a:focus {
   transition: all 500ms ease 0s;
   text-decoration: none;
   outline: 0 solid transparent;
-  color: #000000;
+  /* color: #000000; */
   font-weight: 600;
   font-size: 12px;
 }
@@ -582,7 +582,7 @@ img {
   width: 90px;
   display: block;
   text-align: center;
-  border-left: 1px solid #ebebeb;
+  /* border-left: 1px solid #ebebeb; */
   height: 85px;
   line-height: 80px;
   border-bottom: 1px #22b3c1;
@@ -606,7 +606,7 @@ img {
   width: 90px;
   display: block;
   text-align: center;
-  border-left: 1px solid #ebebeb;
+  border-left: 0px;
   height: 85px;
   line-height: 80px;
   border-top: 1px #22b3c1;
@@ -614,17 +614,17 @@ img {
 }
 
 .right-side-cart-area .cart-button a:hover {
-  border-left: 1px solid var(--cart--item--hover--subcolor);
+  border-left: 0;
   background-color: var(--cart--item--hover--btncolor);
 }
 
 .right-side-cart-area .user-button a:hover {
-  border-left: 1px solid var(--cart--item--hover--subcolor);
+  border-left: 0;
   background-color: var(--cart--item--hover--btncolor);
 }
 
 .right-side-cart-area .close-button a:hover {
-  border-left: 1px solid var(--cart--item--hover--subcolor);
+  border-left: 0;
   background-color: var(--cart--item--hover--btncolor);
 }
 

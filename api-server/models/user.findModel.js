@@ -22,10 +22,10 @@ const FindModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
-  async changePw(LoginId, article, conn = pool) {
+  async changePw(login_id, newPassword, conn = pool) {
     try {
       const sql = `update users set password = ? WHERE login_id = ?`;
-      const [result] = await conn.query(sql, [article, LoginId]);
+      const [result] = await conn.query(sql, [newPassword, login_id]);
       return result.affectedRows;
     } catch (err) {
       throw new Error("DB Error", { cause: err });

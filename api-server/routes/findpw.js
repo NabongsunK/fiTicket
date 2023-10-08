@@ -4,7 +4,8 @@ var router = express.Router();
 const UserService = require("../services/user.service");
 
 //비밀번호변경
-router.put("/changepw/:LoginId", async (req, res, next) => {
+router.post("/change", async (req, res, next) => {
+  // req.body={login_id, newPassword}
   try {
     const result = await UserService.changePw(req.body);
     res.json(result);
@@ -14,7 +15,7 @@ router.put("/changepw/:LoginId", async (req, res, next) => {
 });
 
 // 비밀번호 변경시 인증번호 발급
-router.post("/findpwgetauth", async (req, res, next) => {
+router.post("/getauth", async (req, res, next) => {
   try {
     const result = await UserService.findPwGetAuth(req.body);
     res.json(result);
