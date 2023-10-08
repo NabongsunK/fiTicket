@@ -37,7 +37,8 @@ function Payment(props) {
       pay_method: "card",
       merchant_uid: `mid_${new Date().getTime()}`, //상점에서 생성한 고유 주문번호
       name: "Loca!T 티켓 구매",
-      amount: amount,
+      // amount: amount, //실제 결제할때만 바꿀것
+      amount: 100,
       buyer_email: user.email,
       buyer_name: user.name,
       buyer_tel: user.phone_number, //필수 파라미터 입니다.
@@ -97,7 +98,8 @@ function Payment(props) {
     const tmp = {
       tickets: tickets,
       user_id: user.id,
-      paid_amount: amount,
+      // paid_amount: amount,
+      paid_amount: 100,
     };
     paid_id = (await axios.post("/cart", tmp)).data.paid_id;
 

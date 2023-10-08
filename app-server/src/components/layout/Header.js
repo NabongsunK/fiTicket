@@ -22,7 +22,7 @@ const getUser = async function (user_id) {
 const Header = function (props) {
   const [isActive, setActive] = useState(false);
   const [isFavor, setFavor] = useState(false);
-  const [isCart, setCart] = useState(true);
+  const [opened, setOpened] = useState(0);
   const [login_id, setLogin_id] = useState("");
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
@@ -38,20 +38,22 @@ const Header = function (props) {
     }, 1000);
   };
   const goCart = function (next) {
-    setCart(true);
+    setOpened(0);
     if (typeof next === "function") {
       next?.();
     }
   };
   const goUser = function (next) {
-    setCart(false);
+    setOpened(1);
     if (typeof next === "function") {
       next?.();
     }
   };
-  const goFavorite = function () {
-    setCart(false);
-    setFavor(isFavor);
+  const goFavorite = function (next) {
+    setOpened(2);
+    if (typeof next === "function") {
+      next?.();
+    }
   };
 
   const signOut = function () {
@@ -175,15 +177,15 @@ const Header = function (props) {
       ></div>
 
       <Cart
-        states={{ isActive, isCart }}
+        states={{ isActive, opened }}
         actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
       <User
-        states={{ isActive, isCart }}
+        states={{ isActive, opened }}
         actions={{ handleToggle, goCart, goUser, goFavorite, signOut }}
       />
       <Favorite
-        states={{ isFavor, isCart }}
+        states={{ isFavor, opened }}
         actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
     </>

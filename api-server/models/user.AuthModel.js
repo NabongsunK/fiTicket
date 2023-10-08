@@ -4,6 +4,9 @@ const CryptoJS = require("crypto-js");
 const test = axios.create({
   baseURL: "https://sens.apigw.ntruss.com",
 });
+const test2 = axios.create({
+  baseURL: "https://naveropenapi.apigw.ntruss.com/util/v1",
+});
 const AuthModel = {
   // 중복검사
   async findSame(article, conn = pool) {
@@ -129,6 +132,20 @@ const AuthModel = {
 
     const res = await test.post(url, body, { headers: headers });
     return res;
+  },
+
+  async getQR(query) {
+    const url = "/shorturl?url=" + query;
+    const headers = {
+      "Content-Type": "application/json; charset=utf-8",
+      "X-NCP-APIGW-API-KEY-ID": "3zo9m4bmoi",
+      "X-NCP-APIGW-API-KEY": "AJwrtnDR3BV04zLAFE4mD25vEZEP0JDrAzAWsPdI",
+    };
+
+    const res = await test2.get(url, { headers: headers });
+
+    console.log(res.data.result.url);
+    return res.data.result.url;
   },
 
   makeSignature(access_key, secret_key, time) {

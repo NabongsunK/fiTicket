@@ -29,8 +29,8 @@ const favorite = function (props) {
   return (
     <div
       className={
-        props.states.isFavor
-          ? "right-side-cart-area cart-on favorite-on"
+        props.states.isActive && props.states.opened == 2
+          ? "right-side-cart-area cart-on summary-on"
           : "right-side-cart-area"
       }
       style={{ zIndex: "21474899" }}

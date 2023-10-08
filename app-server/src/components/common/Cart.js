@@ -32,7 +32,7 @@ const Cart = function (props) {
   return (
     <div
       className={
-        props.states.isActive && props.states.isCart
+        props.states.isActive && props.states.opened == 0
           ? "right-side-cart-area cart-on summary-on"
           : "right-side-cart-area"
       }
