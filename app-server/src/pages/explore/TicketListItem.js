@@ -130,7 +130,12 @@ const TicketListItem = function (props) {
             style={{ cursor: "pointer" }}
           >
             <div className={styles.content}>
-              <span className={styles.info}>*D-{props.festival.d_day}</span>
+              <span className={styles.info}>
+                *D-{props.festival.d_day}
+                {/* <figure>
+                  <img src="/assets/images/core-img/heart.svg" />
+                </figure> */}
+              </span>
               <h4>{props.festival.title}</h4>
               <div className="row">
                 <div className="col-12">
@@ -154,6 +159,9 @@ const TicketListItem = function (props) {
                 <i className="fa fa-cart-plus"></i>
               </Link>
             </div>
+            <figure>
+              <img src="/assets/images/core-img/heart.svg" />
+            </figure>
           </div>
         </div>
       </div>

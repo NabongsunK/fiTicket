@@ -41,7 +41,7 @@ const User = function (props) {
   return (
     <div
       className={
-        props.states.isActive && !props.states.isCart
+        props.states.isActive == true && props.states.isCart === 2
           ? "right-side-cart-area cart-on user-on"
           : "right-side-cart-area "
       }
