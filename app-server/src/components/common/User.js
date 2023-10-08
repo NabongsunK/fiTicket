@@ -41,7 +41,7 @@ const User = function (props) {
   return (
     <div
       className={
-        props.states.isActive && !props.states.isCart
+        props.states.isActive && props.states.opened == 1
           ? "right-side-cart-area cart-on user-on"
           : "right-side-cart-area "
       }

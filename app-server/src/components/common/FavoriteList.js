@@ -1,4 +1,4 @@
-import FavoriteListItem from "./CartListItem";
+import FavoriteListItem from "./FavoriteListItem";
 
 function FavoriteList(props) {
   var cartArr = props.cartItems.map((item, index) => (

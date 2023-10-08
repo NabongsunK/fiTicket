@@ -319,22 +319,17 @@ body {
 .explore_list_button a i.fa {
   color: #fff;
 }
-.explore_list_button a:hover {
-  background-color: #fff;
-  color: #22b3c1;
-  border: 1px solid #fff;
-  font-size: 30px;
-}
-.explore_list_button a i.fa:hover {
-  color: #22b3c1;
-}
-
-.explore_list_button a:hover {
+.explore_list_button a:hover,
+a:focus {
   background-color: #fff;
   color: #22b3c1;
   border: 1px solid #22b3c1;
   font-size: 24px;
 }
+.explore_list_button a i.fa:hover {
+  color: #22b3c1;
+}
+
 .explore_list_button a:hover i.fa {
   color: #22b3c1;
 }
