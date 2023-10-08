@@ -5,10 +5,12 @@ const Button = function (props) {
     <div
       className="explore_list_button"
       onClick={() => {
-        props.next();
+        if (props.onClick) {
+          props.onClick();
+        }
       }}
     >
-      <Link style={{ "margin-top": 0, border: "1px solid white" }}>
+      <Link to={props.href} style={props.style}>
         {props.title}
       </Link>
     </div>

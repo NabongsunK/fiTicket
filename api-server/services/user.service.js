@@ -301,13 +301,17 @@ const UserService = {
     }
   },
   // 비밀번호번경
-  async changePw(LoginId, article) {
-    // article = {password}
+  async changePw(article) {
+    // article = {login_id, newPassword}
     const conn = await pool.getConnection();
     try {
+      console.log(article);
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
-      const password = await FindModel.changePw(LoginId, article);
+      const password = await FindModel.changePw(
+        article.login_id,
+        article.newPassword
+      );
       await conn.commit();
       return { ok: true, message: "비밀번호변경완료", password: password };
     } catch (err) {

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { pop, change } from "../../store/cartSlice";
 
 import styles from "./cartlistitem.module.css";
@@ -20,6 +20,7 @@ const UserListItem = function (props) {
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
   const [review, setReview] = useState();
   const [imgsrc, setImgsrc] = useState(); // 로딩 상태 추가
+  const navigate = useNavigate();
 
   // 쿼리로 경위도 찾기
   const getQR = async function (query) {
@@ -87,7 +88,12 @@ const UserListItem = function (props) {
 
   return (
     <div className="single-cart-item">
-      <Link to={`/explore/${props.item.id}/review`} className="product-image">
+      <div
+        onClick={() => {
+          navigate(`/explore/${props.item.id}/review`);
+        }}
+        className="product-image"
+      >
         <div className="row">
           <div className="col-lg-4 p-0">{poster}</div>
 
@@ -101,15 +107,16 @@ const UserListItem = function (props) {
                 <span className="color">{reviewText}</span>
               </div>
               <Button
-                next={async () => {
+                onClick={async () => {
                   await getQR(props.item.first_image);
                 }}
                 title={"QR코드 받기"}
+                style={{ marginTop: 0, border: "1px solid white" }}
               />
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };
