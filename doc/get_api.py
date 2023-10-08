@@ -78,6 +78,9 @@ def get_festival(pageNo):
     }
     try:
         response = requests.get(apiUrl, apiParams, timeout=4)
+        print("HTTP 응답 코드:", response.status_code)
+        print("HTTP 응답 메시지:", response.text)
+
         return response.json()["response"]["body"]["items"]["item"]
     except:
         # err_msg = traceback.format_exc()
@@ -101,6 +104,8 @@ def get_detailCommon1(data):
     }
     try:
         response = requests.get(apiUrl, apiParams, timeout=4)
+        print("HTTP 응답 코드:", response.status_code)
+        print("HTTP 응답 메시지:", response.text[:1000])
         new_data = response.json()["response"]["body"]["items"]["item"][0]
         homepage = ""
         overview = ""
@@ -131,6 +136,8 @@ def get_detailIntro1(data):
     }
     try:
         response = requests.get(apiUrl, apiParams, timeout=4)
+        print("HTTP 응답 코드:", response.status_code)
+        print("HTTP 응답 메시지:", response.text[:1000])
         new_data = response.json()["response"]["body"]["items"]["item"][0]
         return dict(
             {"eventstartdate": new_data["eventstartdate"], "eventenddate": new_data["eventenddate"],
@@ -146,7 +153,7 @@ def pushDB(res):
     print(res)
     try:
         conn = pymysql.connect(
-            host="43.202.150.252",
+            host="13.124.253.233",
             user="localticket",
             password="Localticket12$$",
             db="localticket",
@@ -157,8 +164,8 @@ def pushDB(res):
 
         insert_query = """
             INSERT INTO festival_api (addr1, addr2, content_id, first_image, first_image2, tel, title, map_x, map_y, area_code,
-                 content_type_id, cat1, cat2, cat3, cpyrhtDivCd, m_level, modified_time, si_gun_gu_code, zip_code,home_page,
-                 over_view, event_start_date, event_end_date, play_time, use_time_festival)
+                content_type_id, cat1, cat2, cat3, cpyrhtDivCd, m_level, modified_time, si_gun_gu_code, zip_code,home_page,
+                over_view, event_start_date, event_end_date, play_time, use_time_festival)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s)
