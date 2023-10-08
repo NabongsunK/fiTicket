@@ -305,7 +305,6 @@ const UserService = {
     // article = {login_id, newPassword}
     const conn = await pool.getConnection();
     try {
-      console.log(article);
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
       const password = await FindModel.changePw(
