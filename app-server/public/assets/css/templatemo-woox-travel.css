@@ -2609,20 +2609,18 @@ body {
   /* background-size: ; */
 }
 .signup-container {
-  position: absolute;
+  position: relative;
   padding: 10px 10px 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -45%);
-  width: 18rem;
+  max-width: 18rem;
+  width: 90%;
   background-color: rgba(34, 179, 193, 0.75);
   border-radius: 13px;
+  font-size: 14px;
   margin: 0;
   max-height: calc(100vh - 200px);
-  overflow-y: auto;
-}
-.signup-container::-webkit-scrollbar {
-  display: none;
 }
 
 .search-form #explore-search-form {

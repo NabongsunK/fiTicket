@@ -21,39 +21,35 @@ const getUser = async function (user_id) {
 
 const Header = function (props) {
   const [isActive, setActive] = useState(false);
-  const [isFavor, setFavor] = useState(false);
-  const [opened, setOpened] = useState(0);
+  const [isCart, setCart] = useState();
   const [login_id, setLogin_id] = useState("");
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
   const cartNo = useSelector((state) => state.myCartSlice.myCarts).length;
   const dispatch = useDispatch();
 
-  const handleToggle = function (next) {
+  const handleToggle = function (e) {
     setActive(!isActive);
-    setTimeout(() => {
-      if (typeof next === "function") {
-        next?.();
-      }
-    }, 1000);
+    // setTimeout(() => {
+    //   if (typeof next === "function") {
+    //     next?.();
+    //   }
+    // }, 1000);
   };
-  const goCart = function (next) {
-    setOpened(0);
-    if (typeof next === "function") {
-      next?.();
-    }
+  const goCart = () => {
+    setActive(true);
+    setCart(Number(1));
+    console.log(isActive);
   };
-  const goUser = function (next) {
-    setOpened(1);
-    if (typeof next === "function") {
-      next?.();
-    }
+  const goUser = () => {
+    setCart(2);
+    setActive(true);
+    console.log(isActive);
   };
-  const goFavorite = function (next) {
-    setOpened(2);
-    if (typeof next === "function") {
-      next?.();
-    }
+  const goFavorite = () => {
+    setCart(3);
+    setActive(true);
+    console.log(isActive);
   };
 
   const signOut = function () {
@@ -87,7 +83,7 @@ const Header = function (props) {
       });
     }
   }, [is_signed]);
-
+  // console.log(isCart);
   return (
     <>
       <header className="header-area header-sticky">
@@ -123,11 +119,7 @@ const Header = function (props) {
             {is_signed ? <div>{login_id}</div> : <div>로그인하세요</div>}
             <div className="user-login-info">
               {is_signed ? (
-                <NavLink
-                  onClick={() => {
-                    goUser(handleToggle);
-                  }}
-                >
+                <NavLink onClick={goUser}>
                   <img src="/assets/images/core-img/user.svg" alt="" />
                 </NavLink>
               ) : (
@@ -139,11 +131,7 @@ const Header = function (props) {
 
             <div className="user-favorite-info">
               {is_signed ? (
-                <NavLink
-                  onClick={() => {
-                    goFavorite(handleToggle);
-                  }}
-                >
+                <NavLink onClick={goFavorite}>
                   <img src="/assets/images/core-img/heart-fill2.svg" alt="" />
                 </NavLink>
               ) : (
@@ -154,12 +142,7 @@ const Header = function (props) {
             </div>
 
             <div className="cart-area">
-              <Link
-                id="essenceCartBtn"
-                onClick={() => {
-                  goCart(handleToggle);
-                }}
-              >
+              <Link id="essenceCartBtn" onClick={goCart}>
                 <img src="/assets/images/core-img/bag.svg" alt="" />{" "}
                 <span>{cartNo}</span>
               </Link>
@@ -177,15 +160,15 @@ const Header = function (props) {
       ></div>
 
       <Cart
-        states={{ isActive, opened }}
+        states={{ isActive, isCart }}
         actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
       <User
-        states={{ isActive, opened }}
+        states={{ isActive, isCart }}
         actions={{ handleToggle, goCart, goUser, goFavorite, signOut }}
       />
       <Favorite
-        states={{ isFavor, opened }}
+        states={{ isActive, isCart }}
         actions={{ handleToggle, goCart, goUser, goFavorite }}
       />
     </>

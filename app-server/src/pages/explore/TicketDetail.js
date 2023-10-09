@@ -80,50 +80,66 @@ const TicketDetailItem = function () {
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <Outlet />
-      {/* 알람창 놓고싶은데 넣기*/}
-      <div
-        className={
-          isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
-        }
-        role="alert"
-        aria-live="assertive"
-        data-delay="3000"
-        aria-atomic="true"
-        style={{ position: "absolute", right: "30%", zIndex: 200 }}
-      >
-        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
-          <img
-            src="../../../public/assets/images/logo2.png"
-            alt=""
-            className="img-fluid m-r-5"
-            style={{ width: "150px" }}
-          />
-          <strong className="mr-auto"></strong>
-          <small className="text-muted"></small>
+      <div className="row" style={{ marginTop: "75px" }}>
+        <div className="col-6 text-right">
+          {/* 홈페이지 연결 */}
+          <HomepageBtn homepage_src={festival.home_page} />
+          {/* 장바구니 담기 */}
         </div>
-        <div className="toast-body">
-          <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
+        <div className="col-6">
+          <div className="explore_list_button" onClick={toCart}>
+            <Link onClick={alertHandler}>
+              <i className="fa fa-cart-plus"></i>
+            </Link>
+          </div>
         </div>
       </div>
-      <h1
-        className="display-6 fw-normal text-body-emphasis d-flex justify-content-center"
-        style={{ marginTop: "40px" }}
-      >
-        {festival.title}
-      </h1>
-      {/* 홈페이지 연결 */}
-      <HomepageBtn homepage_src={festival.home_page} />
-      {/* 장바구니 담기 */}
-      <div className="explore_list_button" onClick={toCart}>
-        <Link onClick={alertHandler}>
-          <i className="fa fa-cart-plus"></i>
-        </Link>
-      </div>
-      <form>
-        <div className="content ">
-          <div className="d-flex justify-content-center">
-            <i className="fa fa-clock "></i>
-            <div className="text-center">
+      <div className="row" style={{ marginTop: "75px" }}>
+        <div className="col-12 col-lg-6 text-center">
+          <img className="modal_image1" src={festival.first_image} alt="" />
+        </div>
+        <br />
+        <br />
+
+        {/* 알람창 놓고싶은데 넣기*/}
+        <div
+          className={
+            isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
+          }
+          role="alert"
+          aria-live="assertive"
+          data-delay="3000"
+          aria-atomic="true"
+          style={{ position: "absolute", right: "30%", zIndex: 200 }}
+        >
+          <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
+            <img
+              src="../../../public/assets/images/logo2.png"
+              alt=""
+              className="img-fluid m-r-5"
+              style={{ width: "150px" }}
+            />
+            <strong className="mr-auto"></strong>
+            <small className="text-muted"></small>
+          </div>
+          <div className="toast-body">
+            <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
+          </div>
+        </div>
+        <div className="col-12 col-lg-6">
+          <form>
+            <div className="content ">
+              <h1
+                // className="display-6 fw-normal d-flex justify-content-center"
+                style={{
+                  marginTop: "40px",
+                  marginBottom: "20px",
+                  color: "#22b3c1",
+                }}
+              >
+                {festival.title}
+              </h1>
+              <i className="fa fa-clock" style={{ float: "left" }}></i>
               <h5 className="list" style={{ marginBottom: "40px" }}>
                 {"운영기간 "}
                 {festival.event_start_date} ~ {festival.event_end_date}
@@ -138,17 +154,17 @@ const TicketDetailItem = function () {
                 {"원"}
               </h5>
             </div>
-          </div>
-          <div className="d-flex justify-content-center">
-            <img className="modal_image1" src={festival.first_image} alt="" />
-          </div>
-          <br />
-          <br />
+          </form>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-12" style={{ marginTop: "75px" }}>
           <h5 className="d-flex justify-content-center">{"상세 정보"}</h5>
           <p>{festival.over_view}</p>
           <ReviewList reviewData={reviewData} />
         </div>
-      </form>
+      </div>
     </div>
   );
 };
