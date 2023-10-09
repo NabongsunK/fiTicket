@@ -14,9 +14,12 @@ const ExploreGetModel = {
         title,
         map_x,
         map_y,
-        content_type_id
+        content_type_id,
+        datediff(event_end_date, now()) as d_day
       from festival_api
-        where content_type_id = ?
+        where 
+          content_type_id = ?
+          And datediff(event_end_date, now())>-1
       `;
       const [result] = await conn.query(sql, [content_type_id]);
       return result;
@@ -92,6 +95,7 @@ const ExploreGetModel = {
         AND event_start_date IS NOT NULL
         AND event_end_date IS NOT NULL
         AND over_view IS NOT NULL
+        And datediff(event_end_date, now())>-1
       ORDER BY event_start_date ASC
       `;
       const [result] = await conn.query(sql);
@@ -130,6 +134,7 @@ const ExploreGetModel = {
         AND event_end_date IS NOT NULL
         AND over_view IS NOT NULL
         and deals = ?
+        And datediff(event_end_date, now())>-1
       ORDER BY event_end_date ASC
       `;
       const [result] = await conn.query(sql);
@@ -153,8 +158,9 @@ const ExploreGetModel = {
         event_end_date,
         home_page,
         rec,
-        over_view
-        price
+        over_view,
+        price,
+        datediff(event_end_date, now()) as d_day
       FROM festival_api
 
       WHERE
@@ -164,6 +170,7 @@ const ExploreGetModel = {
         AND event_end_date IS NOT NULL
         AND over_view IS NOT NULL
         AND addr1 Like ?
+        And datediff(event_end_date, now())>-1
       ORDER BY event_start_date ASC
       `;
       const [result] = await conn.query(sql, [query]);
@@ -199,6 +206,7 @@ const ExploreGetModel = {
       AND event_end_date IS NOT NULL
       AND over_view IS NOT NULL
       AND area_code = ?
+      And datediff(event_end_date, now())>-1
       ORDER BY event_start_date ASC
       `;
       const [result] = await conn.query(sql, [area_code]);
@@ -239,7 +247,9 @@ const ExploreGetModel = {
         home_page,
         datediff(event_end_date, now()) as d_day
       from festival_api
-      where (rec is true and area_code= ?)
+      where 
+        rec is true and area_code= ?
+        And datediff(event_end_date, now())>-1
       `;
       const [result] = await conn.query(sql, [code]);
       return result;
@@ -262,7 +272,9 @@ const ExploreGetModel = {
         datediff(event_end_date, now()) as d_day,
         area_code
       from festival_api
-      where rec is true
+      where 
+        rec is true
+        And datediff(event_end_date, now())>-1
       order by festival_api.event_end_date
       `;
       const [result] = await conn.query(sql, [code]);
