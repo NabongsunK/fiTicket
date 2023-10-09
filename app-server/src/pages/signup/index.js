@@ -47,14 +47,11 @@ function Signup() {
   };
 
   //유효성 검사 함수들
-  const checkID = async () => {
+  const checkid = async () => {
     try {
-      const response = await axios.post(
-        "/your_server_endpoint/check_duplication",
-        {
-          login_id: idRef.current.value,
-        }
-      );
+      const response = await axios.post("/checkid", {
+        login_id: idRef.current.value,
+      });
 
       if (response.data.isDuplicated) {
         alert("이미 사용중인 ID입니다.");
@@ -224,7 +221,7 @@ function Signup() {
             </label>
             <button
               type="button"
-              onClick={checkID}
+              onClick={checkid}
               className="btn btn-primary btn-block mb-0"
             >
               중복 확인
