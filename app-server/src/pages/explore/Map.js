@@ -309,8 +309,8 @@ const Map = function (props) {
             주차장
           </li>
           <li ref={menusRefs["14"]} onClick={() => changeMarker("14")}>
-            <span className={styles.ico_carpark}></span>
-            내위치
+            <span className={styles.ico_culture}></span>
+            문화시설
           </li>
         </ul>
       </div>

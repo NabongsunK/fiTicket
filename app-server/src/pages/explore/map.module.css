@@ -107,6 +107,26 @@
   background-position: 0px -144px;
 }
 
+.category .menu_selected .ico_culture {
+  display: block;
+  margin: 0 auto 2px;
+  width: 37px;
+  height: 36px;
+  background: url("https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu_on.png")
+    no-repeat;
+  background-position: 0px -216px;
+}
+
+.category .ico_culture {
+  display: block;
+  margin: 0 auto 2px;
+  width: 37px;
+  height: 36px;
+  background: url("https://korean.visitkorea.or.kr/resources/images/location/icon_depth1_menu.png")
+    no-repeat;
+  background-position: 0px -216px;
+}
+
 .wrap {
   --wrap--item--bgcolor: #22b3c1;
   --wrap--item--color: #f7f7f7;
