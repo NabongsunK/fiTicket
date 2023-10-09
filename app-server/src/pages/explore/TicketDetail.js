@@ -96,7 +96,17 @@ const TicketDetailItem = function () {
       </div>
       <div className="row" style={{ marginTop: "75px" }}>
         <div className="col-12 col-lg-6 text-center">
-          <img className="modal_image1" src={festival.first_image} alt="" />
+          <img
+            className="modal_image1"
+            src={festival.first_image}
+            alt=""
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+              width: "auto",
+              height: "auto",
+            }}
+          />
         </div>
         <br />
         <br />
@@ -126,11 +136,18 @@ const TicketDetailItem = function () {
             <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
           </div>
         </div>
-        <div className="col-12 col-lg-6">
+        <div
+          className="col-12 col-lg-6"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <form>
             <div className="content ">
               <h1
-                // className="display-6 fw-normal d-flex justify-content-center"
                 style={{
                   marginTop: "40px",
                   marginBottom: "20px",
