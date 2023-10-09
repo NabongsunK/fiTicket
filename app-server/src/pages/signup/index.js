@@ -99,7 +99,7 @@ function Signup() {
     const res = await axios.post("/login/signup", {
       login_id: idRef.current.value,
       phone_number: pnRef.current.value,
-      password: await hasing(pwRef.current.value + idRef.current.value),
+      password: await hasing(idRef.current.value + pwRef.current.value),
       email: emailRef.current.value,
       name: nameRef.current.value,
     });
@@ -132,6 +132,7 @@ function Signup() {
       login_id: idRef.current.value,
       phone_number: pnRef.current.value,
     });
+    console.log(res);
     setSend(true);
     setTimeout(() => {
       setSend(false);
@@ -219,13 +220,6 @@ function Signup() {
             <label className="form-label" htmlFor="login_id">
               ID
             </label>
-            <button
-              type="button"
-              onClick={checkid}
-              className="btn btn-primary btn-block mb-0"
-            >
-              중복 확인
-            </button>
           </div>
 
           {/* <!-- 핸드폰번호 input  여기에 인증 추가하기--> */}
