@@ -2,7 +2,6 @@ import MapDiv from "./MapDiv";
 import { useEffect, useRef, useState } from "react";
 
 import axios from "axios";
-import SecondHead from "./SecondHead";
 import BodyTop from "./BodyTop";
 import TicketBody from "./TicketBody";
 import { Outlet } from "react-router";
@@ -10,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMapData, setRegionId } from "../../store/mapSlice";
 import { setAllList, setRegionList } from "../../store/pageSlice";
 import localInfos from "../../data/localInfos.json";
+import ExplorePageHeading from "./ExplorePageHeading";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -127,7 +127,7 @@ const Explore = function () {
   return (
     <>
       {/* 두번째 헤더 */}
-      <SecondHead />
+      <ExplorePageHeading />
 
       {/* 지도 위 소제목 */}
       <BodyTop />

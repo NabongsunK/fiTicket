@@ -7,7 +7,7 @@ import User from "../common/User";
 import Favorite from "../common/Favorite";
 import Left from "../common/Left";
 import { useCookies } from "react-cookie";
-import { signin, signout } from "../../store/loginSlice";
+import { setIsManager, signin, signout } from "../../store/loginSlice";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -75,6 +75,7 @@ const Header = function (props) {
         if (response && response.name) {
           setCookies("user_id", user_id, { path: "/" });
           setCookies("is_signed", true, { path: "/" });
+          dispatch(setIsManager({ is_manager: response.role }));
           setCookies("is_manager", response.role, { path: "/" });
         }
       });
