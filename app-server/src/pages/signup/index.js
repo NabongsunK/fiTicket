@@ -132,11 +132,13 @@ function Signup() {
       login_id: idRef.current.value,
       phone_number: pnRef.current.value,
     });
-    console.log(res);
-    setSend(true);
-    setTimeout(() => {
-      setSend(false);
-    }, 5000);
+
+    if (res.data.ok) {
+      setSend(true);
+      setTimeout(() => {
+        setSend(false);
+      }, 5000);
+    }
   };
   // 여기 인증번호 한아이디에 한개씩이 안됨 확인해야됨
   // 아마 회원가입한사람만(userdb에 아이디가 저장된 사람만) 인증번호 받기로 했던거 같은데 이거 수정해야됨
