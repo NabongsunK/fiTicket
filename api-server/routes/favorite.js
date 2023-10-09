@@ -5,7 +5,7 @@ var router = express.Router();
 const FavoriteService = require("../services/favorite.service");
 
 // 좋아요 취소
-router.delete("/dislike/:fes/:id", async (req, res, next) => {
+router.delete("/:fes/:id", async (req, res, next) => {
   try {
     const fes = Number(req.params.fes);
     const id = Number(req.params.id);
@@ -16,7 +16,7 @@ router.delete("/dislike/:fes/:id", async (req, res, next) => {
   }
 });
 // 좋아요 등록
-router.post("/like/:fes/:id", async (req, res, next) => {
+router.post("/:fes/:id", async (req, res, next) => {
   try {
     const fes = Number(req.params.fes);
     const id = Number(req.params.id);
@@ -36,4 +36,5 @@ router.get("/favorlist/:id", async (req, res, next) => {
     next(err);
   }
 });
+
 module.exports = router;

@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import TicketListItem from "./TicketListItem";
 import { useSelector } from "react-redux";
+import PopUp from "../../components/common/PopUp";
 
 const TicketList = function () {
-  const [isActive, setActive] = useState("false");
-  const [isFavor, setFavor] = useState("false");
   const pageList = useSelector((state) => state.myPageSlice.pageList);
-  const alertHandler = () => {
-    setActive(!isActive);
+  const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
+
+  const [isActive, setIsActive] = useState(false);
+  const [popText, setPopText] = useState("");
+
+  const alertHandler = function (title) {
+    setPopText(title);
+    setIsActive(true);
     setTimeout(() => {
-      setActive(isActive);
-    }, 3000);
-  };
-  const favorToggle = function () {
-    setFavor(!isFavor);
+      setIsActive(false);
+    }, 5000);
   };
 
   const list = pageList.map((festival) => {
@@ -22,38 +24,17 @@ const TicketList = function () {
         key={festival.id}
         festival={festival}
         alertHandler={alertHandler}
-        favorToggle={favorToggle}
-        isFavor={isFavor}
+        isFavor={myFavor.find((element) => {
+          if (element.ticket_id == festival.id) {
+            return true;
+          }
+        })}
       />
     );
   });
   return (
     <>
-      {/* 알람창 놓고싶은데 넣기*/}
-      <div
-        className={
-          isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
-        }
-        role="alert"
-        aria-live="assertive"
-        data-delay="3000"
-        aria-atomic="true"
-        style={{ position: "absolute", right: "30%", zIndex: 200 }}
-      >
-        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
-          <img
-            src="assets/images/logo2.png"
-            alt=""
-            className="img-fluid m-r-5"
-            style={{ width: "150px" }}
-          />
-          <strong className="mr-auto"></strong>
-          <small className="text-muted"></small>
-        </div>
-        <div className="toast-body">
-          <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
-        </div>
-      </div>
+      <PopUp body={popText} isActive={isActive} />
 
       <div className="row">{list}</div>
     </>

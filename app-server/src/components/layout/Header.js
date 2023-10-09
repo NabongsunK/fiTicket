@@ -8,6 +8,7 @@ import Favorite from "../common/Favorite";
 import Left from "../common/Left";
 import { useCookies } from "react-cookie";
 import { setIsManager, signin, signout } from "../../store/loginSlice";
+import { setFavor } from "../../store/favorSlice";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -19,6 +20,12 @@ const getUser = async function (user_id) {
   return res.data.data;
 };
 
+const getFavor = async function (user_id) {
+  const url = "/favorite/favorlist/" + user_id;
+  const res = await axios.get(url);
+  return res.data;
+};
+
 const Header = function (props) {
   const [isActive, setActive] = useState(false);
   const [isCart, setCart] = useState();
@@ -26,6 +33,7 @@ const Header = function (props) {
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
   const cartNo = useSelector((state) => state.myCartSlice.myCarts).length;
+  const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
   const dispatch = useDispatch();
 
   const handleToggle = function (e) {
@@ -81,7 +89,14 @@ const Header = function (props) {
       });
     }
   }, [is_signed]);
-  // console.log(isCart);
+
+  useEffect(() => {
+    getFavor(user_id).then((response) => {
+      console.log(response);
+      dispatch(setFavor({ newMyFavor: response }));
+    });
+  }, [user_id]);
+
   return (
     <>
       <header className="header-area header-sticky">

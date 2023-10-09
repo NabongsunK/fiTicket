@@ -3,19 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { pop, change } from "../../store/cartSlice";
 
 import styles from "./cartlistitem.module.css";
+import { popFavor } from "../../store/favorSlice";
 
 const FavoriteListItem = function (props) {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.myCartSlice.myCarts);
   const navigate = useNavigate();
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
 
-  const removeItem = function (id) {
-    cartItems.forEach((item, i) => {
-      if (item.index === id) {
-        dispatch(pop({ index: i }));
-        return false;
-      }
-    });
+  const removeItem = function () {
+    dispatch(
+      popFavor({
+        ticket: {
+          ticket_id: props.item.ticket_id,
+        },
+        user_id: user_id,
+      })
+    );
   };
 
   const img = props.item.first_image;
@@ -49,7 +52,7 @@ const FavoriteListItem = function (props) {
     <div className="single-cart-item">
       <div
         onClick={() => {
-          navigate(`/explore/${props.item.fes_id}`);
+          navigate(`/explore/${props.item.ticket_id}`);
         }}
         className="product-image"
       >

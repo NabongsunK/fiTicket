@@ -5,7 +5,7 @@ const favoriteModel = {
   async deleteFavor(fes, id, conn = pool) {
     try {
       const sql = `
-        delete from favorite where fes_id = ? and user_id = ?
+        delete from favorite where ticket_id = ? and user_id = ?
       `;
       const [result] = await conn.query(sql, [fes, id]);
       return result.affectedRows;
@@ -17,7 +17,7 @@ const favoriteModel = {
   async updateFavor(fes, id, conn = pool) {
     try {
       const sql = `
-        insert into favorite(fes_id, user_id) VALUES (?, ?)
+        insert into favorite(ticket_id, user_id) VALUES (?, ?)
       `;
       const [result] = await conn.query(sql, [fes, id]);
       // console.log(result);
@@ -32,12 +32,12 @@ const favoriteModel = {
       const sql = `
       select
         favorite.user_id,
-        favorite.fes_id,
+        favorite.ticket_id,
         festival_api.title as title,
         festival_api.first_image as first_image,
         favorite.create_at
       from favorite
-      left join festival_api on favorite.fes_id = festival_api.id
+      left join festival_api on favorite.ticket_id = festival_api.id
       where favorite.user_id = ?
       order by favorite.create_at desc
       `;

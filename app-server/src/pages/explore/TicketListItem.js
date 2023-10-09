@@ -8,7 +8,9 @@ import styles from "./ticketlistitem.module.css";
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import HomepageBtn from "../../components/common/HomepageBtn";
-
+import { popFavor, pushFavor } from "../../store/favorSlice";
+import Button from "../../components/common/Button";
+import PopUp from "../../components/common/PopUp";
 const customStyles = {
   content: {
     top: "50%",
@@ -25,39 +27,13 @@ const customStyles = {
   },
 };
 
-import axios from "axios";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
-
-const getFavor = async function (user_id) {
-  const url = "/favorite/favorlist/" + user_id;
-  const res = await axios.get(url);
-  return res.data;
-};
-
 const TicketListItem = function (props) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const appElement = document.getElementById("root");
   const dispatch = useDispatch();
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
-
+  const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
-  const [favorItems, setFavorItems] = useState([]);
-  useEffect(() => {
-    getFavor(user_id).then((response) => {
-      setFavorItems(response);
-    });
-  }, [user_id]);
-  const favorFes = favorItems.map((item) => item.fes_id);
-  // console.log(favorFes);
-
-  const isFavorFes = (id) => {
-    const regex = new RegExp(`${favorFes[0]}`);
-    return regex.test(id);
-  };
-  const likeFes = isFavorFes(props.festival.id);
-  // console.log(props.festival.id);
-  // console.log(likeFes);
 
   if (appElement) {
     Modal.setAppElement(appElement);
@@ -83,6 +59,30 @@ const TicketListItem = function (props) {
         },
       })
     );
+  };
+
+  const toFavor = function () {
+    if (!props.isFavor) {
+      dispatch(
+        pushFavor({
+          ticket: {
+            ticket_id: props.festival.id,
+            title: props.festival.title,
+            first_image: props.festival.first_image,
+          },
+          user_id: user_id,
+        })
+      );
+    } else {
+      dispatch(
+        popFavor({
+          ticket: {
+            ticket_id: props.festival.id,
+          },
+          user_id: user_id,
+        })
+      );
+    }
   };
 
   const img = props.festival.first_image;
@@ -131,7 +131,6 @@ const TicketListItem = function (props) {
         ></div>
       </Link>
     );
-  // console.log(props.isFavor);
   return (
     <div className="col-lg-6 col-sm-6 mb-3">
       <Modal
@@ -182,18 +181,37 @@ const TicketListItem = function (props) {
           </div>
           <div className="col-lg-2 align-self-center">
             <HomepageBtn homepage_src={props.festival.home_page} />
-            <div className="explore_list_button" onClick={toCart}>
-              <Link onClick={props.alertHandler}>
-                <i className="fa fa-cart-plus"></i>
-              </Link>
-            </div>
-            <figure onClick={props.favorToggle}>
-              {!likeFes ? (
-                <img src="/assets/images/core-img/heart.svg" />
-              ) : (
-                <img src="/assets/images/core-img/heart-fill.svg" />
-              )}
-            </figure>
+
+            <Button
+              title={<i className="fa fa-cart-plus"></i>}
+              onClick={() => {
+                toCart();
+                props.alertHandler("장바구니에 담겼습니다.");
+              }}
+            />
+
+            {props.isFavor ? (
+              <Button
+                title={<i className="fa fa-heart" id="myheart"></i>}
+                onClick={() => {
+                  toFavor();
+                  props.alertHandler("관심리스트에 추가했습니다.");
+                }}
+              />
+            ) : (
+              <Button
+                title={<i className="fa fa-heart" id="myheart"></i>}
+                isRev={true}
+                style={{
+                  border: "1px solid white",
+                  boxShadow: "0 0 3px rgba(0, 0, 0, 0.15)",
+                }}
+                onClick={() => {
+                  toFavor();
+                  props.alertHandler("관심리스트에서 제거하였습니다.");
+                }}
+              />
+            )}
           </div>
         </div>
       </div>
