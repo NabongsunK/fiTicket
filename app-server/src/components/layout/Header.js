@@ -39,17 +39,14 @@ const Header = function (props) {
   const goCart = () => {
     setActive(true);
     setCart(Number(1));
-    console.log(isActive);
   };
   const goUser = () => {
     setCart(2);
     setActive(true);
-    console.log(isActive);
   };
   const goFavorite = () => {
     setCart(3);
     setActive(true);
-    console.log(isActive);
   };
 
   const signOut = function () {

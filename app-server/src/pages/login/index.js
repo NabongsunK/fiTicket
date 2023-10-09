@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signin } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
+import PopUp from "../../components/common/PopUp";
 
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -14,22 +15,19 @@ function Login() {
   const loginIdRef = useRef();
   const loginPwRef = useRef();
 
+  const [isActive, setIsActive] = useState(false);
+  const [popText, setPopText] = useState("");
+
   const signIn = useCallback(async () => {
     const loginId = loginIdRef.current.value;
     const loginPw = loginPwRef.current.value;
 
-    if (!loginId.trim() && !loginPw.trim()) {
-      alert("아이디와 비밀번호를 입력해주세요.");
-      return;
-    }
-
-    if (!loginId.trim()) {
-      alert("아이디를 입력해주세요.");
-      return;
-    }
-
-    if (!loginPw.trim()) {
-      alert("비밀번호를 입력해주세요.");
+    if (!loginId.trim() || !loginPw.trim()) {
+      setPopText("아이디와 비밀번호를 확인해주세요.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
       return;
     }
 
@@ -40,18 +38,40 @@ function Login() {
       });
 
       if (res.data.ok) {
+        setPopText("loca!T를 즐기세요.");
+        setIsActive(true);
+        setTimeout(() => {
+          setIsActive(false);
+        }, 5000);
         dispatch(signin({ user_id: res.data.user_id }));
         navigate("/");
+        return;
       } else {
-        alert("아이디 또는 비밀번호를 다시 확인해주세요.");
+        setPopText("아이디 또는 비밀번호를 다시 확인해주세요.");
+        setIsActive(true);
+        setTimeout(() => {
+          setIsActive(false);
+        }, 5000);
       }
     } catch (error) {
-      alert("잠시후 다시 시도해주세요.");
+      setPopText("잠시후 다시 시도해주세요.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
     }
   }, [dispatch, navigate]);
 
+  const ingToggle = function () {
+    setPopText("서비스 준비예정입니다.");
+    setIsActive(true);
+    setTimeout(() => {
+      setIsActive(false);
+    }, 5000);
+  };
   return (
     <section className="login_page">
+      <PopUp body={popText} isActive={isActive} />
       <div className="login-container">
         <form
           onSubmit={(e) => {
@@ -121,19 +141,35 @@ function Login() {
               회원이 아니신가요? <Link to="/signup">회원가입</Link>
             </p>
             <p>or sign up with:</p>
-            <button type="button" className="btn btn-link btn-floating mx-1">
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
               <i className="fab fa-facebook-f"></i>
             </button>
 
-            <button type="button" className="btn btn-link btn-floating mx-1">
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
               <i className="fab fa-google"></i>
             </button>
 
-            <button type="button" className="btn btn-link btn-floating mx-1">
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
               <i className="fab fa-twitter"></i>
             </button>
 
-            <button type="button" className="btn btn-link btn-floating mx-1">
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
               <i className="fab fa-github"></i>
             </button>
           </div>

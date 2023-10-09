@@ -48,7 +48,7 @@ def get_areaBased(pageNo):
         '_type': 'json',
         'listYN': 'Y',
         'arrange': 'Q',
-        'contentTypeId': 39,
+        'contentTypeId': 14,
     }
     retries = 3  # 최대 재시도 횟수
     for _ in range(retries):
@@ -263,7 +263,7 @@ def pushDB(res):
 
 
 def main():
-    pageNo = 8
+    pageNo = 1
     total_pages = 5000
     while pageNo <= total_pages:
         print(f"{pageNo} 페이지 실행 시작")
