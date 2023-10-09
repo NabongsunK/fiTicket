@@ -7,6 +7,8 @@ const loginSlice = createSlice({
     signin: function (state, action) {
       state.is_signed = true;
       state.user_id = action.payload.user_id;
+    },
+    setIsManager: function (state, action) {
       state.is_manager = action.payload.is_manager;
     },
     signout: function (state, action) {
@@ -18,4 +20,4 @@ const loginSlice = createSlice({
 });
 
 export default loginSlice;
-export const { signin, signout } = loginSlice.actions;
+export const { signin, signout, setIsManager } = loginSlice.actions;

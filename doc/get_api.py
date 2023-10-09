@@ -89,17 +89,28 @@ def get_festival(pageNo):
         'eventEndDate': 20231225,
 
     }
-    try:
-        response = requests.get(apiUrl, apiParams, timeout=4)
-        print("HTTP 응답 코드:", response.status_code)
-        print("HTTP 응답 메시지:", response.text)
+    retries = 3  # 최대 재시도 횟수
+    for _ in range(retries):
+        try:
+            response = requests.get(apiUrl, apiParams, timeout=4)
+            # print("HTTP 응답 코드:", response.status_code)
+            # print("HTTP 응답 메시지:", response.text)
 
-        return response.json()["response"]["body"]["items"]["item"]
-    except:
-        # err_msg = traceback.format_exc()
-        # print(err_msg)
-        print(api["i"]-1, "번째 api key 에서 문제발생")
-        return []
+            return response.json()["response"]["body"]["items"]["item"]
+        except ConnectTimeout:
+            print("연결 시간이 초과되었습니다. 재시도 중...")
+            continue
+        except requests.exceptions.HTTPError as http_err:
+            print(f"HTTP 오류 발생: {http_err}")
+            break
+        except Exception as e:
+            print(f"오류 발생: {e}")
+            break
+    print("최대 재시도 횟수를 초과하여 요청 실패")
+    err_msg = traceback.format_exc()
+    print(err_msg)
+    print(api["i"]-1, "번째 api key 에서 문제발생")
+    return {}
 
 
 def get_detailCommon1(data):
@@ -159,19 +170,30 @@ def get_detailIntro1(data):
         'contentId': data["contentid"],
         'contentTypeId': data["contenttypeid"],
     }
-    try:
-        response = requests.get(apiUrl, apiParams, timeout=4)
-        print("HTTP 응답 코드:", response.status_code)
-        print("HTTP 응답 메시지:", response.text[:1000])
-        new_data = response.json()["response"]["body"]["items"]["item"][0]
-        return dict(
-            {"eventstartdate": new_data["eventstartdate"], "eventenddate": new_data["eventenddate"],
-             "playtime": new_data["playtime"], "usetimefestival": new_data["usetimefestival"]}, **data)
-    except:
-        # err_msg = traceback.format_exc()
-        # print(err_msg)
-        print(api["i"]-1, "번째 api key 에서 문제발생")
-        return {}
+    retries = 3  # 최대 재시도 횟수
+    for _ in range(retries):
+        try:
+            response = requests.get(apiUrl, apiParams, timeout=4)
+            # print("HTTP 응답 코드:", response.status_code)
+            # print("HTTP 응답 메시지:", response.text[:1000])
+            new_data = response.json()["response"]["body"]["items"]["item"][0]
+            return dict(
+                {"eventstartdate": new_data["eventstartdate"], "eventenddate": new_data["eventenddate"],
+                 "playtime": new_data["playtime"], "usetimefestival": new_data["usetimefestival"]}, **data)
+        except ConnectTimeout:
+            print("연결 시간이 초과되었습니다. 재시도 중...")
+            continue
+        except requests.exceptions.HTTPError as http_err:
+            print(f"HTTP 오류 발생: {http_err}")
+            break
+        except Exception as e:
+            print(f"오류 발생: {e}")
+            break
+    print("최대 재시도 횟수를 초과하여 요청 실패")
+    err_msg = traceback.format_exc()
+    print(err_msg)
+    print(api["i"]-1, "번째 api key 에서 문제발생")
+    return {}
 
 
 def pushDB(res):
@@ -241,11 +263,11 @@ def pushDB(res):
 
 
 def main():
-    pageNo = 1
+    pageNo = 8
     total_pages = 5000
     while pageNo <= total_pages:
         print(f"{pageNo} 페이지 실행 시작")
-        ret = get_areaBased(pageNo)
+        ret = get_festival(pageNo)
         if not ret:
             print(f"{pageNo} 페이지의 가져오기 실패. 30초 후에 다시시작")
             time.sleep(30)

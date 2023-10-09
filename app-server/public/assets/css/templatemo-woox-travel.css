@@ -280,6 +280,7 @@ body {
 
 .border-button a:hover {
   background-color: #22b3c1;
+  font-size: 14px;
   color: #fff;
 }
 
@@ -298,6 +299,13 @@ body {
   position: relative;
   overflow: hidden;
 }
+
+.main-button a:hover {
+  background-color: #fff;
+  color: #22b3c1;
+  border: 1px solid #fff;
+}
+
 .explore_list_button a {
   font-size: 28px;
   color: #fff;
@@ -342,12 +350,6 @@ body {
 
 .explore_list_button a:link {
   font-size: 24px;
-}
-
-.main-button a:hover {
-  background-color: #fff;
-  color: #22b3c1;
-  border: 1px solid #fff;
 }
 
 section {
@@ -1410,11 +1412,14 @@ About Page Style
 .about-main-content .content .main-button a {
   background-color: #fff;
   color: #22b3c1;
-  border-color: #fff;
+  border-color: #22b3c1;
 }
 
 .about-main-content .content .main-button a:hover {
-  opacity: 0.9;
+  background-color: #22b3c1;
+  color: #fff;
+  border: 1px solid #fff;
+  font-size: 14px;
 }
 
 .cities-town .slider-content {
@@ -2147,9 +2152,13 @@ Deals Page Style
   overflow: hidden;
 }
 
-.search-form #search-form button:hover {
+.search-form #search-form button:hover,
+.search-form #search-form button:focus,
+.search-form #search-form button:focus-visible {
   background-color: #fff;
   color: #22b3c1;
+  border: 1px solid #fff;
+  outline: 0px;
 }
 
 .amazing-deals {
@@ -2183,6 +2192,7 @@ Deals Page Style
   padding-bottom: 8px;
   /* margin-bottom: 5px; */
   border-bottom: 1px solid #ddd;
+  color: black;
 }
 
 .amazing-deals .item i {
