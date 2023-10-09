@@ -47,6 +47,24 @@ function Signup() {
   };
 
   //유효성 검사 함수들
+  const checkID = async () => {
+    try {
+      const response = await axios.post(
+        "/your_server_endpoint/check_duplication",
+        {
+          login_id: idRef.current.value,
+        }
+      );
+
+      if (response.data.isDuplicated) {
+        alert("이미 사용중인 ID입니다.");
+      } else {
+        alert("사용 가능한 ID입니다.");
+      }
+    } catch (error) {
+      console.error("ID 중복 확인 중 오류가 발생했습니다.", error);
+    }
+  };
 
   const signUp = async function () {
     if (!isValidName(nameRef.current.value)) {
@@ -194,7 +212,7 @@ function Signup() {
       <div className="signup-container">
         <form className="signup-form" onSubmit={FormSubmit}>
           {/* <!-- ID input --> */}
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-2">
             <input
               type="text"
               id="login_id"
@@ -204,10 +222,17 @@ function Signup() {
             <label className="form-label" htmlFor="login_id">
               ID
             </label>
+            <button
+              type="button"
+              onClick={checkID}
+              className="btn btn-primary btn-block mb-0"
+            >
+              중복 확인
+            </button>
           </div>
 
           {/* <!-- 핸드폰번호 input  여기에 인증 추가하기--> */}
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-0">
             <input
               type="text"
               id="phone_number"
@@ -220,7 +245,7 @@ function Signup() {
             {/* <!--인증 --> */}
             <button
               type="button"
-              className="btn btn-primary btn-block mb-4"
+              className="btn btn-primary btn-block mb-2"
               onClick={getAuth}
             >
               핸드폰 인증하기
@@ -236,7 +261,7 @@ function Signup() {
             </label>
             <button
               type="button"
-              className="btn btn-primary btn-block mb-4"
+              className="btn btn-primary btn-block mb-2"
               onClick={doAuth}
             >
               인증번호 제출
@@ -244,7 +269,7 @@ function Signup() {
           </div>
 
           {/* <!-- 이름 --> */}
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-0">
             <input
               type="text"
               id="name"
@@ -257,7 +282,7 @@ function Signup() {
           </div>
 
           {/* <!-- 비밀번호 --> */}
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-0">
             <input
               type="password"
               id="password"
@@ -270,7 +295,7 @@ function Signup() {
           </div>
 
           {/* <!-- 비밀번호 확인 --> */}
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-0">
             <input
               type="password"
               id="password_confirm"
@@ -283,7 +308,7 @@ function Signup() {
           </div>
 
           {/* <!-- 이메일주소 --> */}
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-0">
             <input
               type="text"
               id="email"
@@ -296,7 +321,7 @@ function Signup() {
           </div>
 
           {/* <!-- Submit button --> */}
-          <button type="submit" className="btn btn-primary btn-block mb-4">
+          <button type="submit" className="btn btn-primary btn-block mb-0">
             회원가입
           </button>
 
