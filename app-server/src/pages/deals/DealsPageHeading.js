@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const DealsPageHeading= function(){
+const DealsPageHeading = function () {
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   return (
     <div className="page-heading">
       <div className="container">
@@ -10,7 +12,16 @@ const DealsPageHeading= function(){
             <h2>다양한 축제들이 여러분을 기다립니다</h2>
             <h2>지금 바로 즐겨보세요!</h2>
             <div className="border-button">
-              <Link to="/login">로그인하기</Link>
+              {is_signed ? (
+                ""
+              ) : (
+                <Link
+                  to="/login"
+                  style={{ color: "#fff", borderColor: "#fff" }}
+                >
+                  로그인
+                </Link>
+              )}
             </div>
           </div>
         </div>

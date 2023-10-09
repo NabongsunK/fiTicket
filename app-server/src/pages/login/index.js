@@ -40,9 +40,7 @@ function Login() {
       });
 
       if (res.data.ok) {
-        dispatch(
-          signin({ user_id: res.data.user_id, is_manager: res.data.role })
-        );
+        dispatch(signin({ user_id: res.data.user_id }));
         navigate("/");
       } else {
         alert("아이디 또는 비밀번호를 다시 확인해주세요.");

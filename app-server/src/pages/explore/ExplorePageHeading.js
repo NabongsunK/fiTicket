@@ -1,7 +1,9 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const ExplorePageHeading = function () {
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   return (
     <div className="second-page-heading">
       <div className="container">
@@ -15,9 +17,16 @@ const ExplorePageHeading = function () {
               주저말고 지금 바로 즐기세요
             </p>
             <div className="border-button">
-              <Link to="/login" style={{ color: "#fff", borderColor: "#fff" }}>
-                로그인
-              </Link>
+              {is_signed ? (
+                ""
+              ) : (
+                <Link
+                  to="/login"
+                  style={{ color: "#fff", borderColor: "#fff" }}
+                >
+                  로그인
+                </Link>
+              )}
             </div>
           </div>
         </div>

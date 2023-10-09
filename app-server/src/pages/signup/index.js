@@ -132,6 +132,8 @@ function Signup() {
       login_id: idRef.current.value,
       phone_number: pnRef.current.value,
     });
+
+    console.log(res);
     setSend(true);
     setTimeout(() => {
       setSend(false);
