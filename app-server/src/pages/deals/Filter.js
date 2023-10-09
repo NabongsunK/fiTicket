@@ -25,6 +25,7 @@ const Filter = function (props) {
                     type="button"
                     onClick={toggleType}
                     style={{ padding: "8px 11px" }}
+                    autoFocus
                   >
                     기간 임박
                   </button>

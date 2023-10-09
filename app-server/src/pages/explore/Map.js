@@ -64,7 +64,7 @@ const Map = function (props) {
         menusRefs[tp].current.className = styles.menu_selected;
         setMarkers(map.current, tp);
         //TODO: 현재는 주차장일때 클러스터러를 표시 안하는 방식으로 했지만, 서버에서 클러스터러된 정보를 직접 보내는 경우도 생각해 볼것
-        if (type != "28") {
+        if (type != "28" && type != "39") {
           clusterer.current.addMarkers(markers_group.current[tp]);
         }
       } else {

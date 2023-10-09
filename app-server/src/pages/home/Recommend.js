@@ -18,25 +18,25 @@ const areaRec = async function () {
 const recList = await areaRec();
 
 const Recommend = function () {
-  const [selectedLocal, setSelectedLocal] = useState(1); // 선택한 지역의 ID를 저장하는 상태
+  const [selectedAreaCode, setselectedAreaCode] = useState(1); // 선택한 지역의 ID를 저장하는 상태
   const [festivals, setFestivals] = useState(recList); // 선택한 지역의 행사 정보를 저장하는 상태
 
   useEffect(() => {
     // 선택한 지역의 ID가 변경될 때마다 해당 지역의 행사 정보
     const selectedLocalFestivals = recList.filter(
-      (festival) => festival.area_code == selectedLocal
+      (festival) => festival.area_code == selectedAreaCode
     );
     setFestivals(selectedLocalFestivals);
-  }, [selectedLocal]);
+  }, [selectedAreaCode]);
 
   const onChangeToggle = (selectedValue) => {
-    setSelectedLocal(selectedValue);
+    setselectedAreaCode(localList[selectedValue].area_code);
   };
 
   const LocalSelectList = localList.map((localItem) => (
     <ToggleButton
       id={"tbg-radio" + localItem.id}
-      value={localItem.area_code}
+      value={localItem.id}
       key={localItem.id}
     >
       {localItem.localTitle}

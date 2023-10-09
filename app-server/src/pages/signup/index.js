@@ -99,7 +99,7 @@ function Signup() {
     const res = await axios.post("/login/signup", {
       login_id: idRef.current.value,
       phone_number: pnRef.current.value,
-      password: await hasing(pwRef.current.value + idRef.current.value),
+      password: await hasing(idRef.current.value + pwRef.current.value),
       email: emailRef.current.value,
       name: nameRef.current.value,
     });
@@ -132,10 +132,13 @@ function Signup() {
       login_id: idRef.current.value,
       phone_number: pnRef.current.value,
     });
-    setSend(true);
-    setTimeout(() => {
-      setSend(false);
-    }, 5000);
+
+    if (res.data.ok) {
+      setSend(true);
+      setTimeout(() => {
+        setSend(false);
+      }, 5000);
+    }
   };
   // 여기 인증번호 한아이디에 한개씩이 안됨 확인해야됨
   // 아마 회원가입한사람만(userdb에 아이디가 저장된 사람만) 인증번호 받기로 했던거 같은데 이거 수정해야됨
@@ -166,7 +169,7 @@ function Signup() {
         data-delay="2000"
         aria-atomic="true"
       >
-        <div className={`toast-header ${styles.toastHeaderColor}`}>
+        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
           <img
             src="assets/images/logo2.png"
             alt=""
@@ -192,7 +195,7 @@ function Signup() {
         data-delay="2000"
         aria-atomic="true"
       >
-        <div className={`toast-header ${styles.toastHeaderColor}`}>
+        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
           <img
             src="assets/images/logo2.png"
             alt=""
@@ -219,13 +222,6 @@ function Signup() {
             <label className="form-label" htmlFor="login_id">
               ID
             </label>
-            <button
-              type="button"
-              onClick={checkid}
-              className="btn btn-primary btn-block mb-0"
-            >
-              중복 확인
-            </button>
           </div>
 
           {/* <!-- 핸드폰번호 input  여기에 인증 추가하기--> */}
