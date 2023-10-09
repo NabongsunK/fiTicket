@@ -121,8 +121,13 @@ const TicketDetailItem = function () {
           </div>
         </div>
       </div>
-      <div className="row" style={{ marginTop: "75px" }}>
-        <div className="col-12 col-lg-6 text-center">{poster}</div>
+      <div className="row justify-content-center" style={{ marginTop: "75px" }}>
+        <div
+          className="col-12 col-lg-6 text-center"
+          style={{ marginBottom: "30px" }}
+        >
+          {poster}
+        </div>
         <br />
         <br />
 
@@ -152,19 +157,16 @@ const TicketDetailItem = function () {
           </div>
         </div>
         <div
-          className="col-12 col-lg-6"
+          className="col-8 col-lg-6"
           style={{
             display: "flex",
             flexDirection: "column",
-            //justifyContent: "center",
-            //alignItems: "center",
           }}
         >
           <form>
             <div className="content" style={{ marginLeft: "30px" }}>
               <h1
                 style={{
-                  //marginTop: "40px",
                   marginBottom: "20px",
                   color: "#22b3c1",
                 }}
@@ -203,7 +205,7 @@ const TicketDetailItem = function () {
 
       <div className="row">
         <div className="col-12" style={{ marginTop: "75px" }}>
-          <h5
+          <h2
             className="d-flex justify-content-center"
             style={{
               fontSize: "30px",
@@ -213,7 +215,7 @@ const TicketDetailItem = function () {
             }}
           >
             {"상세 정보"}
-          </h5>
+          </h2>
           <p style={{ paddingLeft: "120px", paddingRight: "120px" }}>
             {festival.over_view}
           </p>
