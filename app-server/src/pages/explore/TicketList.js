@@ -4,12 +4,16 @@ import { useSelector } from "react-redux";
 
 const TicketList = function () {
   const [isActive, setActive] = useState("false");
+  const [isFavor, setFavor] = useState("false");
   const pageList = useSelector((state) => state.myPageSlice.pageList);
   const alertHandler = () => {
     setActive(!isActive);
     setTimeout(() => {
       setActive(isActive);
     }, 3000);
+  };
+  const favorToggle = function () {
+    setFavor(!isFavor);
   };
 
   const list = pageList.map((festival) => {
@@ -18,10 +22,12 @@ const TicketList = function () {
         key={festival.id}
         festival={festival}
         alertHandler={alertHandler}
+        favorToggle={favorToggle}
+        isFavor={isFavor}
       />
     );
   });
-
+  console.log(pageList);
   return (
     <>
       {/* 알람창 놓고싶은데 넣기*/}

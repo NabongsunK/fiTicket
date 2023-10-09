@@ -15,7 +15,6 @@ const getList = async function (user_id) {
   const res = await axios.get(url);
   return res.data.data;
 };
-
 const cartItems = [
   {
     // 여기 지역추가

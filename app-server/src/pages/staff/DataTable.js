@@ -8,6 +8,7 @@ import areaCode from "../../data/locallist.json";
 import CodeTable from "./CodeTable";
 
 import axios from "axios";
+import TypeTable from "./TypeTable";
 
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
@@ -134,6 +135,17 @@ const FestivalDataTable = function () {
   // 지역 코드 표시
   const code = areaCode.map((list) => (
     <CodeTable key={list._key} list={list} />
+  ));
+  // deals type
+  var dealsType = [
+    { type: "기간 임박", code: 1 },
+    { type: "먹거리", code: 2 },
+    { type: "체험", code: 3 },
+    { type: "공연", code: 4 },
+    { type: "전시", code: 5 },
+  ];
+  const type = dealsType.map((item) => (
+    <TypeTable key={item._key} item={item} />
   ));
   // 축제 더보기 및 수정
   const ExpandedComponent = function ({ data }) {
@@ -290,6 +302,7 @@ const FestivalDataTable = function () {
   // 검색어
   const [keyword, setKeyword] = useState("");
   const [searchResult, setSearchResult] = useState(allListData);
+  const [deals, setDeals] = useState("");
 
   // 키워드 바뀌면
   const search = function (event) {
@@ -300,6 +313,14 @@ const FestivalDataTable = function () {
       allListData.filter(
         (festival) => regExp.test(festival.title) || regExp.test(festival.id)
       )
+    );
+  };
+  const search2 = function (event) {
+    const searchKeyword = event.target.value;
+    setDeals(searchKeyword);
+    const regExp = new RegExp(searchKeyword);
+    setSearchResult(
+      allListData.filter((festival) => regExp.test(festival.area_code))
     );
   };
 
@@ -318,6 +339,15 @@ const FestivalDataTable = function () {
             className="form-control"
             type="text"
             id="value"
+            placeholder="지역 코드"
+            value={deals}
+            onChange={search2}
+            style={{ width: "120px", float: "right" }}
+          />
+          <input
+            className="form-control"
+            type="text"
+            id="value"
             placeholder="축제 찾기"
             value={keyword}
             onChange={search}
@@ -325,6 +355,7 @@ const FestivalDataTable = function () {
           />
         </div>
         <div className="area_code">{code}</div>
+        <div className="deals_type">{type}</div>
         <div>
           <DataTable
             columns={columns}

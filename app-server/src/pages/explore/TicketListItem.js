@@ -25,11 +25,39 @@ const customStyles = {
   },
 };
 
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const getFavor = async function (user_id) {
+  const url = "/favorite/favorlist/" + user_id;
+  const res = await axios.get(url);
+  return res.data;
+};
+
 const TicketListItem = function (props) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const appElement = document.getElementById("root");
   const dispatch = useDispatch();
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
+
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const [favorItems, setFavorItems] = useState([]);
+  useEffect(() => {
+    getFavor(user_id).then((response) => {
+      setFavorItems(response);
+    });
+  }, [user_id]);
+  const favorFes = favorItems.map((item) => item.fes_id);
+  // console.log(favorFes);
+
+  const isFavorFes = (id) => {
+    const regex = new RegExp(`${favorFes[0]}`);
+    return regex.test(id);
+  };
+  const likeFes = isFavorFes(props.festival.id);
+  // console.log(props.festival.id);
+  // console.log(likeFes);
 
   if (appElement) {
     Modal.setAppElement(appElement);
@@ -103,7 +131,7 @@ const TicketListItem = function (props) {
         ></div>
       </Link>
     );
-
+  // console.log(props.isFavor);
   return (
     <div className="col-lg-6 col-sm-6 mb-3">
       <Modal
@@ -159,8 +187,12 @@ const TicketListItem = function (props) {
                 <i className="fa fa-cart-plus"></i>
               </Link>
             </div>
-            <figure>
-              <img src="/assets/images/core-img/heart.svg" />
+            <figure onClick={props.favorToggle}>
+              {!likeFes ? (
+                <img src="/assets/images/core-img/heart.svg" />
+              ) : (
+                <img src="/assets/images/core-img/heart-fill.svg" />
+              )}
             </figure>
           </div>
         </div>

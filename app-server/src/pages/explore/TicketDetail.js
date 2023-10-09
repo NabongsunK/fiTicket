@@ -76,6 +76,33 @@ const TicketDetailItem = function () {
   if (loading) {
     return <div>Loading...</div>;
   }
+  const img = festival.first_image;
+  const poster =
+    festival.first_image === "" ? (
+      <img
+        className="modal_image1"
+        src="/assets/images/fes_default.jpg"
+        alt=""
+        style={{
+          maxWidth: "85%",
+          maxHeight: "85%",
+          width: "auto",
+          height: "auto",
+        }}
+      />
+    ) : (
+      <img
+        className="modal_image1"
+        src={festival.first_image}
+        alt=""
+        style={{
+          maxWidth: "100%",
+          maxHeight: "100%",
+          width: "auto",
+          height: "auto",
+        }}
+      />
+    );
 
   return (
     <div onClick={(e) => e.stopPropagation()}>
@@ -95,19 +122,7 @@ const TicketDetailItem = function () {
         </div>
       </div>
       <div className="row" style={{ marginTop: "75px" }}>
-        <div className="col-12 col-lg-6 text-center">
-          <img
-            className="modal_image1"
-            src={festival.first_image}
-            alt=""
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              width: "auto",
-              height: "auto",
-            }}
-          />
-        </div>
+        <div className="col-12 col-lg-6 text-center">{poster}</div>
         <br />
         <br />
 
@@ -141,32 +156,43 @@ const TicketDetailItem = function () {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
+            //justifyContent: "center",
+            //alignItems: "center",
           }}
         >
           <form>
-            <div className="content ">
+            <div className="content" style={{ marginLeft: "30px" }}>
               <h1
                 style={{
-                  marginTop: "40px",
+                  //marginTop: "40px",
                   marginBottom: "20px",
                   color: "#22b3c1",
                 }}
               >
                 {festival.title}
               </h1>
-              <i className="fa fa-clock" style={{ float: "left" }}></i>
+              <i
+                className="fa fa-clock"
+                style={{ float: "left", marginRight: "10px" }}
+              ></i>
               <h5 className="list" style={{ marginBottom: "40px" }}>
-                {"운영기간 "}
+                {"운영 기간 : "}
                 {festival.event_start_date} ~ {festival.event_end_date}
                 <br />
                 <br />
+                <i
+                  className="fa fa-map-marker"
+                  style={{ marginRight: "10px" }}
+                ></i>
+                {"주소 : "}
                 {festival.addr1}
                 <br />
                 <br />
-                {/* {festival.use_time_festival} */}
-                {"티켓 금액: "}
+                <i
+                  className="fa fa-money-bill-wave"
+                  style={{ marginRight: "10px" }}
+                ></i>
+                {"티켓 금액 : "}
                 {festival.price}
                 {"원"}
               </h5>
@@ -177,8 +203,20 @@ const TicketDetailItem = function () {
 
       <div className="row">
         <div className="col-12" style={{ marginTop: "75px" }}>
-          <h5 className="d-flex justify-content-center">{"상세 정보"}</h5>
-          <p>{festival.over_view}</p>
+          <h5
+            className="d-flex justify-content-center"
+            style={{
+              fontSize: "30px",
+              marginBottom: "30px",
+              textTransform: "capitalize",
+              fontWeight: "600",
+            }}
+          >
+            {"상세 정보"}
+          </h5>
+          <p style={{ paddingLeft: "120px", paddingRight: "120px" }}>
+            {festival.over_view}
+          </p>
           <ReviewList reviewData={reviewData} />
         </div>
       </div>
