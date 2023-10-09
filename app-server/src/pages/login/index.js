@@ -107,22 +107,7 @@ function Login() {
 
           {/* <!-- 2 column grid layout for inline styling --> */}
           <div className="row mb-4">
-            <div className="col d-flex justify-content-center">
-              {/* <!-- Checkbox --> */}
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="form2Example31"
-                  defaultChecked
-                />
-                <label className="form-check-label" htmlFor="form2Example31">
-                  {" "}
-                  Remember me{" "}
-                </label>
-              </div>
-            </div>
+            <div className="col d-flex justify-content-center"></div>
 
             <div className="col">
               {/* <!-- Simple link --> */}

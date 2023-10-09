@@ -27,7 +27,6 @@ const TicketList = function () {
       />
     );
   });
-  console.log(pageList);
   return (
     <>
       {/* 알람창 놓고싶은데 넣기*/}
