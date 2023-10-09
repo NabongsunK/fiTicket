@@ -166,7 +166,7 @@ function Signup() {
         data-delay="2000"
         aria-atomic="true"
       >
-        <div className={`toast-header ${styles.toastHeaderColor}`}>
+        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
           <img
             src="assets/images/logo2.png"
             alt=""
@@ -192,7 +192,7 @@ function Signup() {
         data-delay="2000"
         aria-atomic="true"
       >
-        <div className={`toast-header ${styles.toastHeaderColor}`}>
+        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
           <img
             src="assets/images/logo2.png"
             alt=""
