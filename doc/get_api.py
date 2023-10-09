@@ -3,6 +3,7 @@ import pymysql
 import time
 import traceback
 from urllib.parse import urlparse
+from requests.exceptions import ConnectTimeout
 import re
 
 api = {
@@ -47,16 +48,28 @@ def get_areaBased(pageNo):
         '_type': 'json',
         'listYN': 'Y',
         'arrange': 'Q',
-        'contentTypeId': 14,
+        'contentTypeId': 39,
     }
-    try:
-        response = requests.get(apiUrl, apiParams, timeout=4)
-        return response.json()["response"]["body"]["items"]["item"]
-    except:
-        # err_msg = traceback.format_exc()
-        # print(err_msg)
-        print(api["i"]-1, "번째 api key 에서 문제발생")
-        return []
+    retries = 3  # 최대 재시도 횟수
+    for _ in range(retries):
+        try:
+            response = requests.get(apiUrl, apiParams, timeout=30)
+            return response.json()["response"]["body"]["items"]["item"]
+
+        except ConnectTimeout:
+            print("연결 시간이 초과되었습니다. 재시도 중...")
+            continue
+        except requests.exceptions.HTTPError as http_err:
+            print(f"HTTP 오류 발생: {http_err}")
+            break
+        except Exception as e:
+            print(f"오류 발생: {e}")
+            break
+    print("최대 재시도 횟수를 초과하여 요청 실패")
+    err_msg = traceback.format_exc()
+    print(err_msg)
+    print(api["i"]-1, "번째 api key 에서 문제발생")
+    return {}
 
 
 def get_festival(pageNo):
@@ -102,24 +115,36 @@ def get_detailCommon1(data):
         'defaultYN': 'Y',
         'overviewYN': 'Y',
     }
-    try:
-        response = requests.get(apiUrl, apiParams, timeout=4)
-        print("HTTP 응답 코드:", response.status_code)
-        print("HTTP 응답 메시지:", response.text[:1000])
-        new_data = response.json()["response"]["body"]["items"]["item"][0]
-        homepage = ""
-        overview = ""
-        if (new_data["homepage"]):
-            homepage = extract_url_from_homepage(new_data["homepage"])
-        if (new_data["overview"]):
-            overview = remove_html_tags(new_data["overview"])
-        return dict(
-            {"homepage": homepage, "overview": overview}, **data)
-    except:
-        # err_msg = traceback.format_exc()
-        # print(err_msg)
-        print(api["i"]-1, "번째 api key 에서 문제발생")
-        return {}
+
+    retries = 3  # 최대 재시도 횟수
+    for _ in range(retries):
+        try:
+            response = requests.get(apiUrl, apiParams, timeout=30)
+            response.raise_for_status()  # HTTP 오류 발생 시 예외 처리
+            new_data = response.json()["response"]["body"]["items"]["item"][0]
+            homepage = ""
+            overview = ""
+            if (new_data["homepage"]):
+                homepage = extract_url_from_homepage(new_data["homepage"])
+            if (new_data["overview"]):
+                overview = remove_html_tags(new_data["overview"])
+            return dict(
+                {"homepage": homepage, "overview": overview}, **data)
+
+        except ConnectTimeout:
+            print("연결 시간이 초과되었습니다. 재시도 중...")
+            continue
+        except requests.exceptions.HTTPError as http_err:
+            print(f"HTTP 오류 발생: {http_err}")
+            break
+        except Exception as e:
+            print(f"오류 발생: {e}")
+            break
+    print("최대 재시도 횟수를 초과하여 요청 실패")
+    err_msg = traceback.format_exc()
+    print(err_msg)
+    print(api["i"]-1, "번째 api key 에서 문제발생")
+    return {}
 
 
 def get_detailIntro1(data):
@@ -150,7 +175,6 @@ def get_detailIntro1(data):
 
 
 def pushDB(res):
-    print(res)
     try:
         conn = pymysql.connect(
             host="13.124.253.233",
@@ -221,8 +245,7 @@ def main():
     total_pages = 5000
     while pageNo <= total_pages:
         print(f"{pageNo} 페이지 실행 시작")
-        ret = get_festival(pageNo)
-
+        ret = get_areaBased(pageNo)
         if not ret:
             print(f"{pageNo} 페이지의 가져오기 실패. 30초 후에 다시시작")
             time.sleep(30)
