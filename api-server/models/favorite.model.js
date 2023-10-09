@@ -33,7 +33,7 @@ const favoriteModel = {
       select
         favorite.user_id,
         favorite.fes_id,
-        festival_api.title,
+        festival_api.title as title,
         festival_api.first_image as first_image,
         favorite.create_at
       from favorite
@@ -42,7 +42,6 @@ const favoriteModel = {
       order by favorite.create_at desc
       `;
       const [result] = await conn.query(sql, [id]);
-      console.log(result);
       return result;
     } catch (err) {
       throw new Error("DB Error", { cause: err });

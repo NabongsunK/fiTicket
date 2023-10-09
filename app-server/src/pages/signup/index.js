@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { signin, signout } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
-import styles from "./signup.module.css";
+import PopUp from "../../components/common/PopUp";
 
 function Signup() {
   const navigate = useNavigate();
@@ -18,8 +18,11 @@ function Signup() {
   const nameRef = useRef();
   const authRef = useRef();
 
-  const [isActive, setActive] = useState(false);
-  const [isSend, setSend] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [popText, setPopText] = useState("");
+
+  const [blockPhone, setBlockPhone] = useState(false);
+  const [blockAuth, setBlockAuth] = useState(false);
 
   const isValidPhoneNumber = (phoneNumber) => {
     const regex = /^010-?\d{4}-?\d{4}$/;
@@ -46,51 +49,60 @@ function Signup() {
     return regex.test(id);
   };
 
-  //유효성 검사 함수들
-  const checkid = async () => {
-    try {
-      const response = await axios.post("/checkid", {
-        login_id: idRef.current.value,
-      });
-
-      if (response.data.isDuplicated) {
-        alert("이미 사용중인 ID입니다.");
-      } else {
-        alert("사용 가능한 ID입니다.");
-      }
-    } catch (error) {
-      console.error("ID 중복 확인 중 오류가 발생했습니다.", error);
-    }
-  };
-
   const signUp = async function () {
+    if (!pnRef.current.value) {
+      setPopText("핸드폰 번호를 입력해주세요.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
+      return;
+    }
+
     if (!isValidName(nameRef.current.value)) {
-      alert("이름은 한글만 가능합니다.");
+      setPopText("이름은 한글만 가능합니다.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
       return;
     }
 
     if (!isValidPassword(pwRef.current.value)) {
-      alert("비밀번호는 8자리 이상, 영문, 숫자, 특수문자를 포함해야 합니다.");
+      setPopText(
+        "비밀번호는 8자리 이상, 영문, 숫자, 특수문자를 포함해야 합니다."
+      );
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
       return;
     }
 
     if (!isValidEmail(emailRef.current.value)) {
-      alert("유효한 이메일 형식이 아닙니다.");
+      setPopText("유효한 이메일 형식이 아닙니다.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
       return;
     }
 
     if (!isValidId(idRef.current.value)) {
-      alert("ID는 영어와 숫자만 가능합니다.");
+      setPopText("ID는 영어와 숫자만 가능합니다.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
       return;
     }
 
     if (pwRef.current.value !== pwConfirmRef.current.value) {
-      alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-      return;
-    }
-
-    if (!pnRef.current.value) {
-      alert("핸드폰 번호를 입력해주세요.");
+      setPopText("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
       return;
     }
 
@@ -105,26 +117,32 @@ function Signup() {
     });
     // 회원가입성공시 성공시
     if (res.data.ok) {
-      // dispatch(signin({ user_id: res.data.user_id }));
-      navigate("/");
-    }
-  };
+      setPopText(
+        "회원가입 완료되었습니다. 서비스를 이용하려면 로그인 해주세요."
+      );
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
 
-  const FormSubmit = (e) => {
-    e.preventDefault();
-    signUp();
+      navigate("/login");
+    }
   };
 
   const getAuth = async function () {
     if (!isValidPhoneNumber(pnRef.current.value)) {
-      setActive(true);
+      setIsActive(true);
       setTimeout(() => {
-        setActive(false);
+        setIsActive(false);
       }, 5000);
 
-      alert(
+      setPopText(
         "핸드폰 번호는 010으로 시작하며, 중간,끝에는 4자리 숫자만 가능합니다."
       );
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
       return;
     }
 
@@ -134,9 +152,17 @@ function Signup() {
     });
 
     if (res.data.ok) {
-      setSend(true);
+      setPopText("사용가능한 아이디입니다. 인증번호를 입력해 주세요.");
+      setIsActive(true);
+      setBlockPhone(true);
       setTimeout(() => {
-        setSend(false);
+        setIsActive(false);
+      }, 5000);
+    } else {
+      setPopText("중복된 아이디입니다. 다시 입력해 주세요.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
       }, 5000);
     }
   };
@@ -148,69 +174,41 @@ function Signup() {
       phone_number: pnRef.current.value,
       authentication_number: authRef.current.value,
     });
-    setSend(true);
+
+    if (res.data.ok) {
+      setPopText("인증이 완료되었습니다. 아래정보를 기입해 주세요.");
+      setIsActive(true);
+      setBlockAuth(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
+    } else {
+      setPopText(
+        "인증번호가 잘못되었습니다. 대.소문자를 확인하고 다시 입력해 주세요"
+      );
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
+    }
+  };
+
+  const ingToggle = function () {
+    setPopText("서비스 준비예정입니다.");
+    setIsActive(true);
     setTimeout(() => {
-      setSend(false);
-    }, 3000);
+      setIsActive(false);
+    }, 5000);
   };
 
   return (
     // 이쪽 수정부탁
     <section className="signup_page">
-      {/* 핸드폰 인증하기 팝업 */}
-      <div
-        className={
-          isActive
-            ? `toast toast-3s fade show ${styles.toastPosition}`
-            : `toast toast-3s fade hide ${styles.toastPosition}`
-        }
-        role="alert"
-        aria-live="assertive"
-        data-delay="2000"
-        aria-atomic="true"
-      >
-        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
-          <img
-            src="assets/images/logo2.png"
-            alt=""
-            className={`img-fluid m-r-5 ${styles.logoStyle}`}
-          />
-          <strong className="mr-auto"></strong>
-          <small className="text-muted"></small>
-        </div>
-        <div className="toast-body">
-          <strong className="mr-auto">전송받은 인증번호를 입력해주세요.</strong>
-        </div>
-      </div>
-
-      {/* 인증번호 제출 */}
-      <div
-        className={
-          isSend
-            ? `toast toast-3s fade show ${styles.toastPosition}`
-            : `toast toast-3s fade hide ${styles.toastPosition}`
-        }
-        role="alert"
-        aria-live="assertive"
-        data-delay="2000"
-        aria-atomic="true"
-      >
-        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
-          <img
-            src="assets/images/logo2.png"
-            alt=""
-            className={`img-fluid m-r-5 ${styles.logoStyle}`}
-          />
-          <strong className="mr-auto"></strong>
-          <small className="text-muted"></small>
-        </div>
-        <div className="toast-body">
-          <strong className="mr-auto">아래 회원가입을 진행해주세요.</strong>
-        </div>
-      </div>
+      {/* 핸드폰 팝업 */}
+      <PopUp body={popText} isActive={isActive} />
 
       <div className="signup-container">
-        <form className="signup-form" onSubmit={FormSubmit}>
+        <form className="signup-form">
           {/* <!-- ID input --> */}
           <div className="form-outline mb-2">
             <input
@@ -218,6 +216,7 @@ function Signup() {
               id="login_id"
               className="form-control"
               ref={idRef}
+              readOnly={blockPhone}
             />
             <label className="form-label" htmlFor="login_id">
               ID
@@ -231,6 +230,7 @@ function Signup() {
               id="phone_number"
               className="form-control"
               ref={pnRef}
+              readOnly={blockPhone}
             />
             <label className="form-label" htmlFor="phone_number">
               핸드폰 번호
@@ -240,6 +240,7 @@ function Signup() {
               type="button"
               className="btn btn-primary btn-block mb-2"
               onClick={getAuth}
+              disabled={blockPhone}
             >
               핸드폰 인증하기
             </button>
@@ -248,6 +249,7 @@ function Signup() {
               id="authentication_number"
               className="form-control"
               ref={authRef}
+              readOnly={blockAuth}
             />
             <label className="form-label" htmlFor="authentication_number">
               인증번호
@@ -256,6 +258,7 @@ function Signup() {
               type="button"
               className="btn btn-primary btn-block mb-2"
               onClick={doAuth}
+              disabled={blockAuth}
             >
               인증번호 제출
             </button>
@@ -314,26 +317,46 @@ function Signup() {
           </div>
 
           {/* <!-- Submit button --> */}
-          <button type="submit" className="btn btn-primary btn-block mb-0">
+          <button
+            type="button"
+            onClick={signUp}
+            className="btn btn-primary btn-block mb-0"
+            disabled={!blockAuth}
+          >
             회원가입
           </button>
 
-          {/* <!-- Register buttons --> */}
           <div className="text-center">
             <p>or sign up with:</p>
-            <button type="button" className="btn btn-link btn-floating mx-1">
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
               <i className="fab fa-facebook-f"></i>
             </button>
 
-            <button type="button" className="btn btn-link btn-floating mx-1">
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
               <i className="fab fa-google"></i>
             </button>
 
-            <button type="button" className="btn btn-link btn-floating mx-1">
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
               <i className="fab fa-twitter"></i>
             </button>
 
-            <button type="button" className="btn btn-link btn-floating mx-1">
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
               <i className="fab fa-github"></i>
             </button>
           </div>

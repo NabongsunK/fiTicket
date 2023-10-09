@@ -4,6 +4,7 @@ import pageSlice from "./pageSlice";
 import cartSlice from "./cartSlice";
 import mapSlice from "./mapSlice";
 import reviewSlice from "./reviewSlice";
+import favoriteSlice from "./favoriteSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     myCartSlice: cartSlice.reducer,
     myMapSlice: mapSlice.reducer,
     reviewSlice: reviewSlice.reducer,
+    myFavorSlice: favoriteSlice.reducer,
   },
 });
 
