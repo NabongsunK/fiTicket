@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { pop, change } from "../../store/cartSlice";
 
 import styles from "./cartlistitem.module.css";
@@ -7,6 +7,7 @@ import styles from "./cartlistitem.module.css";
 const FavoriteListItem = function (props) {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.myCartSlice.myCarts);
+  const navigate = useNavigate();
 
   const removeItem = function (id) {
     cartItems.forEach((item, i) => {
@@ -17,33 +18,10 @@ const FavoriteListItem = function (props) {
     });
   };
 
-  const increaseQuantity = function (id) {
-    cartItems.forEach((item, i) => {
-      if (item.index === id) {
-        const updateItem = { ...item, quantity: item.quantity + 1 };
-        dispatch(change({ index: i, updateItem }));
-        return false;
-      }
-    });
-  };
-
-  const decreaseQuantity = function (id) {
-    cartItems.forEach((item, i) => {
-      if (item.index === id) {
-        if (item.quantity === 1) {
-          dispatch(pop({ index: i }));
-        } else {
-          const updateItem = { ...item, quantity: item.quantity - 1 };
-          dispatch(change({ index: i, updateItem }));
-        }
-        return false;
-      }
-    });
-  };
-  const img = props.item.image;
+  const img = props.item.first_image;
 
   const poster =
-    props.item.image === "" ? (
+    props.item.first_image === "" ? (
       <div
         className={styles.mycartitem}
         style={{
@@ -69,9 +47,15 @@ const FavoriteListItem = function (props) {
 
   return (
     <div className="single-cart-item">
-      <Link to="#" className="product-image">
+      <div
+        onClick={() => {
+          navigate(`/explore/${props.item.fes_id}`);
+        }}
+        className="product-image"
+      >
         <div className="row">
           <div className="col-lg-4 p-0">{poster}</div>
+
           <div className="col-lg-8">
             <div className="cart-item-desc">
               <span className="product-remove">
@@ -81,12 +65,14 @@ const FavoriteListItem = function (props) {
                   onClick={() => removeItem(props.item.index)}
                 ></i>
               </span>
-              <span className="badge">{props.item.badge}</span>
-              <h6>{props.item.name}</h6>
+
+              <div onClick={props.handleToggle}>
+                <h6>{props.item.title}</h6>
+              </div>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

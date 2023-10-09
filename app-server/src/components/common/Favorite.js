@@ -5,26 +5,33 @@ import Left from "./Left";
 import { setAmount } from "../../store/cartSlice";
 import FavoriteList from "./FavoriteList";
 
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = "http://localhost:4400/api";
+
+const getList = async function (user_id) {
+  const url = "/favorite/favorlist/" + user_id;
+  const res = await axios.get(url);
+  return res.data;
+};
+
 const favorite = function (props) {
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const [favorItems, setFavorItems] = useState([]);
+  useEffect(() => {
+    getList(user_id).then((response) => {
+      setFavorItems(response);
+    });
+  }, [user_id]);
+
   const cartItems = useSelector((state) => state.myCartSlice.myCarts);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setAmount({ newAmount: calculateTotalAmount() }));
   }, [cartItems]);
-
+  // console.log(favorItems);
   const calculateTotalAmount = () => {
     return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  };
-
-  const calculateTotalQuantity = () => {
-    return cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  };
-
-  const calculateTotalDiscount = () => {
-    return cartItems.reduce((acc, item) => {
-      const discount = isNaN(item.discount) ? 0 : item.discount;
-      return acc + ((item.price * discount) / 100) * item.quantity;
-    }, 0);
   };
 
   return (
@@ -40,7 +47,7 @@ const favorite = function (props) {
 
       <div className="cart-content">
         {/* Cart List Area */}
-        <FavoriteList cartItems={cartItems} />
+        <FavoriteList favorItems={favorItems} />
       </div>
     </div>
   );

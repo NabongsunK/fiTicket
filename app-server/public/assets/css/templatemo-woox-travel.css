@@ -2799,7 +2799,6 @@ div.owl-stage-outer > div {
 }
 .codetable {
   display: inline;
-  border: 1px;
 }
 .codetable tr::after {
   content: "||";
@@ -2809,5 +2808,22 @@ div.owl-stage-outer > div {
   margin: 0 8px;
 }
 .codetable:last-child tr::after {
+  content: "";
+}
+.deals_type {
+  float: right;
+  margin: 20px 0;
+}
+.typetable {
+  display: inline;
+}
+.typetable tr::after {
+  content: "||";
+  float: right;
+  color: #ccc;
+  line-height: 14px;
+  margin: 0 8px;
+}
+.typetable:last-child tr::after {
   content: "";
 }
