@@ -151,44 +151,51 @@ function Findpw() {
       }, 5000);
     }
   };
+  const ingToggle = function () {
+    setPopText("서비스 준비예정입니다.");
+    setIsActive(true);
+    setTimeout(() => {
+      setIsActive(false);
+    }, 5000);
+  };
   return (
     // 이쪽 수정부탁
-    <section className="signup_page">
+    <section className="login_page">
       {/* 핸드폰 팝업 */}
       <PopUp body={popText} isActive={isActive} />
 
-      <div className="signup-container">
+      <div className="signup-container2">
+        <img src="/assets/images/logo2.png" alt="" className="login-logo" />
         <form className="signup-form">
           {/* <!-- ID input --> */}
-          <div className="form-outline mb-2">
+          <div className="form-outline mb-0">
             <input
               type="text"
               id="login_id"
               className="form-control"
               ref={idRef}
               readOnly={blockPhone}
+              placeholder="아이디를 입력해주세요."
             />
-            <label className="form-label" htmlFor="login_id">
-              ID
-            </label>
+            <label className="form-label" htmlFor="login_id"></label>
           </div>
 
           {/* <!-- 핸드폰번호 input  여기에 인증 추가하기--> */}
-          <div className="form-outline mb-0">
+          <div className="form-outline mb-2">
             <input
               type="text"
               id="phone_number"
               className="form-control"
               ref={pnRef}
               readOnly={blockPhone}
+              placeholder="핸드폰 번호를 입력해주세요."
+              style={{ marginBottom: "15px" }}
             />
-            <label className="form-label" htmlFor="phone_number">
-              핸드폰 번호
-            </label>
+            <label className="form-label" htmlFor="phone_number"></label>
             {/* <!--인증 --> */}
             <button
               type="button"
-              className="btn btn-primary btn-block mb-2"
+              className="btn btn-primary btn-block mb-3"
               disabled={blockPhone}
               onClick={getAuth}
             >
@@ -200,10 +207,13 @@ function Findpw() {
               className="form-control"
               ref={authRef}
               readOnly={blockAuth}
+              placeholder="인증번호를 입력해주세요."
+              style={{ marginBottom: "15px" }}
             />
-            <label className="form-label" htmlFor="authentication_number">
-              인증번호
-            </label>
+            <label
+              className="form-label"
+              htmlFor="authentication_number"
+            ></label>
             <button
               type="button"
               className="btn btn-primary btn-block mb-2"
@@ -221,10 +231,9 @@ function Findpw() {
               id="password"
               className="form-control"
               ref={pwRef}
+              placeholder="비밀번호를 입력해주세요."
             />
-            <label className="form-label" htmlFor="password">
-              비밀번호
-            </label>
+            <label className="form-label" htmlFor="password"></label>
           </div>
 
           {/* <!-- 비밀번호 확인 --> */}
@@ -234,10 +243,9 @@ function Findpw() {
               id="password_confirm"
               className="form-control"
               ref={pwConfirmRef}
+              placeholder="비밀번호를 다시 입력해주세요."
             />
-            <label className="form-label" htmlFor="password_confirm">
-              비밀번호 확인
-            </label>
+            <label className="form-label" htmlFor="password_confirm"></label>
           </div>
 
           {/* <!-- Submit button --> */}
@@ -252,9 +260,38 @@ function Findpw() {
 
           {/* <!-- Register buttons --> */}
           <div className="text-center">
-            <p>
-              Not a member? <Link to="/signup">Register</Link>
-            </p>
+            <p>or sign up with:</p>
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
+              <i className="fab fa-facebook-f"></i>
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
+              <i className="fab fa-google"></i>
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
+              <i className="fab fa-twitter"></i>
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-link btn-floating mx-1"
+              onClick={ingToggle}
+            >
+              <i className="fab fa-github"></i>
+            </button>
           </div>
         </form>
       </div>
