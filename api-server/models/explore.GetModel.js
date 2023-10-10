@@ -114,7 +114,7 @@ const ExploreGetModel = {
         AND event_end_date IS NOT NULL
         AND over_view IS NOT NULL
         And datediff(event_end_date, now())>-1
-      ORDER BY event_start_date ASC
+      ORDER BY event_end_date ASC
       `;
       const [result] = await conn.query(sql);
       return result;
