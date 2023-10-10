@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../store/pageSlice";
 import { setMapCode, setMapItude, setRegionId } from "../../store/mapSlice";
 import { useNavigate } from "react-router";
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 import styles from "./mapdiv.module.css";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
@@ -72,6 +75,7 @@ const MapDiv = function () {
   };
   //토글 변경되면, 값변경
   const onChangeToggle = async function (val) {
+    console.log(val.target.value);
     dispatch(setPage({ newPage: 1 }));
     if (val === 0) {
       getCurrentPos();
@@ -79,9 +83,9 @@ const MapDiv = function () {
       dispatch(
         setMapItude({
           newMapItude: [
-            localInfos[val].centerLon,
-            localInfos[val].centerLat,
-            localInfos[val].localMapLevel,
+            localInfos[val.target.value].centerLon,
+            localInfos[val.target.value].centerLat,
+            localInfos[val.target.value].localMapLevel,
           ],
         })
       );
@@ -93,15 +97,48 @@ const MapDiv = function () {
   useEffect(getCurrentPos, []);
 
   const LocalSelectList = localInfos.map((localInfo) => (
-    <ToggleButton
-      // className="m-3"
+    <button
       id={"tbg-radio" + localInfo.id}
+      type="button"
       value={localInfo.id}
       key={localInfo.id}
+      onClick={onChangeToggle}
+      // className="item"
+      style={{ padding: "8px 10px" }}
     >
       {localInfo.localTitle}
-    </ToggleButton>
+    </button>
+
+    // <ToggleButton
+    //   // className="m-3"
+    //   id={"tbg-radio" + localInfo.id}
+    //   value={localInfo.id}
+    //   key={localInfo.id}
+    // >
+    //   {localInfo.localTitle}
+    // </ToggleButton>
   ));
+
+  const options = {
+    loop: false,
+    margin: 0,
+    dots: false,
+    nav: false,
+    responsive: {
+      0: {
+        items: 6,
+      },
+      640: {
+        items: 8,
+      },
+      1080: {
+        items: 12,
+      },
+      1280: {
+        items: 19,
+      },
+    },
+  };
 
   return (
     <>
@@ -116,7 +153,24 @@ const MapDiv = function () {
 
       <Map />
 
-      <ToggleButtonGroup
+      {/* 토글버튼 */}
+      <div id={styles.container} className="search-form">
+        <form
+          id="search-form"
+          style={{
+            display: "inline-flex",
+            justifyContent: "center",
+            width: "100%",
+            padding: "5px 10px",
+            borderRadius: "8px",
+          }}
+        >
+          <OwlCarousel className="owl-theme" {...options}>
+            {LocalSelectList}
+          </OwlCarousel>
+        </form>
+      </div>
+      {/* <ToggleButtonGroup
         className="btn-group-justified"
         type="radio"
         name="options"
@@ -124,7 +178,7 @@ const MapDiv = function () {
         onChange={onChangeToggle}
       >
         {LocalSelectList}
-      </ToggleButtonGroup>
+      </ToggleButtonGroup> */}
 
       {/* <div id="result" /> */}
     </>
