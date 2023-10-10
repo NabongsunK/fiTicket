@@ -164,9 +164,9 @@ function Findpw() {
       {/* 핸드폰 팝업 */}
       <PopUp body={popText} isActive={isActive} />
 
-      <div className="signup-container2">
+      <div className="login-container">
         <img src="/assets/images/logo2.png" alt="" className="login-logo" />
-        <form className="signup-form">
+        <form className="login-form">
           {/* <!-- ID input --> */}
           <div className="form-outline mb-0">
             <input
