@@ -306,6 +306,13 @@ body {
   border: 1px solid #fff;
 }
 
+.explore_list_button,
+.explore_list_button_rev {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
 .explore_list_button a,
 .explore_list_button_rev a {
   font-size: 28px;

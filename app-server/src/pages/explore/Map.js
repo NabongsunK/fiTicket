@@ -172,22 +172,32 @@ const Map = function (props) {
           body.className = styles.body;
           info.appendChild(body);
 
-          var imgDiv = document.createElement("div");
-          imgDiv.className = styles.img;
-          imgDiv.onclick = function () {
-            if (position.content_type_id === "15") {
+          if (position.content_type_id == 15) {
+            var imgDiv = document.createElement("div");
+            imgDiv.className = styles.img;
+            imgDiv.onclick = function () {
               navigate("/explore/" + position.id);
-            }
-          };
-          body.appendChild(imgDiv);
+            };
+            body.appendChild(imgDiv);
 
-          var img = document.createElement("img");
-          img.src = position.first_image2 ? position.first_image2 : imgdefault;
-          imgDiv.appendChild(img);
+            var img = document.createElement("img");
+            img.src = position.first_image2
+              ? position.first_image2
+              : imgdefault;
+            imgDiv.appendChild(img);
+          }
 
-          var desc = document.createElement("div");
-          desc.className = styles.desc;
-          body.appendChild(desc);
+          var desc;
+          if (position.content_type_id == 15) {
+            desc = document.createElement("div");
+            desc.className = styles.desc;
+            desc.id = styles.desc15;
+            body.appendChild(desc);
+          } else {
+            desc = document.createElement("div");
+            desc.className = styles.desc;
+            body.appendChild(desc);
+          }
 
           var ellipsis = document.createElement("div");
           ellipsis.className = styles.ellipsis;

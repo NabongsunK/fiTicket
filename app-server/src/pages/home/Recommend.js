@@ -50,9 +50,8 @@ const Recommend = function () {
       onClick={onChangeToggle}
       title={localItem.localTitle}
       style={{
-        padding: "4px 10px",
-        fontSize: "24px",
-        fontWeight: "500",
+        padding: "6px 14px",
+        fontSize: "18px",
         border: "1px solid",
       }}
     />

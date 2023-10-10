@@ -77,22 +77,23 @@ const MapDiv = function () {
   //토글 변경되면, 값변경
   const thisType = useRef(1);
 
-  const onChangeToggle = async function (val) {
+  const onChangeToggle = async function (event) {
+    console.log(event.target.dataset.value);
     dispatch(setPage({ newPage: 1 }));
-    if (val === 0) {
+    if (event.target.dataset.value == 0) {
       getCurrentPos();
     } else {
       dispatch(
         setMapItude({
           newMapItude: [
-            localInfos[val.target.dataset.value].centerLon,
-            localInfos[val.target.dataset.value].centerLat,
-            localInfos[val.target.dataset.value].localMapLevel,
+            localInfos[event.target.dataset.value].centerLon,
+            localInfos[event.target.dataset.value].centerLat,
+            localInfos[event.target.dataset.value].localMapLevel,
           ],
         })
       );
     }
-    thisType.current = val.target.dataset.value;
+    thisType.current = event.target.dataset.value;
 
     navigate("/explore");
   };
@@ -100,33 +101,46 @@ const MapDiv = function () {
   // TODO: 처음마운트 될때 위치정보 얻기
   useEffect(getCurrentPos, []);
 
-  const LocalSelectList = localInfos.map((localInfo) => (
-    <Button
-      id={"tbg-radio" + localInfo.id}
-      type="button"
-      isRev={localInfo.id == thisType.current}
-      value={localInfo.id}
-      key={localInfo.id}
-      onClick={onChangeToggle}
-      // className="item"
-      style={{
-        padding: "4px 10px",
-        fontSize: "16px",
-        fontWeight: "200",
-        border: "1px solid",
-      }}
-      title={localInfo.localTitle}
-    />
-
-    // <ToggleButton
-    //   // className="m-3"
-    //   id={"tbg-radio" + localInfo.id}
-    //   value={localInfo.id}
-    //   key={localInfo.id}
-    // >
-    //   {localInfo.localTitle}
-    // </ToggleButton>
-  ));
+  const LocalSelectList = localInfos.map((localInfo) => {
+    if (localInfo.id == 0) {
+      return (
+        <Button
+          id={"tbg-radio" + localInfo.id}
+          type="button"
+          isRev={localInfo.id == thisType.current}
+          value={localInfo.id}
+          key={localInfo.id}
+          onClick={onChangeToggle}
+          // className="item"
+          style={{
+            padding: "4px 5px",
+            fontSize: "16px",
+            fontWeight: "200",
+            border: "1px solid",
+          }}
+          title={localInfo.localTitle}
+        />
+      );
+    }
+    return (
+      <Button
+        id={"tbg-radio" + localInfo.id}
+        type="button"
+        isRev={localInfo.id == thisType.current}
+        value={localInfo.id}
+        key={localInfo.id}
+        onClick={onChangeToggle}
+        // className="item"
+        style={{
+          padding: "4px 10px",
+          fontSize: "16px",
+          fontWeight: "200",
+          border: "1px solid",
+        }}
+        title={localInfo.localTitle}
+      />
+    );
+  });
 
   const options = {
     loop: false,
