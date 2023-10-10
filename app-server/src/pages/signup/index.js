@@ -130,6 +130,15 @@ function Signup() {
   };
 
   const getAuth = async function () {
+    if (!isValidId(idRef.current.value)) {
+      setPopText("ID는 영어와 숫자만 가능합니다.");
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 5000);
+      return;
+    }
+
     if (!isValidPhoneNumber(pnRef.current.value)) {
       setIsActive(true);
       setTimeout(() => {
@@ -208,19 +217,19 @@ function Signup() {
       <PopUp body={popText} isActive={isActive} />
 
       <div className="signup-container">
+        <img src="/assets/images/logo2.png" alt="" className="login-logo" />
         <form className="signup-form">
           {/* <!-- ID input --> */}
-          <div className="form-outline mb-2">
+          <div className="form-outline mb-0">
             <input
               type="text"
               id="login_id"
               className="form-control"
               ref={idRef}
               readOnly={blockPhone}
+              placeholder="아이디 입력해주세요."
             />
-            <label className="form-label" htmlFor="login_id">
-              ID
-            </label>
+            <label className="form-label" htmlFor="login_id"></label>
           </div>
 
           {/* <!-- 핸드폰번호 input  여기에 인증 추가하기--> */}
@@ -231,14 +240,14 @@ function Signup() {
               className="form-control"
               ref={pnRef}
               readOnly={blockPhone}
+              placeholder="핸드폰 번호를 입력해주세요."
+              style={{ marginBottom: "15px" }}
             />
-            <label className="form-label" htmlFor="phone_number">
-              핸드폰 번호
-            </label>
+            <label className="form-label" htmlFor="phone_number"></label>
             {/* <!--인증 --> */}
             <button
               type="button"
-              className="btn btn-primary btn-block mb-2"
+              className="btn btn-primary btn-block mb-3"
               onClick={getAuth}
               disabled={blockPhone}
             >
@@ -250,13 +259,16 @@ function Signup() {
               className="form-control"
               ref={authRef}
               readOnly={blockAuth}
+              placeholder="인증번호를 입력해주세요."
+              style={{ marginBottom: "15px" }}
             />
-            <label className="form-label" htmlFor="authentication_number">
-              인증번호
-            </label>
+            <label
+              className="form-label"
+              htmlFor="authentication_number"
+            ></label>
             <button
               type="button"
-              className="btn btn-primary btn-block mb-2"
+              className="btn btn-primary btn-block mb-3"
               onClick={doAuth}
               disabled={blockAuth}
             >
@@ -271,10 +283,9 @@ function Signup() {
               id="name"
               className="form-control"
               ref={nameRef}
+              placeholder="이름을 입력해주세요."
             />
-            <label className="form-label" htmlFor="name">
-              이름
-            </label>
+            <label className="form-label" htmlFor="name"></label>
           </div>
 
           {/* <!-- 비밀번호 --> */}
@@ -284,10 +295,9 @@ function Signup() {
               id="password"
               className="form-control"
               ref={pwRef}
+              placeholder="비밀번호를 입력해주세요."
             />
-            <label className="form-label" htmlFor="password">
-              비밀번호
-            </label>
+            <label className="form-label" htmlFor="password"></label>
           </div>
 
           {/* <!-- 비밀번호 확인 --> */}
@@ -297,10 +307,9 @@ function Signup() {
               id="password_confirm"
               className="form-control"
               ref={pwConfirmRef}
+              placeholder="비밀번호를 다시 입력해주세요."
             />
-            <label className="form-label" htmlFor="password_confirm">
-              비밀번호 확인
-            </label>
+            <label className="form-label" htmlFor="password_confirm"></label>
           </div>
 
           {/* <!-- 이메일주소 --> */}
@@ -310,10 +319,9 @@ function Signup() {
               id="email"
               className="form-control"
               ref={emailRef}
+              placeholder="이메일을 입력해주세요."
             />
-            <label className="form-label" htmlFor="email">
-              이메일주소
-            </label>
+            <label className="form-label" htmlFor="email"></label>
           </div>
 
           {/* <!-- Submit button --> */}
