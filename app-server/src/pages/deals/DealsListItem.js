@@ -3,6 +3,7 @@ import { push, pop } from "../../store/cartSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import HomepageBtn from "../../components/common/HomepageBtn";
+import Button from "../../components/common/Button";
 
 const DealsListItem = function (props) {
   const dispatch = useDispatch();
@@ -61,10 +62,7 @@ const DealsListItem = function (props) {
     <div className="col-lg-10 col-sm-6 offset-lg-1">
       <div className="item">
         <div className="row">
-          <div
-            className="col-lg-4"
-            style={{ paddingRight: "45px", overflow: "hidden" }}
-          >
+          <div className="col-lg-3" style={{ overflow: "hidden" }}>
             {poster}
           </div>
           <div className="col-lg-7 align-self-center">
@@ -97,18 +95,23 @@ const DealsListItem = function (props) {
               </Link>
             </div>
           </div>
-          <div className="col-lg-1 align-self-center">
-            <div className="explore_list_button">
-              <HomepageBtn
-                key={props.festival.id}
-                homepage_src={props.festival.home_page}
-              />
-            </div>
-            <div className="explore_list_button" onClick={toCart}>
-              <Link onClick={props.alertHandler} style={{ marginTop: 0 }}>
-                <i className="fa fa-cart-plus"></i>
-              </Link>
-            </div>
+          <div className="col-lg-2 align-self-center">
+            {/* 홈페이지 연결 */}
+            <Button
+              title={<i className="fa fa-home"></i>}
+              href={props.festival.home_page}
+              homepage={true}
+              style={{ padding: "5px 30px" }}
+            />
+            {/* 장바구니 담기 */}
+            <Button
+              title={<i className="fa fa-cart-plus"></i>}
+              onClick={() => {
+                toCart();
+                props.alertHandler("장바구니에 담겼습니다.");
+              }}
+              style={{ padding: "5px 30px" }}
+            />
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ import Filter from "./Filter";
 import DealsPageHeading from "./DealsPageHeading";
 
 import axios from "axios";
+import PopUp from "../../components/common/PopUp";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -20,12 +21,14 @@ const getAllList = async function () {
 var fesAllList = await getAllList();
 
 const Deal = function () {
-  const [isActive, setActive] = useState("false");
+  const [isActive, setIsActive] = useState(false);
+  const [popText, setPopText] = useState("");
 
-  const alertHandler = () => {
-    setActive(!isActive);
+  const alertHandler = function (title) {
+    setPopText(title);
+    setIsActive(true);
     setTimeout(() => {
-      setActive(isActive);
+      setIsActive(false);
     }, 3000);
   };
 
@@ -56,31 +59,7 @@ const Deal = function () {
       {/* 필터 */}
       <Filter setType={setType} />
 
-      {/* 알람창 놓고싶은데 넣기*/}
-      <div
-        className={
-          isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
-        }
-        role="alert"
-        aria-live="assertive"
-        data-delay="3000"
-        aria-atomic="true"
-        style={{ position: "absolute", right: "40%", zIndex: 200 }}
-      >
-        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
-          <img
-            src="assets/images/logo2.png"
-            alt=""
-            className="img-fluid m-r-5"
-            style={{ width: "150px" }}
-          />
-          <strong className="mr-auto"></strong>
-          <small className="text-muted"></small>
-        </div>
-        <div className="toast-body">
-          <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
-        </div>
-      </div>
+      <PopUp body={popText} isActive={isActive} />
 
       <div className="amazing-deals" style={{ marginBottom: "200px" }}>
         <div className="container">

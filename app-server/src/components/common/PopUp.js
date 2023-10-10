@@ -15,7 +15,7 @@ const PopUp = function (props) {
     >
       <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
         <img
-          src="assets/images/logo2.png"
+          src="/assets/images/logo2.png"
           alt=""
           className={`img-fluid m-r-5 ${styles.logoStyle}`}
         />
