@@ -165,7 +165,7 @@ function Findpw() {
       <PopUp body={popText} isActive={isActive} />
 
       <div className="login-container">
-        <img src="/assets/images/logo2.png" alt="" className="login-logo" />
+        <img src="/assets/images/newLogo.png" className="login-logo" />
         <form className="login-form">
           {/* <!-- ID input --> */}
           <div className="form-outline mb-0">
@@ -175,7 +175,7 @@ function Findpw() {
               className="form-control"
               ref={idRef}
               readOnly={blockPhone}
-              placeholder="아이디를 입력해주세요."
+              placeholder="아이디"
             />
             <label className="form-label" htmlFor="login_id"></label>
           </div>
@@ -188,7 +188,7 @@ function Findpw() {
               className="form-control"
               ref={pnRef}
               readOnly={blockPhone}
-              placeholder="핸드폰 번호를 입력해주세요."
+              placeholder="핸드폰 번호"
               style={{ marginBottom: "15px" }}
             />
             <label className="form-label" htmlFor="phone_number"></label>
@@ -207,7 +207,7 @@ function Findpw() {
               className="form-control"
               ref={authRef}
               readOnly={blockAuth}
-              placeholder="인증번호를 입력해주세요."
+              placeholder="인증번호"
               style={{ marginBottom: "15px" }}
             />
             <label
@@ -231,7 +231,7 @@ function Findpw() {
               id="password"
               className="form-control"
               ref={pwRef}
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호"
             />
             <label className="form-label" htmlFor="password"></label>
           </div>
@@ -243,7 +243,7 @@ function Findpw() {
               id="password_confirm"
               className="form-control"
               ref={pwConfirmRef}
-              placeholder="비밀번호를 다시 입력해주세요."
+              placeholder="비밀번호 확인"
             />
             <label className="form-label" htmlFor="password_confirm"></label>
           </div>

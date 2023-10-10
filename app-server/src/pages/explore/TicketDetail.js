@@ -189,6 +189,8 @@ const TicketDetailItem = function () {
                 style={{
                   border: "1px solid white",
                   boxShadow: "0 0 3px rgba(0, 0, 0, 0.15)",
+                  padding: "5px 30px",
+                  float: "left",
                 }}
                 onClick={() => {
                   toFavor();
@@ -202,6 +204,7 @@ const TicketDetailItem = function () {
                   toFavor();
                   alertHandler("관심리스트에 추가했습니다.");
                 }}
+                style={{ padding: "5px 30px", float: "left" }}
               />
             )}
           </div>

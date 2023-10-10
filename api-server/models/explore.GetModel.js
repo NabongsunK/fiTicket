@@ -6,21 +6,39 @@ const ExploreGetModel = {
   // 중복검사
   async getListMap(content_type_id, conn = pool) {
     try {
-      const sql = `
-      select
-        id,
-        addr1,
-        first_image2,
-        title,
-        map_x,
-        map_y,
-        content_type_id,
-        datediff(event_end_date, now()) as d_day
-      from festival_api
-        where 
-          content_type_id = ?
-          And datediff(event_end_date, now())>-1
-      `;
+      let sql = "";
+      if (content_type_id == "15") {
+        sql = `
+        select
+          id,
+          addr1,
+          first_image2,
+          title,
+          map_x,
+          map_y,
+          content_type_id,
+          datediff(event_end_date, now()) as d_day
+        from festival_api
+          where 
+            content_type_id = ?
+            And datediff(event_end_date, now())>-1
+        `;
+      } else {
+        sql = `
+        select
+          id,
+          addr1,
+          first_image2,
+          title,
+          map_x,
+          map_y,
+          content_type_id
+        from festival_api
+          where 
+            content_type_id = ?
+        `;
+      }
+
       const [result] = await conn.query(sql, [content_type_id]);
       return result;
     } catch (err) {

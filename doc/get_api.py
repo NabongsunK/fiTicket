@@ -267,7 +267,7 @@ def main():
     total_pages = 5000
     while pageNo <= total_pages:
         print(f"{pageNo} 페이지 실행 시작")
-        ret = get_festival(pageNo)
+        ret = get_areaBased(pageNo)
         if not ret:
             print(f"{pageNo} 페이지의 가져오기 실패. 30초 후에 다시시작")
             time.sleep(30)

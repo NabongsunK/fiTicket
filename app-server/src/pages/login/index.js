@@ -73,9 +73,7 @@ function Login() {
     <section className="login_page">
       <PopUp body={popText} isActive={isActive} />
       <div className="login-container">
-        <div className="row" style={{ backgroundColor: "#22b3c1" }}>
-          <img src="/assets/images/logo2.png" alt="" className="login-logo" />
-        </div>
+        <img src="/assets/images/newLogo.png" className="login-logo" />
 
         <form
           onSubmit={(e) => {
@@ -92,7 +90,7 @@ function Login() {
               type="text"
               id="form2Example1"
               className="form-control"
-              placeholder="아이디를 입력해주세요."
+              placeholder="아이디"
               ref={loginIdRef}
             />
           </div>
@@ -106,7 +104,7 @@ function Login() {
               type="password"
               id="form2Example2"
               className="form-control"
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호"
               ref={loginPwRef}
             />
           </div>

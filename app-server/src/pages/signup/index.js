@@ -227,7 +227,7 @@ function Signup() {
               className="form-control"
               ref={idRef}
               readOnly={blockPhone}
-              placeholder="아이디 입력해주세요."
+              placeholder="아이디"
             />
             <label className="form-label" htmlFor="login_id"></label>
           </div>
@@ -240,7 +240,7 @@ function Signup() {
               className="form-control"
               ref={pnRef}
               readOnly={blockPhone}
-              placeholder="핸드폰 번호를 입력해주세요."
+              placeholder="핸드폰 번호"
               style={{ marginBottom: "15px" }}
             />
             <label className="form-label" htmlFor="phone_number"></label>
@@ -259,7 +259,7 @@ function Signup() {
               className="form-control"
               ref={authRef}
               readOnly={blockAuth}
-              placeholder="인증번호를 입력해주세요."
+              placeholder="인증번호"
               style={{ marginBottom: "15px" }}
             />
             <label
@@ -283,7 +283,7 @@ function Signup() {
               id="name"
               className="form-control"
               ref={nameRef}
-              placeholder="이름을 입력해주세요."
+              placeholder="이름"
             />
             <label className="form-label" htmlFor="name"></label>
           </div>
@@ -295,7 +295,7 @@ function Signup() {
               id="password"
               className="form-control"
               ref={pwRef}
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호."
             />
             <label className="form-label" htmlFor="password"></label>
           </div>
@@ -307,7 +307,7 @@ function Signup() {
               id="password_confirm"
               className="form-control"
               ref={pwConfirmRef}
-              placeholder="비밀번호를 다시 입력해주세요."
+              placeholder="비밀번호 확인"
             />
             <label className="form-label" htmlFor="password_confirm"></label>
           </div>
@@ -319,7 +319,7 @@ function Signup() {
               id="email"
               className="form-control"
               ref={emailRef}
-              placeholder="이메일을 입력해주세요."
+              placeholder="이메일"
             />
             <label className="form-label" htmlFor="email"></label>
           </div>
