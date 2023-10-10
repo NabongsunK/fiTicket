@@ -2581,7 +2581,7 @@ body {
   position: relative;
   top: 70;
   width: 95%;
-  min-height: 900px;
+  min-height: 700px;
   height: 80vh;
   margin: 0 auto;
   margin-top: 70px;
@@ -2610,13 +2610,20 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 18rem;
-  background-color: rgba(34, 179, 193, 0.75);
+  background-color: #22b3c1;
   border-radius: 13px;
 }
+
 .login-container form .text-center p {
   color: #212529;
   /* font-weight: 600; */
 }
+.login-logo {
+  margin: 20px auto;
+  display: block;
+  width: 200px;
+}
+
 .btn.btn-primary.btn-block.mb-4:hover {
   color: #22b3c1;
 }
@@ -2624,7 +2631,7 @@ body {
 .signup_page {
   position: relative;
   top: 70;
-  min-height: 800px;
+  min-height: 1000px;
   margin: 0 auto;
   height: 90vh;
   /* background-image: url("../images/signup_bg.jpg"); */
@@ -2638,34 +2645,39 @@ body {
   transform: translate(-50%, -45%);
   max-width: 18rem;
   width: 90%;
-  background-color: rgba(34, 179, 193, 0.75);
+  background-color: #22b3c1;
   border-radius: 13px;
-  font-size: 14px;
   margin: 0;
-  max-height: calc(100vh - 200px);
 }
 
-.search-form #explore-search-form {
-  background-color: #22b3c1;
-  border-radius: 23px;
-  padding: 20px 60px;
-}
-.search-form #explore-search-form button {
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-  color: #fff;
-  background-color: transparent;
-  border: 1px solid #fff;
-  padding: 8px 30px;
-  display: inline-block;
-  border-radius: 25px;
-  font-weight: 500;
-  text-transform: capitalize;
-  letter-spacing: 0.5px;
-  transition: all 0.3s;
+.signup-container2 {
   position: relative;
-  overflow: hidden;
+  padding: 10px 10px 0;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  max-width: 18rem;
+  width: 90%;
+  background-color: #22b3c1;
+  border-radius: 13px;
+  margin: 0;
+}
+
+.login-container .form-control,
+.signup-container .form-control,
+.signup-container2 .form-control,
+.login-container .form-control::placeholder,
+.signup-container .form-control::placeholder,
+.signup-container2 .form-control::placeholder {
+  text-align: right;
+}
+
+body .form-control::placeholder {
+  color: rgb(179, 178, 178);
+}
+
+body .form-control::placeholder {
+  color: rgb(179, 178, 178);
 }
 
 .hover-item {

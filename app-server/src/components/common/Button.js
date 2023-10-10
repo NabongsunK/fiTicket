@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 
 const Button = function (props) {
+  if (props.homepage && !props.href) {
+    return "";
+  }
   if (props.isRev) {
     return (
       <div
         className="explore_list_button_rev"
         value={props.value}
+        style={props.divStyle}
         onClick={(e) => {
           if (props.onClick) {
             props.onClick(e);
@@ -22,6 +26,7 @@ const Button = function (props) {
       <div
         className="explore_list_button"
         value={props.value}
+        style={props.divStyle}
         onClick={(e) => {
           if (props.onClick) {
             props.onClick(e);

@@ -112,9 +112,11 @@ const UserListItem = function (props) {
                 }}
                 title={"QR코드 받기"}
                 style={{
-                  marginTop: 0,
-                  border: "1px solid white",
-                  fontSize: "24px",
+                  fontSize: "16px",
+                  position: "absolute",
+                  top: "80px",
+                  right: "40px",
+                  border: "1px solid",
                 }}
               />
             </div>

@@ -73,6 +73,7 @@ function Login() {
     <section className="login_page">
       <PopUp body={popText} isActive={isActive} />
       <div className="login-container">
+        <img src="/assets/images/logo2.png" alt="" className="login-logo" />
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -82,12 +83,13 @@ function Login() {
           {/* <!-- ID input --> */}
           <div className="form-outline">
             <label className="form-label" htmlFor="form2Example1">
-              ID
+              {/* ID */}
             </label>
             <input
               type="text"
               id="form2Example1"
               className="form-control"
+              placeholder="아이디를 입력해주세요."
               ref={loginIdRef}
             />
           </div>
@@ -95,23 +97,26 @@ function Login() {
           {/* <!-- Password input --> */}
           <div className="form-outline">
             <label className="form-label" htmlFor="form2Example2">
-              Password
+              {/* Password */}
             </label>
             <input
               type="password"
               id="form2Example2"
               className="form-control"
+              placeholder="비밀번호를 입력해주세요."
               ref={loginPwRef}
             />
           </div>
 
           {/* <!-- 2 column grid layout for inline styling --> */}
-          <div className="row mb-4">
-            <div className="col d-flex justify-content-center"></div>
-
-            <div className="col">
-              {/* <!-- Simple link --> */}
-              <Link to="/findpw">비밀번호 찾기</Link>
+          <div className="row mb-1 mt-4">
+            <div className="col d-flex justify-content-center">
+              {/* <!-- Checkbox --> */}
+              <div className="text-center">
+                <p>
+                  비밀번호를 잊으셨나요? <Link to="/findpw">비밀번호 찾기</Link>
+                </p>
+              </div>
             </div>
           </div>
 

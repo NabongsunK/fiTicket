@@ -52,26 +52,34 @@ const User = function (props) {
 
       <div className="cart-content">
         <div className="row">
-          <div className="col-lg-7 p-0"></div>
-          <div className="col-lg-5">
-            {is_manager ? (
-              <Button
-                title="관리자페이지"
-                href="/staff"
-                onClick={props.actions.handleToggle}
-                style={{ fontSize: "24px" }}
-              />
-            ) : (
-              ""
-            )}
-            <Button
-              title="로그아웃"
-              style={{ fontSize: "24px" }}
-              onClick={() => {
-                props.actions.signOut();
-                props.actions.handleToggle();
+          <div className="col-lg-12">
+            <div
+              style={{
+                display: "flex",
+                float: "right",
+                gap: "10px",
+                margin: "10px",
               }}
-            />
+            >
+              {is_manager ? (
+                <Button
+                  title="관리자페이지"
+                  href="/staff"
+                  onClick={props.actions.handleToggle}
+                  style={{ fontSize: "24px" }}
+                />
+              ) : (
+                ""
+              )}
+              <Button
+                title="로그아웃"
+                style={{ fontSize: "24px" }}
+                onClick={() => {
+                  props.actions.signOut();
+                  props.actions.handleToggle();
+                }}
+              />
+            </div>
           </div>
         </div>
         <UserList

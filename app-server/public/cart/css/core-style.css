@@ -824,7 +824,7 @@ img {
   .cart-item-desc
   .product-remove {
   position: absolute;
-  top: 10px;
+  top: 0px;
   right: 30px;
   color: var(--cart--item--subcolor);
   font-size: 26px;
@@ -903,7 +903,7 @@ img {
   color: var(--cart--item--color);
   text-transform: capitalize;
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
 }
 
 .right-side-cart-area
@@ -917,7 +917,7 @@ img {
   color: var(--cart--item--hover--color);
   text-transform: capitalize;
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
 }
 @media only screen and (max-width: 767px) {
   .right-side-cart-area
