@@ -73,7 +73,10 @@ function Login() {
     <section className="login_page">
       <PopUp body={popText} isActive={isActive} />
       <div className="login-container">
-        <img src="/assets/images/logo2.png" alt="" className="login-logo" />
+        <div className="row" style={{ backgroundColor: "#22b3c1" }}>
+          <img src="/assets/images/logo2.png" alt="" className="login-logo" />
+        </div>
+
         <form
           onSubmit={(e) => {
             e.preventDefault();

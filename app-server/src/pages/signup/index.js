@@ -212,13 +212,13 @@ function Signup() {
 
   return (
     // 이쪽 수정부탁
-    <section className="signup_page">
+    <section className="login_page">
       {/* 핸드폰 팝업 */}
       <PopUp body={popText} isActive={isActive} />
 
-      <div className="signup-container">
-        <img src="/assets/images/logo2.png" alt="" className="login-logo" />
-        <form className="signup-form">
+      <div className="login-container">
+        <img src="/assets/images/newLogo.png" className="login-logo" />
+        <form className="login-form">
           {/* <!-- ID input --> */}
           <div className="form-outline mb-0">
             <input
