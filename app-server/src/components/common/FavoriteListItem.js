@@ -5,13 +5,13 @@ import { pop, change, push } from "../../store/cartSlice";
 import styles from "./cartlistitem.module.css";
 import { popFavor } from "../../store/favorSlice";
 import Button from "./Button";
+import { useState } from "react";
 
 const FavoriteListItem = function (props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
-  console.log(props.item);
 
   const removeItem = function () {
     dispatch(
@@ -28,12 +28,12 @@ const FavoriteListItem = function (props) {
     dispatch(
       push({
         ticket: {
-          badge: props.festival.addr1 + " " + props.festival.addr2,
-          name: props.festival.title,
+          badge: props.item.addr1 + " " + props.item.addr2,
+          name: props.item.title,
           quantity: 1,
-          price: props.festival.price,
-          image: props.festival.first_image,
-          ticket_id: props.festival.id,
+          price: props.item.price,
+          image: props.item.first_image,
+          ticket_id: props.item.id,
           index: myCart.length,
         },
       })
@@ -80,6 +80,7 @@ const FavoriteListItem = function (props) {
 
           <div className="col-lg-8">
             <div className="cart-item-desc">
+              <span className="badge">{"D-" + props.item.d_day}</span>
               <span className="product-remove">
                 <i
                   className="fa fa-close"
@@ -90,6 +91,7 @@ const FavoriteListItem = function (props) {
 
               <div onClick={props.handleToggle}>
                 <h6>{props.item.title}</h6>
+                <p className="price">{props.item.price.toLocaleString()}원</p>
                 <Button
                   onClick={() => {
                     toCart();
@@ -97,10 +99,12 @@ const FavoriteListItem = function (props) {
                   }}
                   title={<i className="fa fa-cart-plus"></i>}
                   style={{
-                    marginTop: 0,
-                    border: "1px solid white",
                     fontSize: "24px",
-                    float: "right",
+                    position: "absolute",
+                    bottom: "10px",
+                    right: "40px",
+                    padding: "5px 40px",
+                    border: "1px solid",
                   }}
                 />
               </div>

@@ -32,7 +32,7 @@ const favorite = function (props) {
       <PopUp body={popText} isActive={isActive} />
       <div className="cart-content">
         {/* Cart List Area */}
-        <FavoriteList favorItems={myFavor} />
+        <FavoriteList favorItems={myFavor} alertHandler={alertHandler} />
       </div>
     </div>
   );

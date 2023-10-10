@@ -69,6 +69,8 @@ const TicketListItem = function (props) {
             ticket_id: props.festival.id,
             title: props.festival.title,
             first_image: props.festival.first_image,
+            price: props.festival.price,
+            d_day: props.festival.d_day,
           },
           user_id: user_id,
         })
@@ -143,6 +145,7 @@ const TicketListItem = function (props) {
           festival={props.festival}
           openModal={openModal}
           toCart={toCart}
+          toFavor={toFavor}
         />
       </Modal>
       <div className={styles.item}>

@@ -1,70 +1,54 @@
 import { Link, useParams } from "react-router-dom";
 import { push, pop } from "../../store/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import styles from "./ticketDetailItem.module.css";
+import Button from "../../components/common/Button";
+import PopUp from "../../components/common/PopUp";
 
 const TicketDetailItem = function (props) {
-  const [isActive, setActive] = useState("false");
-  // const [reviewData, setReviewData] = useState([]);
-  const alertHandler = () => {
-    setActive(!isActive);
+  const [isActive, setIsActive] = useState(false);
+  const [popText, setPopText] = useState("");
+  const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
+
+  const isFavor = myFavor.find((element) => {
+    if (element.ticket_id == props.festival.id) {
+      return true;
+    }
+  });
+
+  const alertHandler = function (title) {
+    setPopText(title);
+    setIsActive(true);
     setTimeout(() => {
-      setActive(isActive);
-    }, 3000);
+      setIsActive(false);
+    }, 5000);
   };
 
   return (
     <div onClick={(e) => e.stopPropagation()}>
-      {/* 알람창 놓고싶은데 넣기*/}
-      <div
-        className={
-          isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
-        }
-        role="alert"
-        aria-live="assertive"
-        data-delay="3000"
-        aria-atomic="true"
-        style={{
-          position: "fixed",
-          bottom: "10px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 200
-        }}
-      >
-        <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
-          <img
-            src="assets/images/logo2.png"
-            alt=""
-            className="img-fluid m-r-5"
-            style={{ width: "150px" }}
-          />
-          <strong className="mr-auto"></strong>
-          <small className="text-muted"></small>
-        </div>
-        <div className="toast-body">
-          <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
-        </div>
-      </div>
+      <PopUp body={popText} isActive={isActive} />
 
       {/* close */}
       <div id={styles.closeButton}>
-        <div className="close-button"
-            id="rightSideClose"
-            onClick={props.openModal}
-          >
-            <i className="fa fa-close fa-close-cart" aria-hidden="true"></i>
+        <div
+          className="close-button"
+          id="rightSideClose"
+          onClick={props.openModal}
+        >
+          <i className="fa fa-close fa-close-cart" aria-hidden="true"></i>
         </div>
       </div>
 
-      <div onClick={(e) => e.stopPropagation()} className={styles.modalContainer}>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={styles.modalContainer}
+      >
         <div className={styles.modalContent}>
           <h4 className={styles.modalTitle}>{props.festival.title}</h4>
-          <div className={styles.address}>
-            {props.festival.addr1}
-          </div>
+          <div className={styles.address}>{props.festival.addr1}</div>
           <h6 className={styles.listdate}>
             {"운영기간: "}
             {props.festival.event_start_date} ~ {props.festival.event_end_date}
@@ -77,23 +61,49 @@ const TicketDetailItem = function (props) {
         </div>
       </div>
 
-      <div id= {styles.buttonContainer}>
+      <div id={styles.buttonContainer}>
         {/* 홈페이지 연결 */}
-        <div className="explore_list_button">
-          <div
-          className={styles.button}
+        <Button
+          title="홈페이지"
           onClick={() => {
-          window.open(props.festival.home_page, '_blank');
-          }}>
-            <Link>홈페이지</Link>
-          </div>
-        </div>
+            window.open(props.festival.home_page, "_blank");
+          }}
+          style={{ padding: "5px 40px" }}
+        />
+
         {/* 장바구니 담기 */}
-        <div className="explore_list_button" onClick={alertHandler}>
-          <div className={styles.button} onClick={props.toCart}>
-            <Link>장바구니</Link>
-          </div>
-        </div>
+        <Button
+          title="장바구니"
+          onClick={() => {
+            props.toCart();
+            alertHandler("장바구니에 담겼습니다.");
+          }}
+          style={{ padding: "5px 40px" }}
+          divStyle={{ float: "left" }}
+        />
+
+        {isFavor ? (
+          <Button
+            title={<i className="fa fa-heart" id="myheart"></i>}
+            isRev={true}
+            style={{
+              border: "1px solid white",
+              boxShadow: "0 0 3px rgba(0, 0, 0, 0.15)",
+            }}
+            onClick={() => {
+              props.toFavor();
+              alertHandler("관심리스트에서 제거하였습니다.");
+            }}
+          />
+        ) : (
+          <Button
+            title={<i className="fa fa-heart" id="myheart"></i>}
+            onClick={() => {
+              props.toFavor();
+              alertHandler("관심리스트에 추가했습니다.");
+            }}
+          />
+        )}
       </div>
     </div>
   );

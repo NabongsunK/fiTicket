@@ -7,6 +7,9 @@ import { setMapItude } from "../../store/mapSlice";
 import axios from "axios";
 import ReviewList from "./ReviewList";
 import HomepageBtn from "../../components/common/HomepageBtn";
+import Button from "../../components/common/Button";
+import PopUp from "../../components/common/PopUp";
+import { popFavor, pushFavor } from "../../store/favorSlice";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -26,6 +29,25 @@ const TicketDetailItem = function () {
   const dispatch = useDispatch();
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
   const [reviewData, setReviewData] = useState([]);
+  const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
+  const user_id = useSelector((state) => state.myLoginSlice.user_id);
+
+  const isFavor = myFavor.find((element) => {
+    if (element.ticket_id == festival.id) {
+      return true;
+    }
+  });
+
+  const [isActive, setIsActive] = useState(false);
+  const [popText, setPopText] = useState("");
+
+  const alertHandler = function (title) {
+    setPopText(title);
+    setIsActive(true);
+    setTimeout(() => {
+      setIsActive(false);
+    }, 5000);
+  };
 
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
   // 처음 랜더링되면
@@ -64,18 +86,33 @@ const TicketDetailItem = function () {
       })
     );
   };
-  const [isActive, setActive] = useState("false");
-  const alertHandler = () => {
-    setActive(!isActive);
-    setTimeout(() => {
-      setActive(isActive);
-    }, 3000);
+
+  const toFavor = function () {
+    if (!isFavor) {
+      dispatch(
+        pushFavor({
+          ticket: {
+            ticket_id: festival.id,
+            title: festival.title,
+            first_image: festival.first_image,
+            price: festival.price,
+            d_day: festival.d_day,
+          },
+          user_id: user_id,
+        })
+      );
+    } else {
+      dispatch(
+        popFavor({
+          ticket: {
+            ticket_id: festival.id,
+          },
+          user_id: user_id,
+        })
+      );
+    }
   };
 
-  // 로딩 중이면 로딩 메시지를 보여줍니다.
-  if (loading) {
-    return <div>Loading...</div>;
-  }
   const img = festival.first_image;
   const poster =
     festival.first_image === "" ? (
@@ -104,67 +141,73 @@ const TicketDetailItem = function () {
       />
     );
 
+  // 로딩 중이면 로딩 메시지를 보여줍니다.
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div onClick={(e) => e.stopPropagation()}>
+      <PopUp body={popText} isActive={isActive} />
       <Outlet />
-      <div className="row" style={{ marginTop: "75px" }}>
-        <div className="col-6 text-right">
-          {/* 홈페이지 연결 */}
-          <HomepageBtn homepage_src={festival.home_page} />
-          {/* 장바구니 담기 */}
-        </div>
-        <div className="col-6">
-          <div className="explore_list_button" onClick={toCart}>
-            <Link onClick={alertHandler}>
-              <i className="fa fa-cart-plus"></i>
-            </Link>
-          </div>
-        </div>
-      </div>
       <div className="row justify-content-center" style={{ marginTop: "75px" }}>
         <div
-          className="col-12 col-lg-6 text-center"
+          className="col-12 col-lg-5 text-center"
           style={{ marginBottom: "30px" }}
         >
           {poster}
         </div>
-        <br />
-        <br />
 
-        {/* 알람창 놓고싶은데 넣기*/}
-        <div
-          className={
-            isActive ? "toast toast-3s fade hide" : "toast toast-3s fade show"
-          }
-          role="alert"
-          aria-live="assertive"
-          data-delay="3000"
-          aria-atomic="true"
-          style={{ position: "absolute", right: "30%", zIndex: 200 }}
-        >
-          <div className="toast-header" style={{ backgroundColor: "#22b3c1" }}>
-            <img
-              src="../../../public/assets/images/logo2.png"
-              alt=""
-              className="img-fluid m-r-5"
-              style={{ width: "150px" }}
+        <div className="col-8 col-lg-6 ms-2">
+          <div
+            style={{
+              display: "flex",
+              gap: "30px",
+            }}
+          >
+            {/* 홈페이지 연결 */}
+            <Button
+              title="홈페이지"
+              href={festival.home_page}
+              homepage={true}
+              style={{ padding: "5px 40px", float: "left" }}
             />
-            <strong className="mr-auto"></strong>
-            <small className="text-muted"></small>
+            {/* 장바구니 담기 */}
+            <Button
+              title="장바구니"
+              onClick={() => {
+                toCart();
+                alertHandler("장바구니에 담겼습니다.");
+              }}
+              style={{ padding: "5px 40px", float: "left" }}
+            />
+
+            {isFavor ? (
+              <Button
+                title={<i className="fa fa-heart" id="myheart"></i>}
+                isRev={true}
+                style={{
+                  border: "1px solid white",
+                  boxShadow: "0 0 3px rgba(0, 0, 0, 0.15)",
+                }}
+                onClick={() => {
+                  toFavor();
+                  alertHandler("관심리스트에서 제거하였습니다.");
+                }}
+              />
+            ) : (
+              <Button
+                title={<i className="fa fa-heart" id="myheart"></i>}
+                onClick={() => {
+                  toFavor();
+                  alertHandler("관심리스트에 추가했습니다.");
+                }}
+              />
+            )}
           </div>
-          <div className="toast-body">
-            <strong className="mr-auto">티켓이 장바구니에 담겼습니다.</strong>
-          </div>
-        </div>
-        <div
-          className="col-8 col-lg-6"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+
           <form>
-            <div className="content" style={{ marginLeft: "30px" }}>
+            <div className="content" style={{ marginTop: "40px" }}>
               <h1
                 style={{
                   marginBottom: "20px",
