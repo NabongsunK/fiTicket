@@ -15,7 +15,7 @@ const TicketList = function () {
     setIsActive(true);
     setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
 
   const list = pageList.map((festival) => {

@@ -2578,6 +2578,17 @@ body {
 
 /* 추가 */
 .login_page {
+  --login--bgcolor: #f7f7f7;
+  --login--color: #22b3c1;
+  --login--subcolor: #212529;
+
+  --login--item--hover--bgcolor: #22b3c1;
+  --login--item--hover--color: #f7f7f7;
+  --login--item--hover--subcolor: #ffee88;
+  --login--item--hover--btncolor: #aaaaaa;
+}
+
+.login_page {
   position: relative;
   top: 70;
   width: 95%;
@@ -2603,72 +2614,73 @@ body {
   }
 }
 
+.login-container form .text-center p {
+  color: #212529;
+  /* font-weight: 600; */
+}
+
+.btn.btn-primary.btn-block.mb-4:hover {
+  color: #22b3c1;
+  border: 1px solid var(--login--color);
+}
+
 .login-container {
   position: relative;
   padding: 10px 10px 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 18rem;
-  background-color: #22b3c1;
+  width: 24rem;
+  background-color: var(--login--bgcolor);
+  border: 2px solid var(--login--color);
   border-radius: 13px;
+  padding: 0px 40px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
 }
 
-.login-container form .text-center p {
-  color: #212529;
-  /* font-weight: 600; */
-}
-.login-logo {
-  margin: 20px auto;
+.login-container img {
+  margin: 0px auto;
   display: block;
-  width: 200px;
+  width: 500px;
 }
 
-.btn.btn-primary.btn-block.mb-4:hover {
-  color: #22b3c1;
+.login-container a,
+.login-container i {
+  color: var(--login--color);
+}
+.login-container a:hover,
+.login-container i:hover {
+  color: var(--login--subcolor);
 }
 
-.signup_page {
-  position: relative;
-  top: 70;
-  min-height: 1000px;
-  margin: 0 auto;
-  height: 90vh;
-  /* background-image: url("../images/signup_bg.jpg"); */
-  /* background-size: ; */
-}
-.signup-container {
-  position: relative;
-  padding: 10px 10px 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -45%);
-  max-width: 18rem;
-  width: 90%;
-  background-color: #22b3c1;
-  border-radius: 13px;
-  margin: 0;
+.login-container form {
+  text-align: center;
 }
 
-.signup-container2 {
-  position: relative;
-  padding: 10px 10px 0;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -45%);
-  max-width: 18rem;
-  width: 90%;
-  background-color: #22b3c1;
-  border-radius: 13px;
-  margin: 0;
+.login-container button.btn-primary {
+  width: 80%;
 }
 
-.login-container .form-control,
-.signup-container .form-control,
-.signup-container2 .form-control,
-.login-container .form-control::placeholder,
-.signup-container .form-control::placeholder,
-.signup-container2 .form-control::placeholder {
+.login-container button.btn-primary:hover {
+  border: 1px solid var(--login--color);
+  color: var(--login--color);
+  background-color: var(--login--bgcolor);
+}
+
+.login-container button.btn-primary:disabled {
+  background-color: var(--login--subcolor);
+}
+
+.login-container .form-control {
+  background-color: var(--login--bgcolor);
+  border: 0px;
+  border-bottom: 2px solid var(--login--color);
+  border-radius: 0px;
+  color: var(--login--color);
+}
+.login-container .form-control::placeholder {
+  border: 0px;
+  color: var(--login--color);
   text-align: right;
 }
 

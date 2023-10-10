@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useOutletContext, useParams } from "react-router";
+import { Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { push } from "../../store/cartSlice";
 import { setMapItude } from "../../store/mapSlice";
@@ -10,6 +10,8 @@ import HomepageBtn from "../../components/common/HomepageBtn";
 import Button from "../../components/common/Button";
 import PopUp from "../../components/common/PopUp";
 import { popFavor, pushFavor } from "../../store/favorSlice";
+import TicketList from "./TicketList";
+import NotFound from "../notFound";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -24,8 +26,17 @@ const getReview = async function (ticket_id) {
 
 const TicketDetailItem = function () {
   const { id } = useParams();
+
+  if (isNaN(id)) {
+    return <NotFound />;
+  }
+
   const allList = useSelector((state) => state.myPageSlice.allList);
   const festival = allList.filter((fes) => fes.id === Number(id))[0];
+
+  if (!festival) {
+    return <NotFound />;
+  }
   const dispatch = useDispatch();
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
   const [reviewData, setReviewData] = useState([]);
@@ -46,7 +57,7 @@ const TicketDetailItem = function () {
     setIsActive(true);
     setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
 
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
@@ -189,6 +200,8 @@ const TicketDetailItem = function () {
                 style={{
                   border: "1px solid white",
                   boxShadow: "0 0 3px rgba(0, 0, 0, 0.15)",
+                  padding: "5px 30px",
+                  float: "left",
                 }}
                 onClick={() => {
                   toFavor();
@@ -202,6 +215,7 @@ const TicketDetailItem = function () {
                   toFavor();
                   alertHandler("관심리스트에 추가했습니다.");
                 }}
+                style={{ padding: "5px 30px", float: "left" }}
               />
             )}
           </div>

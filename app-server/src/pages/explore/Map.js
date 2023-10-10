@@ -7,7 +7,7 @@ import { setMapItude } from "../../store/mapSlice";
 import styles from "./map.module.css";
 import { useNavigate } from "react-router";
 
-var markerHeight = { 28: 144, 14: 36, 15: 0, 39: 36 };
+var markerHeight = { 28: 144, 14: 216, 15: 0, 39: 36 };
 // var markerImageSrc =
 //   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png"; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
 var markerImageSrc =

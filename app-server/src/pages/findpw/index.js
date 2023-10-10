@@ -26,6 +26,8 @@ function Findpw() {
   const [blockPhone, setBlockPhone] = useState(false);
   const [blockAuth, setBlockAuth] = useState(false);
 
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
+
   const isValidPassword = (password) => {
     const regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
     return regex.test(password);
@@ -58,7 +60,7 @@ function Findpw() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -67,7 +69,7 @@ function Findpw() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -85,14 +87,14 @@ function Findpw() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       navigate("/");
     } else {
       setPopText("비밀번호가 변경실패했습니다.");
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -104,7 +106,7 @@ function Findpw() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -118,13 +120,13 @@ function Findpw() {
       setBlockPhone(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     } else {
       setPopText("아이디와 핸드폰번호를 다시 입력해 주세요.");
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -140,7 +142,7 @@ function Findpw() {
       setBlockAuth(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     } else {
       setPopText(
         "인증번호가 잘못되었습니다. 대.소문자를 확인하고 다시 입력해 주세요"
@@ -148,7 +150,7 @@ function Findpw() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     }
   };
   const ingToggle = function () {
@@ -156,17 +158,21 @@ function Findpw() {
     setIsActive(true);
     setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
+
+  if (is_signed) {
+    navigate("/");
+  }
   return (
     // 이쪽 수정부탁
     <section className="login_page">
       {/* 핸드폰 팝업 */}
       <PopUp body={popText} isActive={isActive} />
 
-      <div className="signup-container2">
-        <img src="/assets/images/logo2.png" alt="" className="login-logo" />
-        <form className="signup-form">
+      <div className="login-container">
+        <img src="/assets/images/newLogo.png" className="login-logo" />
+        <form className="login-form">
           {/* <!-- ID input --> */}
           <div className="form-outline mb-0">
             <input
@@ -175,7 +181,7 @@ function Findpw() {
               className="form-control"
               ref={idRef}
               readOnly={blockPhone}
-              placeholder="아이디를 입력해주세요."
+              placeholder="아이디"
             />
             <label className="form-label" htmlFor="login_id"></label>
           </div>
@@ -188,7 +194,7 @@ function Findpw() {
               className="form-control"
               ref={pnRef}
               readOnly={blockPhone}
-              placeholder="핸드폰 번호를 입력해주세요."
+              placeholder="핸드폰 번호"
               style={{ marginBottom: "15px" }}
             />
             <label className="form-label" htmlFor="phone_number"></label>
@@ -207,7 +213,7 @@ function Findpw() {
               className="form-control"
               ref={authRef}
               readOnly={blockAuth}
-              placeholder="인증번호를 입력해주세요."
+              placeholder="인증번호"
               style={{ marginBottom: "15px" }}
             />
             <label
@@ -231,7 +237,7 @@ function Findpw() {
               id="password"
               className="form-control"
               ref={pwRef}
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호"
             />
             <label className="form-label" htmlFor="password"></label>
           </div>
@@ -243,7 +249,7 @@ function Findpw() {
               id="password_confirm"
               className="form-control"
               ref={pwConfirmRef}
-              placeholder="비밀번호를 다시 입력해주세요."
+              placeholder="비밀번호 확인"
             />
             <label className="form-label" htmlFor="password_confirm"></label>
           </div>

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signin, signout } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
 import PopUp from "../../components/common/PopUp";
@@ -9,7 +9,7 @@ import PopUp from "../../components/common/PopUp";
 function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const idRef = useRef();
   const pnRef = useRef();
   const pwRef = useRef();
@@ -55,7 +55,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -64,7 +64,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -75,7 +75,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -84,7 +84,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -93,7 +93,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -102,7 +102,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -123,9 +123,10 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
-
-      navigate("/login");
+      }, 3000);
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
     }
   };
 
@@ -135,7 +136,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -143,7 +144,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
 
       setPopText(
         "핸드폰 번호는 010으로 시작하며, 중간,끝에는 4자리 숫자만 가능합니다."
@@ -151,7 +152,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -166,13 +167,13 @@ function Signup() {
       setBlockPhone(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     } else {
       setPopText("중복된 아이디입니다. 다시 입력해 주세요.");
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     }
   };
   // 여기 인증번호 한아이디에 한개씩이 안됨 확인해야됨
@@ -190,7 +191,7 @@ function Signup() {
       setBlockAuth(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     } else {
       setPopText(
         "인증번호가 잘못되었습니다. 대.소문자를 확인하고 다시 입력해 주세요"
@@ -198,7 +199,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -207,18 +208,21 @@ function Signup() {
     setIsActive(true);
     setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
+  if (is_signed) {
+    navigate("/");
+  }
 
   return (
     // 이쪽 수정부탁
-    <section className="signup_page">
+    <section className="login_page">
       {/* 핸드폰 팝업 */}
       <PopUp body={popText} isActive={isActive} />
 
-      <div className="signup-container">
-        <img src="/assets/images/logo2.png" alt="" className="login-logo" />
-        <form className="signup-form">
+      <div className="login-container">
+        <img src="/assets/images/newLogo.png" className="login-logo" />
+        <form className="login-form">
           {/* <!-- ID input --> */}
           <div className="form-outline mb-0">
             <input
@@ -227,7 +231,7 @@ function Signup() {
               className="form-control"
               ref={idRef}
               readOnly={blockPhone}
-              placeholder="아이디 입력해주세요."
+              placeholder="아이디"
             />
             <label className="form-label" htmlFor="login_id"></label>
           </div>
@@ -240,7 +244,7 @@ function Signup() {
               className="form-control"
               ref={pnRef}
               readOnly={blockPhone}
-              placeholder="핸드폰 번호를 입력해주세요."
+              placeholder="핸드폰 번호"
               style={{ marginBottom: "15px" }}
             />
             <label className="form-label" htmlFor="phone_number"></label>
@@ -259,7 +263,7 @@ function Signup() {
               className="form-control"
               ref={authRef}
               readOnly={blockAuth}
-              placeholder="인증번호를 입력해주세요."
+              placeholder="인증번호"
               style={{ marginBottom: "15px" }}
             />
             <label
@@ -283,7 +287,7 @@ function Signup() {
               id="name"
               className="form-control"
               ref={nameRef}
-              placeholder="이름을 입력해주세요."
+              placeholder="이름"
             />
             <label className="form-label" htmlFor="name"></label>
           </div>
@@ -295,7 +299,7 @@ function Signup() {
               id="password"
               className="form-control"
               ref={pwRef}
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호"
             />
             <label className="form-label" htmlFor="password"></label>
           </div>
@@ -307,7 +311,7 @@ function Signup() {
               id="password_confirm"
               className="form-control"
               ref={pwConfirmRef}
-              placeholder="비밀번호를 다시 입력해주세요."
+              placeholder="비밀번호 확인"
             />
             <label className="form-label" htmlFor="password_confirm"></label>
           </div>
@@ -319,7 +323,7 @@ function Signup() {
               id="email"
               className="form-control"
               ref={emailRef}
-              placeholder="이메일을 입력해주세요."
+              placeholder="이메일"
             />
             <label className="form-label" htmlFor="email"></label>
           </div>

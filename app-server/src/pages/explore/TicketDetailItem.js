@@ -24,7 +24,7 @@ const TicketDetailItem = function (props) {
     setIsActive(true);
     setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
 
   return (
@@ -89,6 +89,8 @@ const TicketDetailItem = function (props) {
             style={{
               border: "1px solid white",
               boxShadow: "0 0 3px rgba(0, 0, 0, 0.15)",
+              padding: "5px 30px",
+              float: "left",
             }}
             onClick={() => {
               props.toFavor();
@@ -101,6 +103,10 @@ const TicketDetailItem = function (props) {
             onClick={() => {
               props.toFavor();
               alertHandler("관심리스트에 추가했습니다.");
+            }}
+            style={{
+              padding: "5px 30px",
+              float: "left",
             }}
           />
         )}

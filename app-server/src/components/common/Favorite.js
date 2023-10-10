@@ -16,7 +16,7 @@ const favorite = function (props) {
     setIsActive(true);
     setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
 
   return (
