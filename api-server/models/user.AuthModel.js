@@ -108,11 +108,11 @@ const AuthModel = {
     const body = {
       type: "SMS",
       from: "01020597105",
-      content: `안녕하세요! loca!T 팀입니다`,
+      content: `loca!T`,
       messages: [
         {
           to: phone_number,
-          content: `안녕하세요! loca!T 팀입니다. 고객님의 인증번호는 "${authentication_number}"입니다. 안전한 서비스 이용을 위해 타인에게 공유하지 마세요. 감사합니다.`,
+          content: `[loca!T] 인증번호 ["${authentication_number}"]를 입력해 주세요.`,
         },
       ],
     };
