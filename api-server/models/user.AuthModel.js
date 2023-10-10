@@ -112,7 +112,7 @@ const AuthModel = {
       messages: [
         {
           to: phone_number,
-          content: `[loca!T] 인증번호 ["${authentication_number}"]를 입력해 주세요.`,
+          content: `[loca!T] 인증번호 [${authentication_number}]를 입력해 주세요.`,
         },
       ],
     };
