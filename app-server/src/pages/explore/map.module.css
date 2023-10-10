@@ -184,15 +184,19 @@
   transition: all 0.3s;
 }
 
-.info .close {
+.wrap .close {
   position: absolute;
   top: 1px;
   right: 12px;
   color: var(--wrap--item--btncolor);
 }
-.info .close:hover {
+.wrap .close:hover {
   cursor: pointer;
   color: var(--wrap--item--hover--btncolor);
+}
+
+.wrap .close i {
+  font-size: 26px;
 }
 .info .body {
   position: relative;

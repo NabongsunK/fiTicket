@@ -162,7 +162,7 @@ const Map = function (props) {
           close.onclick = function () {
             overlay.setMap(null);
           };
-          title.appendChild(close);
+          content.appendChild(close);
 
           var closeI = document.createElement("i");
           closeI.className = "fa fa-close";
