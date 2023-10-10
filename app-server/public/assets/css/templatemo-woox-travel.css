@@ -306,12 +306,14 @@ body {
   border: 1px solid #fff;
 }
 
-.explore_list_button a,
-.explore_list_button_rev a {
+.explore_list_button a {
   font-size: 28px;
+  color: #fff;
+  background-color: #22b3c1;
+  border: 1px solid #22b3c1;
   padding: 8px 22px;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  margin-top: 12px;
+  margin-bottom: 12px;
   display: inline-block;
   border-radius: 25px;
   font-weight: 500;
@@ -322,38 +324,24 @@ body {
   overflow: hidden;
 }
 
-.explore_list_button a,
-.explore_list_button_rev a:hover {
+.explore_list_button a i.fa {
   color: #fff;
-  background-color: #22b3c1;
-  border: 1px solid #22b3c1;
-  font-size: 28px;
+}
+.explore_list_button a:hover {
+  background-color: #fff;
+  color: #22b3c1;
+  border: 1px solid #fff;
+  font-size: 30px;
+}
+.explore_list_button a i.fa:hover {
+  color: #22b3c1;
 }
 
-.explore_list_button a:hover,
-.explore_list_button_rev a {
+.explore_list_button a:hover {
   background-color: #fff;
   color: #22b3c1;
   border: 1px solid #22b3c1;
-  font-size: 28px;
-}
-
-.explore_list_button a:hover #myheart,
-.explore_list_button_rev a:focus #myheart,
-.explore_list_button_rev a #myheart {
-  color: #dc0345;
-  font-size: 28px;
-}
-
-.explore_list_button_rev a:hover #myheart,
-.explore_list_button a:focus #myheart {
-  color: #fff;
-  font-size: 28px;
-}
-
-.explore_list_button a i.fa,
-.explore_list_button_rev a:hover i.fa {
-  color: #fff;
+  font-size: 24px;
 }
 
 .explore_list_button a:hover i.fa {
@@ -361,7 +349,7 @@ body {
 }
 
 .explore_list_button a:link {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 section {
@@ -2581,7 +2569,7 @@ body {
   position: relative;
   top: 70;
   width: 95%;
-  min-height: 900px;
+  min-height: 700px;
   height: 80vh;
   margin: 0 auto;
   margin-top: 70px;
@@ -2610,13 +2598,20 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 18rem;
-  background-color: rgba(34, 179, 193, 0.75);
+  background-color: #22b3c1;
   border-radius: 13px;
 }
+
 .login-container form .text-center p {
   color: #212529;
   /* font-weight: 600; */
 }
+.login-logo {
+  margin: 20px auto;
+  display: block;
+  width: 200px;
+}
+
 .btn.btn-primary.btn-block.mb-4:hover {
   color: #22b3c1;
 }
@@ -2624,7 +2619,7 @@ body {
 .signup_page {
   position: relative;
   top: 70;
-  min-height: 800px;
+  min-height: 1000px;
   margin: 0 auto;
   height: 90vh;
   /* background-image: url("../images/signup_bg.jpg"); */
@@ -2638,11 +2633,41 @@ body {
   transform: translate(-50%, -45%);
   max-width: 18rem;
   width: 90%;
-  background-color: rgba(34, 179, 193, 0.75);
+  background-color: #22b3c1;
   border-radius: 13px;
-  font-size: 14px;
   margin: 0;
-  max-height: calc(100vh - 200px);
+}
+
+.signup-container2 {
+  position: relative;
+  padding: 10px 10px 0;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  max-width: 18rem;
+  width: 90%;
+  background-color: #22b3c1;
+  border-radius: 13px;
+  margin: 0;
+}
+
+.form-control {
+  text-align: right;
+}
+
+.form-control::placeholder {
+  text-align: right;
+}
+
+body .form-control::placeholder {
+  color: rgb(179, 178, 178);
+}
+#Inquiry .form-control {
+  text-align: left;
+}
+
+#Inquiry .form-control::placeholder {
+  text-align: left;
 }
 
 .search-form #explore-search-form {
