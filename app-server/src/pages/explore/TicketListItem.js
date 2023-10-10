@@ -193,14 +193,6 @@ const TicketListItem = function (props) {
             {props.isFavor ? (
               <Button
                 title={<i className="fa fa-heart" id="myheart"></i>}
-                onClick={() => {
-                  toFavor();
-                  props.alertHandler("관심리스트에 추가했습니다.");
-                }}
-              />
-            ) : (
-              <Button
-                title={<i className="fa fa-heart" id="myheart"></i>}
                 isRev={true}
                 style={{
                   border: "1px solid white",
@@ -209,6 +201,14 @@ const TicketListItem = function (props) {
                 onClick={() => {
                   toFavor();
                   props.alertHandler("관심리스트에서 제거하였습니다.");
+                }}
+              />
+            ) : (
+              <Button
+                title={<i className="fa fa-heart" id="myheart"></i>}
+                onClick={() => {
+                  toFavor();
+                  props.alertHandler("관심리스트에 추가했습니다.");
                 }}
               />
             )}
