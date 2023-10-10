@@ -3,7 +3,7 @@ import Home from "./pages/home";
 import Layout from "./components/layout";
 import Deal from "./pages/deals";
 import Login from "./pages/login";
-import Findpw from "./pages/findpw"
+import Findpw from "./pages/findpw";
 
 import festivals from "./data/_festivals.json";
 import { Provider } from "react-redux";
@@ -19,6 +19,7 @@ import Staff from "./pages/staff";
 import Reviews from "./pages/staff/Reviews";
 import FestivalDataTable from "./pages/staff/DataTable";
 import StaffHome from "./pages/staff/StaffHome";
+import NotFound from "./pages/notFound";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
               <Route path="fes_table" element={<FestivalDataTable />} />
               <Route path="reviews" element={<Reviews />} />
             </Route>
+            <Route path="/*" element={<NotFound />}></Route>
           </Route>
         </Routes>
       </Router>

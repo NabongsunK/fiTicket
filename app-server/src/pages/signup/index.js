@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signin, signout } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
 import PopUp from "../../components/common/PopUp";
@@ -9,7 +9,7 @@ import PopUp from "../../components/common/PopUp";
 function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const idRef = useRef();
   const pnRef = useRef();
   const pwRef = useRef();
@@ -55,7 +55,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -64,7 +64,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -75,7 +75,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -84,7 +84,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -93,7 +93,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -102,7 +102,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -123,9 +123,10 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
-
-      navigate("/login");
+      }, 3000);
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
     }
   };
 
@@ -135,7 +136,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -143,7 +144,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
 
       setPopText(
         "핸드폰 번호는 010으로 시작하며, 중간,끝에는 4자리 숫자만 가능합니다."
@@ -151,7 +152,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -166,13 +167,13 @@ function Signup() {
       setBlockPhone(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     } else {
       setPopText("중복된 아이디입니다. 다시 입력해 주세요.");
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     }
   };
   // 여기 인증번호 한아이디에 한개씩이 안됨 확인해야됨
@@ -190,7 +191,7 @@ function Signup() {
       setBlockAuth(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     } else {
       setPopText(
         "인증번호가 잘못되었습니다. 대.소문자를 확인하고 다시 입력해 주세요"
@@ -198,7 +199,7 @@ function Signup() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -207,8 +208,11 @@ function Signup() {
     setIsActive(true);
     setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
+  if (is_signed) {
+    navigate("/");
+  }
 
   return (
     // 이쪽 수정부탁
@@ -295,7 +299,7 @@ function Signup() {
               id="password"
               className="form-control"
               ref={pwRef}
-              placeholder="비밀번호."
+              placeholder="비밀번호"
             />
             <label className="form-label" htmlFor="password"></label>
           </div>

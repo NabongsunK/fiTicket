@@ -92,7 +92,6 @@ const Header = function (props) {
 
   useEffect(() => {
     getFavor(user_id).then((response) => {
-      console.log(response);
       dispatch(setFavor({ newMyFavor: response }));
     });
   }, [user_id]);

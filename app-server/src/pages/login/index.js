@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRef, useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
 import PopUp from "../../components/common/PopUp";
@@ -17,6 +17,7 @@ function Login() {
 
   const [isActive, setIsActive] = useState(false);
   const [popText, setPopText] = useState("");
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
 
   const signIn = useCallback(async () => {
     const loginId = loginIdRef.current.value;
@@ -27,7 +28,7 @@ function Login() {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
       return;
     }
 
@@ -42,7 +43,7 @@ function Login() {
         setIsActive(true);
         setTimeout(() => {
           setIsActive(false);
-        }, 5000);
+        }, 3000);
         dispatch(signin({ user_id: res.data.user_id }));
         navigate("/");
         return;
@@ -51,14 +52,14 @@ function Login() {
         setIsActive(true);
         setTimeout(() => {
           setIsActive(false);
-        }, 5000);
+        }, 3000);
       }
     } catch (error) {
       setPopText("잠시후 다시 시도해주세요.");
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
-      }, 5000);
+      }, 3000);
     }
   }, [dispatch, navigate]);
 
@@ -67,8 +68,12 @@ function Login() {
     setIsActive(true);
     setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
+
+  if (is_signed) {
+    navigate("/");
+  }
   return (
     <section className="login_page">
       <PopUp body={popText} isActive={isActive} />
