@@ -10,7 +10,6 @@ const ReviewList = function (props) {
   const options = {
     loop: true,
     center: false,
-    items: 3,
     margin: 0,
     autoplay: true,
     dots: true,
@@ -19,7 +18,7 @@ const ReviewList = function (props) {
     nav: false,
     responsive: {
       0: {
-        items: 1,
+        items: 2,
       },
       600: {
         items: 3,
@@ -50,7 +49,7 @@ const ReviewList = function (props) {
         </div>
         <div className="container-fluid">
           <div className="row justify-content-center">
-            <div className="col-md-12">
+            <div className="col-md-10">
               <OwlCarousel
                 id="customer-testimonoals"
                 className="owl-carousel owl-theme"

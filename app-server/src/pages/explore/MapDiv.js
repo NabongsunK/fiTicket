@@ -75,7 +75,7 @@ const MapDiv = function () {
     }
   };
   //토글 변경되면, 값변경
-  const thisType = useRef(1);
+  const thisType = useRef(0);
 
   const onChangeToggle = async function (event) {
     console.log(event.target.dataset.value);

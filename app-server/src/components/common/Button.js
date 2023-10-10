@@ -10,13 +10,17 @@ const Button = function (props) {
         className="explore_list_button_rev"
         value={props.value}
         style={props.divStyle}
-        onClick={(e) => {
-          if (props.onClick) {
-            props.onClick(e);
-          }
-        }}
       >
-        <Link to={props.href} style={props.style} data-value={props.value}>
+        <Link
+          to={props.href}
+          style={props.style}
+          data-value={props.value}
+          onClick={(e) => {
+            if (props.onClick) {
+              props.onClick(e);
+            }
+          }}
+        >
           {props.title}
         </Link>
       </div>
@@ -27,13 +31,17 @@ const Button = function (props) {
         className="explore_list_button"
         value={props.value}
         style={props.divStyle}
-        onClick={(e) => {
-          if (props.onClick) {
-            props.onClick(e);
-          }
-        }}
       >
-        <Link to={props.href} style={props.style} data-value={props.value}>
+        <Link
+          to={props.href}
+          style={props.style}
+          data-value={props.value}
+          onClick={(e) => {
+            if (props.onClick) {
+              props.onClick(e);
+            }
+          }}
+        >
           {props.title}
         </Link>
       </div>

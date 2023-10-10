@@ -1,12 +1,12 @@
 [
   {
     "id": 0,
-    "defaultChecked": false,
+    "defaultChecked": true,
     "localTitle": "내위치"
   },
   {
     "id": 1,
-    "defaultChecked": true,
+    "defaultChecked": false,
     "localTitle": "전국",
     "area_code": 0,
     "centerLat": 35.950001001,

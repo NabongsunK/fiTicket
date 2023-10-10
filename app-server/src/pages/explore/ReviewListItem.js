@@ -29,7 +29,9 @@ const ReviewListItem = (props) => {
               </span>
             </h4>
             <div className="line-dec" style={{ margin: 0, padding: 0 }}></div>
-            <ul style={{ marginTop: "4px", paddingTop: "12px" }}>
+            <ul
+              style={{ marginTop: "4px", paddingTop: "12px", paddingLeft: "0" }}
+            >
               <li>리뷰</li>
               <li>{content}</li>
             </ul>
