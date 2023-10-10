@@ -1,11 +1,11 @@
+import { useRef, useState } from "react";
+import Button from "../../components/common/Button";
 const Filter = function (props) {
+  const thisType = useRef(1);
   const toggleType = function (e) {
-    props.setType(Number(e.target.value));
+    props.setType(Number(e.target.dataset.value));
+    thisType.current = Number(e.target.dataset.value);
   };
-  // console.log(toggleType());
-  // const type = function () {
-  //   props.setType(toggleType);
-  // };
   return (
     <div className="search-form">
       <div className="container">
@@ -20,40 +20,79 @@ const Filter = function (props) {
             >
               <div className="row justify-content-center">
                 <div className="col-lg-2 align-self-center">
-                  <button
+                  <Button
+                    onClick={toggleType}
                     value={1}
-                    type="button"
-                    onClick={toggleType}
-                    style={{ padding: "8px 11px" }}
-                    autoFocus
-                  >
-                    기간 임박
-                  </button>
+                    isRev={1 == thisType.current}
+                    style={{
+                      padding: "10px auto",
+                      fontSize: "14px",
+                      border: "1px solid",
+                      width: "8rem",
+                      textAlign: "center",
+                    }}
+                    title="기간 임박"
+                  />
                 </div>
                 <div className="col-lg-2 align-self-center">
-                  <button
+                  <Button
+                    onClick={toggleType}
                     value={2}
-                    type="button"
+                    isRev={2 == thisType.current}
+                    style={{
+                      padding: "10px auto",
+                      fontSize: "14px",
+                      border: "1px solid",
+                      width: "8rem",
+                      textAlign: "center",
+                    }}
+                    title="먹거리"
+                  />
+                </div>
+                <div className="col-lg-2 align-self-center">
+                  <Button
                     onClick={toggleType}
-                    style={{ padding: "8px 11px" }}
-                  >
-                    먹거리
-                  </button>
+                    value={3}
+                    isRev={3 == thisType.current}
+                    style={{
+                      padding: "10px auto",
+                      fontSize: "14px",
+                      border: "1px solid",
+                      width: "8rem",
+                      textAlign: "center",
+                    }}
+                    title="체험"
+                  />
                 </div>
                 <div className="col-lg-2 align-self-center">
-                  <button value={3} onClick={toggleType} type="button">
-                    체험
-                  </button>
+                  <Button
+                    onClick={toggleType}
+                    value={4}
+                    isRev={4 == thisType.current}
+                    style={{
+                      padding: "10px auto",
+                      fontSize: "14px",
+                      border: "1px solid",
+                      width: "8rem",
+                      textAlign: "center",
+                    }}
+                    title="공연"
+                  />
                 </div>
                 <div className="col-lg-2 align-self-center">
-                  <button value={4} onClick={toggleType} type="button">
-                    공연
-                  </button>
-                </div>
-                <div className="col-lg-2 align-self-center">
-                  <button value={5} onClick={toggleType} type="button">
-                    전시
-                  </button>
+                  <Button
+                    onClick={toggleType}
+                    value={5}
+                    isRev={5 == thisType.current}
+                    style={{
+                      padding: "10px auto",
+                      fontSize: "14px",
+                      border: "1px solid",
+                      width: "8rem",
+                      textAlign: "center",
+                    }}
+                    title="전시"
+                  />
                 </div>
               </div>
             </form>

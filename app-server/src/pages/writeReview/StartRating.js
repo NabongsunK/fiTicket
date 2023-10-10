@@ -50,15 +50,16 @@ const HiddenText = styled.p`
   padding-top: 7px;
   transform: translate(-50%, -50%);
   color: white;
-  background-color: #1f8ce6;
+  background-color: #22b3c1;
   border-radius: 4px;
   font-size: 16px;
+  line-height: 1;
 
   ${({ show }) => (show === "true" ? `display:block` : `display: none`)}
 `;
 
 function Score(props) {
-  const [hovered, setHovered] = useState(null);
+  const [hovered, setHovered] = useState(5);
 
   const starText = [1, 2, 3, 4, 5].map((num) => (
     <HiddenText key={num} show={hovered === num ? "true" : "false"}>
@@ -73,7 +74,6 @@ function Score(props) {
       }`}
       key={el}
       onMouseEnter={() => setHovered(el)}
-      onMouseLeave={() => setHovered(null)}
       onClick={() => props.setRating(el)}
     />
   ));

@@ -111,7 +111,11 @@ const UserListItem = function (props) {
                   await getQR(props.item.first_image);
                 }}
                 title={"QR코드 받기"}
-                style={{ marginTop: 0, border: "1px solid white" }}
+                style={{
+                  marginTop: 0,
+                  border: "1px solid white",
+                  fontSize: "24px",
+                }}
               />
             </div>
           </div>

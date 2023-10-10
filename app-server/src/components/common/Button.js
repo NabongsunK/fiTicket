@@ -5,13 +5,14 @@ const Button = function (props) {
     return (
       <div
         className="explore_list_button_rev"
-        onClick={() => {
+        value={props.value}
+        onClick={(e) => {
           if (props.onClick) {
-            props.onClick();
+            props.onClick(e);
           }
         }}
       >
-        <Link to={props.href} style={props.style}>
+        <Link to={props.href} style={props.style} data-value={props.value}>
           {props.title}
         </Link>
       </div>
@@ -20,13 +21,14 @@ const Button = function (props) {
     return (
       <div
         className="explore_list_button"
-        onClick={() => {
+        value={props.value}
+        onClick={(e) => {
           if (props.onClick) {
-            props.onClick();
+            props.onClick(e);
           }
         }}
       >
-        <Link to={props.href} style={props.style}>
+        <Link to={props.href} style={props.style} data-value={props.value}>
           {props.title}
         </Link>
       </div>

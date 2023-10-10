@@ -54,7 +54,7 @@ const Deal = function () {
       <DealsPageHeading />
 
       {/* 필터 */}
-      <Filter type={type} setType={setType} />
+      <Filter setType={setType} />
 
       {/* 알람창 놓고싶은데 넣기*/}
       <div
