@@ -6,7 +6,6 @@ import { push } from "../../store/cartSlice";
 import { setMapItude } from "../../store/mapSlice";
 import axios from "axios";
 import ReviewList from "./ReviewList";
-import HomepageBtn from "../../components/common/HomepageBtn";
 import Button from "../../components/common/Button";
 import PopUp from "../../components/common/PopUp";
 import { popFavor, pushFavor } from "../../store/favorSlice";

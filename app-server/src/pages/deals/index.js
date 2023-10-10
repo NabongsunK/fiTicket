@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { next, prev } from "../../store/pageSlice";
 
 import DealsListItem from "./DealsListItem";
 import GoToMap from "../../components/common/GoToMap";
