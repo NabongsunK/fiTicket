@@ -35,7 +35,11 @@ const favoriteModel = {
         favorite.ticket_id,
         festival_api.title as title,
         festival_api.first_image as first_image,
-        favorite.create_at
+        festival_api.addr1 as addr1,
+        festival_api.addr2 as addr2,
+        festival_api.price as price,
+        favorite.create_at,
+        datediff(event_end_date, now()) as d_day
       from favorite
       left join festival_api on favorite.ticket_id = festival_api.id
       where favorite.user_id = ?
