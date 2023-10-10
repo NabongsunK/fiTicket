@@ -5,6 +5,10 @@ import localList from "../../data/locallist.json";
 import festivalsData from "../../data/_festivals.json";
 import { Link } from "react-router-dom";
 import styles from "./recommend.module.css";
+import ReactDOM from "react-dom";
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 import axios from "axios";
 // axios 기본 url 정의
@@ -30,17 +34,21 @@ const Recommend = function () {
   }, [selectedAreaCode]);
 
   const onChangeToggle = (selectedValue) => {
-    setselectedAreaCode(localList[selectedValue].area_code);
+    setselectedAreaCode(selectedValue.target.value);
   };
 
   const LocalSelectList = localList.map((localItem) => (
-    <ToggleButton
+    <button
       id={"tbg-radio" + localItem.id}
-      value={localItem.id}
+      type="button"
+      value={localItem.area_code}
       key={localItem.id}
+      onClick={onChangeToggle}
+      // className="item"
+      style={{ padding: "8px 10px" }}
     >
       {localItem.localTitle}
-    </ToggleButton>
+    </button>
   ));
 
   const poster = festivals.first_image;
@@ -81,6 +89,23 @@ const Recommend = function () {
       </div>
     </div>
   ));
+  const options = {
+    loop: false,
+    margin: 0,
+    dots: false,
+    nav: false,
+    responsive: {
+      0: {
+        items: 6,
+      },
+      640: {
+        items: 8,
+      },
+      1280: {
+        items: 17,
+      },
+    },
+  };
 
   return (
     <div className="amazing-deal">
@@ -90,7 +115,7 @@ const Recommend = function () {
             <div className={`container ${styles.containerStyle}`}>
               <div className={styles.slider_content}>
                 <div className="row justify-content-center align-items-center">
-                  <div className="col-5 align-middle">
+                  <div className="col-6 align-middle">
                     <h2 className={styles.title}>
                       <em className={styles.emphasis}>지역별 행사 추천</em>
                     </h2>
@@ -99,17 +124,21 @@ const Recommend = function () {
               </div>
 
               {/* 토글버튼 */}
-              <div id={styles.container} className="container">
-                <ToggleButtonGroup
-                  className="btn-group-justified"
-                  type="radio"
-                  name="options"
-                  defaultValue={0}
-                  onChange={onChangeToggle}
-                  size="lg"
+              <div id={styles.container} className="search-form">
+                <form
+                  id="search-form"
+                  style={{
+                    display: "inline-flex",
+                    justifyContent: "center",
+                    width: "100%",
+                    padding: "5px 10px",
+                    borderRadius: "8px",
+                  }}
                 >
-                  {LocalSelectList}
-                </ToggleButtonGroup>
+                  <OwlCarousel className="owl-theme" {...options}>
+                    {LocalSelectList}
+                  </OwlCarousel>
+                </form>
               </div>
 
               {/* 행사 리스트 */}
