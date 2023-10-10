@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import localInfos from "../../data/localInfos.json";
 import Map from "./Map";
 import ToggleButton from "react-bootstrap/ToggleButton";
@@ -13,6 +13,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
 import styles from "./mapdiv.module.css";
+import Button from "../../components/common/Button";
 //스크립트로 가져온 kakao map api를 윈도우 전역객체에서 받아옴
 
 // 쿼리로 경위도 찾기
@@ -74,8 +75,9 @@ const MapDiv = function () {
     }
   };
   //토글 변경되면, 값변경
+  const thisType = useRef(1);
+
   const onChangeToggle = async function (val) {
-    console.log(val.target.value);
     dispatch(setPage({ newPage: 1 }));
     if (val === 0) {
       getCurrentPos();
@@ -83,13 +85,15 @@ const MapDiv = function () {
       dispatch(
         setMapItude({
           newMapItude: [
-            localInfos[val.target.value].centerLon,
-            localInfos[val.target.value].centerLat,
-            localInfos[val.target.value].localMapLevel,
+            localInfos[val.target.dataset.value].centerLon,
+            localInfos[val.target.dataset.value].centerLat,
+            localInfos[val.target.dataset.value].localMapLevel,
           ],
         })
       );
     }
+    thisType.current = val.target.dataset.value;
+
     navigate("/explore");
   };
 
@@ -97,17 +101,22 @@ const MapDiv = function () {
   useEffect(getCurrentPos, []);
 
   const LocalSelectList = localInfos.map((localInfo) => (
-    <button
+    <Button
       id={"tbg-radio" + localInfo.id}
       type="button"
+      isRev={localInfo.id == thisType.current}
       value={localInfo.id}
       key={localInfo.id}
       onClick={onChangeToggle}
       // className="item"
-      style={{ padding: "8px 10px" }}
-    >
-      {localInfo.localTitle}
-    </button>
+      style={{
+        padding: "4px 10px",
+        fontSize: "16px",
+        fontWeight: "200",
+        border: "1px solid",
+      }}
+      title={localInfo.localTitle}
+    />
 
     // <ToggleButton
     //   // className="m-3"
@@ -126,13 +135,16 @@ const MapDiv = function () {
     nav: false,
     responsive: {
       0: {
-        items: 6,
+        items: 7,
       },
       640: {
-        items: 8,
+        items: 9,
+      },
+      800: {
+        items: 11,
       },
       1080: {
-        items: 12,
+        items: 14,
       },
       1280: {
         items: 19,

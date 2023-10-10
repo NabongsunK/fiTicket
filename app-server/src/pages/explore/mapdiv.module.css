@@ -1,3 +1,6 @@
 .mytogglegroup {
   background-color: yellow;
 }
+#search-form > div > div.owl-stage-outer > div > div:nth-child(1) > div > a {
+  padding: 4px;
+}

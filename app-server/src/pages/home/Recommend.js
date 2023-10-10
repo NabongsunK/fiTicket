@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import localList from "../../data/locallist.json";
@@ -11,6 +11,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
 import axios from "axios";
+import Button from "../../components/common/Button";
 // axios 기본 url 정의
 axios.defaults.baseURL = "http://localhost:4400/api";
 
@@ -32,23 +33,29 @@ const Recommend = function () {
     );
     setFestivals(selectedLocalFestivals);
   }, [selectedAreaCode]);
-
+  const thisType = useRef(1);
   const onChangeToggle = (selectedValue) => {
-    setselectedAreaCode(selectedValue.target.value);
+    // console.log(selectedValue.target);
+    setselectedAreaCode(selectedValue.target.dataset.value);
+    thisType.current = selectedValue.target.dataset.value;
   };
 
   const LocalSelectList = localList.map((localItem) => (
-    <button
+    <Button
       id={"tbg-radio" + localItem.id}
       type="button"
+      isRev={localItem.area_code == thisType.current}
       value={localItem.area_code}
       key={localItem.id}
       onClick={onChangeToggle}
-      // className="item"
-      style={{ padding: "8px 10px" }}
-    >
-      {localItem.localTitle}
-    </button>
+      title={localItem.localTitle}
+      style={{
+        padding: "4px 10px",
+        fontSize: "24px",
+        fontWeight: "500",
+        border: "1px solid",
+      }}
+    />
   ));
 
   const poster = festivals.first_image;
@@ -98,10 +105,19 @@ const Recommend = function () {
       0: {
         items: 6,
       },
-      640: {
+      600: {
+        items: 6,
+      },
+      770: {
         items: 8,
       },
+      1080: {
+        items: 11,
+      },
       1280: {
+        items: 15,
+      },
+      1440: {
         items: 17,
       },
     },
@@ -124,7 +140,11 @@ const Recommend = function () {
               </div>
 
               {/* 토글버튼 */}
-              <div id={styles.container} className="search-form">
+              <div
+                id={styles.container}
+                className="search-form"
+                style={{ marginTop: "1px" }}
+              >
                 <form
                   id="search-form"
                   style={{
