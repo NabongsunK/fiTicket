@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { push, pop } from "../../store/cartSlice";
 
 import { useDispatch, useSelector } from "react-redux";
-import HomepageBtn from "../../components/common/HomepageBtn";
 import Button from "../../components/common/Button";
 
 const DealsListItem = function (props) {

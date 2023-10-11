@@ -12,7 +12,7 @@ const TicketBody = function () {
   // 페이지별 리스트
   const dispatch = useDispatch();
   const regionList = useSelector((state) => state.myPageSlice.regionList);
-  const mapItude = useSelector((state) => state.myPageSlice.mapItude);
+  const mapItude = useSelector((state) => state.myMapSlice.mapItude);
   //슬라이스에서 현재 페이지 가지고옴
   const page = useSelector((state) => state.myPageSlice.page);
 
@@ -35,6 +35,7 @@ const TicketBody = function () {
 
   //검색에의해서 바뀌거나 page가 바뀌면
   useEffect(() => {
+    console.log(regionList, page, mapItude);
     skip = (page - 1) * listPerPage;
     dispatch(
       setPageList({

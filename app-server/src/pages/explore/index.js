@@ -102,6 +102,7 @@ const Explore = function () {
       }
       const regionName = await getAdress(mapItude[0], mapItude[1]);
       if (!regionName) return;
+      console.log(regionName);
       dispatch(setRegionId({ newRegionId: getRegionId(regionName) }));
     };
     setMap();

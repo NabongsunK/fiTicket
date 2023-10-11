@@ -57,7 +57,7 @@ const MapDiv = function () {
         },
         function (error) {
           // 실패했을때 실행
-          dispatch(setMapItude({ newMapItude: [35.95, 128.25, 13] }));
+          dispatch(setMapItude({ newMapItude: [128.25, 35.95, 13] }));
         }
       );
     } else {

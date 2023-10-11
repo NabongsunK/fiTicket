@@ -7,10 +7,8 @@ import styles from "./ticketlistitem.module.css";
 
 import { push, pop } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import HomepageBtn from "../../components/common/HomepageBtn";
 import { popFavor, pushFavor } from "../../store/favorSlice";
 import Button from "../../components/common/Button";
-import PopUp from "../../components/common/PopUp";
 const customStyles = {
   content: {
     top: "50%",
@@ -19,7 +17,6 @@ const customStyles = {
     bottom: "auto",
     height: "70vh",
     width: "50vw",
-    minWidth: "640px",
     transform: "translate(-50%, -50%)",
     backgroundColor: "rgba(255, 255, 255, 0.9)",
     padding: "50px",
@@ -189,7 +186,12 @@ const TicketListItem = function (props) {
             </div>
           </div>
           <div className="col-lg-2 align-self-center">
-            <HomepageBtn homepage_src={props.festival.home_page} />
+            {/* 홈페이지 연결 */}
+            <Button
+              title={<i className="fa fa-home"></i>}
+              href={props.festival.home_page}
+              homepage={true}
+            />
 
             <Button
               title={<i className="fa fa-cart-plus"></i>}
