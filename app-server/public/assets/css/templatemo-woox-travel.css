@@ -2926,13 +2926,13 @@ div.owl-stage-outer > div {
 .card-container {
   display: flex;
   flex-direction: column;
-  padding: 0 15%; /* 가로 패딩을 원하는 비율로 설정 */
+  padding: 0 15%;
   margin-top: 50px;
   margin-bottom: 10px;
 }
 
 .card-body {
-  flex: 1; /* 내용 부분이 남은 공간을 모두 차지하도록 설정 */
+  flex: 1;
 }
 
 @media (max-width: 1200px) {
