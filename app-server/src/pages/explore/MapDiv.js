@@ -57,12 +57,12 @@ const MapDiv = function () {
         },
         function (error) {
           // 실패했을때 실행
-          dispatch(setMapItude({ newMapItude: [128.25, 35.95, 13] }));
+          dispatch(setMapItude({ newMapItude: [128.590752, 35.849918, 8] }));
         }
       );
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      dispatch(setMapItude({ newMapItude: [35.95, 128.25, 13] }));
+      dispatch(setMapItude({ newMapItude: [128.590752, 35.849918, 8] }));
     }
   };
 
