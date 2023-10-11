@@ -12,19 +12,39 @@ const ExploreService = {
     try {
       // 트랜젝션 작업 시작
       await conn.beginTransaction();
+      const area_code_list = [
+        0, 1, 31, 2, 32, 8, 3, 34, 33, 5, 38, 37, 6, 4, 7, 35, 36, 39,
+      ];
 
-      const content_type_id_arr = [14, 15, 39];
       const data = {};
-      content_type_id_arr.forEach(async (content_type_id) => {
-        data[content_type_id] = await ExploreGetModel.getListMap(
-          content_type_id,
-          conn
-        );
+      area_code_list.forEach(async (area_code) => {
+        const content_type_id_arr = [14, 15, 39];
+        const tmp = {};
+        content_type_id_arr.forEach(async (content_type_id) => {
+          if (area_code == 0) {
+            tmp[content_type_id] = await ExploreGetModel.getListMap(
+              content_type_id,
+              conn
+            );
+          } else {
+            tmp[content_type_id] = await ExploreGetModel.getListMapByAreaCode(
+              content_type_id,
+              area_code,
+              conn
+            );
+          }
+        });
+        // getListSelectParking()은 parking.csv에서 id, map_x, map_y, title만 받아온다
+        // parking.csv의 전체를 받아오려면 getListParking()을 쓰면 된다.
+        if (area_code == 0) {
+          tmp["28"] = await ExploreGetModel.getListSelectParking();
+        } else {
+          // tmp["28"] = await ExploreGetModel.getListSelectParking();
+          tmp["28"] =
+            await ExploreGetModel.getListSelectParkingByAreaCode(area_code);
+        }
+        data[area_code] = tmp;
       });
-      // getListSelectParking()은 parking.csv에서 id, map_x, map_y, title만 받아온다
-      // parking.csv의 전체를 받아오려면 getListParking()을 쓰면 된다.
-      const parking = await ExploreGetModel.getListSelectParking();
-      data["28"] = parking;
       // DB에 작업 반영
       await conn.commit();
       return { data, ok: true, length: data.length };

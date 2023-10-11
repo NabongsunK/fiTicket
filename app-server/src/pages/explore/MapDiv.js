@@ -78,7 +78,6 @@ const MapDiv = function () {
   const thisType = useRef(0);
 
   const onChangeToggle = async function (event) {
-    console.log(event.target.dataset.value);
     dispatch(setPage({ newPage: 1 }));
     if (event.target.dataset.value == 0) {
       getCurrentPos();

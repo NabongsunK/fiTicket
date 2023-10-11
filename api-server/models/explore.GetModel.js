@@ -46,6 +46,50 @@ const ExploreGetModel = {
     }
   },
 
+  async getListMapByAreaCode(content_type_id, area_code, conn = pool) {
+    try {
+      let sql = "";
+      if (content_type_id == "15") {
+        sql = `
+        select
+          id,
+          addr1,
+          first_image2,
+          title,
+          map_x,
+          map_y,
+          content_type_id,
+          datediff(event_end_date, now()) as d_day
+        from festival_api
+          where 
+            content_type_id = ?
+            And area_code = ?
+            And datediff(event_end_date, now())>-1
+        `;
+      } else {
+        sql = `
+        select
+          id,
+          addr1,
+          first_image2,
+          title,
+          map_x,
+          map_y,
+          content_type_id
+        from festival_api
+          where 
+            content_type_id = ?
+            And area_code = ?
+        `;
+      }
+
+      const [result] = await conn.query(sql, [content_type_id, area_code]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
   async getListParking() {
     try {
       const results = [];
@@ -76,6 +120,51 @@ const ExploreGetModel = {
             addr1: data.addr1,
           };
           results.push(selectedData);
+        })
+        .on("end", () => {});
+      return results;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+  async getListSelectParkingByAreaCode(area_code) {
+    try {
+      const reg = {
+        1: "서울",
+        31: "경기도",
+        2: "인천",
+        32: "강원",
+        8: "세종특별자치시",
+        3: "대전",
+        34: "충청남도",
+        33: "충청북도",
+        5: "광주",
+        38: "전라남도",
+        37: "전라북도",
+        6: "부산",
+        4: "대구광역시",
+        7: "울산",
+        35: "경상북도",
+        36: "경상남도",
+        39: "제주",
+      };
+      const results = [];
+      const parkingFilePath = "./models/parking.csv";
+
+      fs.createReadStream(parkingFilePath)
+        .pipe(csv({}))
+        .on("data", (data) => {
+          const selectedData = {
+            id: data.id,
+            map_x: data.map_x,
+            map_y: data.map_y,
+            title: data.title,
+            content_type_id: "28",
+            addr1: data.addr1,
+          };
+          if (data.addr1.indexOf(reg[area_code]) > -1) {
+            results.push(selectedData);
+          }
         })
         .on("end", () => {});
       return results;
