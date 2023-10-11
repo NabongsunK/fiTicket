@@ -199,7 +199,10 @@ const Map = function (props) {
             body.className = styles.body;
             info.appendChild(body);
 
-            if (position.content_type_id == 15) {
+            if (
+              position.content_type_id == 15 ||
+              position.content_type_id == 14
+            ) {
               var imgDiv = document.createElement("div");
               imgDiv.className = styles.img;
               imgDiv.onclick = function () {
@@ -215,7 +218,10 @@ const Map = function (props) {
             }
 
             var desc;
-            if (position.content_type_id == 15) {
+            if (
+              position.content_type_id == 15 ||
+              position.content_type_id == 14
+            ) {
               desc = document.createElement("div");
               desc.className = styles.desc;
               desc.id = styles.desc15;
