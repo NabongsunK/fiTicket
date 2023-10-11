@@ -114,7 +114,7 @@ const MapDiv = function () {
           style={{
             padding: "4px 5px",
             fontSize: "16px",
-            fontWeight: "200",
+            fontWeight: "bold",
             border: "1px solid",
           }}
           title={localInfo.localTitle}
@@ -133,7 +133,7 @@ const MapDiv = function () {
         style={{
           padding: "4px 10px",
           fontSize: "16px",
-          fontWeight: "200",
+          fontWeight: "bold",
           border: "1px solid",
         }}
         title={localInfo.localTitle}

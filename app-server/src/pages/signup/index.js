@@ -22,7 +22,8 @@ function Signup() {
   const [popText, setPopText] = useState("");
 
   const [blockPhone, setBlockPhone] = useState(false);
-  const [blockAuth, setBlockAuth] = useState(false);
+  const [blockAuth, setBlockAuth] = useState(true);
+  const [blockUp, setBlockUp] = useState(true);
 
   const isValidPhoneNumber = (phoneNumber) => {
     const regex = /^010-?\d{4}-?\d{4}$/;
@@ -165,6 +166,7 @@ function Signup() {
       setPopText("사용가능한 아이디입니다. 인증번호를 입력해 주세요.");
       setIsActive(true);
       setBlockPhone(true);
+      setBlockAuth(false);
       setTimeout(() => {
         setIsActive(false);
       }, 3000);
@@ -189,6 +191,7 @@ function Signup() {
       setPopText("인증이 완료되었습니다. 아래정보를 기입해 주세요.");
       setIsActive(true);
       setBlockAuth(true);
+      setBlockUp(false);
       setTimeout(() => {
         setIsActive(false);
       }, 3000);
@@ -333,7 +336,7 @@ function Signup() {
             type="button"
             onClick={signUp}
             className="btn btn-primary btn-block mb-0"
-            disabled={!blockAuth}
+            disabled={blockUp}
           >
             회원가입
           </button>
