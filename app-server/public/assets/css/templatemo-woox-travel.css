@@ -2923,7 +2923,15 @@ div.owl-stage-outer > div {
   content: "";
 }
 
+.card-container {
+  padding: 0 200px;
+  margin-top: 50px;
+}
+
 @media (max-width: 767px){
+  .card-container{
+    padding: 0;
+  }
   .card-body{
     width: 100%;
   }

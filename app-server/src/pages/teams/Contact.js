@@ -37,7 +37,7 @@ const Contact = function () {
         </div>
       </div>
 
-      <div className="container">
+      <div className="card-container">
         <div className="card-body">
           <div className="bg-light p-4 mb-2">
             <div className="row">
