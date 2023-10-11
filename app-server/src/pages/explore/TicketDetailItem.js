@@ -12,6 +12,7 @@ const TicketDetailItem = function (props) {
   const [popText, setPopText] = useState("");
   const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
 
   const isFavor = myFavor.find((element) => {
     if (element.ticket_id == props.festival.id) {
@@ -93,6 +94,10 @@ const TicketDetailItem = function (props) {
               float: "left",
             }}
             onClick={() => {
+              if (!is_signed) {
+                alertHandler("로그인후 이용가능합니다.");
+                return;
+              }
               props.toFavor();
               alertHandler("관심리스트에서 제거하였습니다.");
             }}
@@ -101,6 +106,10 @@ const TicketDetailItem = function (props) {
           <Button
             title={<i className="fa fa-heart" id="myheart"></i>}
             onClick={() => {
+              if (!is_signed) {
+                alertHandler("로그인후 이용가능합니다.");
+                return;
+              }
               props.toFavor();
               alertHandler("관심리스트에 추가했습니다.");
             }}

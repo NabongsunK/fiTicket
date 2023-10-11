@@ -30,6 +30,7 @@ const TicketDetailItem = function () {
     return <NotFound />;
   }
 
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
   const allList = useSelector((state) => state.myPageSlice.allList);
   const festival = allList.filter((fes) => fes.id === Number(id))[0];
 
@@ -203,6 +204,10 @@ const TicketDetailItem = function () {
                   float: "left",
                 }}
                 onClick={() => {
+                  if (!is_signed) {
+                    alertHandler("로그인후 이용가능합니다.");
+                    return;
+                  }
                   toFavor();
                   alertHandler("관심리스트에서 제거하였습니다.");
                 }}
@@ -211,6 +216,10 @@ const TicketDetailItem = function () {
               <Button
                 title={<i className="fa fa-heart" id="myheart"></i>}
                 onClick={() => {
+                  if (!is_signed) {
+                    alertHandler("로그인후 이용가능합니다.");
+                    return;
+                  }
                   toFavor();
                   alertHandler("관심리스트에 추가했습니다.");
                 }}
