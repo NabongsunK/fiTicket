@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import TicketDetailItem from "./TicketDetailItem";
 
@@ -32,6 +32,7 @@ const TicketListItem = function (props) {
   const myCart = useSelector((state) => state.myCartSlice.myCarts);
   const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
   const user_id = useSelector((state) => state.myLoginSlice.user_id);
+  const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
 
   if (appElement) {
     Modal.setAppElement(appElement);
@@ -213,6 +214,10 @@ const TicketListItem = function (props) {
                   boxShadow: "0 0 3px rgba(0, 0, 0, 0.15)",
                 }}
                 onClick={() => {
+                  if (!is_signed) {
+                    props.alertHandler("로그인후 이용가능합니다.");
+                    return;
+                  }
                   toFavor();
                   props.alertHandler("관심리스트에서 제거하였습니다.");
                 }}
@@ -221,6 +226,10 @@ const TicketListItem = function (props) {
               <Button
                 title={<i className="fa fa-heart" id="myheart"></i>}
                 onClick={() => {
+                  if (!is_signed) {
+                    props.alertHandler("로그인후 이용가능합니다.");
+                    return;
+                  }
                   toFavor();
                   props.alertHandler("관심리스트에 추가했습니다.");
                 }}
