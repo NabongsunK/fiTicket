@@ -2923,11 +2923,6 @@ div.owl-stage-outer > div {
   content: "";
 }
 
-.container {
-  padding: 0 200px;
-  margin-top: 50px;
-}
-
 @media (max-width: 767px){
   .card-body{
     width: 100%;
