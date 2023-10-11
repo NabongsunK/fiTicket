@@ -35,7 +35,6 @@ const TicketBody = function () {
 
   //검색에의해서 바뀌거나 page가 바뀌면
   useEffect(() => {
-    console.log(regionList, page, mapItude);
     skip = (page - 1) * listPerPage;
     dispatch(
       setPageList({

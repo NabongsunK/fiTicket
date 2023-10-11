@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import localInfos from "../../data/localInfos.json";
 import { pushList, setPageList } from "../../store/pageSlice";
@@ -30,14 +30,34 @@ const Map = function (props) {
   const navigate = useNavigate();
   const map = useRef();
   const clusterer = useRef(null);
+  const [curType, setCurType] = useState(15);
 
   let polygons = useRef([]);
   var openOverlay = [null, null];
   const dispatch = useDispatch();
   const allList = useSelector((state) => state.myPageSlice.allList);
 
-  var markers_group = useRef({ 14: [], 15: [], 39: [], 28: [] });
-
+  var markers_group = useRef([
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+    { 14: [], 15: [], 39: [], 28: [] },
+  ]);
   const menusRefs = {
     14: useRef(null),
     15: useRef(null),
@@ -57,16 +77,14 @@ const Map = function (props) {
   }
 
   function changeMarker(type) {
+    setCurType(type);
     clusterer.current.clear();
-
-    ["14", "15", "39", "28"].forEach((tp) => {
+    [14, 15, 39, 28].forEach((tp) => {
       if (tp === type) {
         menusRefs[tp].current.className = styles.menu_selected;
         setMarkers(map.current, tp);
         //TODO: 현재는 주차장일때 클러스터러를 표시 안하는 방식으로 했지만, 서버에서 클러스터러된 정보를 직접 보내는 경우도 생각해 볼것
-        if (type != "28" && type != "39") {
-          clusterer.current.addMarkers(markers_group.current[tp]);
-        }
+        clusterer.current.addMarkers(markers_group.current[regionId][tp]);
       } else {
         menusRefs[tp].current.className = "";
         setMarkers(null, tp);
@@ -83,8 +101,8 @@ const Map = function (props) {
 
   // 마커들의 지도 표시 여부를 설정하는 함수입니다
   function setMarkers(map, type) {
-    for (var i = 0; i < markers_group.current[type].length; i++) {
-      markers_group.current[type][i].setMap(map);
+    for (var i = 0; i < markers_group.current[regionId][type].length; i++) {
+      markers_group.current[regionId][type][i].setMap(map);
       // 클러스터러에 마커들을 추가합니다
     }
   }
@@ -108,148 +126,149 @@ const Map = function (props) {
   // mapdata 바뀔때
   useEffect(
     function () {
-      for (var key in mapData) {
-        // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-        var markers = mapData[key].map(function (position) {
-          // 마커이미지와 마커를 생성합니다
-          var imageSize = new kakao.maps.Size(37, 36),
-            imageOptions = {
-              // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-              spriteOrigin: new kakao.maps.Point(0, markerHeight[key]),
-              // 스프라이트 이미지의 전체 크기
-              spriteSize: new kakao.maps.Size(37, 360),
-            };
-          var markerImage = new kakao.maps.MarkerImage(
-            // 이미지 주소
-            markerImageSrc,
-            // 마커의 크기
-            imageSize,
-            imageOptions
-          );
-          var marker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(position.map_y, position.map_x),
-            map: map.current,
-            clickable: true,
-            image: markerImage,
-          });
-
-          // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-          var content = document.createElement("div");
-          content.className = styles.wrap;
-
-          var info = document.createElement("div");
-          info.className = styles.info;
-          content.appendChild(info);
-
-          var title = document.createElement("div");
-          title.className = styles.title;
-          title.onclick = function () {
-            if (position.content_type_id === "15") {
-              navigate("/explore/" + position.id);
-            }
-          };
-          title.appendChild(
-            document.createTextNode(
-              position.title.substring(0, 14) +
-                (position.title.length > 14 ? "..." : "")
-            )
-          );
-          info.appendChild(title);
-
-          var close = document.createElement("div");
-          close.className = styles.close;
-          // 닫기 이벤트 추가
-          close.onclick = function () {
-            overlay.setMap(null);
-          };
-          content.appendChild(close);
-
-          var closeI = document.createElement("i");
-          closeI.className = "fa fa-close";
-          close.appendChild(closeI);
-
-          var body = document.createElement("div");
-          body.className = styles.body;
-          info.appendChild(body);
-
-          if (position.content_type_id == 15) {
-            var imgDiv = document.createElement("div");
-            imgDiv.className = styles.img;
-            imgDiv.onclick = function () {
-              navigate("/explore/" + position.id);
-            };
-            body.appendChild(imgDiv);
-
-            var img = document.createElement("img");
-            img.src = position.first_image2
-              ? position.first_image2
-              : imgdefault;
-            imgDiv.appendChild(img);
-          }
-
-          var desc;
-          if (position.content_type_id == 15) {
-            desc = document.createElement("div");
-            desc.className = styles.desc;
-            desc.id = styles.desc15;
-            body.appendChild(desc);
-          } else {
-            desc = document.createElement("div");
-            desc.className = styles.desc;
-            body.appendChild(desc);
-          }
-
-          var ellipsis = document.createElement("div");
-          ellipsis.className = styles.ellipsis;
-          ellipsis.appendChild(document.createTextNode(position.addr1));
-          desc.appendChild(ellipsis);
-
-          var findDesc = document.createElement("button");
-          findDesc.className = styles.findDesc;
-          findDesc.onclick = () => {
-            handleOpenNewTab(
-              "https://map.kakao.com/link/to/" +
-                position.title +
-                "," +
-                position.map_y +
-                "," +
-                position.map_x
+      for (let i = 1; i < 19; i++) {
+        for (var key in mapData[localInfos[i].area_code]) {
+          // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+          var markers = mapData[localInfos[i].area_code][key].map(function (
+            position
+          ) {
+            // 마커이미지와 마커를 생성합니다
+            var imageSize = new kakao.maps.Size(37, 36),
+              imageOptions = {
+                // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+                spriteOrigin: new kakao.maps.Point(0, markerHeight[key]),
+                // 스프라이트 이미지의 전체 크기
+                spriteSize: new kakao.maps.Size(37, 360),
+              };
+            var markerImage = new kakao.maps.MarkerImage(
+              // 이미지 주소
+              markerImageSrc,
+              // 마커의 크기
+              imageSize,
+              imageOptions
             );
-          };
+            var marker = new kakao.maps.Marker({
+              position: new kakao.maps.LatLng(position.map_y, position.map_x),
+              clickable: true,
+              image: markerImage,
+            });
 
-          var findDescI = document.createElement("i");
-          findDescI.className = "fa fa-map";
-          findDesc.appendChild(findDescI);
+            // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+            var content = document.createElement("div");
+            content.className = styles.wrap;
 
-          // console.log(position.title, position.map_x, position.map_y);
-          desc.appendChild(findDesc);
+            var info = document.createElement("div");
+            info.className = styles.info;
+            content.appendChild(info);
 
-          // 마커 위에 커스텀오버레이를 표시합니다
-          // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-          var overlay = new kakao.maps.CustomOverlay({
-            content: content,
-            position: marker.getPosition(),
-          });
+            var title = document.createElement("div");
+            title.className = styles.title;
+            title.onclick = function () {
+              if (position.content_type_id === "15") {
+                navigate("/explore/" + position.id);
+              }
+            };
+            title.appendChild(
+              document.createTextNode(
+                position.title.substring(0, 14) +
+                  (position.title.length > 14 ? "..." : "")
+              )
+            );
+            info.appendChild(title);
 
-          // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-          kakao.maps.event.addListener(marker, "click", function () {
-            navigate("/explore");
-            openOverlay[1] = overlay;
-            closeAllOverlay();
-            overlay.setMap(map.current);
-            if (position.content_type_id === "15") {
-              const festival = allList.filter(
-                (fes) => fes.id === Number(position.id)
-              )[0];
-              dispatch(pushList({ newPage: festival }));
+            var close = document.createElement("div");
+            close.className = styles.close;
+            // 닫기 이벤트 추가
+            close.onclick = function () {
+              overlay.setMap(null);
+            };
+            content.appendChild(close);
+
+            var closeI = document.createElement("i");
+            closeI.className = "fa fa-close";
+            close.appendChild(closeI);
+
+            var body = document.createElement("div");
+            body.className = styles.body;
+            info.appendChild(body);
+
+            if (position.content_type_id == 15) {
+              var imgDiv = document.createElement("div");
+              imgDiv.className = styles.img;
+              imgDiv.onclick = function () {
+                navigate("/explore/" + position.id);
+              };
+              body.appendChild(imgDiv);
+
+              var img = document.createElement("img");
+              img.src = position.first_image2
+                ? position.first_image2
+                : imgdefault;
+              imgDiv.appendChild(img);
             }
-          });
 
-          return marker;
-        });
-        markers_group.current[key] = markers;
+            var desc;
+            if (position.content_type_id == 15) {
+              desc = document.createElement("div");
+              desc.className = styles.desc;
+              desc.id = styles.desc15;
+              body.appendChild(desc);
+            } else {
+              desc = document.createElement("div");
+              desc.className = styles.desc;
+              body.appendChild(desc);
+            }
+
+            var ellipsis = document.createElement("div");
+            ellipsis.className = styles.ellipsis;
+            ellipsis.appendChild(document.createTextNode(position.addr1));
+            desc.appendChild(ellipsis);
+
+            var findDesc = document.createElement("button");
+            findDesc.className = styles.findDesc;
+            findDesc.onclick = () => {
+              handleOpenNewTab(
+                "https://map.kakao.com/link/to/" +
+                  position.title +
+                  "," +
+                  position.map_y +
+                  "," +
+                  position.map_x
+              );
+            };
+
+            var findDescI = document.createElement("i");
+            findDescI.className = "fa fa-map";
+            findDesc.appendChild(findDescI);
+            desc.appendChild(findDesc);
+
+            // 마커 위에 커스텀오버레이를 표시합니다
+            // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+            var overlay = new kakao.maps.CustomOverlay({
+              content: content,
+              position: marker.getPosition(),
+            });
+
+            // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+            kakao.maps.event.addListener(marker, "click", function () {
+              navigate("/explore");
+              openOverlay[1] = overlay;
+              closeAllOverlay();
+              overlay.setMap(map.current);
+              if (position.content_type_id === "15") {
+                const festival = allList.filter(
+                  (fes) => fes.id === Number(position.id)
+                )[0];
+                dispatch(pushList({ newPage: festival }));
+              }
+            });
+
+            return marker;
+          });
+          markers_group.current[i][key] = markers;
+        }
       }
-      changeMarker("15");
+      changeMarker(curType);
     },
     [mapData]
   );
@@ -281,6 +300,7 @@ const Map = function (props) {
           polygon.setMap(map.current);
         });
       }
+      changeMarker(curType);
       return () => {
         if (boundary) {
           polygons.current.forEach((pl) => {
@@ -306,19 +326,19 @@ const Map = function (props) {
       {/* <div onClick={getInfo}>버튼</div> */}
       <div className={styles.category}>
         <ul>
-          <li ref={menusRefs["15"]} onClick={() => changeMarker("15")}>
+          <li ref={menusRefs[15]} onClick={() => changeMarker(15)}>
             <span className={styles.ico_festival}></span>
             축제
           </li>
-          <li ref={menusRefs["39"]} onClick={() => changeMarker("39")}>
+          <li ref={menusRefs[39]} onClick={() => changeMarker(39)}>
             <span className={styles.ico_food}></span>
             음식점
           </li>
-          <li ref={menusRefs["28"]} onClick={() => changeMarker("28")}>
+          <li ref={menusRefs[28]} onClick={() => changeMarker(28)}>
             <span className={styles.ico_carpark}></span>
             주차장
           </li>
-          <li ref={menusRefs["14"]} onClick={() => changeMarker("14")}>
+          <li ref={menusRefs[14]} onClick={() => changeMarker(14)}>
             <span className={styles.ico_culture}></span>
             문화시설
           </li>
