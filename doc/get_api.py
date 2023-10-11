@@ -5,6 +5,7 @@ import traceback
 from urllib.parse import urlparse
 from requests.exceptions import ConnectTimeout
 import re
+import schedule
 
 api = {
     'i': 0,
@@ -48,7 +49,7 @@ def get_areaBased(pageNo):
         '_type': 'json',
         'listYN': 'Y',
         'arrange': 'Q',
-        'contentTypeId': 14,
+        'contentTypeId': 15,
     }
     retries = 3  # 최대 재시도 횟수
     for _ in range(retries):
@@ -262,7 +263,7 @@ def pushDB(res):
         return False
 
 
-def main():
+def job():
     pageNo = 1
     total_pages = 5000
     while pageNo <= total_pages:
@@ -308,6 +309,10 @@ def main():
         pageNo += 1
         time.sleep(3)
 
-
 if __name__ == "__main__":
-    main()
+    print("자동 스케줄 시작")
+    schedule.every().day.at("12:10").do(job)
+    
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
