@@ -74,14 +74,24 @@ const CartListItem = function (props) {
           <div className="col-4 p-0">{poster}</div>
           <div className="col-8">
             <div className="cart-item-desc">
-              <span className="product-remove">
-                <i
-                  className="fa fa-close"
-                  aria-hidden="true"
-                  onClick={() => removeItem(props.item.index)}
-                ></i>
-              </span>
-              <span className="badge">{props.item.badge}</span>
+              <div className="row">
+                <div
+                  className="col-9"
+                  style={{ overflow: "hidden", paddingRight: "0" }}
+                >
+                  <span className="badge">{props.item.badge}</span>
+                </div>
+                <div className="col-2">
+                  <div className="product-remove">
+                    <i
+                      className="fa fa-close"
+                      aria-hidden="true"
+                      onClick={() => removeItem(props.item.index)}
+                    ></i>
+                  </div>
+                </div>
+              </div>
+
               <h6>{props.item.name}</h6>
               <p className="size">
                 수량:{" "}
