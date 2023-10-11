@@ -2638,13 +2638,24 @@ body {
 }
 @media (max-width: 1200px) {
   .login_page {
-    min-height: 550px;
+    min-height: 900px;
   }
 }
 
 @media (max-width: 992px) {
   .login_page {
     height: 80vh;
+  }
+}
+
+@media (max-width: 767px) {
+  .login_page {
+    height: 100vh;
+    min-height: 900px;
+  }
+  .login-container {
+    width: 100%;
+    padding: 10px;
   }
 }
 
@@ -2670,6 +2681,11 @@ body {
   border-radius: 13px;
   padding: 0px 40px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 576px) {
+  .login-container {
+    width: 100%;
+  }
 }
 
 .login-container img {
