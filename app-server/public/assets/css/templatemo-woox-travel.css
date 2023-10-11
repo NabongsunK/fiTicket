@@ -645,13 +645,13 @@ Header Style
   cursor: pointer;
   display: block;
   position: absolute;
-  top: 33px;
+  top: 12px;
   width: 32px;
   height: 40px;
   text-indent: -9999em;
   z-index: 99;
-  right: 20px;
   display: none;
+  left: 0px;
 }
 
 .background-header .main-nav .menu-trigger {
@@ -765,8 +765,14 @@ Header Style
 }
 
 @media (max-width: 1200px) {
+  .header-area .main-nav .logo {
+    flex-basis: 20%;
+  }
+  .header-area .main-nav .nav {
+    flex-basis: 80%;
+  }
   .header-area .main-nav .nav li {
-    padding-left: 10px;
+    padding-left: 0;
     padding-right: 10px;
   }
   .header-area .main-nav:before {
@@ -777,6 +783,10 @@ Header Style
 @media (max-width: 992px) {
   .header-area {
     top: 0;
+    height: 40px;
+  }
+  .header-area .header-meta {
+    height: 40px;
   }
   .header-area .main-nav {
     background-color: transparent;
@@ -788,8 +798,11 @@ Header Style
   }
   .header-area .main-nav .logo {
     position: absolute;
-    left: 30px;
-    top: 15px;
+    left: 28%;
+    top: -20px;
+  }
+  .header-area .main-nav .logo img {
+    width: 260px;
   }
   .background-header .main-nav .logo {
     top: 0px;

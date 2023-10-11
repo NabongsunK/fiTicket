@@ -351,7 +351,7 @@ img {
   min-width: 50%;
   width: 50%;
 }
-@media only screen and (max-width: 767px) {
+/* @media only screen and (max-width: 767px) {
   .header_area .classy-navbar,
   .header-area .header-meta {
     -webkit-box-flex: 0;
@@ -360,7 +360,7 @@ img {
     min-width: 100%;
     width: 100%;
   }
-}
+} */
 .header_area .classy-navbar {
   height: 85px;
   padding: 5px 0 5px 5%;
@@ -376,7 +376,7 @@ img {
   position: relative;
   z-index: 1;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 992px) {
   .header-area .header-meta {
     height: 40px;
   }
@@ -485,6 +485,15 @@ img {
   height: 100%;
   line-height: 80px;
 }
+@media only screen and (max-width: 992px) {
+  .header-area .user-favorite-info a {
+    display: none;
+  }
+  .header-area .user-login-info a,
+  .header-area .cart-area a {
+    line-height: 100px;
+  }
+}
 @media only screen and (max-width: 767px) {
   .header-area .user-favorite-info a,
   .header-area .user-login-info a,
@@ -500,6 +509,12 @@ img {
 .header-area .user-login-info a img,
 .header-area .cart-area a img {
   max-width: 20px;
+}
+@media only screen and (max-width: 992px) {
+  .header-area .user-login-info a img,
+  .header-area .cart-area a img {
+    max-width: 40px;
+  }
 }
 .header-area .user-favorite-info a span,
 .header-area .user-login-info a span,
