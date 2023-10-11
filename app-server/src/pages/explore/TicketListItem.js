@@ -99,9 +99,14 @@ const TicketListItem = function (props) {
           style={{
             color: "#22b3c1",
             position: "absolute",
-            top: "10%",
-            left: "15%",
+            top: "6%",
+            left: "12%",
             fontSize: "32px",
+            border: "1px solid #22b3c1",
+            borderRadius: "23px",
+            backgroundColor: "#f7f7f7",
+            padding: "4px 6px",
+            boxShadow: "rgba(0, 0, 0, 0.15) 2px 2px 1px 1px",
           }}
         ></i>
       </span>
