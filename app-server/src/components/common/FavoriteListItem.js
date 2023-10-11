@@ -81,7 +81,7 @@ const FavoriteListItem = function (props) {
           <div className="col-8">
             <div className="cart-item-desc">
               <span className="badge">{"D-" + props.item.d_day}</span>
-              <span className="product-remove">
+              <span className="product-remove2">
                 <i
                   className="fa fa-close"
                   aria-hidden="true"
