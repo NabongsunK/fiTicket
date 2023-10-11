@@ -36,13 +36,13 @@ const Header = function (props) {
   const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
   const dispatch = useDispatch();
 
-  const handleToggle = function (e) {
+  const handleToggle = function (next) {
     setActive(!isActive);
-    // setTimeout(() => {
-    //   if (typeof next === "function") {
-    //     next?.();
-    //   }
-    // }, 1000);
+    setTimeout(() => {
+      if (typeof next === "function") {
+        next?.();
+      }
+    }, 1000);
   };
   const goCart = () => {
     setActive(true);
