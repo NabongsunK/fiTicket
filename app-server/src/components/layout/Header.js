@@ -36,6 +36,14 @@ const Header = function (props) {
   const myFavor = useSelector((state) => state.myFavorSlice.myFavor);
   const dispatch = useDispatch();
 
+  const [isNav, setNav] = useState(false);
+  const navToggle = function () {
+    setNav(!isNav);
+  };
+  const navClose = function () {
+    setNav(false);
+  };
+
   const handleToggle = function (e) {
     setActive(!isActive);
     // setTimeout(() => {
@@ -99,6 +107,22 @@ const Header = function (props) {
   return (
     <>
       <header className="header-area header-sticky">
+        <nav className={isNav ? "main-nav2 show-on" : "main-nav2"}>
+          <ul className={isNav ? "nav show" : "nav"}>
+            <li onClick={navClose}>
+              <NavLink to="/ ">Home</NavLink>
+            </li>
+            <li onClick={navClose}>
+              <NavLink to="/deals">추천 행사</NavLink>
+            </li>
+            <li onClick={navClose}>
+              <NavLink to="/explore">행사 찾기</NavLink>
+            </li>
+            <li onClick={navClose}>
+              <NavLink to="/teams">Loca!T</NavLink>
+            </li>
+          </ul>
+        </nav>
         <div className="container breakpoint-off d-flex align-items-center">
           <div className="col-10">
             <div className="">
@@ -108,19 +132,30 @@ const Header = function (props) {
                 </Link>
                 <ul className="nav">
                   <li>
-                    <NavLink to="/ ">Home</NavLink>
+                    <NavLink to="/ " onClick={navClose}>
+                      Home
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/deals">추천 행사</NavLink>
+                    <NavLink to="/deals" onClick={navClose}>
+                      추천 행사
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/explore">행사 찾기</NavLink>
+                    <NavLink to="/explore" onClick={navClose}>
+                      행사 찾기
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/teams">Loca!T</NavLink>
+                    <NavLink to="/teams" onClick={navClose}>
+                      Loca!T
+                    </NavLink>
                   </li>
                 </ul>
-                <Link className="menu-trigger">
+                <Link
+                  onClick={navToggle}
+                  className={isNav ? "menu-trigger active" : "menu-trigger"}
+                >
                   <span>Menu</span>
                 </Link>
               </nav>
