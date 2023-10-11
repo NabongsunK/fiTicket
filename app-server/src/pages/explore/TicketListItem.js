@@ -169,7 +169,10 @@ const TicketListItem = function (props) {
                   <img src="/assets/images/core-img/heart.svg" />
                 </figure> */}
               </span>
-              <h4>{props.festival.title}</h4>
+              <h4>
+                {props.festival.title.substring(0, 23)}
+                {props.festival.title.length > 23 ? "..." : ""}
+              </h4>
               <div className="row">
                 <div className="col-12">
                   <div className={styles.list}>
