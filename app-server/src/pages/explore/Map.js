@@ -76,6 +76,103 @@ const Map = function (props) {
     );
   }
 
+  function makeInfo(position, marker) {
+    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+    var content = document.createElement("div");
+    content.className = styles.wrap;
+
+    var info = document.createElement("div");
+    info.className = styles.info;
+    content.appendChild(info);
+
+    var title = document.createElement("div");
+    title.className = styles.title;
+    title.onclick = function () {
+      if (position.content_type_id === "15") {
+        navigate("/explore/" + position.id);
+      }
+    };
+    title.appendChild(
+      document.createTextNode(
+        position.title.substring(0, 14) +
+          (position.title.length > 14 ? "..." : "")
+      )
+    );
+    info.appendChild(title);
+
+    var close = document.createElement("div");
+    close.className = styles.close;
+    // 닫기 이벤트 추가
+    close.onclick = function () {
+      overlay.setMap(null);
+    };
+    content.appendChild(close);
+
+    var closeI = document.createElement("i");
+    closeI.className = "fa fa-close";
+    close.appendChild(closeI);
+
+    var body = document.createElement("div");
+    body.className = styles.body;
+    info.appendChild(body);
+
+    if (position.content_type_id == 15 || position.content_type_id == 14) {
+      var imgDiv = document.createElement("div");
+      imgDiv.className = styles.img;
+      imgDiv.onclick = function () {
+        navigate("/explore/" + position.id);
+      };
+      body.appendChild(imgDiv);
+
+      var img = document.createElement("img");
+      img.src = position.first_image2 ? position.first_image2 : imgdefault;
+      imgDiv.appendChild(img);
+    }
+
+    var desc;
+    if (position.content_type_id == 15 || position.content_type_id == 14) {
+      desc = document.createElement("div");
+      desc.className = styles.desc;
+      desc.id = styles.desc15;
+      body.appendChild(desc);
+    } else {
+      desc = document.createElement("div");
+      desc.className = styles.desc;
+      body.appendChild(desc);
+    }
+
+    var ellipsis = document.createElement("div");
+    ellipsis.className = styles.ellipsis;
+    ellipsis.appendChild(document.createTextNode(position.addr1));
+    desc.appendChild(ellipsis);
+
+    var findDesc = document.createElement("button");
+    findDesc.className = styles.findDesc;
+    findDesc.onclick = () => {
+      handleOpenNewTab(
+        "https://map.kakao.com/link/to/" +
+          position.title +
+          "," +
+          position.map_y +
+          "," +
+          position.map_x
+      );
+    };
+
+    var findDescI = document.createElement("i");
+    findDescI.className = "fa fa-map";
+    findDesc.appendChild(findDescI);
+    desc.appendChild(findDesc);
+
+    // 마커 위에 커스텀오버레이를 표시합니다
+    // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+    var overlay = new kakao.maps.CustomOverlay({
+      content: content,
+      position: marker.getPosition(),
+    });
+    return overlay;
+  }
+
   function changeMarker(type) {
     var newCurType = curType;
     if (curType.indexOf(type) == -1) {
@@ -160,111 +257,10 @@ const Map = function (props) {
               image: markerImage,
             });
 
-            // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-            var content = document.createElement("div");
-            content.className = styles.wrap;
-
-            var info = document.createElement("div");
-            info.className = styles.info;
-            content.appendChild(info);
-
-            var title = document.createElement("div");
-            title.className = styles.title;
-            title.onclick = function () {
-              if (position.content_type_id === "15") {
-                navigate("/explore/" + position.id);
-              }
-            };
-            title.appendChild(
-              document.createTextNode(
-                position.title.substring(0, 14) +
-                  (position.title.length > 14 ? "..." : "")
-              )
-            );
-            info.appendChild(title);
-
-            var close = document.createElement("div");
-            close.className = styles.close;
-            // 닫기 이벤트 추가
-            close.onclick = function () {
-              overlay.setMap(null);
-            };
-            content.appendChild(close);
-
-            var closeI = document.createElement("i");
-            closeI.className = "fa fa-close";
-            close.appendChild(closeI);
-
-            var body = document.createElement("div");
-            body.className = styles.body;
-            info.appendChild(body);
-
-            if (
-              position.content_type_id == 15 ||
-              position.content_type_id == 14
-            ) {
-              var imgDiv = document.createElement("div");
-              imgDiv.className = styles.img;
-              imgDiv.onclick = function () {
-                navigate("/explore/" + position.id);
-              };
-              body.appendChild(imgDiv);
-
-              var img = document.createElement("img");
-              img.src = position.first_image2
-                ? position.first_image2
-                : imgdefault;
-              imgDiv.appendChild(img);
-            }
-
-            var desc;
-            if (
-              position.content_type_id == 15 ||
-              position.content_type_id == 14
-            ) {
-              desc = document.createElement("div");
-              desc.className = styles.desc;
-              desc.id = styles.desc15;
-              body.appendChild(desc);
-            } else {
-              desc = document.createElement("div");
-              desc.className = styles.desc;
-              body.appendChild(desc);
-            }
-
-            var ellipsis = document.createElement("div");
-            ellipsis.className = styles.ellipsis;
-            ellipsis.appendChild(document.createTextNode(position.addr1));
-            desc.appendChild(ellipsis);
-
-            var findDesc = document.createElement("button");
-            findDesc.className = styles.findDesc;
-            findDesc.onclick = () => {
-              handleOpenNewTab(
-                "https://map.kakao.com/link/to/" +
-                  position.title +
-                  "," +
-                  position.map_y +
-                  "," +
-                  position.map_x
-              );
-            };
-
-            var findDescI = document.createElement("i");
-            findDescI.className = "fa fa-map";
-            findDesc.appendChild(findDescI);
-            desc.appendChild(findDesc);
-
-            // 마커 위에 커스텀오버레이를 표시합니다
-            // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-            var overlay = new kakao.maps.CustomOverlay({
-              content: content,
-              position: marker.getPosition(),
-            });
-
             // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
             kakao.maps.event.addListener(marker, "click", function () {
               navigate("/explore");
+              var overlay = makeInfo(position, marker);
               openOverlay[1] = overlay;
               closeAllOverlay();
               overlay.setMap(map.current);
