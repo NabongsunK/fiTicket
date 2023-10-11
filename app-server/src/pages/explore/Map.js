@@ -30,7 +30,7 @@ const Map = function (props) {
   const navigate = useNavigate();
   const map = useRef();
   const clusterer = useRef(null);
-  const [curType, setCurType] = useState(15);
+  const [curType, setCurType] = useState([15]);
 
   let polygons = useRef([]);
   var openOverlay = [null, null];
@@ -77,10 +77,17 @@ const Map = function (props) {
   }
 
   function changeMarker(type) {
-    setCurType(type);
+    var newCurType = curType;
+    if (curType.indexOf(type) == -1) {
+      newCurType.push(type);
+      setCurType(newCurType);
+    } else {
+      newCurType.splice(curType.indexOf(type), 1);
+      setCurType(newCurType);
+    }
     clusterer.current.clear();
     [14, 15, 39, 28].forEach((tp) => {
-      if (tp === type) {
+      if (curType.indexOf(tp) != -1) {
         menusRefs[tp].current.className = styles.menu_selected;
         setMarkers(map.current, tp);
         //TODO: 현재는 주차장일때 클러스터러를 표시 안하는 방식으로 했지만, 서버에서 클러스터러된 정보를 직접 보내는 경우도 생각해 볼것
