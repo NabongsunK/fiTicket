@@ -138,7 +138,7 @@ const TicketListItem = function (props) {
       </Link>
     );
   return (
-    <div className="col-lg-6 col-sm-6 mb-3">
+    <div className="col-lg-6 col-sm-12 mb-3">
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={openModal}

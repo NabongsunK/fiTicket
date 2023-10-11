@@ -25,7 +25,7 @@ const Filter = function (props) {
                     value={1}
                     isRev={1 == thisType.current}
                     style={{
-                      padding: "10px auto",
+                      padding: "10px 5px",
                       fontSize: "14px",
                       border: "1px solid",
                       width: "8rem",
