@@ -37,10 +37,7 @@ const Contact = function () {
         </div>
       </div>
 
-      <div
-        className="container"
-        style={{ padding: "0 200px", marginTop: "50px" }}
-      >
+      <div className="container">
         <div className="card-body">
           <div className="bg-light p-4 mb-2">
             <div className="row">

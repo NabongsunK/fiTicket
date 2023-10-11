@@ -276,6 +276,7 @@ body {
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .border-button a:hover {
@@ -2920,4 +2921,15 @@ div.owl-stage-outer > div {
 }
 .typetable:last-child tr::after {
   content: "";
+}
+
+.container {
+  padding: 0 200px;
+  margin-top: 50px;
+}
+
+@media (max-width: 767px){
+  .card-body{
+    width: 100%;
+  }
 }
