@@ -71,8 +71,8 @@ const CartListItem = function (props) {
     <div className="single-cart-item">
       <Link to="#" className="product-image">
         <div className="row">
-          <div className="col-lg-4 p-0">{poster}</div>
-          <div className="col-lg-8">
+          <div className="col-4 p-0">{poster}</div>
+          <div className="col-8">
             <div className="cart-item-desc">
               <span className="product-remove">
                 <i
