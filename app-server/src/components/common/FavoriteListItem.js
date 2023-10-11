@@ -76,9 +76,9 @@ const FavoriteListItem = function (props) {
         className="product-image"
       >
         <div className="row">
-          <div className="col-lg-4 p-0">{poster}</div>
+          <div className="col-4 p-0">{poster}</div>
 
-          <div className="col-lg-8">
+          <div className="col-8">
             <div className="cart-item-desc">
               <span className="badge">{"D-" + props.item.d_day}</span>
               <span className="product-remove">
