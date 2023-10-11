@@ -361,14 +361,13 @@ body {
 }
 
 .explore_list_button a:hover #myheart,
-.explore_list_button_rev a:focus #myheart,
-.explore_list_button_rev a #myheart {
+.explore_list_button_rev a #myheart,
+.explore_list_button a:focus #myhear {
   color: #dc0345;
   font-size: 28px;
 }
 
-.explore_list_button_rev a:hover #myheart,
-.explore_list_button a:focus #myheart {
+.explore_list_button_rev a:hover #myheart {
   color: #fff;
   font-size: 28px;
 }
@@ -3001,7 +3000,7 @@ div.owl-stage-outer > div {
   .card-container {
     padding: 0;
   }
-  .card-body{
+  .card-body {
     width: 100%;
   }
 }

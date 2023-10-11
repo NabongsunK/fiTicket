@@ -24,7 +24,8 @@ function Findpw() {
   const [popText, setPopText] = useState("");
 
   const [blockPhone, setBlockPhone] = useState(false);
-  const [blockAuth, setBlockAuth] = useState(false);
+  const [blockAuth, setBlockAuth] = useState(true);
+  const [blockUp, setBlockUp] = useState(true);
 
   const is_signed = useSelector((state) => state.myLoginSlice.is_signed);
 
@@ -118,6 +119,7 @@ function Findpw() {
       setPopText("인증번호를 입력 해 주십시오.");
       setIsActive(true);
       setBlockPhone(true);
+      setBlockAuth(false);
       setTimeout(() => {
         setIsActive(false);
       }, 3000);
@@ -140,6 +142,7 @@ function Findpw() {
       setPopText("인증이 완료되었습니다. 아래정보를 기입해 주세요.");
       setIsActive(true);
       setBlockAuth(true);
+      setBlockUp(false);
       setTimeout(() => {
         setIsActive(false);
       }, 3000);
@@ -258,7 +261,7 @@ function Findpw() {
           <button
             type="button"
             className="btn btn-primary btn-block mb-0"
-            disabled={!blockAuth}
+            disabled={blockUp}
             onClick={ChangePw}
           >
             비밀번호 변경
