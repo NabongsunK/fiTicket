@@ -96,9 +96,14 @@ const TicketListItem = function (props) {
           style={{
             color: "#22b3c1",
             position: "absolute",
-            top: "10%",
-            left: "15%",
+            top: "6%",
+            left: "12%",
             fontSize: "32px",
+            border: "1px solid #22b3c1",
+            borderRadius: "23px",
+            backgroundColor: "#f7f7f7",
+            padding: "4px 6px",
+            boxShadow: "rgba(0, 0, 0, 0.15) 2px 2px 1px 1px",
           }}
         ></i>
       </span>
@@ -164,7 +169,10 @@ const TicketListItem = function (props) {
                   <img src="/assets/images/core-img/heart.svg" />
                 </figure> */}
               </span>
-              <h4>{props.festival.title}</h4>
+              <h4>
+                {props.festival.title.substring(0, 23)}
+                {props.festival.title.length > 23 ? "..." : ""}
+              </h4>
               <div className="row">
                 <div className="col-12">
                   <div className={styles.list}>
