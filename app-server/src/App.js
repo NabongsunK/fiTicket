@@ -21,6 +21,10 @@ import FestivalDataTable from "./pages/staff/DataTable";
 import StaffHome from "./pages/staff/StaffHome";
 import NotFound from "./pages/notFound";
 
+import axios from "axios";
+// axios 기본 url 정의
+axios.defaults.baseURL = process.env.REACT_APP_API_SERVER;
+
 function App() {
   return (
     <Provider store={store}>

@@ -7,9 +7,6 @@ import UserList from "./UserList";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
-
 const getList = async function (user_id) {
   const url = "/cart/tickethistory/" + user_id;
   const res = await axios.get(url);

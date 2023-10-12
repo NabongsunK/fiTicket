@@ -6,8 +6,6 @@ import { signin } from "../../store/loginSlice";
 import hasing from "../../store/hasing";
 import PopUp from "../../components/common/PopUp";
 
-axios.defaults.baseURL = "http://localhost:4400/api";
-
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();

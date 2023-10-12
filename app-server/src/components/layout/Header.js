@@ -10,9 +10,6 @@ import { useCookies } from "react-cookie";
 import { setIsManager, signin, signout } from "../../store/loginSlice";
 import { setFavor } from "../../store/favorSlice";
 
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
-
 const getUser = async function (user_id) {
   const res = await axios.post("/login/getuser", {
     user_id: user_id,

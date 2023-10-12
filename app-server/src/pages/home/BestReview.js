@@ -6,8 +6,7 @@ import React from "react";
 import BestReviewListItem from "./BestReviewListItem";
 
 import axios from "axios";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
+axios.defaults.baseURL = process.env.REACT_APP_API_SERVER;
 
 const bestReview = async function () {
   const res = await axios.get("/review/best");

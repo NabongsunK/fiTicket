@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import hasing from "../../store/hasing";
 import PopUp from "../../components/common/PopUp";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 function Findpw() {
   const navigate = useNavigate();

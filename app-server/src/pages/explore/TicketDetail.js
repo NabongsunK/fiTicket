@@ -11,8 +11,6 @@ import PopUp from "../../components/common/PopUp";
 import { popFavor, pushFavor } from "../../store/favorSlice";
 import TicketList from "./TicketList";
 import NotFound from "../notFound";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 const getReview = async function (ticket_id) {
   try {

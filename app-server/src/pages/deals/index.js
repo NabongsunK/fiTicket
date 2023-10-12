@@ -7,8 +7,6 @@ import DealsPageHeading from "./DealsPageHeading";
 
 import axios from "axios";
 import PopUp from "../../components/common/PopUp";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 const getAllList = async function () {
   const res = await axios.get("/explore/getalllist");

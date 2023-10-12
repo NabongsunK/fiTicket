@@ -10,9 +10,6 @@ import CodeTable from "./CodeTable";
 import axios from "axios";
 import TypeTable from "./TypeTable";
 
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
-
 const getAllList = async function () {
   const res = await axios.get("/explore/getalllist");
   return res.data.data;

@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-axios.defaults.baseURL = "http://localhost:4400/api";
 import { deletes } from "../../store/cartSlice";
 const getUser = async function (user_id) {
   const res = await axios.post("/login/getuser", {

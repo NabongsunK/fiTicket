@@ -12,9 +12,6 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 
 import axios from "axios";
 import Button from "../../components/common/Button";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
-
 const areaRec = async function () {
   const res = await axios.get(`/explore/recommends`);
   return res.data;

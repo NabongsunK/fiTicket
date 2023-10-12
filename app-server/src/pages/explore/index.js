@@ -11,9 +11,6 @@ import { setAllList, setRegionList } from "../../store/pageSlice";
 import localInfos from "../../data/localInfos.json";
 import ExplorePageHeading from "./ExplorePageHeading";
 
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
-
 const getAllMap = async function () {
   const res = await axios.get("/explore/getallmap");
   return res.data.data;

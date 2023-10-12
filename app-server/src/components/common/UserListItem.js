@@ -7,8 +7,6 @@ import styles from "./cartlistitem.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "./Button";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 const userReview = async function (user_id, ticket_id) {
   const url = "/review/reviews/" + user_id + "/" + ticket_id;

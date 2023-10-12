@@ -1,8 +1,6 @@
 import { SHA256 } from "crypto-js";
 
 import axios from "axios";
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 const getSlt = async function () {
   const res = await axios.get("/login/getslt");

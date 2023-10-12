@@ -4,9 +4,6 @@ import StarRating from "./StartRating";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
-// import { Link } from "react-router-dom";
-
-axios.defaults.baseURL = "http://localhost:4400/api";
 
 const submit = async function (article) {
   const res = await axios.post("/review/write", article);

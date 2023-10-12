@@ -6,9 +6,6 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import axios from "axios";
 
-// axios 기본 url 정의
-axios.defaults.baseURL = "http://localhost:4400/api";
-
 const getAllList = async function () {
   const res = await axios.get("/review/reviews");
   return res.data;
