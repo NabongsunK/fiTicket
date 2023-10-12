@@ -16,12 +16,7 @@ const BestReviewListItem = (props) => {
 
   return (
     <>
-      <div
-        className="item"
-        onClick={() => {
-          navigate("/explore/" + ticket_id);
-        }}
-      >
+      <div className="item">
         <div className="thumb">
           <img
             src={first_image}
@@ -34,7 +29,13 @@ const BestReviewListItem = (props) => {
             <br />
             <div className="row">
               <div className="col align-self-start">
-                <h4>{ticket_name}</h4>
+                <h4
+                  onClick={() => {
+                    navigate("/explore/" + ticket_id);
+                  }}
+                >
+                  {ticket_name}
+                </h4>
 
                 <br />
                 <div className="col align-self-end">

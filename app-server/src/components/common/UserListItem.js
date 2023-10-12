@@ -27,8 +27,8 @@ const UserListItem = function (props) {
     } else {
       try {
         const res = await axios.post("/auth/getqr", {
-          // query: "http://localhost:3000/" + query,
-          query: query,
+          query: "https://localticket873663.aws2.store/explore/" + query,
+          // query: query,
         });
 
         setImgsrc(res.data.url);
@@ -106,7 +106,7 @@ const UserListItem = function (props) {
               </div>
               <Button
                 onClick={async () => {
-                  await getQR(props.item.first_image);
+                  await getQR(props.item.id);
                 }}
                 title={"QR코드 받기"}
                 style={{

@@ -7,7 +7,7 @@ const Staff = function () {
   const is_manager = useSelector((state) => state.myLoginSlice.is_manager);
 
   if (!is_manager) {
-    navigate("/");
+    navigate("/404");
   }
   return (
     <>

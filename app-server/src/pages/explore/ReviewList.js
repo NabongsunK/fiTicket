@@ -8,7 +8,7 @@ import ReviewListItem from "./ReviewListItem";
 const ReviewList = function (props) {
   //Owl Carousel Settings
   const options = {
-    loop: true,
+    loop: false,
     center: false,
     margin: 0,
     autoplay: true,
