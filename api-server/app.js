@@ -22,9 +22,11 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "..", "app-server", "build")));
 
 // 교차출처 처리
+// 서버가 다르면 추가
 app.use(cors());
 app.use("/api", indexRouter);
 
@@ -32,6 +34,14 @@ app.use("/api", indexRouter);
 app.use((req, res, next) => {
   console.error(404, req.url);
   res.json({ error: { message: "404::존재하지 않는 API입니다." } });
+  if (typeof next === "function") {
+    next?.();
+  }
+});
+
+// React용 fallback 추가
+app.use("/", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "..", "app-server", "build", "index.html"));
   if (typeof next === "function") {
     next?.();
   }

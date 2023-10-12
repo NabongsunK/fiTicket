@@ -117,8 +117,8 @@ const AuthModel = {
       ],
     };
     const currentTime = Date.now().toString();
-    const access_key = "g5OTKOM5XcOo5EEUO2KG";
-    const secret_key = "JOJqIxWV7vB1Z0IAquhxqPX2Vi737UC9d54HU42P";
+    const access_key = process.env.DB_NAVER_POSTSMS_ACCESS_KEY;
+    const secret_key = process.env.DB_DB_NAVER_POSTSMS_SECRET_KEY;
     const headers = {
       "Content-Type": "application/json; charset=utf-8",
       "x-ncp-apigw-timestamp": currentTime,
