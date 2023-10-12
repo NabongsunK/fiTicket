@@ -118,7 +118,7 @@ const AuthModel = {
     };
     const currentTime = Date.now().toString();
     const access_key = process.env.DB_NAVER_POSTSMS_ACCESS_KEY;
-    const secret_key = process.env.DB_DB_NAVER_POSTSMS_SECRET_KEY;
+    const secret_key = process.env.DB_NAVER_POSTSMS_SECRET_KEY;
     const headers = {
       "Content-Type": "application/json; charset=utf-8",
       "x-ncp-apigw-timestamp": currentTime,
@@ -138,13 +138,12 @@ const AuthModel = {
     const url = "/shorturl?url=" + query;
     const headers = {
       "Content-Type": "application/json; charset=utf-8",
-      "X-NCP-APIGW-API-KEY-ID": "3zo9m4bmoi",
-      "X-NCP-APIGW-API-KEY": "AJwrtnDR3BV04zLAFE4mD25vEZEP0JDrAzAWsPdI",
+      "X-NCP-APIGW-API-KEY-ID": process.env.DB_NAVER_GETQR_API_KEY_ID,
+      "X-NCP-APIGW-API-KEY": process.env.DB_NAVER_GETQR_API_KEY,
     };
 
     const res = await test2.get(url, { headers: headers });
 
-    console.log(res.data.result.url);
     return res.data.result.url;
   },
 
