@@ -34,17 +34,11 @@ app.use("/api", indexRouter);
 app.use("/api", (req, res, next) => {
   console.error(404, req.url);
   res.json({ error: { message: "404::존재하지 않는 API입니다." } });
-  if (typeof next === "function") {
-    next?.();
-  }
 });
 
 // React용 fallback 추가
 app.use("/", (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "app-server", "build", "index.html"));
-  if (typeof next === "function") {
-    next?.();
-  }
 });
 
 // 500 에러 처리
@@ -56,9 +50,6 @@ app.use((err, req, res, next) => {
       message: "500::요청을 처리할 수 없습니다. 잠시 후 다시 요청해 주세요.",
     },
   });
-  if (typeof next === "function") {
-    next?.();
-  }
 });
 
 module.exports = app;
