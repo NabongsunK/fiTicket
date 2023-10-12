@@ -31,7 +31,7 @@ app.use(cors());
 app.use("/api", indexRouter);
 
 // 404 에러 처리
-app.use((req, res, next) => {
+app.use("/api", (req, res, next) => {
   console.error(404, req.url);
   res.json({ error: { message: "404::존재하지 않는 API입니다." } });
   if (typeof next === "function") {
