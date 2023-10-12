@@ -121,7 +121,7 @@ const Header = function (props) {
           </ul>
         </nav>
         <div className="container breakpoint-off d-flex align-items-center">
-          <div className="col-10">
+          <div className="col-10 col-lg-9">
             <div className="">
               <nav className="main-nav">
                 <Link to="/" className="logo">
