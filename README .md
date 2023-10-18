@@ -1,5 +1,29 @@
 # LocalT 프로젝트
 
+## 실행방법
+
+api-server : npm run local 로 실행 ( 실행안되면 .env.local 확인하기, 네이버sms, QR쓰려면 키발급받고 .env파일 수정하기 )
+
+app-server: npm start 로 실행 (나중에 카카오맵 안되면 키발급받고 env파일 수정하기 ('http://localhost:3000/' 등록해야됨))
+
+https 실행 : api-server/greenlock.d/config.json 수정하고, aws 키 발급받으면 될듯?
+
+aws 서버에 올리기 https://github.com/uzoolove/frontend-skeleton/blob/main/%EB%B0%B0%ED%8F%AC.md 여기 확인해볼것
+
+mySQL DB생성시키기: doc/main_sql.sql 실행시킬것
+
+DB안에 데이터 넣기: doc/get_api.py 실행시킬것 (api키 없어지면 해당 파일에 api 변수 수정할것, 저장안되면 pushDB에 conn 수정할것)
+
+doc/get_api.py 구조:
+main -> job, job_festival 실행 스케쥴 함수 ( 시간 변경할것 )
+job -> get_areaBased -> get_detailCommon1 -> get_detailIntro1 실행
+job_festival -> get_festival -> get_detailCommon1 -> get_detailIntro1 실행
+
+get_detailIntro1: eventstartdate 등 시간 가져오는 함수
+get_detailCommon1: homepage,overview 등 추가정보 가져오는 함수
+get_festival: 축제정보 리스트로 가져오는 함수(축제에만 있는 무언가를 더받아옴)
+et_areaBased: 모든정보 리스트로 가져오느 함수(두번쨰 인수값 contentTypeId 을통해 다른것 받아오기 가능 job의 contentTypeId 수정할것)
+
 ## 프로젝트 소개
 
 지역별 축제 한눈에!
