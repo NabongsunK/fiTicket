@@ -78,7 +78,7 @@ def get_festival(pageNo):
     apiKey = api["db"][api['i'] % len(api["db"])]
     api['i'] = api['i']+1
     apiParams = {
-        'numOfRows': 12,
+        'numOfRows': 2,
         'pageNo': pageNo,
         'MobileOS': 'ETC',
         'MobileApp': 'AppTest',
@@ -202,7 +202,7 @@ def pushDB(res):
         conn = pymysql.connect(
             host='localhost',
             user='root',
-            password=1234,
+            password='1234',
             db='localticket',
             charset="utf8mb4",
         )
@@ -264,6 +264,8 @@ def pushDB(res):
 
 
 def job_festival():
+    print("job_festival 실행시작")
+
     pageNo = 1
     total_pages = 5000
     while pageNo <= total_pages:
@@ -312,7 +314,7 @@ def job_festival():
 
 def job():
     contentTypeId = 14
-
+    print("job 실행시작")
     pageNo = 1
     total_pages = 5000
     while pageNo <= total_pages:
@@ -361,8 +363,8 @@ def job():
 
 if __name__ == "__main__":
     print("자동 스케줄 시작")
-    schedule.every().day.at("12:10").do(job)
-    schedule.every().day.at("12:10").do(job_festival)
+    schedule.every().day.at("10:24").do(job)
+    schedule.every().day.at("10:26").do(job_festival)
 
     while True:
         schedule.run_pending()

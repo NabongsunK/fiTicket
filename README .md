@@ -22,7 +22,8 @@ job_festival -> get_festival -> get_detailCommon1 -> get_detailIntro1 실행
 get_detailIntro1: eventstartdate 등 시간 가져오는 함수
 get_detailCommon1: homepage,overview 등 추가정보 가져오는 함수
 get_festival: 축제정보 리스트로 가져오는 함수(축제에만 있는 무언가를 더받아옴)
-et_areaBased: 모든정보 리스트로 가져오느 함수(두번쨰 인수값 contentTypeId 을통해 다른것 받아오기 가능 job의 contentTypeId 수정할것)
+et_areaBased: 모든정보 리스트로 가져오는 함수(두번째 인수값 contentTypeId 을통해 다른것 받아오기 가능,
+job의 contentTypeId 수정할것)
 
 ## 프로젝트 소개
 
