@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./bin/www-https",
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
-    "local": "cross-env NODE_ENV=local nodemon ./bin/www-https"
+    "local": "cross-env NODE_ENV=local nodemon ./bin/www"
   },
   "dependencies": {
     "axios": "^1.5.0",

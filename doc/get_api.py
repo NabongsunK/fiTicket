@@ -36,7 +36,7 @@ def remove_html_tags(text):
     return re.sub(clean, '', text)
 
 
-def get_areaBased(pageNo):
+def get_areaBased(pageNo, contentTypeId):
     apiUrl = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1"
     apiKey = api["db"][api['i'] % len(api["db"])]
     api['i'] = api['i']+1
@@ -49,7 +49,7 @@ def get_areaBased(pageNo):
         '_type': 'json',
         'listYN': 'Y',
         'arrange': 'Q',
-        'contentTypeId': 15,
+        'contentTypeId': contentTypeId,
     }
     retries = 3  # 최대 재시도 횟수
     for _ in range(retries):
@@ -200,10 +200,10 @@ def get_detailIntro1(data):
 def pushDB(res):
     try:
         conn = pymysql.connect(
-            host="13.124.253.233",
-            user="localticket",
-            password="Localticket12$$",
-            db="localticket",
+            host='localhost',
+            user='root',
+            password=1234,
+            db='localticket',
             charset="utf8mb4",
         )
 
@@ -263,12 +263,12 @@ def pushDB(res):
         return False
 
 
-def job():
+def job_festival():
     pageNo = 1
     total_pages = 5000
     while pageNo <= total_pages:
         print(f"{pageNo} 페이지 실행 시작")
-        ret = get_areaBased(pageNo)
+        ret = get_festival(pageNo)
         if not ret:
             print(f"{pageNo} 페이지의 가져오기 실패. 30초 후에 다시시작")
             time.sleep(30)
@@ -309,10 +309,61 @@ def job():
         pageNo += 1
         time.sleep(3)
 
+
+def job():
+    contentTypeId = 14
+
+    pageNo = 1
+    total_pages = 5000
+    while pageNo <= total_pages:
+        print(f"{pageNo} 페이지 실행 시작")
+        ret = get_areaBased(pageNo, contentTypeId)
+        if not ret:
+            print(f"{pageNo} 페이지의 가져오기 실패. 30초 후에 다시시작")
+            time.sleep(30)
+            continue
+
+        items = []
+        i = 0
+        while i < len(ret):
+            item = ret[i]
+            ret2 = get_detailCommon1(item)
+            if not ret2:
+                print(
+                    f"{pageNo} 페이지의 {item['contentid']} 가져오기 실패. 30초 후에 다시시작")
+                time.sleep(30)
+                continue
+            if item["contenttypeid"] and int(item["contenttypeid"]) == 15:
+                time.sleep(3)
+                ret3 = get_detailIntro1(ret2)
+                if not ret3:
+                    print(
+                        f"{pageNo} 페이지의 {item['contentid']} 시간 가져오기 실패. 30초 후에 다시시작")
+                    time.sleep(30)
+                    continue
+                ret2 = ret3
+
+            items.append(ret2)
+            i += 1
+            time.sleep(3)
+
+        retF = pushDB(items)
+
+        if not retF:
+            print(f"{pageNo} 페이지의 넣기실패.")
+            break
+
+        print(f"{pageNo} 페이지의 데이터가 데이터베이스에 저장되었습니다.")
+
+        pageNo += 1
+        time.sleep(3)
+
+
 if __name__ == "__main__":
     print("자동 스케줄 시작")
     schedule.every().day.at("12:10").do(job)
-    
+    schedule.every().day.at("12:10").do(job_festival)
+
     while True:
         schedule.run_pending()
         time.sleep(1)
